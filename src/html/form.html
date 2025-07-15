@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Form | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Tab</tit>
+					<box>
+						<label for="a1">예약번호</label>
+            <input type="text" id="a1" aria-invalid="true" aria-describedby="error-msg">
+            <div id="erro-msg">올바르지 않습니다.</div>
+					</box>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- system box -->
+	<div class="area-system"></div>
+	<!-- select combo box -->
+	<div class="area-select"></div>
+	<!-- toast -->
+	<div class="area-toast"></div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+		
+ 
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+// guide tag
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+wrap {
+	display: flex;
+	flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+	gap:3.2rem;
+	padding:2.4rem;
+}
+tit {
+	font-size:3rem;
+	font-weight: 700;
+}
+stit {
+	font-size:1.6rem;
+	font-weight: 500;
+}
+box {
+  width: 100%;
+  max-width: 30rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap:.8rem;
+	padding: 1.6rem;
+	border-radius: 1.2rem;
+	border: .1rem dashed #ccc;
+
+  &[data-color="pink"] {
+    background-color: #fff9fa;
+    border-color: pink;
+  }
+  &[data-color="green"] {
+    background-color: #f9fffb;
+    border-color: #5de75c;
+  }
+  &[data-color="blue"] {
+    background-color: #f9fcff;
+    border-color: #70b8f7;
+  }
+}
+group {
+  display: flex;
+  flex-direction: column;
+  gap:0.8rem;
+}
+codebox {
+	display: flex;
+	gap:.8rem;
+	padding: 1.6rem;
+	border-radius: 1.2rem;
+	border: .1rem dashed #ccc;
+	background-color: #f2f2f2;
+}
+codebox code {
+	width: 100%;
+	overflow: auto;
+	font-size: 1.0rem;
+	line-height: 2;
+	font-family: "Source Code Pro", serif;
+	tab-size: 2;
+}

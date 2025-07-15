@@ -1,0 +1,35 @@
+.base-header {
+  position: relative;
+  z-index: 1;
+
+  &--wrap {
+    display: flex;
+    width: 100%;
+    justify-content:space-between;
+    padding:1.8rem 2.4rem;
+    align-items: center;
+  }
+
+  &--title {
+    display: flex;
+    flex-direction: column;
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    sup {
+      font-size: 1rem;
+      border-radius: 0.4rem;
+      background: linear-gradient(20deg, #111 50%, #444 55%);
+      color: #fff;
+      padding: 0.2rem 0.6rem;
+      display: flex;
+      letter-spacing: 0;
+
+    }
+  }
+}
+

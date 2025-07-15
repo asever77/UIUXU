@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="../assets/css/app.css">
+ 
+</head>
+<body>
+  <div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Dialog</tit>
+					<box>
+            <div data-dragdrop="drag1">
+              <div class="sample-target">
+                <div class="sample-target--item" data-dragdrop-target="item" data-value="1"></div>
+                <div class="sample-target--item" data-dragdrop-target="item" data-value="2"></div>
+              </div>
+              <div class="sample-object" data-dragdrop-object="area">
+
+                <div class="sample-object--wrap" data-dragdrop-object="wrap">
+                  <div class="sample-object--item" 
+                  data-dragdrop-object="item" 
+                  data-this="original"
+                  data-mode="move" 
+                  data-clone="1" 
+                  data-value="1">
+                    <button type="button" data-dragdrop-object="event" aria-label="이동"></button>
+
+                    <div data-dragdrop-contral="group" role="tablist">
+                      <!-- <button type="button" role="tab" aria-selected="true" data-dragdrop-contral="move" aria-label="이동"></button> -->
+                      <button type="button" role="tab" aria-selected="false" data-dragdrop-contral="rotate" aria-label="회전"></button>
+
+                      <button type="button" role="tab" aria-selected="false" data-dragdrop-contral="reversal" aria-label="반전"></button>
+
+                      <button type="button" role="tab" aria-selected="false" data-dragdrop-contral="delete" aria-label="삭제"></button>
+
+
+                      <!-- <button type="button" data-dragdrop-contral="delete" aria-label="닫기"></button> -->
+                    </div>
+            
+                    <div class="sample-object--img" data-dragdrop-object="img" role="img" aria-label="이미지설명">
+                      <svg width="71" height="71" viewBox="0 0 71 71" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M42.4278 14.1428L28.2852 0.000184819L14.143 14.1423L28.2856 28.2849L0.00195312 56.5686L14.1441 70.7107L70.7127 14.1421L56.5705 3.8147e-06L42.4278 14.1428Z" fill="#594B9C"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </box>
+        </wrap>
+      </main>
+    </div>
+  </div>
+  
+
+  <!-- script -->
+	<script type="module">
+    import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+
+    UI.exe.Drag1 = new UX.Drag({
+			id: 'drag1',
+      unit: 20,
+      angle: 45,
+		});			
+  </script>
+</body>
+</html>

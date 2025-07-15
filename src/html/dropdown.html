@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dropdown | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Dropdown</tit>
+					<box>
+            <div data-dropdown="dropdown1">
+							<button type="button" data-dropdown-button="dropdown1">
+								<span data-dropdown-text="dropdown1">서울시</span>
+							</button>
+						</div>
+						<div data-dropdown="dropdown2">
+							<button type="button" data-dropdown-button="dropdown2">
+								<span data-dropdown-text="dropdown2">월요일</span>
+							</button>
+							<div data-dropdown-panel="dropdown2" aria-hidden="true">
+								<div data-dropdown-section="dropdown2">
+									<div data-selection="rd2"></div>
+								</div>
+							</div>
+						</div>
+					</box>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown">
+		<div data-dropdown-panel="dropdown1" aria-hidden="true">
+			<div data-dropdown-section="dropdown2">
+				<div data-selection="rd1"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+	 
+    // dropdown
+		UI.exe.dropdown1 = new UX.Dropdown({
+			id: 'dropdown1',
+			callback: () => {
+				//내부 라디오버튼 선택인 경우
+				UI.exe.rd1 = new UX.ButtonSelection({
+					id: 'rd1',
+					type: 'radio',
+					label: '지역선택',
+					data: [
+						{text:'서울시', value:'서울시', checked: true},
+						{text:'강남구', value:'강남구', checked: false},
+						{text:'강동구', value:'강동구', checked: false},
+						{text:'강북구', value:'강북구', checked: false},
+					],
+					callback: (target, value) => {
+						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
+						UI.exe.dropdown1.hide();
+					}
+				});
+			},
+		});
+		UI.exe.dropdown2 = new UX.Dropdown({
+			id: 'dropdown2',
+			ps: 'bottom',
+			callback: () => {
+				//내부 라디오버튼 선택인 경우
+				UI.exe.rd2 = new UX.ButtonSelection({
+					id: 'rd2',
+					type: 'checkbox',
+					label: '요일선택',
+					data: [
+						{text:'월요일', value:'월요일', checked: true},
+						{text:'화요일', value:'화요일', checked: false},
+						{text:'수요일', value:'수요일', checked: false},
+						{text:'목요일', value:'목요일', checked: false},
+						{text:'금요일', value:'금요일', checked: false},
+						{text:'토요일', value:'토요일', checked: false},
+						{text:'일요일', value:'일요일', checked: false},
+					],
+					callback: (target, value) => {
+						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown2.id}"]`).textContent = value;
+						// UI.exe.dropdown2.hide();
+					}
+				});
+			},
+		});
+
+	</script>
+</body>
+
+</html>

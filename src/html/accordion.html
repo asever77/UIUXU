@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Accordion | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Accordion</tit>
+					<box>
+            <div data-accordion="acco1">
+              <div data-accordion-item="acco1">
+                <h3 data-accordion-head="acco1">
+                  <button type="button" data-accordion-button="acco1"></button>
+                  <b data-accordion-title="acco1" aria-hidden="true">title 1</b>
+                  <a href="#link">외부링크</a>
+                </h3>
+                <div data-accordion-body="acco1">
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd
+                </div>
+              </div>
+
+              <div data-accordion-item="acco1">
+                <h3 data-accordion-head="acco1">
+                  <button type="button" data-accordion-button="acco1"></button>
+                  <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
+                </h3>
+                <div data-accordion-body="acco1">
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd
+                </div>
+              </div>
+
+              <div data-accordion-item="acco1">
+                <h3 data-accordion-head="acco1">
+                  <button type="button" data-accordion-button="acco1"></button>
+                  <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
+                </h3>
+                <div data-accordion-body="acco1">
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd<br>
+                  ddddd
+                </div>
+              </div>
+            </div>
+					</box>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+	 
+     // accordion
+    UI.exe.acco1 = new UX.Accordion({
+      id: 'acco1',
+      expanded: 'acco1_0',
+    });
+
+	</script>
+</body>
+
+</html>

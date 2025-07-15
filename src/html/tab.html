@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tab | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Tab</tit>
+					<box>
+						<div role="tablist" data-tab="tab1"></div>
+						<div data-tab-wrap="tab1"></div>
+					</box>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- system box -->
+	<div class="area-system"></div>
+	<!-- select combo box -->
+	<div class="area-select"></div>
+	<!-- toast -->
+	<div class="area-toast"></div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+		
+		UI.exe.tab1 = new UX.Tab({
+      rederMode: 'static',
+      id: 'tab1',
+      data: [
+        {tab: `<span>tab 1</span>`, src: './tab/tab1.html', selected:true},
+        {tab: `<span>tab 2</span>`, src: './tab/tab2.html', selected:false},
+      ],
+    })
+	</script>
+</body>
+
+</html>

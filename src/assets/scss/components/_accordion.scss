@@ -1,0 +1,39 @@
+
+/* accordion */
+[data-accordion] {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-item] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-head] {
+  position: relative;
+  display: flex;
+
+  a {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+[data-accordion-button] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+[data-accordion-title] {
+  position: relative;
+  z-index: 0;
+}
+
+[data-accordion-body] {
+  overflow: hidden;
+}

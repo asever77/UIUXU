@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tooltip | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Tooltip</tit>
+					<box>
+            <div style="margin-right: 8rem;">
+              <em class="tooltip" tabindex="0">
+                <span class="offscreen" data-ps="top-left">대한항공</span>
+                <span aria-hidden="true">hover 툴팁</span>
+              </em>
+            </div>
+            <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip1">click 툴팁</button>
+            <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip2">click 툴팁2</button>
+					</box>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- tooltip -->
+  <div class="area-tooltip">
+    <div role="tooltip" id="tooltip1" aria-hidden="true">
+      <div class="offscreen" data-ps="right-top">
+        <dl>
+          <dt>날씨</dt>
+          <dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+        </dl>
+        <button type="button" data-tooltip-close="tooltip1">닫기</button>
+      </div>
+    </div>
+
+    <div role="tooltip" id="tooltip2" aria-hidden="true">
+      <div class="offscreen" data-ps="top-left">
+        <dl>
+          <dt>날씨222</dt>
+          <dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+        </dl>
+        <button type="button" data-tooltip-close="tooltip2">닫기</button>
+      </div>
+    </div>
+  </div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+	 
+    // tooltip
+    const tooltip = new UX.Tooltip('[data-tooltip="click"]');
+
+	</script>
+</body>
+
+</html>

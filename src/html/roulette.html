@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dialog | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body>
+  <div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Event Loulette</tit>
+					<box>
+
+            <div class="lucky-roulette" data-roulette="main">
+              <div class="lucky-roulette--arrow"></div>
+              <button type="button" class="lucky-roulette--start" data-roulette="start">롤렛 돌리기</button>
+              <div class="lucky-roulette--wrap" data-roulette="item">
+                <img src="test.png" alt="">
+              </div>
+            </div>
+
+          </box>
+          <select id="test" style="margin:2rem auto; border: 1px solid #000; display: block; padding: 1rem;z-index: 10; position: relative; ">
+            <option value="1">10,000P</option>
+            <option value="2">1,000P</option>
+            <option value="3">500P</option>
+            <option value="4">100P</option>
+            <option value="5">10P</option>
+          </select>
+ 
+        </wrap>
+      </main>
+    </div>
+  </div>
+
+  <script type="module">
+    import { UX } from '../assets/js/ui.global.js';
+		UX.init();
+
+		document.addEventListener('DOMContentLoaded', () => {
+      UI.exe.luckyRouletteEvent = new UX.Roulette({
+        data: [1, 2, 3, 4, 5, 4, 3, 2],
+        speed: 6000,
+        turns: 5,
+        callback: () => {
+          UI.exe.luckyRouletteEvent.play({
+            /**
+             * 개발에서 룰렛 결과 설정값 지정. (1~5 사이 정수)
+             * 1 <- 10000
+             * 2 <- 1000
+             * 3 <- 500
+             * 4 <- 100
+             * 5 <- 10
+             * */
+           
+            result: UI.exe.luckyRouletteEvent.result,
+          });
+        }
+      });
+      UI.exe.luckyRouletteEvent.result = 1; 
+
+      document.querySelector('#test').addEventListener('change', e => {
+        UI.exe.luckyRouletteEvent.result = Number(e.currentTarget.value);
+      });
+		});
+	</script>
+</body>
+</html>

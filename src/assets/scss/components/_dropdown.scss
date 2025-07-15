@@ -1,0 +1,48 @@
+/* dropdown */
+[data-dropdown] {
+  position: relative;
+}
+
+[data-dropdown-button] {
+  width: 100%;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+
+  &[aria-expanded] {
+    border: 0.1rem solid #000;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.4rem;
+  }
+}
+
+[data-dropdown-panel] {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  
+  [data-dropdown-section] {
+    top: 100%
+  }
+
+  &[data-ps="bottom"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+  }
+  &[aria-hidden="true"] {
+    display: none;
+  }
+  &[aria-hidden="false"] {
+    display: flex;
+  }
+}
+
+[data-dropdown-section] {
+  border: 0.1rem solid #000;
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.4rem;
+  background-color: #fff;
+  overflow: hidden;
+  position: absolute;
+}

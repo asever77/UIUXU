@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Wheel Picker | Guide </title>
+	<link rel="stylesheet" href="../assets/css/app.css">
+  <style>
+  </style>
+</head>
+
+<body>
+	<div class="area-base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap>
+					<tit>Wheel Picker</tit>
+
+          <fieldset id="selectType" style="font-size: 1.2rem;">
+            <legend>날짜 타입 선택</legend>
+            <label>
+              <input type="radio" name="type" value="YYYY-MM-DD"> YYYY-MM-DD
+            </label>
+            <label>
+              <input type="radio" name="type" value="MM-DD-YYYY"> MM-DD-YYYY
+            </label>
+            <label>
+              <input type="radio" name="type" value="DD-MM-YYYY"> DD-MM-YYYY
+            </label>
+          </fieldset>
+
+          <button type="button" data-set="MM-DD-YYYY" data-wheel-picker-button="aa1">
+            <span data-wheel-picker-set="YYYY">YYYY</span>
+            <span data-wheel-picker-set="MM">MM</span>
+            <span data-wheel-picker-set="DD">DD</span>
+          </div>
+          
+          <box style="justify-content: center; align-items: center;">
+
+            <div class="wheel-picker-area" data-wheel-picker="aa1" data-set="YYYY-MM-DD">
+              <div class="wheel-picker" data-wheel-picker-set="YYYY" id="iosPicker_year" aria-hidden="true"></div>
+              <div class="wheel-picker" data-wheel-picker-set="MM" id="iosPicker_month" aria-hidden="true"></div>
+              <div class="wheel-picker" data-wheel-picker-set="DD" id="iosPicker_day" aria-hidden="true"></div>
+
+              <div class="wheel-picker-a11y">
+                <select data-set="YYYY" id="iosPicker_year_a11y" style="pointer-events: none;">
+                  <option>2000</option>
+                </select>
+                <select data-set="MM" id="iosPicker_month_a11y">
+                  <option>12</option>
+                </select>
+                <select data-set="DD" id="iosPicker_day_a11y">
+                  <option>30</option>
+                </select>
+              </div>
+            </div>
+
+          </box>
+
+        </wrap>
+      </main>
+    </div>
+  </div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/ui.global.js';
+		import WheelPicker from '../assets/js/libs/wheelPicker.js';
+
+		UX.init();
+
+    // test용
+    document.querySelectorAll('#selectType input').forEach(item => {
+      item.addEventListener('change', (e) => {
+        const _this = e.currentTarget;
+        const set = _this.value;
+        const pickerArea = document.querySelector(`[data-wheel-picker="aa1"]`);
+        const pickerButton = document.querySelector(`[data-wheel-picker-button="aa1"]`);
+        pickerArea.dataset.set = set;
+        pickerButton.dataset.set = set;
+        console.log(set)
+      })
+    })
+		
+    // Wheel picker
+    UI.exe.wheelPickerYear = new WheelPicker({
+      el: '#iosPicker_year',
+      type: 'normal', // normal
+      source:  [
+        {value:2020, text: '2020'},
+        {value:2021, text: '2021'},
+        {value:2022, text: '2022'},
+        {value:2023, text: '2023'},
+        {value:2024, text: '2024'},
+        {value:2025, text: '2025'},
+        {value:2026, text: '2026'},
+        {value:2027, text: '2027'},
+        {value:2028, text: '2028'},
+      ],
+      value:2023,
+      onChange: (selected) => {
+        const selectA11y = document.querySelector('#iosPicker_year_a11y');
+        selectA11y.value = selected.value;
+        selectA11y.addEventListener('change', (e) => {
+          UI.exe.wheelPickerYear.select(Number(e.currentTarget.value));
+        });
+        
+        document.querySelector('[data-wheel-picker-button="aa1"] [data-wheel-picker-set="YYYY"]').textContent = selected.text;
+      }
+    });
+    UI.exe.wheelPickerMonth = new WheelPicker({
+      el: '#iosPicker_month',
+      type: 'normal', // normal
+      source:  [
+        {value:1, text: '01'},
+        {value:2, text: '02'},
+        {value:3, text: '03'},
+        {value:4, text: '04'},
+        {value:5, text: '05'},
+        {value:6, text: '06'},
+        {value:7, text: '07'},
+        {value:8, text: '08'},
+        {value:9, text: '09'},
+        {value:10, text: '10'},
+        {value:11, text: '11'},
+        {value:12, text: '12'},
+      ],
+      value:5,
+      onChange: (selected) => {
+        const selectA11y = document.querySelector('#iosPicker_month_a11y');
+        selectA11y.value = selected.value;
+        selectA11y.addEventListener('change', (e) => {
+          UI.exe.wheelPickerYear.select(Number(e.currentTarget.value));
+        });
+
+        document.querySelector('[data-wheel-picker-button="aa1"] [data-wheel-picker-set="MM"]').textContent = selected.text;
+      }
+    });
+    UI.exe.wheelPickerDay = new WheelPicker({
+      el: '#iosPicker_day',
+      type: 'infinite', // normal
+      source:  [
+        {value:1, text: '01'},
+        {value:2, text: '02'},
+        {value:3, text: '03'},
+        {value:4, text: '04'},
+        {value:5, text: '05'},
+        {value:6, text: '06'},
+        {value:7, text: '07'},
+        {value:8, text: '08'},
+        {value:9, text: '09'},
+        {value:10, text: '10'},
+        {value:11, text: '11'},
+        {value:12, text: '12'},
+        {value:13, text: '13'},
+        {value:14, text: '14'},
+        {value:15, text: '15'},
+        {value:16, text: '16'},
+        {value:17, text: '17'},
+        {value:18, text: '18'},
+        {value:19, text: '19'},
+        {value:20, text: '20'},
+        {value:21, text: '21'},
+        {value:22, text: '22'},
+        {value:23, text: '23'},
+        {value:24, text: '24'},
+        {value:25, text: '25'},
+        {value:26, text: '26'},
+        {value:27, text: '27'},
+        {value:28, text: '28'},
+        {value:29, text: '29'},
+        {value:30, text: '30'},
+      ],
+      value:1,
+      onChange: (selected) => {
+        const selectA11y = document.querySelector('#iosPicker_day_a11y');
+        selectA11y.value = selected.value;
+        selectA11y.addEventListener('change', (e) => {
+          UI.exe.wheelPickerYear.select(Number(e.currentTarget.value));
+        });
+
+        document.querySelector('[data-wheel-picker-button="aa1"] [data-wheel-picker-set="DD"]').textContent = selected.text;
+      }
+    });
+	</script>
+</body>
+
+</html>
