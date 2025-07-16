@@ -325,13 +325,12 @@ codebox code {
   top: 0;
   width: 100%;
   z-index: 1;
-  height: 5.6rem;
 }
 .base-header--wrap {
   display: flex;
   width: 100%;
   justify-content: center;
-  padding: 1.8rem 2.4rem;
+  padding: 5rem 2.4rem;
   align-items: center;
 }
 .base-header--title {

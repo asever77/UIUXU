@@ -224,3 +224,12 @@ export class ArrowNavigator {
     this.container.removeEventListener('keydown', this.handleKeyDown);
   }
 }
+
+export class AllcheckFn {
+  constructor(opt) {
+    this.name = opt.name;
+    this.callback = opt.callback;
+
+    console.log(this.name)
+  }
+}

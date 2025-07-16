@@ -95,6 +95,24 @@
           </group>
 
           <group>
+            <tit>All Check</tit>
+            <box>
+              <input type="checkbox" id="allcheck_0" name="allcheck" data-allcheck-main="allcheck">
+              <label for="allcheck_0">전체 체크</label>
+
+              <hr>
+              <input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck">
+              <label for="allcheck_1">체크 1</label>
+
+              <input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck">
+              <label for="allcheck_2">체크 2</label>
+
+              <input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck">
+              <label for="allcheck_3">체크 3</label>
+            </box>
+          </group>
+
+          <group>
             <tit>Tab</tit>
             <box>
               <div role="tablist" data-tab="tab1"></div>
@@ -228,6 +246,13 @@
       expanded: 'acco1_0',
     });
 
+    UI.exe.acco1 = new UX.AllcheckFn({
+      name: 'allcheck',
+      callback: (v) => {
+        console.log(v);
+      }
+    })
+
     // dialog
 		UI.exe.modal1 = new UX.Dialog({
 			area: document.querySelector('.area-dialog[data-area="body"]'),
@@ -340,7 +365,7 @@
 		});
 		UI.exe.dropdown2 = new UX.Dropdown({
 			id: 'dropdown2',
-			ps: 'bottom',
+			ps: 'top',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
 				UI.exe.rd2 = new UX.ButtonSelection({

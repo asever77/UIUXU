@@ -9,7 +9,9 @@ import WheelPicker from './libs/wheelPicker.js';
 import Nav from './page/nav.js';
 
 
-import { loadContent } from './utils/utils.js';
+import { loadContent, AllcheckFn } from './utils/utils.js';
+
+console.log(loadContent, AllcheckFn)
 
 export const UX = {
 	Accordion,
@@ -19,6 +21,7 @@ export const UX = {
 	Tab,
 	Tooltip,
 	WheelPicker,
+	AllcheckFn,
 
 	init: () => {
 		const global = 'UI';
