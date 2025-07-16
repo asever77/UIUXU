@@ -4,26 +4,20 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Guide </title>
+	<title>UIUXU</title>
 	<link rel="stylesheet" href="../assets/css/app.css">
 </head>
 
 <body>
 	<div class="area-base">
-		<header class="base-header">
-      <div class="base-header--wrap">
-        <div class="base-header--title">
-          <h1>UIUXU<sup>A11y</sup></h1>
-        </div>
-      </div>
-    </header>
+		<header class="base-header"></header>
+
 		<div class="base-body">
-			<aside class="base-side"></aside>
-			<main class="base-content">
+			<main class="base-main">
 				<wrap>
           <group>
             <tit>Accordion</tit>
-            <box data-color="green">
+            <box>
               <div data-accordion="acco1">
                 <div data-accordion-item="acco1">
                   <h3 data-accordion-head="acco1">
@@ -66,7 +60,7 @@
 
           <group>
             <tit>Dialog</tit>
-            <box data-color="pink">
+            <box>
               <button type="button" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>|
               <button type="button" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>|
               <button type="button" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>|
@@ -81,7 +75,7 @@
 
           <group>
             <tit>Dropdown</tit>
-            <box data-color="blue">
+            <box>
               <div data-dropdown="dropdown1">
                 <button type="button" data-dropdown-button="dropdown1">
                   <span data-dropdown-text="dropdown1">서울시</span>
@@ -225,7 +219,7 @@
 
 	<!-- script -->
 	<script type="module">
-		import { UX } from '../assets/js/ui.global.js';
+		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 	 
     // accordion

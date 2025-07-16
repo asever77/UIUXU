@@ -35,9 +35,9 @@ export const UX = {
 	},
 	header: () => {
 		//header
-		if (document.querySelector('.base-header[data-type="nav"]')) {
+		if (document.querySelector('.base-header')) {
 			loadContent({
-				area: document.querySelector('.base-header[data-type="nav"]'),
+				area: document.querySelector('.base-header'),
 				src: './inc/header.html',
 				insert: true
 			})
@@ -45,10 +45,10 @@ export const UX = {
 				console.log('callback -- header');
 				const el_header = document.querySelector('.base-header');
 				
-				const ManiNav = new Nav({
-					id: 'main-nav'
-				});
-				ManiNav.init();
+				// const ManiNav = new Nav({
+				// 	id: 'main-nav'
+				// });
+				// ManiNav.init();
 
 			})
 			.catch(err => console.error('Error loading header content:', err));
