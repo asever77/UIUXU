@@ -26,6 +26,9 @@
 	--gray_20: #eee;
 	--gray_10: #f7f7f7;
 	--gray_0: #fff;
+
+	--bgcolor: #fff;
+	--bgheader: rgba(255,255,255,0) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 90%;
 }
 
 :root.dark {
@@ -42,5 +45,8 @@
 	--gray_90: #eee;
 	--gray_95: #f7f7f7;
 	--gray_100: #fff;
+
+	--bgcolor: rgb(29,29,31);
+	--bgheader: rgba(255,255,255,0) 10%, rgba(29,29,31,0.9) 40%, rgba(29,29,31,0.8) 60%, rgba(255,255,255,0) 90%;
 }
 

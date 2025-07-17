@@ -1,8 +1,18 @@
+body {
+  background-color: var(--bgcolor);
+}
+
+.area-base {
+  max-width: 120rem;
+  position: relative;
+  margin: 0 auto;
+}
 .base-header {
   position: sticky;
   top:0;
   width: 100%;
   z-index: 1;
+  background: linear-gradient(var(--bgheader));
 
   &--wrap {
     display: flex;
@@ -42,3 +52,38 @@
   }
 }
 
+.base-content {
+  position: relative;
+  z-index: 0;
+}
+
+grid {
+  width: 100%;
+  display: grid;
+
+  &.main-content {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows:repeat(1, 1fr);
+
+    grid-auto-flow: row dense;
+
+    gap:2rem;
+    padding:1.6rem;
+    [data-name] {
+      grid-column: span 3;
+      grid-row: span 1;
+    }
+
+    [data-name="wheel picker"] {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    box{
+      flex:1; 
+      justify-content: flex-start;
+    }
+  }
+  
+  
+}

@@ -225,11 +225,60 @@ export class ArrowNavigator {
   }
 }
 
-export class AllcheckFn {
-  constructor(opt) {
-    this.name = opt.name;
-    this.callback = opt.callback;
+export class RadioAllcheck {
+  //private
+  #main;
+  #subs;
+  #sum
+  #callback;
+  #isAllCheck;
 
-    console.log(this.name)
+  constructor(opt) {
+    // opt 유효성 검사
+    if (!opt || !opt.name) {
+      throw new Errow('옵션 객체와 name 속성은 필수입니다.');
+    }
+
+    const { name, callback } = opt;
+
+    this.#callback = callback;
+    this.#main = document.querySelector(`[data-allcheck-main="${name}"]`);
+    this.#subs = document.querySelectorAll(`[data-allcheck-sub="${name}"]`);
+
+    if (!this.#main || this.#subs.length === 0) {
+      console.error(`${name}에 핻앟나느 체크박스 요소를 찾을 수가 없습니다.`);
+      return;
+    }
+
+    this.#sum = this.#subs.length;
+    this.#updateState(); // 초기 상태 설정
+    this.#addEventListeners();
+  }
+
+  #addEventListeners() {
+    this.#main.addEventListener('change', this.#handleToggle);
+    this.#subs.forEach(item => {
+      item.addEventListener('change', this.#updateState);
+    });
+  }
+
+  #handleToggle = (e) => {
+    this.#isAllCheck = e.target.checked;
+    this.#subs.forEach(item => {
+      item.checked = this.#isAllCheck;
+    });
+    this.#callback?.(this.#isAllCheck);
+  }
+  #updateState = (e) => {
+    const checkedSum = Array.from(this.#subs).filter(item => item.checked).length;
+    this.#isAllCheck = (this.#sum === checkedSum);
+    this.#main.checked = this.#isAllCheck;
+    this.#callback?.(this.#isAllCheck);
+  }
+  destroy() {
+    this.#main.removeEventListener('change', this.#handleToggle);
+    this.#subs.forEach(item => {
+      item.removeEventListener('change', this.#updateState);
+    });
   }
 }

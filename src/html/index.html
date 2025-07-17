@@ -14,8 +14,8 @@
 
 		<div class="base-body">
 			<main class="base-main">
-				<wrap>
-          <group>
+				<grid class="main-content">
+          <group data-name="accordion">
             <tit>Accordion</tit>
             <box>
               <div data-accordion="acco1">
@@ -58,61 +58,68 @@
             </box>
           </group>
 
-          <group>
+          <group data-name="dialog">
             <tit>Dialog</tit>
             <box>
-              <button type="button" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>|
-              <button type="button" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>|
-              <button type="button" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>|
-              <button type="button" data-test-id="modal4" onclick="UI.exe.modal4.show()">left</button>|
-              <button type="button" data-test-id="modal5" onclick="UI.exe.modal5.show()">right</button>|
-              <button type="button" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>|
-              <button type="button" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast1</button>|
-              <button type="button" data-test-id="toast2" onclick="UI.exe.toast2.show()">toast2</button>|
-              <button type="button" data-test-id="snackbar1" onclick="UI.exe.snackbar1.show()">snack bar1</button>
+              <div style="display: flex; gap:0.4rem; flex-wrap: wrap; align-items: flex-start; ">
+                <button type="button" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>|
+                <button type="button" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>|
+                <button type="button" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>|
+                <button type="button" data-test-id="modal4" onclick="UI.exe.modal4.show()">left</button>|
+                <button type="button" data-test-id="modal5" onclick="UI.exe.modal5.show()">right</button>|
+                <button type="button" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>|
+                <button type="button" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast1</button>|
+                <button type="button" data-test-id="toast2" onclick="UI.exe.toast2.show()">toast2</button>|
+                <span>shack bar 추가필요</span>
+              </div>
             </box>
           </group>
 
-          <group>
+          <group data-name="dropdown">
             <tit>Dropdown</tit>
             <box>
-              <div data-dropdown="dropdown1">
-                <button type="button" data-dropdown-button="dropdown1">
-                  <span data-dropdown-text="dropdown1">서울시</span>
-                </button>
-              </div>
-              <div data-dropdown="dropdown2">
-                <button type="button" data-dropdown-button="dropdown2">
-                  <span data-dropdown-text="dropdown2">월요일</span>
-                </button>
-                <div data-dropdown-panel="dropdown2" aria-hidden="true">
-                  <div data-dropdown-section="dropdown2">
-                    <div data-selection="rd2"></div>
+              <div style="display: flex; gap:0.8rem;">
+                <div data-dropdown="dropdown1">
+                  <button type="button" data-dropdown-button="dropdown1">
+                    <span data-dropdown-text="dropdown1">서울시</span>
+                  </button>
+                </div>
+                <div data-dropdown="dropdown2">
+                  <button type="button" data-dropdown-button="dropdown2">
+                    <span data-dropdown-text="dropdown2">월요일</span>
+                  </button>
+                  <div data-dropdown-panel="dropdown2" aria-hidden="true">
+                    <div data-dropdown-section="dropdown2">
+                      <div data-selection="rd2"></div>
+                    </div>
                   </div>
                 </div>
               </div>
+              
             </box>
           </group>
 
-          <group>
+          <group data-name="all check">
             <tit>All Check</tit>
             <box>
-              <input type="checkbox" id="allcheck_0" name="allcheck" data-allcheck-main="allcheck">
-              <label for="allcheck_0">전체 체크</label>
+              <div>
+                <input type="checkbox" id="allcheck_0" name="allcheck" data-allcheck-main="allcheck">
+                <label for="allcheck_0">전체 체크</label>
 
-              <hr>
-              <input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck">
-              <label for="allcheck_1">체크 1</label>
+                <hr>
+                <input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck">
+                <label for="allcheck_1">체크 1</label>
 
-              <input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck">
-              <label for="allcheck_2">체크 2</label>
+                <input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck">
+                <label for="allcheck_2">체크 2</label>
 
-              <input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck">
-              <label for="allcheck_3">체크 3</label>
+                <input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck">
+                <label for="allcheck_3">체크 3</label>
+              </div>
             </box>
           </group>
 
-          <group>
+          <group data-name="tab">
             <tit>Tab</tit>
             <box>
               <div role="tablist" data-tab="tab1"></div>
@@ -120,26 +127,28 @@
             </box>
           </group>
 
-          <group>
+          <group data-name="tooltip">
             <tit>Tooltip</tit>
             <box style="flex-direction: column;">
               <div>
-                <em class="tooltip" tabindex="0">
-                  <span class="offscreen" data-ps="top-left">대한항공</span>
-                  <span aria-hidden="true">hover 툴팁</span>
-                </em>
+                <div>
+                  <em class="tooltip" tabindex="0">
+                    <span class="offscreen" data-ps="top-left">대한항공</span>
+                    <span aria-hidden="true">hover 툴팁</span>
+                  </em>
+                </div>
+                <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip1">click 툴팁</button>
+                <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip2">click 툴팁2</button>
               </div>
-              <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip1">click 툴팁</button>
-              <button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip2">click 툴팁2</button>
             </box>
           </group>
 
-          <group>
+          <group data-name="wheel picker">
             <tit>Wheel Picker (libray)</tit>
-            <fieldset id="selectType" style="font-size: 1.2rem;">
+            <fieldset id="selectType" style="font-size: 1.2rem; display: flex; flex-direction: column;">
               <legend>날짜 타입 선택</legend>
               <label>
-                <input type="radio" name="type" value="YYYY-MM-DD"> YYYY-MM-DD
+                <input type="radio" name="type" value="YYYY-MM-DD" checked> YYYY-MM-DD
               </label>
               <label>
                 <input type="radio" name="type" value="MM-DD-YYYY"> MM-DD-YYYY
@@ -148,7 +157,7 @@
                 <input type="radio" name="type" value="DD-MM-YYYY"> DD-MM-YYYY
               </label>
             </fieldset>
-            <button type="button" data-set="MM-DD-YYYY" data-wheel-picker-button="aa1">
+            <button type="button" data-set="YYYY-MM-DD" data-wheel-picker-button="aa1">
               <span data-wheel-picker-set="YYYY">YYYY</span>
               <span data-wheel-picker-set="MM">MM</span>
               <span data-wheel-picker-set="DD">DD</span>
@@ -167,7 +176,7 @@
               </div>
             </box>
           </group>
-				</wrap>
+				</grid>
 
         <div class="area-dialog" data-area="main"></div>
 			</main>
@@ -240,18 +249,19 @@
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 	 
+    // all check
+    UI.exe.allcheck1 = new UX.RadioAllcheck({
+      name: 'allcheck',
+      callback: (v) => {
+        console.log(`콜백 결과 ${v}`);
+      },
+    });
+
     // accordion
     UI.exe.acco1 = new UX.Accordion({
       id: 'acco1',
       expanded: 'acco1_0',
     });
-
-    UI.exe.acco1 = new UX.AllcheckFn({
-      name: 'allcheck',
-      callback: (v) => {
-        console.log(v);
-      }
-    })
 
     // dialog
 		UI.exe.modal1 = new UX.Dialog({
@@ -333,13 +343,6 @@
 			type: 'toast',
 			message: `<strong>2222 토스트 메세지</strong>입니다.`,
 		});
-		UI.exe.snackbar1 = new UX.Dialog({
-			area: document.querySelector('.area-toast'),
-			id: 'snackbar1',
-			ps: 'bottom',
-			type: 'snack',
-			message: `<strong>토스트 메세지</strong>입니다.`,
-		});
 
     // dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
@@ -411,8 +414,7 @@
         const pickerButton = document.querySelector(`[data-wheel-picker-button="aa1"]`);
         pickerArea.dataset.set = set;
         pickerButton.dataset.set = set;
-        console.log(set)
-      })
+      });
     })
     UI.exe.wheelPickerYear = new UX.WheelPicker({
       el: '#iosPicker_year',
@@ -507,7 +509,6 @@
         const selectA11y = document.querySelector('#iosPicker_day_a11y');
         selectA11y.value = selected.value;
         selectA11y.addEventListener('change', (e) => {
-          console.log(Number(e.currentTarget.value))
           UI.exe.wheelPickerDay.select(Number(e.currentTarget.value));
         });
 

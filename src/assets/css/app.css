@@ -23,6 +23,8 @@
   --gray_20: #eee;
   --gray_10: #f7f7f7;
   --gray_0: #fff;
+  --bgcolor: #fff;
+  --bgheader: rgba(255,255,255,0) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 90%;
 }
 
 :root.dark {
@@ -39,6 +41,8 @@
   --gray_90: #eee;
   --gray_95: #f7f7f7;
   --gray_100: #fff;
+  --bgcolor: rgb(29,29,31);
+  --bgheader: rgba(255,255,255,0) 10%, rgba(29,29,31,0.9) 40%, rgba(29,29,31,0.8) 60%, rgba(255,255,255,0) 90%;
 }
 
 html {
@@ -273,13 +277,11 @@ stit {
 
 box {
   width: 100%;
-  max-width: 30rem;
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
   gap: 0.8rem;
   padding: 1.6rem;
   border-radius: 1.2rem;
-  border: 0.1rem dashed #ccc;
+  border: 0.1rem dashed #e9e9e9;
 }
 box[data-color=pink] {
   background-color: #fff9fa;
@@ -320,11 +322,22 @@ codebox code {
        tab-size: 2;
 }
 
+body {
+  background-color: var(--bgcolor);
+}
+
+.area-base {
+  max-width: 120rem;
+  position: relative;
+  margin: 0 auto;
+}
+
 .base-header {
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1;
+  background: linear-gradient(var(--bgheader));
 }
 .base-header--wrap {
   display: flex;
@@ -362,6 +375,30 @@ codebox code {
 .base-content {
   position: relative;
   z-index: 0;
+}
+
+grid {
+  width: 100%;
+  display: grid;
+}
+grid.main-content {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-auto-flow: row dense;
+  gap: 2rem;
+  padding: 1.6rem;
+}
+grid.main-content [data-name] {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+grid.main-content [data-name="wheel picker"] {
+  grid-column: span 3;
+  grid-row: span 2;
+}
+grid.main-content box {
+  flex: 1;
+  justify-content: flex-start;
 }
 
 @keyframes modal-hide {

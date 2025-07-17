@@ -42,8 +42,6 @@ export default class WheelPicker {
 
 		this.itemHeight = this.elems.el.offsetHeight * 3 / this.options.count;
 		// 각 항목의 높이
-		console.log(this.elems.el)
-
 
 		this.itemAngle = 360 / this.options.count; // 각 항목 간의 회전 정도
 		this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180); // 링 반경 
@@ -185,8 +183,6 @@ export default class WheelPicker {
 		let circleListHTML = '';
 		let selectOptionHTML = ``;
 		for (let i = 0; i < source.length; i++) {
-
-			console.log(this.value, this.source[i].value)
 			selectOptionHTML += `<option value="${source[i].value}" ${this.value, this.source[i].value ? 'selected' : ''}>${source[i].text}</option>`;
 
 			circleListHTML += `<li class="wheel-picker-option" aria-hidden="true" 
