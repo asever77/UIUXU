@@ -269,7 +269,7 @@ export class RadioAllcheck {
     });
     this.#callback?.(this.#isAllCheck);
   }
-  #updateState = (e) => {
+  #updateState = () => {
     const checkedSum = Array.from(this.#subs).filter(item => item.checked).length;
     this.#isAllCheck = (this.#sum === checkedSum);
     this.#main.checked = this.#isAllCheck;

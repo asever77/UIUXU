@@ -21,7 +21,7 @@ export default class Dropdown {
 
   init() {
     //setting
-    this.text.dataset.dropdownText = this.id;
+    this.text && (this.text.dataset.dropdownText = this.id);
     this.button.dataset.dropdownButton = this.id;
     this.button.setAttribute('aria-controls', this.id);
     this.button.setAttribute('aria-expanded', false);

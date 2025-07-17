@@ -64,11 +64,10 @@ grid {
   &.main-content {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows:repeat(1, 1fr);
-
     grid-auto-flow: row dense;
-
-    gap:2rem;
+    gap:1.6rem;
     padding:1.6rem;
+
     [data-name] {
       grid-column: span 3;
       grid-row: span 1;
@@ -84,6 +83,23 @@ grid {
       justify-content: flex-start;
     }
   }
-  
-  
+}
+@media (max-width:1199px) {
+  grid {
+    &.main-content {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows:repeat(1, 1fr);
+      grid-auto-flow: row dense;
+
+      [data-name] {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+
+      [data-name="wheel picker"] {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+    }
+  }
 }

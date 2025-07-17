@@ -295,6 +295,9 @@ box[data-color=blue] {
   background-color: #f9fcff;
   border-color: #70b8f7;
 }
+box[data-color=gray] {
+  background-color: #e9e9e9;
+}
 
 group {
   display: flex;
@@ -385,7 +388,7 @@ grid.main-content {
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(1, 1fr);
   grid-auto-flow: row dense;
-  gap: 2rem;
+  gap: 1.6rem;
   padding: 1.6rem;
 }
 grid.main-content [data-name] {
@@ -401,6 +404,21 @@ grid.main-content box {
   justify-content: flex-start;
 }
 
+@media (max-width: 1199px) {
+  grid.main-content {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-auto-flow: row dense;
+  }
+  grid.main-content [data-name] {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+  grid.main-content [data-name="wheel picker"] {
+    grid-column: span 4;
+    grid-row: span 1;
+  }
+}
 @keyframes modal-hide {
   0% {
     display: flex;

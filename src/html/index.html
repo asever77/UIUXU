@@ -86,11 +86,12 @@
                 </div>
                 <div data-dropdown="dropdown2">
                   <button type="button" data-dropdown-button="dropdown2">
-                    <span data-dropdown-text="dropdown2">월요일</span>
+                    <span>요일 (중복선택)</span>
                   </button>
                   <div data-dropdown-panel="dropdown2" aria-hidden="true">
                     <div data-dropdown-section="dropdown2">
                       <div data-selection="rd2"></div>
+                      <button type="button" onclick="UI.exe.dropdown2.hide()">닫기</button>
                     </div>
                   </div>
                 </div>
@@ -107,15 +108,23 @@
                 <label for="allcheck_0">전체 체크</label>
 
                 <hr>
-                <input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck">
+                <input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck" checked>
                 <label for="allcheck_1">체크 1</label>
 
-                <input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck">
+                <input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck" >
                 <label for="allcheck_2">체크 2</label>
 
-                <input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck">
+                <input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck" checked>
                 <label for="allcheck_3">체크 3</label>
               </div>
+
+              
+            </box>
+            <box data-color="gray">
+              UX.RadioAllcheck({<br>
+              name:'name',<br>
+              callback:(result) => {}<br>
+              })
             </box>
           </group>
 
@@ -385,7 +394,7 @@
 						{text:'일요일', value:'일요일', checked: false},
 					],
 					callback: (target, value) => {
-						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown2.id}"]`).textContent = value;
+						// document.querySelector(`[data-dropdown-text="${UI.exe.dropdown2.id}"]`).textContent = value;
 						// UI.exe.dropdown2.hide();
 					}
 				});
