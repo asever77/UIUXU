@@ -413,8 +413,22 @@
       rederMode: 'static',
       id: 'tab1',
       data: [
-        {tab: `<span>tab 1</span>`, src: './tab/tab1.html', selected:true},
-        {tab: `<span>tab 2</span>`, src: './tab/tab2.html', selected:false},
+        {
+					tab: `<span>tab 1</span>`, 
+					src: './tab/tab1.html', 
+					selected:true, 
+					callback: () => {
+						console.log('tab 1 open');
+					}
+				},
+        {
+					tab: `<span>tab 2</span>`, 
+					src: './tab/tab2.html', 
+					selected:false,
+					callback: () => {
+						console.log('tab 2 open');
+					}
+				},
       ],
     });
 
@@ -426,11 +440,24 @@
         selected: 1,
       },
       data: [
-        {tab: `<span>tab 33</span>`, src: null, selected:true},
-        {tab: `<span>tab 4</span>`, src: null, selected:false},
+        { 
+					tab: `<span>tab 3</span>`, 
+					src: null, 
+					selected: true, 
+					callback: () => {
+						console.log('tab 3 open');
+					}
+				},
+				{ 
+					tab: `<span>tab 4</span>`, 
+					src: null, 
+					selected: false, 
+					callback: () => {
+						console.log('tab 4 open');
+					}
+				},
       ],
     });
-
     // tooltip
     const tooltip = new UX.Tooltip('[data-tooltip="click"]');
 
