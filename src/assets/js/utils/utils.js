@@ -99,6 +99,45 @@ export const slideToggle = (element, duration = 300) => {
   return isHidden ? slideDown(element, duration) : slideUp(element, duration);
 };
 
+export class SmoothScroller {
+  /**
+   * @param {Object} opt
+   * @param {HTMLElement} opt.element
+   * @param {string} [opt.type=center|left]
+   */
+  constructor(opt) {
+    this.container = opt.element;
+    this.width = this.container.offsetWidth;
+    this.type = opt.type || 'center';
+    const computedStyle = window.getComputedStyle(this.container);
+    this.gap = parseFloat(computedStyle.paddingLeft);
+  }
+
+  move(item) {
+    const rect = this.container.getBoundingClientRect();
+    const scrollLeft = this.container.scrollLeft;
+    const itemRect = item.getBoundingClientRect();
+    const containerHalf = rect.width / 2;
+
+    const targetLeft = Math.abs((rect.left + this.gap) - (itemRect.left + scrollLeft));
+
+    switch (this.type) {
+      case 'center':
+        this.container.scrollTo({
+          left: targetLeft - containerHalf + (itemRect.width / 2),
+          behavior: 'smooth'
+        });
+        break;
+      case 'left':
+        this.container.scrollTo({
+          left: targetLeft,
+          behavior: 'smooth'
+        });
+        break;
+    }
+  }
+}
+
 export class FocusTrap {
   constructor(container) {
     if (!container || !(container instanceof HTMLElement)) {

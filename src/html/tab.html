@@ -17,16 +17,27 @@
 				<wrap>
 					<tit>Tab</tit>
 					<box>
-              <stit>개별 탭</stit>
-              <div role="tablist" data-tab="tab1"></div>
-              <div data-tab-wrap="tab1"></div>
-
-              <stit>그룹 탭</stit>
-              <div>
-                <div role="tablist" data-tab="tab2"></div>
-                <div data-tab-wrap="tab2"></div>
-              </div>
-            </box>
+						<div data-tab="tab1" data-tab-style="small-box-type">
+							<div role="tablist">
+								<button type="button" role="tab">
+									<span>tab 1</span>
+								</button>
+								<button type="button" role="tab">
+									<span>tab 2</span>
+								</button>
+								<button type="button" role="tab">
+									<span>tab 3</span>
+								</button>
+								<button type="button" role="tab">
+									<span>tab 4</span>
+								</button>
+								<button type="button" role="tab">
+									<span>tab 5</span>
+								</button>
+							</div>
+						</div>
+						<div data-tab-wrap="tab1"></div>
+					</box>
 				</wrap>
 			</main>
 		</div>
@@ -44,56 +55,36 @@
 	<script type="module">
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
-		
+
 		UI.exe.tab1 = new UX.Tab({
-      rederMode: 'static',
-      id: 'tab1',
-      data: [
-        {
-					tab: `<span>tab 1</span>`, 
-					src: './tab/tab1.html', 
-					selected:true, 
-					callback: () => {
-						console.log('tab 1 open');
-					}
-				},
-        {
-					tab: `<span>tab 2</span>`, 
-					src: './tab/tab2.html', 
-					selected:false,
+			id: 'tab1',
+			selected: 1,
+			data: [
+				{ src: './tab/tab1.html', },
+				{ src: './tab/tab2.html',
 					callback: () => {
 						console.log('tab 2 open');
+						UI.exe.tab2.init()
 					}
 				},
-      ],
-    });
+				{ src: './tab/tab3.html', },
+				{ src: './tab/tab1.html', },
+				{ src: './tab/tab3.html', },
+			],
+		});
 
-    UI.exe.tab1 = new UX.Tab({
-      rederMode: 'static',
-      id: 'tab2',
-      group: {
-        src: './tab/tab_group.html',
-        selected: 1,
-      },
-      data: [
-        { 
-					tab: `<span>tab 3</span>`, 
-					src: null, 
-					selected: true, 
-					callback: () => {
-						console.log('tab 3 open');
-					}
-				},
-				{ 
-					tab: `<span>tab 4</span>`, 
-					src: null, 
-					selected: false, 
-					callback: () => {
-						console.log('tab 4 open');
-					}
-				},
-      ],
-    });
+		UI.exe.tab2 = new UX.Tab({
+			id: 'tab2',
+			selected: 1,
+			group: {
+				src: './tab/tab_group.html',
+			},
+			data: [
+				{ callback: () => { console.log('tab2 > tab1 open');}},
+				{ callback: () => { console.log('tab2 > tab2 open');}},
+			],
+		});
+		UI.exe.tab1.init();
 
 	</script>
 </body>

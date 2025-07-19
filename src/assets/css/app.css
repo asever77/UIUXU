@@ -1330,13 +1330,24 @@ grid.main-content box {
 /* tab */
 [data-tab] {
   display: flex;
+  overflow-x: auto;
+  position: relative;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+[role=tablist] {
+  display: flex;
+  flex-wrap: nowrap;
   gap: 0;
   width: 100%;
 }
-[data-tab] [role=tab] {
+[role=tablist] [role=tab] {
   display: flex;
   padding: 1.2rem;
   cursor: pointer;
+  min-width: 10rem;
 }
 
 [role=tab][aria-selected=true] {

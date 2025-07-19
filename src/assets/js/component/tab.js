@@ -1,11 +1,13 @@
-import { loadContent, ArrowNavigator } from '../utils/utils.js';
+import { loadContent, ArrowNavigator, SmoothScroller } from '../utils/utils.js';
 
 export default class Tab {
   constructor(opt) {
 		const defaults = {
 			renderMode: 'static', 
       group: false,
+      selected: 1,
 			data: null, 
+      callback: null,
 		};
 
 		this.option = { ...defaults, ...opt };
@@ -13,28 +15,50 @@ export default class Tab {
     this.data = this.option.data;
     this.id = this.option.id;
     this.group = this.option.group;
+    this.selected = this.option.selected;
 
-    this.el_tab = document.querySelector(`[data-tab="${this.id}"]`);
-    this.el_wrap = document.querySelector(`[data-tab-wrap="${this.id}"]`);
+    this.el_tab = null;
+    this.el_wrap = null;
     this.el_tabBtns = null;
     this.el_tabPnls = null;
 
-    this.init();
+    this.smoothScroll = null;
+
+    if (this.el_tab) {
+      // this.init();
+    } 
   }
 
   init() {
-    let tablist_html = ``;
+    this.el_tab = document.querySelector(`[data-tab="${this.id}"]`);
+    this.el_tabList = this.el_tab.querySelector(`[role="tablist"]`);
+    this.el_tabButton = this.el_tab.querySelectorAll(`[role="tab"]`);
+    this.el_wrap = document.querySelector(`[data-tab-wrap="${this.id}"]`);
+
+    if (this.el_tab.dataset.load === 'true') return false;
+
+    this.el_tab.dataset.load = true;
     let tabpanel_html = ``;
+
+    this.el_tabButton.forEach((item, index) => {
+      const n = index + 1;
+      const isSelected = this.selected === n;
+      item.setAttribute('id', `${this.id}-id-${n}`);
+      item.setAttribute('aria-controls', `${this.id}-panel-${n}`);
+      item.setAttribute('aria-selected', `${isSelected}`);
+      item.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
+      item.dataset.tabName = this.id;
+      item.dataset.n = index;
+    });
     this.data.forEach((item, index) => {
       const n = index + 1;
-      tablist_html += `<button type="button" role="tab" aria-selected="${item.selected}" aria-controls="${this.id}-panel-${n}" tabindex="${item.selected ? '0' : '-1'}" id="${this.id}-id-${n}" data-n="${index}">${item.tab}</li>`;
+      const isSelected = this.selected === n;
 
       if (!this.group) {
-         tabpanel_html += `<div role="tabpanel" aria-labelledby="${this.id}-id-${n}" id="${this.id}-panel-${n}" aria-expanded="${item.selected}" tabindex="${item.selected ? '0' : '-1'}"></div>`;
+         tabpanel_html += `<div role="tabpanel" aria-labelledby="${this.id}-id-${n}" id="${this.id}-panel-${n}" aria-expanded="${isSelected}" tabindex="${isSelected ? '0' : '-1'}" data-tab-name="${this.id}"></div>`;
       } 
     });
     
-    this.el_tab.innerHTML = tablist_html;
     this.el_wrap.innerHTML = tabpanel_html;
     this.el_tabBtns = this.el_tab.querySelectorAll('[role="tab"]');
 
@@ -53,7 +77,6 @@ export default class Tab {
       });
     } 
     else {
-      console.log('group', this.group.src)
       loadContent({
         area: this.el_wrap,
         src: this.group.src,
@@ -62,18 +85,17 @@ export default class Tab {
       .then(() => {
         this.el_wrap.querySelectorAll('[role="tabpanel"]').forEach((item, index) => {
           const n = index + 1;
-          const isSelected = this.group.selected === n;
+          const isSelected = this.selected === n;
           item.setAttribute('aria-labelledby', `${this.id}-id-${n}`);
           item.setAttribute('id', `${this.id}-panel-${n}`);
           item.setAttribute('aria-expanded', `${isSelected}`);
           item.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
+          item.dataset.tabName = this.id;
 
           if (isSelected) {
-            console.log(this.data, index)
             this.data[index].callback && this.data[index].callback();
           }
         });
-        
       })
       .catch(err => console.error('Error loading tab content:', err));
     }
@@ -88,11 +110,16 @@ export default class Tab {
         this.expanded(el.id);
       }
     });
+
+    this.smoothScroll = new SmoothScroller({
+      element: this.el_tab,
+      type: 'center'
+    });
   }
 
   handleToggle (e) {
     const _this = e.currentTarget;
-    const _wrap = _this.closest('[role="tablist"]');
+    const _wrap = _this.closest('[data-tab]');
     const tabSelected = _wrap.querySelector('[role="tab"][aria-selected="true"]');
     const tabID = _this.id;
     const idx = Number(_this.dataset.n);
@@ -101,20 +128,22 @@ export default class Tab {
     _this.setAttribute('aria-selected', true);
 
     this.data[idx].callback && this.data[idx].callback();
-
-    
+    this.smoothScroll.move(_this);
     this.expanded(_this.id);
   }
 
   expanded (id) {
     const tabID = id;
     const _this = document.querySelector(`#${tabID}`);
-    const _wrap = _this.closest('[role="tablist"]');
+    const _wrap = _this.closest('[data-tab]');
     const tabName = _wrap.dataset.tab;
-    const tabSelected = _wrap.querySelector('[role="tab"][aria-selected="true"]');
+
+    console.log(tabName, tabID)
+
+    const tabSelected = _wrap.querySelector(`[data-tab-name="${tabName}"][role="tab"][aria-selected="true"]`);
     const panelWrap = document.querySelector(`[data-tab-wrap="${tabName}"]`);
-    const panelSelected = panelWrap.querySelector(`[role="tabpanel"][aria-expanded="true"]`);
-    const currentPanel = panelWrap.querySelector(`[role="tabpanel"][aria-labelledby="${tabID}"]`);
+    const panelSelected = panelWrap.querySelector(`[data-tab-name="${tabName}"][role="tabpanel"][aria-expanded="true"]`);
+    const currentPanel = panelWrap.querySelector(`[data-tab-name="${tabName}"][role="tabpanel"][aria-labelledby="${tabID}"]`);
 
     _this.focus();
 
@@ -128,6 +157,9 @@ export default class Tab {
     _this.setAttribute('aria-selected', true);
     _this.setAttribute('tabindex', '0');
     // tab panel
+
+    console.log(panelWrap,panelSelected,currentPanel)
+
     panelSelected.setAttribute('aria-expanded', false);
     panelSelected.setAttribute('tabindex', '-1');
     currentPanel.setAttribute('aria-expanded', true);
