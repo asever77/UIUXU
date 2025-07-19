@@ -17,9 +17,16 @@
 				<wrap>
 					<tit>Tab</tit>
 					<box>
-						<div role="tablist" data-tab="tab1"></div>
-						<div data-tab-wrap="tab1"></div>
-					</box>
+              <stit>개별 탭</stit>
+              <div role="tablist" data-tab="tab1"></div>
+              <div data-tab-wrap="tab1"></div>
+
+              <stit>그룹 탭</stit>
+              <div>
+                <div role="tablist" data-tab="tab2"></div>
+                <div data-tab-wrap="tab2"></div>
+              </div>
+            </box>
 				</wrap>
 			</main>
 		</div>
@@ -42,10 +49,52 @@
       rederMode: 'static',
       id: 'tab1',
       data: [
-        {tab: `<span>tab 1</span>`, src: './tab/tab1.html', selected:true},
-        {tab: `<span>tab 2</span>`, src: './tab/tab2.html', selected:false},
+        {
+					tab: `<span>tab 1</span>`, 
+					src: './tab/tab1.html', 
+					selected:true, 
+					callback: () => {
+						console.log('tab 1 open');
+					}
+				},
+        {
+					tab: `<span>tab 2</span>`, 
+					src: './tab/tab2.html', 
+					selected:false,
+					callback: () => {
+						console.log('tab 2 open');
+					}
+				},
       ],
-    })
+    });
+
+    UI.exe.tab1 = new UX.Tab({
+      rederMode: 'static',
+      id: 'tab2',
+      group: {
+        src: './tab/tab_group.html',
+        selected: 1,
+      },
+      data: [
+        { 
+					tab: `<span>tab 3</span>`, 
+					src: null, 
+					selected: true, 
+					callback: () => {
+						console.log('tab 3 open');
+					}
+				},
+				{ 
+					tab: `<span>tab 4</span>`, 
+					src: null, 
+					selected: false, 
+					callback: () => {
+						console.log('tab 4 open');
+					}
+				},
+      ],
+    });
+
 	</script>
 </body>
 

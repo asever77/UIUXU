@@ -1,11 +1,6 @@
 import { loadContent, FocusTrap } from '../utils/utils.js';
 
 export default class Dialog {
-  //private
-  #boundKeyStart;
-  #boundKeyEnd;
-  #rem_base = 10;
-
   constructor(opt) {
     const defaults = {
       type: 'modal', // 'modal', 'system', 'toast', 'snackbar'
