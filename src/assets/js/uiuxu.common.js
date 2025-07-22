@@ -29,8 +29,8 @@ export const UX = {
 		DROPDOWN_VERSION.history.forEach(item => {
 			console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
 		});
-		console.log(`author: ${item.author}`)
-		console.log(`license: ${item.license}`)
+		console.log(`author: ${DROPDOWN_VERSION.author}`)
+		console.log(`license: ${DROPDOWN_VERSION.license}`)
 		console.groupEnd();
 
 
