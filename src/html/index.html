@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>UIUXU</title>
 	<link rel="stylesheet" href="../assets/css/app.css">
+	<style>
+		[data-toggle-obj][data-state="selected"] {color: red;}
+		[data-toggle-target][data-state="selected"] {border:1px solid red;}
+	</style>
 </head>
 
 <body>
@@ -73,6 +77,20 @@
 								<span>shack bar 추가필요</span>
 							</div>
 						</box>
+						<box>
+							<dl>
+								<div>
+									<dt>Dialog</dt>
+									<dd>사용자의 중요한 상호작용을 위한 웹 페이지 내부에서 생성되는 컴포넌트</dd>
+									<dd>삭제 확인, 정보 입력, 경고 메시지</dd>
+								</div>
+								<div>
+									<dt>Alert</dt>
+									<dd>사용자에게 경고나 중요한 알림을 </dd>
+									<dd>삭제 확인, 정보 입력, 경고 메시지</dd>
+								</div>
+							</dl>
+						</box>
 					</group>
 
 					<group data-name="dropdown">
@@ -106,25 +124,33 @@
 							<div>
 								<input type="checkbox" id="allcheck_0" name="allcheck" data-allcheck-main="allcheck">
 								<label for="allcheck_0">전체 체크</label>
-
 								<hr>
 								<input type="checkbox" id="allcheck_1" name="allcheck" data-allcheck-sub="allcheck" checked>
 								<label for="allcheck_1">체크 1</label>
-
 								<input type="checkbox" id="allcheck_2" name="allcheck" data-allcheck-sub="allcheck">
 								<label for="allcheck_2">체크 2</label>
-
 								<input type="checkbox" id="allcheck_3" name="allcheck" data-allcheck-sub="allcheck" checked>
 								<label for="allcheck_3">체크 3</label>
 							</div>
-
-
 						</box>
-						<box data-color="gray">
-							UX.RadioAllcheck({<br>
-							name:'name',<br>
-							callback:(result) => {}<br>
-							})
+					</group>
+
+					<group data-name="toggle">
+						<tit>Toggle Event</tit>
+						<box>
+							<button type="button" data-toggle-obj="a1" data-toggle-callback="a1">토글 클릭</button>
+							<div data-toggle-target="a1">
+								상태 변경
+							</div>
+						</box>
+					</group>
+
+					<group data-name="range">
+						<tit>Toggle Event</tit>
+						<box>
+							<div data-rangeslider="rangeInput">
+								<input type="range" id="rangeInput" min="1000" max="2000" value="1500">
+							</div>
 						</box>
 					</group>
 
@@ -275,7 +301,29 @@
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 
+		// range slider
+		const rangeInput = new UX.RangeSlider({
+			id: 'rangeInput',
+			range: 19,
+			tooltip: true,
+			pointerWidth: 18,
+		});
+		
+		// toggle callback
+		UI.exe.toggle.a1 = (v) => {
+			console.log(v)
+			document.querySelector(`[data-toggle-target="${v.name}"]`).textContent = (v.state) ? '선택됨' : '선택안됨';
+		}
+
 		// all check
+		UI.exe.allcheck1 = new UX.RadioAllcheck({
+			name: 'allcheck',
+			callback: (v) => {
+				console.log(`콜백 결과 ${v}`);
+			},
+		});
+
+		// toggle
 		UI.exe.allcheck1 = new UX.RadioAllcheck({
 			name: 'allcheck',
 			callback: (v) => {
@@ -386,8 +434,13 @@
 						{ text: '강북구', value: '강북구', checked: false },
 					],
 					callback: (target, value) => {
+						console.log('callback rd1', target, value)
 						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
 						UI.exe.dropdown1.hide();
+					},
+					onGroupExit: (value) => {
+						console.log('onGroupExit', value);
+
 					}
 				});
 			},

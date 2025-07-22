@@ -5,10 +5,12 @@ import Dropdown from './component/dropdown.js';
 import Tab from './component/tab.js';
 import Tooltip from './component/tooltip.js';
 import WheelPicker from './libs/wheelPicker.js';
-
-import Nav from './page/nav.js';
+import ToggleController from './component/toggleController.js';
+import RangeSlider from './component/range.js';
 
 import { loadContent, RadioAllcheck } from './utils/utils.js';
+
+import { DROPDOWN_VERSION } from "./config/versions.js";
 
 export const UX = {
 	Accordion,
@@ -19,19 +21,37 @@ export const UX = {
 	Tooltip,
 	WheelPicker,
 	RadioAllcheck,
+	ToggleController,
+	RangeSlider,
 
 	init: () => {
+		console.groupCollapsed(`%cdropdown %c${DROPDOWN_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;'); // 기본적으로 접힌 상태
+		DROPDOWN_VERSION.history.forEach(item => {
+			console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
+		});
+		console.log(`author: ${item.author}`)
+		console.log(`license: ${item.license}`)
+		console.groupEnd();
+
+
 		const global = 'UI';
 		if (!window[global]) {
 			window[global] = {};
 		}
 		const Global = window[global];
 
-		Global.exe = {}	//실행용
+		Global.exe = {
+			dropdown: {},
+			modal: {},
+			tab: {},
+			acco: {},
+			toggle: {},
+		}	//실행용
 		Global.dev = {} //개발용
 		Global.pub = {} //퍼블용
 
 		UX.header();
+		const toggleController = new UX.ToggleController();
 	},
 	header: () => {
 		//header
@@ -43,13 +63,6 @@ export const UX = {
 			})
 			.then(() => {
 				console.log('callback -- header');
-				const el_header = document.querySelector('.base-header');
-				
-				// const ManiNav = new Nav({
-				// 	id: 'main-nav'
-				// });
-				// ManiNav.init();
-
 			})
 			.catch(err => console.error('Error loading header content:', err));
 		}
