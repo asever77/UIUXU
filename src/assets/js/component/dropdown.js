@@ -1,3 +1,5 @@
+import { DROPDOWN_VERSION } from "../config/versions.js";
+
 export default class Dropdown {
   constructor(opt) {
     const defaults = {
@@ -27,11 +29,20 @@ export default class Dropdown {
     this.boundHandleOutsideClick = this.handleOutsideClick.bind(this);
 
     this.isArea = this.wrap.querySelector('[data-dropdown-panel');
-
-    // this.init();
   }
 
+  ver() {
+    console.groupCollapsed(`%cdropdown %c${DROPDOWN_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;'); // 기본적으로 접힌 상태
+    DROPDOWN_VERSION.history.forEach(item => {
+    console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
+    });
+    console.log(`author: ${DROPDOWN_VERSION.author}`);
+    console.log(`license: ${DROPDOWN_VERSION.license}`);
+    console.table(this.option);
+    console.groupEnd();
+  }
   init() {
+    this.ver();
     //setting
     this._setupElements();
     this._addEventListeners();

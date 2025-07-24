@@ -12,6 +12,10 @@
   flex-direction: column;
 }
 
+[data-accordion-head-group] {
+  display: flex;
+}
+
 [data-accordion-head] {
   position: relative;
   display: flex;
@@ -28,6 +32,9 @@
   height: 100%;
   z-index: 1;
 }
+[data-accordion-button]:disabled {
+  opacity: 1;
+}
 
 [data-accordion-title] {
   position: relative;
@@ -35,5 +42,6 @@
 }
 
 [data-accordion-body] {
+  position: relative;
   overflow: hidden;
 }
