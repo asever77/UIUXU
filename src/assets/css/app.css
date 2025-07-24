@@ -216,8 +216,7 @@ caption {
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(0.1rem, 0.1rem, 0.1rem, 0.1rem);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   margin: -0.1rem 0 0;
 }
 
@@ -233,8 +232,7 @@ td {
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(0.1rem, 0.1rem, 0.1rem, 0.1rem);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   margin: 0 !important;
   padding: 0 !important;
 }
