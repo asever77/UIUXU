@@ -19,11 +19,25 @@
 					<box>
             <div data-accordion="acco1">
               <div data-accordion-item="acco1">
-                <h3 data-accordion-head="acco1">
-                  <button type="button" data-accordion-button="acco1"></button>
-                  <b data-accordion-title="acco1" aria-hidden="true">title 1</b>
-                  <a href="#link">외부링크</a>
-                </h3>
+                <div data-accordion-head="acco1">
+                  <h3 data-accordion-title="acco1"><guide></guide>title 1</h3>
+                  <button type="button" data-accordion-button="acco1"><guide></guide></button>
+                  <a href="#link">링크</a>
+                </div>
+                  
+                <div data-accordion-body="acco1">
+                  <guide></guide>
+                  ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+                </div>
+              </div>
+
+              <div data-accordion-item="acco1">
+                <div data-accordion-group="acco1">
+                  <h3 data-accordion-head="acco1">
+                    <button type="button" data-accordion-button="acco1"></button>
+                    <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
+                  </h3>
+                </div>
                 <div data-accordion-body="acco1">
                   ddddd<br>
                   ddddd<br>
@@ -37,27 +51,12 @@
               </div>
 
               <div data-accordion-item="acco1">
-                <h3 data-accordion-head="acco1">
-                  <button type="button" data-accordion-button="acco1"></button>
-                  <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
-                </h3>
-                <div data-accordion-body="acco1">
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd
+                <div data-accordion-group="acco1">
+                  <h3 data-accordion-head="acco1">
+                    <button type="button" data-accordion-button="acco1"></button>
+                    <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
+                  </h3>
                 </div>
-              </div>
-
-              <div data-accordion-item="acco1">
-                <h3 data-accordion-head="acco1">
-                  <button type="button" data-accordion-button="acco1"></button>
-                  <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
-                </h3>
                 <div data-accordion-body="acco1">
                   ddddd<br>
                   ddddd<br>
@@ -79,15 +78,58 @@
 
 	<!-- script -->
 	<script type="module">
+  /* 준비 ---------------------------------------------- */
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
+
 	 
-     // accordion
+  /* 선언 ---------------------------------------------- */
     UI.exe.acco1 = new UX.Accordion({
       id: 'acco1',
       expanded: 'acco1_0',
     });
 
+
+  /* 실행 ---------------------------------------------- */
+    UI.exe.acco1.init();
+
+    // 외부 접근 컨트롤
+    setTimeout(() => {
+      UI.exe.acco1.show('acco1_1', () => {
+        console.log('callback show');
+      });
+    },1000);
+    setTimeout(() => {
+      UI.exe.acco1.hide('acco1_1', () => {
+        console.log('callback hide');
+      });
+    },2000);
+    setTimeout(() => {
+      document.querySelector('[data-accordion="acco1"]').insertAdjacentHTML('beforeend', `
+      <div data-accordion-item="acco1">
+        <div data-accordion-group="acco1">
+          <h3 data-accordion-head="acco1">
+            <button type="button" data-accordion-button="acco1"></button>
+            <b data-accordion-title="acco1" aria-hidden="true">title 4</b>
+          </h3>
+        </div>
+        <div data-accordion-body="acco1">
+          4444<br>
+          ddddd
+        </div>
+      </div>`);
+      UI.exe.acco1.update();
+    },3000);
+    setTimeout(() => {
+      UI.exe.acco1.destroy();
+    },4000);
+    setTimeout(() => {
+      UI.exe.acco1 = new UX.Accordion({
+        id: 'acco1',
+        expanded: 'acco1_0',
+      });
+      UI.exe.acco1.init();
+    },5000);
 	</script>
 </body>
 

@@ -10,8 +10,6 @@ import RangeSlider from './component/range.js';
 
 import { loadContent, RadioAllcheck } from './utils/utils.js';
 
-import { DROPDOWN_VERSION } from "./config/versions.js";
-
 export const UX = {
 	Accordion,
 	ButtonSelection,
@@ -25,15 +23,6 @@ export const UX = {
 	RangeSlider,
 
 	init: () => {
-		console.groupCollapsed(`%cdropdown %c${DROPDOWN_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;'); // 기본적으로 접힌 상태
-		DROPDOWN_VERSION.history.forEach(item => {
-			console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
-		});
-		console.log(`author: ${DROPDOWN_VERSION.author}`)
-		console.log(`license: ${DROPDOWN_VERSION.license}`)
-		console.groupEnd();
-
-
 		const global = 'UI';
 		if (!window[global]) {
 			window[global] = {};

@@ -1,22 +1,22 @@
-@import 'abstracts/variable';
+@use 'abstracts/variable';
 
-@import 'base/reset';
-@import 'base/defualt';
+@forward 'base/reset';
+@forward 'base/defualt';
 
-@import 'common/layout';
+@forward 'common/layout';
 
-@import 'components/common';
-@import 'components/accordion';
-@import 'components/dialog';
-@import 'components/drag';
-@import 'components/dropdown';
-@import 'components/selection';
-@import 'components/tab';
-@import 'components/tooltip';
-@import 'components/range';
+@forward 'components/common';
+@forward 'components/accordion';
+@forward 'components/dialog';
+@forward 'components/drag';
+@forward 'components/dropdown';
+@forward 'components/selection';
+@forward 'components/tab';
+@forward 'components/tooltip';
+@forward 'components/range';
 
-@import 'libs/wheelpicker';
+@forward 'libs/wheelpicker';
 
-@import 'components/nav';
+@forward 'components/nav';
 
-@import 'event/roulette';
+@forward 'event/roulette';
