@@ -1,0 +1,42 @@
+<div data-dropdown-panel="dropdown1" aria-hidden="true">
+  <div data-dropdown-section="dropdown1" style="width: 60rem">
+    <wrap data-dir="col" style="height: 60vh; overflow: auto;">
+      <group data-dir="col">
+        <stit>주요기능 (Key Features)</stit>
+        <p>드롭다운 컴포넌트는 다음과 같은 핵심 기능을 제공합니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>초기화 init()</stit>
+        <p>드롭다운 컴포넌트를 초기화하고 필요한 이벤트 리스너를 설정합니다. 컴포넌트를 사용하기 전에 반드시 호출해야 합니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>패널 표시 show()</stit>
+        <p>드롭다운 패널을 표시합니다. 내부적으로 aria-expanded="true" 및 aria-hidden="false" 속성을 설정하여 접근성을 준수하며, 패널에 포커스를 이동시킵니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>패널 숨기기 hide()</stit>
+        <p>드롭다운 패널을 숨깁니다. aria-expanded="false" 및 aria-hidden="true" 속성을 설정하고, 패널이 닫힌 후 드롭다운 버튼에 포커스를 다시 이동시킵니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>리셋 reset()</stit>
+        <p>현재 열려 있는 다른 드롭다운 패널이 있다면 모두 닫는 기능을 제공합니다. 이는 동시에 여러 드롭다운이 열리는 것을 방지하고 UI 상태를 일관되게 유지하는 데 도움을 줍니다. 이 메서드는 window의 resize 이벤트에 바인딩되어 화면 크기 변경 시에도 드롭다운 상태를 재설정합니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>버전 정보 확인 ver()</stit>
+        <p>컴포넌트의 버전 정보와 변경 이력을 콘솔에 출력합니다. 디버깅이나 컴포넌트 버전을 확인할 때 유용합니다.</p>
+      </group>
+
+      <group data-dir="col">
+        <stit>컴포넌트 해제 destroy()</stit>
+        <p>드롭다운 컴포넌트가 더 이상 필요하지 않을 때 모든 이벤트 리스너를 제거하고 DOM 요소 참조를 해제하여 메모리 누수를 방지하고 자원을 정리합니다. 컴포넌트 인스턴스를 제거할 때 반드시 호출해야 합니다.</p>
+      </group>
+
+    </wrap>
+    <button type="button" onclick="UI.exe.dropdown1.hide()">닫기</button>
+  </div>
+</div>

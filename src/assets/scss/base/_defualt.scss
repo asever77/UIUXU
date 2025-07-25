@@ -1,32 +1,50 @@
 // guide tag
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+[data-dir="col"] {flex-direction: column;}
+[data-dir="col-re"] {flex-direction: column-reverse;}
+[data-dir="row"] {flex-direction: row;}
+[data-dir="row-re"] {flex-direction: row-reverse;}
 
 wrap {
+	width: 100%;
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
 	align-items: flex-start;
-	gap: 3.2rem;
-	padding: 2.4rem;
+	gap: var(--x6);
+	padding: var(--x3);
+}
+group {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	gap: var(--x3);
+	
 }
 
 tit {
-	font-size: 1.6rem;
-	font-weight: 700;
+	font-size: 3rem;
+	line-height: 2.2;
+	font-weight: 200;
+	letter-spacing: 0.4rem;
+}
+
+mtit {
+	font-size: 2.4rem;
+	line-height: 2;
+	font-weight: 600;
 }
 
 stit {
 	font-size: 1.6rem;
-	font-weight: 500;
+	line-height: 2;
+	font-weight: 900;
 }
 
 box {
 	width: 100%;
 	display: block;
-	gap: .8rem;
-	padding: 1.6rem;
-	border-radius: 1.2rem;
-	border: .1rem dashed #e9e9e9;
+	gap: var(--x1);
+	padding: var(--x2);
+	border-radius: var(--x1);
+	border: 1px dashed #e9e9e9;
 
 	&[data-color="pink"] {
 		background-color: #fff9fa;
@@ -48,27 +66,24 @@ box {
 	}
 }
 
-group {
-	display: flex;
-	flex-direction: column;
-	gap: 0.8rem;
-}
-
 codebox {
+	width: 100%;
 	display: flex;
-	gap: .8rem;
-	padding: 1.6rem;
-	border-radius: 1.2rem;
-	border: .1rem dashed #ccc;
-	background-color: #f2f2f2;
+	gap: var(--x1);
+	padding: var(--x2);
+	border-radius: var(--x1);
+	background-color: #282828;
 }
-
+codebox pre:focus {
+	outline: 0;
+}
 codebox code {
 	width: 100%;
 	overflow: auto;
-	font-size: 1.0rem;
-	line-height: 2;
-	font-family: "Source Code Pro", serif;
+	color:#f2f2f2;
+	font-size: 1.2rem;
+	line-height: 2.4;
+	font-family: "Source Code Pro", monospace;
 	tab-size: 2;
 }
 
@@ -107,4 +122,74 @@ guide {
 		left: 50%;
 		top: 0;
 	}
+}
+grid {
+  width: 100%;
+  display: grid;
+
+  &.main-content {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows:repeat(1, 1fr);
+    grid-auto-flow: row dense;
+    gap:1.6rem;
+    padding:1.6rem;
+
+    [data-name] {
+      grid-column: span 3;
+      grid-row: span 1;
+    }
+
+    [data-name="wheel picker"] {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    box{
+      flex:1; 
+      justify-content: flex-start;
+    }
+  }
+}
+@media (max-width:1199px) {
+  grid {
+    &.main-content {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows:repeat(1, 1fr);
+      grid-auto-flow: row dense;
+
+      [data-name] {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+
+      [data-name="wheel picker"] {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+    }
+  }
+}
+
+table{
+	table-layout: fixed;
+	overflow: hidden;
+	border-radius: var(--x1);
+	margin: var(--x1) 0;
+}
+thead th {
+	font-weight: 700;
+	font-size: 1.2rem;
+	background-color: #f3f3f3;
+	text-align: left;
+}
+tbody th {
+	text-align: left;
+	font-weight: 600;
+	padding: var(--x1) var(--x2);
+}
+th,td{
+	padding: var(--x2) var(--x2);
+	background-color: #f3f3f3;
+	font-size: 1.3rem;
+	vertical-align: top;
 }

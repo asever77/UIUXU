@@ -1,3 +1,8 @@
+.scroll-not {
+  overflow: hidden !important;
+}
+
+
 @keyframes modal-hide {
   0% {display: flex;}
   100% {display: none;}
@@ -107,57 +112,4 @@
 @keyframes hide_toast {
   0% {transform:translateY(0);margin-bottom:0;opacity:1;}
   100% {transform:translateY(0);margin-bottom:-5.2rem;opacity:0;}
-}
-
-.scroll-not {
-  overflow: hidden !important;
-}
-/* 기본 영역 z-index */
-.area-dropdown {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-}
-
-.area-tooltip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 200;
-}
-
-.area-dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 300;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-
-  &[data-area="body"] {
-     position: fixed;
-  }
-}
-
-.area-toast {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 400;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-
-  &[data-ps="bottom"] {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    gap: .8rem;
-    padding-bottom: 0.8rem;
-  }
 }

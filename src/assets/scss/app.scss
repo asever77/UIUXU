@@ -2,8 +2,11 @@
 
 @forward 'base/reset';
 @forward 'base/defualt';
+@forward 'base/typo';
+
 
 @forward 'common/layout';
+@forward 'common/area';
 
 @forward 'components/common';
 @forward 'components/accordion';

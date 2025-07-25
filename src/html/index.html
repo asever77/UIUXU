@@ -7,7 +7,7 @@
 	<title>UIUXU</title>
 	<link rel="stylesheet" href="../assets/css/app.css">
 	<style>
-		[data-toggle-obj][data-state="selected"] {color: red;}
+		[data-toggle-object][data-state="selected"] {color: red;}
 		[data-toggle-target][data-state="selected"] {border:1px solid red;}
 	</style>
 </head>
@@ -138,7 +138,7 @@
 					<group data-name="toggle">
 						<tit>Toggle Event</tit>
 						<box>
-							<button type="button" data-toggle-obj="a1" data-toggle-callback="a1">토글 클릭</button>
+							<button type="button" data-toggle-object="a1" data-toggle-callback="a1">토글 클릭</button>
 							<div data-toggle-target="a1">
 								상태 변경
 							</div>
@@ -147,9 +147,17 @@
 
 					<group data-name="range">
 						<tit>Toggle Event</tit>
-						<box>
-							<div data-rangeslider="rangeInput">
-								<input type="range" id="rangeInput" min="1000" max="2000" value="1500">
+						<box data-color="pink">
+							<div class="slider-item" data-rangeslider="rangeInput">
+								<div class="slider-wrapper">
+									<input type="range" id="rangeInput">
+								</div>
+							</div>
+
+							<div class="slider-item" data-rangeslider="rangeInput2">
+								<div class="slider-wrapper">
+									<input type="range" id="rangeInput2">
+								</div>
 							</div>
 						</box>
 					</group>
@@ -302,12 +310,31 @@
 		UX.init();
 
 		// range slider
-		const rangeInput = new UX.RangeSlider({
+		UI.exe.rangeInput = new UX.RangeSlider({
 			id: 'rangeInput',
-			range: 19,
-			tooltip: true,
-			pointerWidth: 18,
+			label: false,
+			labelArray: ['전반기(2021 ~ 2040년)', '중반기(2041 ~ 2060년)', '후반기(2061 ~ 2080년)'],
+			valueArray: [1,2,3],
+			value:2,
+			callback: (v) => {
+				console.log(v);
+			}
 		});
+		UI.exe.rangeInput.init();
+		UI.exe.rangeInput2 = new UX.RangeSlider({
+			id: 'rangeInput2',
+			label: false,
+			labelAddText: ['','년'],
+			labelArray: false,
+			valueArray: false,
+			min: 2021,
+			max: 2100,
+			value:2025,
+			callback: (v) => {
+				console.log(v);
+			}
+		});
+		UI.exe.rangeInput2.init();
 		
 		// toggle callback
 		UI.exe.toggle.a1 = (v) => {
@@ -421,36 +448,43 @@
 		// dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
 			id: 'dropdown1',
+			ps: 'bl',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
-				UI.exe.rd1 = new UX.ButtonSelection({
-					id: 'rd1',
-					type: 'radio',
-					label: '지역선택',
-					data: [
-						{ text: '서울시', value: '서울시', checked: true },
-						{ text: '강남구', value: '강남구', checked: false },
-						{ text: '강동구', value: '강동구', checked: false },
-						{ text: '강북구', value: '강북구', checked: false },
-					],
-					callback: (target, value) => {
-						console.log('callback rd1', target, value)
-						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
-						UI.exe.dropdown1.hide();
-					},
-					onGroupExit: (value) => {
-						console.log('onGroupExit', value);
-
-					}
-				});
+				UI.exe.rd1.init();
 			},
 		});
+		UI.exe.dropdown1.init();
 		UI.exe.dropdown2 = new UX.Dropdown({
 			id: 'dropdown2',
-			ps: 'top',
+			ps: 'br',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
-				UI.exe.rd2 = new UX.ButtonSelection({
+				UI.exe.rd2.init();
+			},
+		});
+		UI.exe.dropdown2.init();
+
+		UI.exe.rd1 = new UX.ButtonSelection({
+			id: 'rd1',
+			type: 'radio',
+			label: '지역선택',
+			data: [
+				{ text: '서울시', value: '서울시', checked: true },
+				{ text: '강남구', value: '강남구', checked: false },
+				{ text: '강동구', value: '강동구', checked: false },
+				{ text: '강북구', value: '강북구', checked: false },
+			],
+			callback: (target, value) => {
+				console.log('callback rd1', target, value)
+				document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
+				UI.exe.dropdown1.hide();
+			},
+			onGroupExit: (value) => {
+				console.log('onGroupExit', value);
+			}
+		});
+		UI.exe.rd2 = new UX.ButtonSelection({
 					id: 'rd2',
 					type: 'checkbox',
 					label: '요일선택',
@@ -468,8 +502,6 @@
 						// UI.exe.dropdown2.hide();
 					}
 				});
-			},
-		});
 
 		// tab
 		UI.exe.tab1 = new UX.Tab({

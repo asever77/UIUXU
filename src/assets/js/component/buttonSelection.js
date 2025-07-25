@@ -17,7 +17,9 @@ export default class ButtonSelection {
       console.error('ButtonSelection: "id" 옵션은 필수입니다.');
       return; // ID가 제공되지 않으면 종료
     }
+  }
 
+  init() {
     this.selection = document.querySelector(`[data-selection="${this.option.id}"]`);
     if (!this.selection) {
       console.error(`ButtonSelection: data-selection="${this.option.id}" 요소를 찾을 수 없습니다.`);
@@ -57,10 +59,7 @@ export default class ButtonSelection {
       // 각 항목의 'value'를 selectedValues Set에 추가합니다.
       // Set은 중복을 자동으로 제거하므로, 여기에 같은 값을 여러 번 추가하려고 해도 문제가 없습니다.
     }
-    // this.init();
-  }
-
-  init() {
+    
     this.selection.setAttribute('aria-label', this.label);
     this.selection.setAttribute('role', this.type === 'radio' ? 'radiogroup' : 'group');
 

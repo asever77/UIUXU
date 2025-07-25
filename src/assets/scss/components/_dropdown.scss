@@ -4,7 +4,6 @@
 }
 
 [data-dropdown-button] {
-  width: 100%;
   text-align: left;
   position: relative;
   z-index: 1;
@@ -22,10 +21,9 @@
   width: 100%;
   z-index: 0;
   pointer-events: none;
-  
+
   [data-dropdown-section] {
-    top: 100%;
-    pointer-events: visible;
+    top: 100%
   }
 
   &[data-ps="bl"] [data-dropdown-section] {
@@ -34,12 +32,12 @@
     left:0;
     right: auto;
   }
+  &[data-ps="bc"] {justify-content: center}
   &[data-ps="bc"] [data-dropdown-section] {
     top: 100%;
     bottom: auto;
-    left:50%;
+    left: auto;
     right: auto;
-    transform: translate(-50%, 0);
   }
   &[data-ps="br"] [data-dropdown-section] {
     top: 100%;
@@ -53,12 +51,13 @@
     left:0;
     right: auto;
   }
+  &[data-ps="tc"] {justify-content: center}
   &[data-ps="tc"] [data-dropdown-section] {
     top: auto;
     bottom: 100%;
-    left:50%;
+    left: auto;
     right: auto;
-    transform: translate(-50%, 0);
+    transform: auto;
   }
   &[data-ps="tr"] [data-dropdown-section] {
     top: auto;
@@ -73,12 +72,13 @@
     left: auto;
     right: 100%;
   }
+
+  &[data-ps="lc"] {align-items: center;}
   &[data-ps="lc"] [data-dropdown-section] {
-    top: 50%;
+    top: auto;
     bottom: auto;
     left: auto;
     right: 100%;
-    transform: translate(0, -50%);
   }
   &[data-ps="lb"] [data-dropdown-section] {
     top: auto;
@@ -92,12 +92,12 @@
     left: 100%;
     right: auto;
   }
+  &[data-ps="rc"] {align-items: center;}
   &[data-ps="rc"] [data-dropdown-section] {
-    top: 50%;
+    top: auto;
     bottom: auto;
     left: 100%;
     right: auto;
-    transform: translate(0, -50%);
   }
   &[data-ps="rb"] [data-dropdown-section] {
     top: auto;
@@ -112,13 +112,18 @@
   &[aria-hidden="false"] {
     display: flex;
   }
+
+  &:hover {
+    z-index: 1;
+  }
 }
 
 [data-dropdown-section] {
-  border: 0.1rem solid #000;
   padding: 0.2rem 0.8rem;
   border-radius: 0.4rem;
-  background-color: #fff;
   overflow: hidden;
   position: absolute;
+  pointer-events: visible;
+  border: 1px solid #000;
+  background-color: #fff;
 }

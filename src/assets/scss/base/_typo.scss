@@ -1,0 +1,22 @@
+
+// font
+[data-heading="display"] {
+  position: relative;
+  font-family: "Bitcount Prop Single", system-ui;
+	font-size: 10rem;
+	line-height: 2.2;
+	font-weight: 100;
+	letter-spacing: 1.4rem; 
+
+  &::before {
+    content: attr(data-text);
+    font-family: "Bitcount Prop Single", system-ui;
+    font-size: 10rem;
+    line-height: 2.2;
+    font-weight: 400;
+    letter-spacing: 1.4rem; 
+    position: absolute;
+    opacity: 0.03;
+    transform: translate(.4rem, .4rem);
+  }
+}
