@@ -28,10 +28,84 @@
     pointer-events: visible;
   }
 
-  &[data-ps="bottom"] [data-dropdown-section] {
+  &[data-ps="bl"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left:0;
+    right: auto;
+  }
+  &[data-ps="bc"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left:50%;
+    right: auto;
+    transform: translate(-50%, 0);
+  }
+  &[data-ps="br"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left:auto;
+    right: 0;
+  }
+  &[data-ps="tl"] [data-dropdown-section] {
     top: auto;
     bottom: 100%;
+    left:0;
+    right: auto;
   }
+  &[data-ps="tc"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+    left:50%;
+    right: auto;
+    transform: translate(-50%, 0);
+  }
+  &[data-ps="tr"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+    left:auto;
+    right: 0;
+  }
+
+  &[data-ps="lt"] [data-dropdown-section] {
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: 100%;
+  }
+  &[data-ps="lc"] [data-dropdown-section] {
+    top: 50%;
+    bottom: auto;
+    left: auto;
+    right: 100%;
+    transform: translate(0, -50%);
+  }
+  &[data-ps="lb"] [data-dropdown-section] {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 100%;
+  }
+   &[data-ps="rt"] [data-dropdown-section] {
+    top: 0;
+    bottom: auto;
+    left: 100%;
+    right: auto;
+  }
+  &[data-ps="rc"] [data-dropdown-section] {
+    top: 50%;
+    bottom: auto;
+    left: 100%;
+    right: auto;
+    transform: translate(0, -50%);
+  }
+  &[data-ps="rb"] [data-dropdown-section] {
+    top: auto;
+    bottom: 0;
+    left: 100%;
+    right: auto;
+  }
+
   &[aria-hidden="true"] {
     display: none;
   }

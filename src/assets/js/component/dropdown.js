@@ -1,16 +1,23 @@
 import { DROPDOWN_VERSION } from "../config/versions.js";
+import { loadContent } from '../utils/utils.js';
 
 export default class Dropdown {
   constructor(opt) {
     const defaults = {
+      area: document.querySelector('.area-dropdown[data-area="body"]'),
+      src: null,
       ps: null, // 'top', 'bottom', null - 위치 지정 전략
-      callback: null, // 초기화 후 호출할 함수
+      srcCallback: null,
+      callback: null,
     };
 
     this.option = { ...defaults, ...opt };
     this.id = this.option.id;
     this.ps = this.option.ps;
+    this.area = this.option.area;
     this.callback = this.option.callback;
+    this.src = this.option.src;
+    this.srcCallback = this.option.srcCallback;
 
     // 요소 참조
     this.wrap = document.querySelector(`[data-dropdown="${this.id}"]`);
@@ -41,33 +48,71 @@ export default class Dropdown {
     console.table(this.option);
     console.groupEnd();
   }
+
   init() {
-    this.ver();
     //setting
     this._setupElements();
     this._addEventListeners();
 
     this.button.addEventListener('click', this.boundHandleToggle);
     this.callback && this.callback();
+    window.addEventListener('resize', this.reset);
   }
 
   /**
    * 드롭다운 요소의 초기 ARIA 속성과 데이터 속성을 설정합니다.
    */
   _setupElements() {
-    if (this.text) {
-      this.text.dataset.dropdownText = this.id;
+    if (this.src) {
+      loadContent({
+        area: this.area,
+        src: this.src,
+        insert: true,
+      })
+      .then(() => {
+        if (this.text) {
+          this.text.dataset.dropdownText = this.id;
+        }
+        if (this.button) {
+          this.button.dataset.dropdownButton = this.id;
+          this.button.setAttribute('aria-controls', this.id);
+          this.button.setAttribute('aria-expanded', 'false');
+        }
+ 
+        this.panel = document.querySelector(`[data-dropdown-panel="${this.id}"]`);
+        this.panelInner = document.querySelector(`[data-dropdown-section="${this.id}"]`);
+        this.panel.dataset.dropdownPanel = this.id;
+        this.panel.setAttribute('aria-hidden', 'true');
+        this.panel.setAttribute('tabindex', '-1');
+        this.panel.id = this.id;
+
+        this.isArea = this.wrap.querySelector('[data-dropdown-panel]');
+        this.srcCallback && this.srcCallback();
+      })
+      .catch(err => console.error('Error loading tab content:', err));
+    } else {
+      if (this.text) {
+        this.text.dataset.dropdownText = this.id;
+      }
+      if (this.button) {
+        this.button.dataset.dropdownButton = this.id;
+        this.button.setAttribute('aria-controls', this.id);
+        this.button.setAttribute('aria-expanded', 'false');
+      }
+      if (this.panel) {
+        this.panel.dataset.dropdownPanel = this.id;
+        this.panel.setAttribute('aria-hidden', 'true');
+        this.panel.setAttribute('tabindex', '-1');
+        this.panel.id = this.id; // aria-controls를 위해 패널에 ID가 있는지 확인
+      }
     }
-    if (this.button) {
-      this.button.dataset.dropdownButton = this.id;
-      this.button.setAttribute('aria-controls', this.id);
-      this.button.setAttribute('aria-expanded', 'false');
-    }
-    if (this.panel) {
-      this.panel.dataset.dropdownPanel = this.id;
-      this.panel.setAttribute('aria-hidden', 'true');
-      this.panel.setAttribute('tabindex', '-1');
-      this.panel.id = this.id; // aria-controls를 위해 패널에 ID가 있는지 확인
+  }
+
+  reset() {
+    const expanded = document.querySelector('[data-dropdown-panel][aria-hidden="false"]');
+    if (expanded && expanded !== this.panel) {
+      expanded.setAttribute('aria-hidden', true);
+      document.querySelector(`[data-dropdown-button="${expanded.dataset.dropdownPanel}"]`).setAttribute('aria-expanded', false);
     }
   }
 
