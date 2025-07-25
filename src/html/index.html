@@ -147,9 +147,17 @@
 
 					<group data-name="range">
 						<tit>Toggle Event</tit>
-						<box>
-							<div data-rangeslider="rangeInput">
-								<input type="range" id="rangeInput" min="1000" max="2000" value="1500">
+						<box data-color="pink">
+							<div class="slider-item" data-rangeslider="rangeInput">
+								<div class="slider-wrapper">
+									<input type="range" id="rangeInput">
+								</div>
+							</div>
+
+							<div class="slider-item" data-rangeslider="rangeInput2">
+								<div class="slider-wrapper">
+									<input type="range" id="rangeInput2">
+								</div>
 							</div>
 						</box>
 					</group>
@@ -302,12 +310,31 @@
 		UX.init();
 
 		// range slider
-		const rangeInput = new UX.RangeSlider({
+		UI.exe.rangeInput = new UX.RangeSlider({
 			id: 'rangeInput',
-			range: 19,
-			tooltip: true,
-			pointerWidth: 18,
+			label: false,
+			labelArray: ['전반기(2021 ~ 2040년)', '중반기(2041 ~ 2060년)', '후반기(2061 ~ 2080년)'],
+			valueArray: [1,2,3],
+			value:2,
+			callback: (v) => {
+				console.log(v);
+			}
 		});
+		UI.exe.rangeInput2.init();
+		UI.exe.rangeInput2 = new UX.RangeSlider({
+			id: 'rangeInput2',
+			label: false,
+			labelAddText: ['','년'],
+			labelArray: false,
+			valueArray: false,
+			min: 2021,
+			max: 2100,
+			value:2025,
+			callback: (v) => {
+				console.log(v);
+			}
+		});
+		UI.exe.rangeInput2.init();
 		
 		// toggle callback
 		UI.exe.toggle.a1 = (v) => {

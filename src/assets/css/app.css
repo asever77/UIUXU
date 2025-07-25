@@ -1586,8 +1586,16 @@ grid.main-content box {
   transform: translateX(-50%);
 }
 
+[data-rangeslider-text] {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
 [data-rangeslider] {
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 [data-rangeslider] input[type=range] {
   -webkit-appearance: none;
