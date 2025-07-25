@@ -43,13 +43,7 @@
 	</div>
 
 	<!-- dropdown -->
-	<div class="area-dropdown">
-		<div data-dropdown-panel="dropdown1" aria-hidden="true">
-			<div data-dropdown-section="dropdown1">
-				<div data-selection="rd1"></div>
-			</div>
-		</div>
-	</div>
+	<div class="area-dropdown" data-area="body"></div>
 
 	<!-- script -->
 	<script type="module">
@@ -103,13 +97,14 @@
     // dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
 			id: 'dropdown1',
-			callback: () => {
+			src: './dropdown/dropdown1.html',
+			srcCallback: () => {
 				UI.exe.localSelect.init();
 			},
 		});
 		UI.exe.dropdown2 = new UX.Dropdown({
 			id: 'dropdown2',
-			ps: 'top',
+			ps: 'rc',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
 				UI.exe.weeklySelect.init();

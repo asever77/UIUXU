@@ -320,7 +320,7 @@
 				console.log(v);
 			}
 		});
-		UI.exe.rangeInput2.init();
+		UI.exe.rangeInput.init();
 		UI.exe.rangeInput2 = new UX.RangeSlider({
 			id: 'rangeInput2',
 			label: false,
@@ -448,36 +448,43 @@
 		// dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
 			id: 'dropdown1',
+			ps: 'bl',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
-				UI.exe.rd1 = new UX.ButtonSelection({
-					id: 'rd1',
-					type: 'radio',
-					label: '지역선택',
-					data: [
-						{ text: '서울시', value: '서울시', checked: true },
-						{ text: '강남구', value: '강남구', checked: false },
-						{ text: '강동구', value: '강동구', checked: false },
-						{ text: '강북구', value: '강북구', checked: false },
-					],
-					callback: (target, value) => {
-						console.log('callback rd1', target, value)
-						document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
-						UI.exe.dropdown1.hide();
-					},
-					onGroupExit: (value) => {
-						console.log('onGroupExit', value);
-
-					}
-				});
+				UI.exe.rd1.init();
 			},
 		});
+		UI.exe.dropdown1.init();
 		UI.exe.dropdown2 = new UX.Dropdown({
 			id: 'dropdown2',
-			ps: 'top',
+			ps: 'br',
 			callback: () => {
 				//내부 라디오버튼 선택인 경우
-				UI.exe.rd2 = new UX.ButtonSelection({
+				UI.exe.rd2.init();
+			},
+		});
+		UI.exe.dropdown2.init();
+
+		UI.exe.rd1 = new UX.ButtonSelection({
+			id: 'rd1',
+			type: 'radio',
+			label: '지역선택',
+			data: [
+				{ text: '서울시', value: '서울시', checked: true },
+				{ text: '강남구', value: '강남구', checked: false },
+				{ text: '강동구', value: '강동구', checked: false },
+				{ text: '강북구', value: '강북구', checked: false },
+			],
+			callback: (target, value) => {
+				console.log('callback rd1', target, value)
+				document.querySelector(`[data-dropdown-text="${UI.exe.dropdown1.id}"]`).textContent = value;
+				UI.exe.dropdown1.hide();
+			},
+			onGroupExit: (value) => {
+				console.log('onGroupExit', value);
+			}
+		});
+		UI.exe.rd2 = new UX.ButtonSelection({
 					id: 'rd2',
 					type: 'checkbox',
 					label: '요일선택',
@@ -495,8 +502,6 @@
 						// UI.exe.dropdown2.hide();
 					}
 				});
-			},
-		});
 
 		// tab
 		UI.exe.tab1 = new UX.Tab({
