@@ -40,7 +40,9 @@ export const UX = {
 		Global.pub = {} //퍼블용
 
 		UX.header();
-		const toggleController = new UX.ToggleController();
+		UX.footer();
+
+		new UX.ToggleController();
 	},
 	header: () => {
 		//header
@@ -52,8 +54,23 @@ export const UX = {
 			})
 			.then(() => {
 				console.log('callback -- header');
+				new UX.ToggleController();
 			})
 			.catch(err => console.error('Error loading header content:', err));
+		}
+	},
+	footer: () => {
+		//header
+		if (document.querySelector('.base-footer')) {
+			loadContent({
+				area: document.querySelector('.base-footer'),
+				src: './inc/footer.html',
+				insert: true
+			})
+			.then(() => {
+				console.log('callback -- footer');
+			})
+			.catch(err => console.error('Error loading footer content:', err));
 		}
 	},
 	utils: {

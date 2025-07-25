@@ -4,6 +4,8 @@
 	--opacity_1: 1;
 	--opacity_0: 0;
 
+	--w375: 2.6667vw;
+
 	/* iOS 11.2 이상 */
 	--sat: env(safe-area-inset-top);
 	--sar: env(safe-area-inset-right);
@@ -13,40 +15,46 @@
 	--primary: #FFD700;
 	--sub: #FF612D;
 
-	/* Grayscale */
-	--gray_100: #000;
-	--gray_95: #222;
-	--gray_90: #444;
-	--gray_80: #666;
-	--gray_70: #777;
-	--gray_60: #999;
-	--gray_50: #ccc;
-	--gray_40: #d7d7d7;
-	--gray_30: #e5e5e5;
-	--gray_20: #eee;
-	--gray_10: #f7f7f7;
-	--gray_0: #fff;
+	//* 1단계: 기본 그레이스케일 팔레트 (밝기 레벨별) */
+  --gray-100: #f8f8f8;
+  --gray-200: #ededed;
+  --gray-300: #dddddd;
+  --gray-400: #cccccc;
+  --gray-500: #999999;
+  --gray-600: #777777;
+  --gray-700: #555555;
+  --gray-800: #333333;
+  --gray-900: #111111;
+
+  /* 2단계: 의미론적 변수 (실제 UI 적용) */
+  --color-background-default: var(--gray-100);
+  --color-text-primary: var(--gray-800);
+  --color-text-secondary: var(--gray-600);
+  --color-border-light: var(--gray-300);
+  --color-border-dark: var(--gray-500);
+  --color-icon-default: var(--gray-700);
+  --color-disabled-text: var(--gray-400);
 
 	--bgcolor: #fff;
-	--bgheader: rgba(255,255,255,0) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 90%;
+	--bgheader: rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 90%;
+
+	--gap: 0.8rem;
+
+	--x1: calc(0.8rem * 1);
+	--x2: calc(0.8rem * 2);
+	--x3: calc(0.8rem * 3);
+	--x4: calc(0.8rem * 4);
+	--x5: calc(0.8rem * 5);
+	--x6: calc(0.8rem * 6);
+	--x7: calc(0.8rem * 7);
+	--x8: calc(0.8rem * 8);
+	--x9: calc(0.8rem * 9);
 }
 
-:root.dark {
-	/* Grayscale */
-	--gray_0: #000;
-	--gray_10: #222;
-	--gray_20: #444;
-	--gray_30: #666;
-	--gray_40: #777;
-	--gray_50: #999;
-	--gray_60: #ccc;
-	--gray_70: #d7d7d7;
-	--gray_80: #e5e5e5;
-	--gray_90: #eee;
-	--gray_95: #f7f7f7;
-	--gray_100: #fff;
-
-	--bgcolor: rgb(29,29,31);
-	--bgheader: rgba(255,255,255,0) 10%, rgba(29,29,31,0.9) 40%, rgba(29,29,31,0.8) 60%, rgba(255,255,255,0) 90%;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background-default: var(--gray-900); /* 어두운 배경 */
+    --color-text-primary: var(--gray-200);    /* 밝은 텍스트 */
+    /* ... */
+  }
 }
-

@@ -16,15 +16,26 @@
 			<main class="base-content">
 				<wrap data-dir="col">
 					<group data-dir="col">
-						<h1 data-heading="display" data-text="Dropdown">Dropdown</h1>
+						<tit>Dropdown</tit>
 						<p>드롭다운 컴포넌트는 웹 페이지에서 사용자에게 선택 목록을 제공하거나, 특정 콘텐츠를 필요할 때만 보여주는 데 사용되는 UI 요소입니다. 이 가이드에서는 드롭다운 컴포넌트의 설정 가능한 옵션과 제공되는 주요 기능에 대해 설명합니다.</p>
 
 						<box>
 							<div style="display: flex; gap:0.8rem;">
 								<div data-dropdown="dropdown1">
 									<button type="button" data-dropdown-button="dropdown1">
-										<span data-dropdown-text="dropdown1">주요기능</span>
+										<span data-dropdown-text="dropdown1">서울시</span>
 									</button>
+								</div>
+								<div data-dropdown="dropdown2">
+									<button type="button" data-dropdown-button="dropdown2">
+										<span>요일 (중복선택)</span>
+									</button>
+									<div data-dropdown-panel="dropdown2" aria-hidden="true">
+										<div data-dropdown-section="dropdown2">
+											<div data-selection="rd2"></div>
+											<button type="button" onclick="UI.exe.dropdown2.hide()">닫기</button>
+										</div>
+									</div>
 								</div>
 							</div>
 						</box>
@@ -113,7 +124,7 @@ import Dropdown from './Dropdown.js';
 
 const myDropdown = new Dropdown({
   id: 'userMenu',
-  area: document.querySelector('area-dropdown[data-area="body"]'), // 헤더 영역에 드롭다운 패널 삽입
+  area: document.querySelector('#header-area'), // 헤더 영역에 드롭다운 패널 삽입
   src: './html/user-menu.html', // 외부 파일에서 메뉴 콘텐츠 로드
   ps: 'br', // 버튼의 오른쪽 아래에 패널 위치
   srcCallback: () => {
@@ -129,6 +140,15 @@ myDropdown.init();
 							</pre></code>
 						</codebox>
 					</group>
+
+					<group data-dir="col">
+						<mtit>주요기능 (Key Features)</mtit>
+						<p>드롭다운 컴포넌트는 다음과 같은 핵심 기능을 제공합니다.</p>
+
+						<stit>초기화 ( init() )</stit>
+						<p>드롭다운 컴포넌트를 초기화하고 필요한 이벤트 리스너를 설정합니다. 컴포넌트를 사용하기 전에 반드시 호출해야 합니다.</p>
+					</group>
+					
 				</wrap>
 			</main>
 		</div>
@@ -144,24 +164,70 @@ myDropdown.init();
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 		
-
 /* 선언 ---------------------------------------------- */
+		// buttonSelection
+		UI.exe.localSelect = new UX.ButtonSelection({
+			id: 'rd1',
+			type: 'radio',
+			label: '지역선택',
+			data: [
+				{ text: '서울시', value: '서울시', checked: false },
+				{ text: '강남구', value: '강남구', checked: false },
+				{ text: '강동구', value: '강동구', checked: true },
+				{ text: '강북구', value: '강북구', checked: false },
+			],
+			callback: (eventData) => {
+				console.log('callback localSelect: ', eventData, UI.exe.localSelect)
+				document.querySelector(`[data-dropdown-text="dropdown1"]`).textContent = eventData.value;
+				document.querySelector(`[data-dropdown-panel="dropdown1"][aria-hidden="false"]`) && UI.exe.dropdown1.hide();
+			},
+			onGroupExit: (eventData) => {
+				console.log('onGroupExit!!!!!:', eventData);
+				UI.exe.dropdown1.hide();
+			}
+		});
+		UI.exe.weeklySelect = new UX.ButtonSelection({
+			id: 'rd2',
+			type: 'checkbox',
+			label: '요일선택',
+			data: [
+				{ text: '월요일', value: '월요일', checked: true },
+				{ text: '화요일', value: '화요일', checked: false },
+				{ text: '수요일', value: '수요일', checked: false },
+				{ text: '목요일', value: '목요일', checked: false },
+				{ text: '금요일', value: '금요일', checked: false },
+				{ text: '토요일', value: '토요일', checked: false },
+				{ text: '일요일', value: '일요일', checked: false },
+			],
+			callback: (eventData) => {
+				console.log('callback weeklySelect: ', eventData)
+			},
+			onGroupExit: (eventData) => {
+				console.log('onGroupExit!!!!!:', eventData);
+			}
+		});
+
     // dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
 			id: 'dropdown1',
-			ps: 'bl',
 			src: './dropdown/dropdown1.html',
 			srcCallback: () => {
-				console.log(`./dropdown/dropdown1.html load complete callback`);
+				UI.exe.localSelect.init();
 			},
+		});
+		UI.exe.dropdown2 = new UX.Dropdown({
+			id: 'dropdown2',
+			ps: 'rc',
 			callback: () => {
-				console.log(`dropdown init callback`);
+				//내부 라디오버튼 선택인 경우
+				UI.exe.weeklySelect.init();
 			},
 		});
 
 
 /* 실행 ---------------------------------------------- */
 		UI.exe.dropdown1.init();
+		UI.exe.dropdown2.init();
 
 	</script>
 </body>

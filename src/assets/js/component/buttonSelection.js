@@ -17,9 +17,6 @@ export default class ButtonSelection {
       console.error('ButtonSelection: "id" 옵션은 필수입니다.');
       return; // ID가 제공되지 않으면 종료
     }
-
-    
-    // this.init();
   }
 
   init() {
