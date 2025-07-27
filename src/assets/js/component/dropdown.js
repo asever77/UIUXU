@@ -1,5 +1,6 @@
 import { DROPDOWN_VERSION } from "../config/versions.js";
 import { loadContent } from '../utils/utils.js';
+import { FocusTrap } from '../utils/utils.js';
 
 export default class Dropdown {
   // Private 필드 선언
@@ -80,7 +81,6 @@ export default class Dropdown {
   }
 
   #setupElements() {
-    console.log(this.#src);
     if (this.#src) {
       loadContent({
         area: this.#area,
@@ -190,6 +190,8 @@ export default class Dropdown {
 
     this.#panel.focus();
     this.#html.addEventListener('click', this.#boundHandleOutsideClick);
+
+    new FocusTrap(this.#panel);
   }
   
   hide() {

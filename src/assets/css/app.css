@@ -1,12 +1,10 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Bitcount+Prop+Single:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0&icon_names=arrow_downward");
 :root {
   --opacity_1: 1;
   --opacity_0: 0;
   --w375: 2.6667vw;
-  /* iOS 11.2 이상 */
   --sat: env(safe-area-inset-top);
   --sar: env(safe-area-inset-right);
   --sab: env(safe-area-inset-bottom);
@@ -44,11 +42,62 @@
   --x9: calc(0.8rem * 9);
 }
 
+:root[data-mode=dark] {
+  /* 1. 기본 배경 및 텍스트 */
+  --color-background-default: var(--gray-900); /* 밝은 배경 -> 어두운 배경 */
+  --color-text-primary: var(--gray-200); /* 어두운 텍스트 -> 밝은 텍스트 */
+  --color-text-secondary: var(--gray-400); /* 조금 더 밝게 조정 */
+  --color-icon-default: var(--gray-300); /* 아이콘 색상도 밝게 */
+  --color-disabled-text: var(--gray-600); /* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
+  /* 2. 경계선 색상 */
+  --color-border-light: var(--gray-700); /* 밝은 테두리 -> 어두운 배경에 어울리는 어두운 테두리 */
+  --color-border-dark: var(--gray-600); /* 어두운 테두리 -> 여전히 구분되도록 조정 */
+  /* 그림자 (만약 사용한다면) */
+  /* --color-shadow: rgba(0, 0, 0, 0.4); */ /* 어두운 배경에 적합한 그림자 */
+  /* 3. 컴포넌트별 배경색 */
+  --color-card-background: var(--gray-800); /* 카드 배경을 어둡게 */
+  --color-modal-background: var(--gray-850); /* 모달 배경은 카드보다 조금 더 어둡게 (구분감) */
+  /* 기존 --bgcolor도 필요하다면 조정 */
+  --bgcolor: var(--gray-900); /* 전체 페이지 배경색이 흰색이었다면 어두운 색으로 */
+  /* 배경 그라데이션도 조정 */
+  --bgheader: rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0) 90%;
+  /* 특정 아이콘에만 적용할 경우 */
+}
+:root[data-mode=dark] .base-header--title .logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+:root[data-mode=dark] .icon-light-only {
+  filter: brightness(0.7) contrast(1.2);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background-default: var(--gray-900); /* 어두운 배경 */
-    --color-text-primary: var(--gray-200); /* 밝은 텍스트 */
-    /* ... */
+    /* 1. 기본 배경 및 텍스트 */
+    --color-background-default: var(--gray-900); /* 밝은 배경 -> 어두운 배경 */
+    --color-text-primary: var(--gray-200); /* 어두운 텍스트 -> 밝은 텍스트 */
+    --color-text-secondary: var(--gray-400); /* 조금 더 밝게 조정 */
+    --color-icon-default: var(--gray-300); /* 아이콘 색상도 밝게 */
+    --color-disabled-text: var(--gray-600); /* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
+    /* 2. 경계선 색상 */
+    --color-border-light: var(--gray-700); /* 밝은 테두리 -> 어두운 배경에 어울리는 어두운 테두리 */
+    --color-border-dark: var(--gray-600); /* 어두운 테두리 -> 여전히 구분되도록 조정 */
+    /* 그림자 (만약 사용한다면) */
+    /* --color-shadow: rgba(0, 0, 0, 0.4); */ /* 어두운 배경에 적합한 그림자 */
+    /* 3. 컴포넌트별 배경색 */
+    --color-card-background: var(--gray-800); /* 카드 배경을 어둡게 */
+    --color-modal-background: var(--gray-850); /* 모달 배경은 카드보다 조금 더 어둡게 (구분감) */
+    /* 기존 --bgcolor도 필요하다면 조정 */
+    --bgcolor: var(--gray-900); /* 전체 페이지 배경색이 흰색이었다면 어두운 색으로 */
+    /* 배경 그라데이션도 조정 */
+    --bgheader: rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0) 90%;
+    /* 특정 아이콘에만 적용할 경우 */
+  }
+  :root .my-logo-img {
+    /* 이미지 색상 반전 (흑백 로고에 효과적) */
+    filter: invert(1) hue-rotate(180deg);
+  }
+  :root .icon-light-only {
+    filter: brightness(0.7) contrast(1.2);
   }
 }
 html {
@@ -127,7 +176,7 @@ summary {
 body {
   background-color: #fff;
   font-family: "Base", sans-serif;
-  color: #000;
+  color: var(--color-text-primary);
   font-size: 1.4rem;
   word-break: keep-all;
   -webkit-font-smoothing: antialiased;
@@ -450,6 +499,36 @@ th, td {
   vertical-align: top;
 }
 
+@media (max-width: 1023px) {
+  table {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  thead {
+    display: none;
+  }
+  tbody {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--x2);
+  }
+  tr {
+    display: grid;
+    border: 1px solid var(--gray-400);
+    border-radius: var(--x1);
+    padding: var(--x1);
+  }
+  tbody th {
+    width: 100%;
+    text-align: left;
+  }
+  tbody td, tbody th {
+    display: flex;
+    padding: calc(var(--x1) / 2);
+    background-color: transparent;
+  }
+}
 [data-heading=display] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
@@ -470,6 +549,19 @@ th, td {
   transform: translate(0.4rem, 0.4rem);
 }
 
+[data-MSO-before]::before {
+  content: attr(data-MSO-before);
+  font: inherit;
+  font-family: "Material Symbols Outlined";
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   background-color: var(--bgcolor);
 }
@@ -479,7 +571,6 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
-  background: linear-gradient(var(--bgheader));
 }
 .base-header--wrap {
   display: flex;
@@ -515,25 +606,36 @@ body {
   display: flex;
   letter-spacing: 0;
 }
+.base-header--group {
+  display: flex;
+  gap: var(--x2);
+}
 
-.nav-menu {
+.btn-icon {
   width: 3rem;
   height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  background-color: #111;
   border-radius: 50%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%23ffffff'%3E%3Cpath d='M427-344.09v-422.13q0-22.08 15.46-37.54 15.45-15.46 37.54-15.46t37.54 15.46Q533-788.3 533-766.22v422.13l173.96-173.95q15.95-15.96 37.61-15.74 21.65.21 37.6 16.17 14.96 15.96 15.18 37.61.22 21.65-15.74 37.61l-264 264q-7.7 7.69-17.52 11.61-9.83 3.91-20.09 3.91t-20.09-3.91q-9.82-3.92-17.52-11.61L177.83-442.96q-15.53-15.52-15.53-37.11 0-21.58 15.53-37.54 15.95-15.96 37.82-15.96t37.83 15.96L427-344.09Z'/%3E%3C/svg%3E");
-  background-position: 50% 50%;
-  background-size: 2.4rem;
-  background-repeat: no-repeat;
   position: relative;
+  background-color: #fff;
   z-index: 1;
 }
-.nav-menu[data-state=selected] {
+.btn-icon[data-state=selected][data-toggle-object=nav] {
   transform: rotate(180deg);
+}
+.btn-icon[data-bg=dark] {
+  color: #fff;
+  background-color: #111;
+}
+.btn-icon[data-bg=dark][data-MSO-before]::before {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+.btn-icon[data-MSO-before]::before {
+  font-size: 3rem;
+  font-weight: 500;
 }
 
 .nav-main {
@@ -1654,112 +1756,112 @@ body {
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg width='8' height='10' viewBox='0 0 8 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 9.58462V1H7L1 9.58462Z' fill='white'/%3E%3Cpath d='M1 1.27692V9.30769C1 9.30769 4.62872 4.41313 6.95385 1.27692' stroke='black' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
 }
-.offscreen[data-ps=top-left] {
+.offscreen[data-ps=tl] {
   bottom: calc(100% + 1rem);
   left: -0.4rem;
 }
-.offscreen[data-ps=top-left]::before {
+.offscreen[data-ps=tl]::before {
   top: calc(100% - 0.1rem);
   left: 1.8rem;
 }
-.offscreen[data-ps=top-center] {
+.offscreen[data-ps=tc] {
   bottom: calc(100% + 1rem);
   left: 50%;
   transform: translateX(-50%);
 }
-.offscreen[data-ps=top-center]::before {
+.offscreen[data-ps=tc]::before {
   top: calc(100% - 0.1rem);
   left: 50%;
   transform: translateX(-50%);
 }
-.offscreen[data-ps=top-right] {
+.offscreen[data-ps=tr] {
   bottom: calc(100% + 1rem);
   right: -0.4rem;
 }
-.offscreen[data-ps=top-right]::before {
+.offscreen[data-ps=tr]::before {
   top: calc(100% - 0.1rem);
   right: 1.8rem;
 }
-.offscreen[data-ps=bottom-left] {
+.offscreen[data-ps=bl] {
   top: calc(100% + 1rem);
   left: -0.4rem;
 }
-.offscreen[data-ps=bottom-left]::before {
+.offscreen[data-ps=bl]::before {
   bottom: calc(100% - 0.1rem);
   left: 1.8rem;
   transform: rotate(180deg);
 }
-.offscreen[data-ps=bottom-center] {
+.offscreen[data-ps=bc] {
   top: calc(100% + 1rem);
   left: 50%;
   transform: translateX(-50%);
 }
-.offscreen[data-ps=bottom-center]::before {
+.offscreen[data-ps=bc]::before {
   bottom: calc(100% - 0.1rem);
   left: 50%;
   transform: translateX(-50%) rotate(180deg);
 }
-.offscreen[data-ps=bottom-right] {
+.offscreen[data-ps=br] {
   top: calc(100% + 1rem);
   right: -0.4rem;
 }
-.offscreen[data-ps=bottom-right]::before {
+.offscreen[data-ps=br]::before {
   bottom: calc(100% - 0.1rem);
   right: 1.8rem;
   transform: rotate(180deg);
 }
-.offscreen[data-ps=left-top] {
+.offscreen[data-ps=lt] {
   right: calc(100% + 1rem);
   top: -0.4rem;
 }
-.offscreen[data-ps=left-top]::before {
+.offscreen[data-ps=lt]::before {
   top: 0.7rem;
   right: -0.8rem;
   transform: rotate(-90deg);
 }
-.offscreen[data-ps=left-center] {
+.offscreen[data-ps=lc] {
   right: calc(100% + 1rem);
   top: 50%;
   transform: translateY(-50%);
 }
-.offscreen[data-ps=left-center]::before {
+.offscreen[data-ps=lc]::before {
   top: calc(50% - 0.8rem);
   right: -0.8rem;
   transform: rotate(-90deg);
 }
-.offscreen[data-ps=left-bottom] {
+.offscreen[data-ps=lb] {
   right: calc(100% + 1rem);
   bottom: -0.4rem;
 }
-.offscreen[data-ps=left-bottom]::before {
+.offscreen[data-ps=lb]::before {
   bottom: 0.7rem;
   right: -0.8rem;
   transform: rotate(-90deg);
 }
-.offscreen[data-ps=right-top] {
+.offscreen[data-ps=rt] {
   left: calc(100% + 1rem);
   top: -0.4rem;
 }
-.offscreen[data-ps=right-top]::before {
+.offscreen[data-ps=rt]::before {
   top: 0.7rem;
   left: -0.8rem;
   transform: rotate(90deg);
 }
-.offscreen[data-ps=right-center] {
+.offscreen[data-ps=rc] {
   left: calc(100% + 1rem);
   top: 50%;
   transform: translateY(-50%);
 }
-.offscreen[data-ps=right-center]::before {
+.offscreen[data-ps=rc]::before {
   top: calc(50% - 0.4rem);
   left: -0.8rem;
   transform: rotate(90deg);
 }
-.offscreen[data-ps=right-bottom] {
+.offscreen[data-ps=rb] {
   left: calc(100% + 1rem);
   bottom: -0.4rem;
 }
-.offscreen[data-ps=right-bottom]::before {
+.offscreen[data-ps=rb]::before {
   bottom: 0.7rem;
   left: -0.8rem;
   transform: rotate(90deg);
@@ -1774,9 +1876,6 @@ body {
 }
 
 [data-tooltip-close] {
-  position: absolute;
-  right: 0.2rem;
-  top: 0.2rem;
   pointer-events: visible;
 }
 

@@ -5,6 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dropdown | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
 </head>
 
@@ -126,6 +128,9 @@ const myDropdown = new Dropdown({
 });
 
 myDropdown.init();
+myDropdown.show();
+myDropdown.hide();
+myDropdown.destroy();
 							</pre></code>
 						</codebox>
 					</group>
@@ -140,12 +145,13 @@ myDropdown.init();
 
 	<!-- script -->
 	<script type="module">
-/* 준비 ---------------------------------------------- */
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 		
 
-/* 선언 ---------------------------------------------- */
+		/* 선언 ---------------------------------------------- */
     // dropdown
 		UI.exe.dropdown1 = new UX.Dropdown({
 			id: 'dropdown1',
@@ -158,9 +164,9 @@ myDropdown.init();
 				console.log(`dropdown init callback`);
 			},
 		});
+  
 
-
-/* 실행 ---------------------------------------------- */
+		/* 실행 ---------------------------------------------- */
 		UI.exe.dropdown1.init();
 
 	</script>

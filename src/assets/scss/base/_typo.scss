@@ -20,3 +20,18 @@
     transform: translate(.4rem, .4rem);
   }
 }
+
+
+[data-MSO-before]::before{
+  content: attr(data-MSO-before);
+  font: inherit;
+  font-family: 'Material Symbols Outlined';
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+
+}

@@ -193,3 +193,34 @@ th,td{
 	font-size: 1.3rem;
 	vertical-align: top;
 }
+@media (max-width:1023px) {
+	table {
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+	}
+	thead{
+		display: none;
+	}
+	tbody {
+		display: flex;
+		flex-wrap: wrap;
+		gap:var(--x2);
+	}
+	tr{
+		display: grid;
+		
+		border: 1px solid var(--gray-400);
+		border-radius: var(--x1);
+		padding:var(--x1);
+	}
+	tbody th {
+		width: 100%;
+		text-align: left;
+	}
+	tbody td, tbody th {
+		display: flex;
+		padding: calc(var(--x1) / 2);
+		background-color: transparent;
+	}
+}

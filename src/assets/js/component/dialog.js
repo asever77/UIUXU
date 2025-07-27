@@ -24,9 +24,10 @@ export default class Dialog {
       cancelCallback: null,
 
       delay: 'short', // short[2s] | long[3.5s]
-      live: 'polite', 
+      live: 'polite',
       //assertive[중요도 높은 경우] | polite[중요도가 낮은 경우] | off[default]
 			message: '',
+      full: false,
     };
 
     this.option = { ...defaults, ...opt };
@@ -93,7 +94,7 @@ export default class Dialog {
       const delay = this.delay === 'short' ? '2000' : '3000';
       this.toastTimer = setTimeout(()=> {
         this.toastHide();
-        
+
       }, delay);
     }
   }
@@ -102,7 +103,7 @@ export default class Dialog {
     this.elToast.remove();
     this.elToast = '';
   }
-  toastHide(){ 
+  toastHide(){
     const rect = this.elToast.getBoundingClientRect();
     const gap = 8;
     this.elToast.style.transition = 'margin 300ms ease';
@@ -156,18 +157,26 @@ export default class Dialog {
       console.error('Modal element not found');
       return;
     }
-    
+
     this.dialog.dataset.ps = this.option.ps;
     this.dialog.dataset.drag = this.option.drag;
     this.dialogWrap = this.dialog.querySelector('[data-dialog-item="wrap"]');
     this.dialogMain = this.dialog.querySelector('[data-dialog-item="main"]');
+
+    // full
+    if (this.option.full) {
+      this.dialog.classList.add('is-full');
+      this.dim = false;
+      this.move = false;
+      this.extend = false;
+    }
 
     //dim
     if (this.dim) {
       this.dialog.insertAdjacentHTML('beforeend', '<div class="dim"></div>');
       this.el_dim = this.dialog.querySelector('.dim');
       this.dimClick && this.el_dim.addEventListener('click', this.handleDimClick.bind(this));
-    } 
+    }
 
     //extend
     (this.extend) && this.dialogWrap.insertAdjacentHTML('afterbegin', '<div data-dialog-item="extend"></div>');
@@ -411,7 +420,7 @@ export default class Dialog {
 	show() {
     if (this.type === 'toast') {
       this.initToast('show');
-    } 
+    }
     else {
       document.querySelector('body').classList.add('scroll-not');
 
@@ -427,7 +436,7 @@ export default class Dialog {
       this.dialog.dataset.zindex = zIndex;
       this.dialog.dataset.current = 'true';
       // (this.option.drag) && this.dragEvent();
-      
+
       const trap = new FocusTrap(this.dialogWrap);
 
       if (this.extend) {
@@ -454,7 +463,7 @@ export default class Dialog {
     this.dialog.dataset.zindex = "";
 		this.option.focus_back && this.option.focus_back.focus();
 		this.dialog.setAttribute('aria-hidden', 'true');
-   
+
     //열린 모달 재설정
     const openModals = document.querySelectorAll('[data-dialog][aria-hidden="false"]');
     const zIndex = openModals.length;

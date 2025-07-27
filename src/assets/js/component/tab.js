@@ -6,7 +6,7 @@ export default class Tab {
 			renderMode: 'static', 
       group: false,
       selected: 1,
-			data: null, 
+			data: [], 
       callback: null,
 		};
 
@@ -92,7 +92,7 @@ export default class Tab {
           item.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
           item.dataset.tabName = this.id;
 
-          if (isSelected) {
+          if (isSelected && this.data && this.data.length > 0) {
             this.data[index].callback && this.data[index].callback();
           }
         });
@@ -127,7 +127,10 @@ export default class Tab {
     tabSelected.setAttribute('aria-selected', false);
     _this.setAttribute('aria-selected', true);
 
-    this.data[idx].callback && this.data[idx].callback();
+    if (this.data && this.data.length > 0) {
+      this.data[idx].callback && this.data[idx].callback();
+    }
+    
     this.smoothScroll.move(_this);
     this.expanded(_this.id);
   }

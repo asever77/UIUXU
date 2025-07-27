@@ -184,6 +184,9 @@ export class FocusTrap {
       if (document.activeElement === this.firstElement) {
         e.preventDefault();
         this.lastElement.focus();
+      } else if (e.target === this.container) {
+        e.preventDefault();
+        this.lastElement.focus();
       }
     } else {
       // Tab
@@ -321,3 +324,116 @@ export class RadioAllcheck {
     });
   }
 }
+
+export class HoverMenu {
+  constructor(opt) {
+    this.id = opt.id,
+    this.nav = document.querySelector(`[data-hover-nav="${this.id}"]`);
+    this.links = this.nav.querySelectorAll('a, button');
+    this.depBtns = this.nav.querySelectorAll('[data-hover-nav-button]');
+    this.handleHover = this.handleHover.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
+    this.handleTab = this.handleTab.bind(this);
+    this.first = this.links[0];
+    this.last = this.links[this.links.length - 1];
+    this.init();
+  }
+
+  init() {
+    this.depBtns.forEach((item, index) => {
+      item.addEventListener('mouseover', this.handleHover);
+      item.addEventListener('focus', this.handleFocus);
+      item.addEventListener('mouseleave', this.handleLeave);
+    });
+
+    this.first.addEventListener('keydown', this.handleTab);
+    this.last.addEventListener('keydown', this.handleTab);
+
+    this.nav.addEventListener('mouseover', this.handleBodyOn);
+    this.nav.addEventListener('mouseleave', this.handleBodyOff);
+
+  }
+
+  handleBodyOn() {
+    document.body.dataset.navState = "on";
+  }
+  handleBodyOff() {
+    document.body.dataset.navState = "off";
+  }
+  handleTab(e) {
+    if (e.key !== 'Tab') return;
+
+    const _this = e.currentTarget;
+    const wrap = _this.closest('[data-hover-nav-item="1"]');
+    if (_this === this.first && e.shiftKey) {
+      wrap.dataset.state = 'off';
+      document.body.dataset.navState = "off";
+    } else if (_this === this.last && !e.shiftKey) {
+      wrap.dataset.state = 'off';
+      document.body.dataset.navState = "off";
+    }
+  }
+  handleFocus(e) {
+    const _this = e.currentTarget;
+    const area = _this.closest('[data-hover-nav]');
+    const wrap = _this.closest('[data-hover-nav-item]');
+    const onItem = area.querySelector('[data-hover-nav-item][data-state="on"]')
+    if (onItem) {
+      onItem.dataset.state = 'off';
+      document.body.dataset.navState = "off";
+    }
+    wrap.dataset.state = 'on';
+    document.body.dataset.navState = "on";
+  }
+
+  handleHover(e) {
+    const _this = e.currentTarget;
+    const wrap = _this.closest('[data-hover-nav-item]');
+    wrap.dataset.state = 'on';
+    document.body.dataset.navState = "on";
+  }
+  handleLeave(e) {
+    const _this = e.currentTarget;
+    const wrap = _this.closest('[data-hover-nav-item]');
+    const depth = Number(wrap.dataset.hoverNavItem) + 1;
+    const nextDepth = wrap.querySelector(`[data-hover-nav-item="${depth}"]`);
+    let timer = null;
+
+    const actHide = () => {
+      wrap.dataset.state = 'off';
+    }
+    const actCancle = () => {
+      clearTimeout(timer);
+      nextDepth.addEventListener('mouseleave', actHide)
+    }
+
+    nextDepth.addEventListener('mouseover', actCancle);
+    timer = setTimeout(() => {
+      wrap.dataset.state = 'off';
+    }, 200);
+  }
+}
+
+export class FakeRadio  {
+  constructor(opt) {
+    this.el = document.querySelector(`[data-radio-checked="${opt.id}"]`);
+    this.radios = this.el.querySelectorAll('[data-radio-checked]');
+    this.checkedItem = null;
+    this.callback = opt.callback;
+    this.init();
+  }
+  init(){ 
+    this.radios.forEach(item => {
+      item.addEventListener('click', this.handleCheck);
+    });
+  }
+  handleCheck = (e) => {
+    const _this = e.currentTarget;
+    this.checkedItem = this.el.querySelector('[data-radio-checked="true"]');
+    this.checkedItem.dataset.radioChecked = 'false';
+    _this.dataset.radioChecked = 'true';
+    this.callback && this.callback(_this);
+  }
+}
+
+
