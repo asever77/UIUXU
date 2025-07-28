@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Dropdown | UIUXU </title>
 	<!-- loads the entire Variable Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
 </head>
 
@@ -118,11 +118,11 @@ const myDropdown = new Dropdown({
   area: document.querySelector('area-dropdown[data-area="body"]'), // 헤더 영역에 드롭다운 패널 삽입
   src: './html/user-menu.html', // 외부 파일에서 메뉴 콘텐츠 로드
   ps: 'br', // 버튼의 오른쪽 아래에 패널 위치
-  srcCallback: () => {
+  srcCallback: () =&gt; {
     console.log('User menu content loaded!');
     // 로드된 콘텐츠 내의 특정 버튼에 이벤트 리스너 추가 등
   },
-  callback: () => {
+  callback: () =&gt; {
     console.log('Dropdown initialized!');
   }
 });

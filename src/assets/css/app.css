@@ -22,6 +22,7 @@
   --gray-900: #111111;
   /* 2단계: 의미론적 변수 (실제 UI 적용) */
   --color-background-default: var(--gray-100);
+  --color-background-table: var(--gray-200);
   --color-text-primary: var(--gray-800);
   --color-text-secondary: var(--gray-600);
   --color-border-light: var(--gray-300);
@@ -40,11 +41,43 @@
   --x7: calc(0.8rem * 7);
   --x8: calc(0.8rem * 8);
   --x9: calc(0.8rem * 9);
+  --x10: calc(0.8rem * 10);
+  --x11: calc(0.8rem * 11);
+  --x12: calc(0.8rem * 12);
+  --x13: calc(0.8rem * 13);
+  --x14: calc(0.8rem * 14);
+  --x15: calc(0.8rem * 15);
+  --x16: calc(0.8rem * 16);
+  --x17: calc(0.8rem * 17);
+  --x18: calc(0.8rem * 18);
+  --x19: calc(0.8rem * 19);
+  --x20: calc(0.8rem * 10);
+  --x21: calc(0.8rem * 1);
+  --x22: calc(0.8rem * 2);
+  --x23: calc(0.8rem * 3);
+  --x24: calc(0.8rem * 4);
+  --x25: calc(0.8rem * 5);
+  --x26: calc(0.8rem * 6);
+  --x27: calc(0.8rem * 7);
+  --x28: calc(0.8rem * 8);
+  --x29: calc(0.8rem * 9);
+  --x30: calc(0.8rem * 10);
+  --x31: calc(0.8rem * 31);
+  --x32: calc(0.8rem * 32);
+  --x33: calc(0.8rem * 33);
+  --x34: calc(0.8rem * 34);
+  --x35: calc(0.8rem * 35);
+  --x36: calc(0.8rem * 36);
+  --x37: calc(0.8rem * 37);
+  --x38: calc(0.8rem * 38);
+  --x39: calc(0.8rem * 39);
+  --x40: calc(0.8rem * 10);
 }
 
 :root[data-mode=dark] {
   /* 1. 기본 배경 및 텍스트 */
   --color-background-default: var(--gray-900); /* 밝은 배경 -> 어두운 배경 */
+  --color-background-table: var(--gray-800); /* 밝은 배경 -> 어두운 배경 */
   --color-text-primary: var(--gray-200); /* 어두운 텍스트 -> 밝은 텍스트 */
   --color-text-secondary: var(--gray-400); /* 조금 더 밝게 조정 */
   --color-icon-default: var(--gray-300); /* 아이콘 색상도 밝게 */
@@ -60,7 +93,7 @@
   /* 기존 --bgcolor도 필요하다면 조정 */
   --bgcolor: var(--gray-900); /* 전체 페이지 배경색이 흰색이었다면 어두운 색으로 */
   /* 배경 그라데이션도 조정 */
-  --bgheader: rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0) 90%;
+  --bgheader: rgba(17,17,17,0.95) 10%, rgba(17,17,17,0.9) 40%, rgba(17,17,17,0.8) 60%, rgba(17,17,17,0) 90%;
   /* 특정 아이콘에만 적용할 경우 */
 }
 :root[data-mode=dark] .base-header--title .logo {
@@ -104,7 +137,7 @@ html {
   font-size: var(--w375);
 }
 
-@media screen and (min-width: 376px) {
+@media screen and (min-width: 800px) {
   html {
     font-size: 10px;
   }
@@ -321,32 +354,32 @@ wrap {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  gap: var(--x6);
-  padding: var(--x3);
+  gap: var(--x3);
+  padding: var(--x2);
 }
 
 group {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  gap: var(--x3);
+  gap: var(--x2);
 }
 
 tit {
-  font-size: 3rem;
+  font-size: var(--x4);
   line-height: 2.2;
   font-weight: 200;
   letter-spacing: 0.4rem;
 }
 
 mtit {
-  font-size: 2.4rem;
+  font-size: var(--x3);
   line-height: 2;
   font-weight: 600;
 }
 
 stit {
-  font-size: 1.6rem;
+  font-size: var(--x2);
   line-height: 2;
   font-weight: 900;
 }
@@ -482,7 +515,7 @@ table {
 thead th {
   font-weight: 700;
   font-size: 1.2rem;
-  background-color: #f3f3f3;
+  background-color: var(--color-background-table);
   text-align: left;
 }
 
@@ -494,12 +527,12 @@ tbody th {
 
 th, td {
   padding: var(--x2) var(--x2);
-  background-color: #f3f3f3;
+  background-color: var(--color-background-table);
   font-size: 1.3rem;
   vertical-align: top;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 800px) {
   table {
     display: flex;
     width: 100%;
@@ -511,7 +544,7 @@ th, td {
   tbody {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--x2);
+    gap: var(--x1);
   }
   tr {
     display: grid;
@@ -532,27 +565,33 @@ th, td {
 [data-heading=display] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
-  font-size: 10rem;
+  font-size: var(--x6);
   line-height: 2.2;
   font-weight: 100;
-  letter-spacing: 1.4rem;
+  letter-spacing: 0.09em;
 }
 [data-heading=display]::before {
   content: attr(data-text);
   font-family: "Bitcount Prop Single", system-ui;
-  font-size: 10rem;
+  font-size: var(--x6);
   line-height: 2.2;
   font-weight: 400;
-  letter-spacing: 1.4rem;
+  letter-spacing: 0.09em;
   position: absolute;
-  opacity: 0.03;
-  transform: translate(0.4rem, 0.4rem);
+  opacity: 0.05;
+  transform: translate(0.03em, 0.03em);
 }
 
-[data-MSO-before]::before {
-  content: attr(data-MSO-before);
+[data-mso-before] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[data-mso-before]::before {
+  content: attr(data-mso-before);
   font: inherit;
-  font-family: "Material Symbols Outlined";
+  font-family: "Material Symbols Rounded";
   line-height: 1;
   display: inline-block;
   white-space: nowrap;
@@ -560,6 +599,7 @@ th, td {
   direction: ltr;
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
+  transform: translateY(0.1rem);
 }
 
 body {
@@ -571,12 +611,13 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
+  background: linear-gradient(var(--bgheader));
 }
 .base-header--wrap {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  padding: 5rem 2.4rem;
+  padding: var(--x2) var(--x2);
   align-items: center;
 }
 .base-header--title {
@@ -586,19 +627,16 @@ body {
   z-index: 1;
 }
 .base-header--title h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 1rem;
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: var(--x1);
 }
 .base-header--title .logo {
   display: block;
-  width: 17.4rem;
+  width: var(--x18);
 }
 .base-header--title sup {
-  font-size: 0.8rem;
+  font-size: var(--x1);
   border-radius: 0.4rem;
   background: linear-gradient(20deg, #111 50%, #444 55%);
   color: #000;
@@ -609,33 +647,6 @@ body {
 .base-header--group {
   display: flex;
   gap: var(--x2);
-}
-
-.btn-icon {
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  position: relative;
-  background-color: #fff;
-  z-index: 1;
-}
-.btn-icon[data-state=selected][data-toggle-object=nav] {
-  transform: rotate(180deg);
-}
-.btn-icon[data-bg=dark] {
-  color: #fff;
-  background-color: #111;
-}
-.btn-icon[data-bg=dark][data-MSO-before]::before {
-  font-size: 2.2rem;
-  font-weight: 300;
-}
-.btn-icon[data-MSO-before]::before {
-  font-size: 3rem;
-  font-weight: 500;
 }
 
 .nav-main {
@@ -730,6 +741,32 @@ body {
 }
 
 /* 기본 영역 z-index */
+.btn-icon {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+.btn-icon[data-state=selected][data-toggle-object=nav] {
+  transform: rotate(180deg);
+}
+.btn-icon[data-bg=dark] {
+  color: #fff;
+  background-color: #111;
+}
+.btn-icon[data-bg=dark][data-mso-before]::before {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+.btn-icon[data-mso-before]::before {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
 .scroll-not {
   overflow: hidden !important;
 }
@@ -1571,8 +1608,13 @@ body {
   z-index: 0;
   pointer-events: none;
 }
+[data-dropdown-panel] [data-mso-before=close] {
+  width: var(--x4);
+  height: var(--x4);
+  font-size: var(--x3);
+}
 [data-dropdown-panel] [data-dropdown-section] {
-  top: 100%;
+  overflow-y: auto;
 }
 [data-dropdown-panel][data-ps=bl] [data-dropdown-section] {
   top: 100%;
@@ -1669,6 +1711,21 @@ body {
   z-index: 1;
 }
 
+@media screen and (max-width: 799px) {
+  [data-dropdown-panel] [data-dropdown-section] {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 100%;
+    overflow-y: auto;
+    border: 0;
+    border-radius: 0;
+  }
+}
 [data-dropdown-section] {
   padding: 0.2rem 0.8rem;
   border-radius: 0.4rem;

@@ -8,32 +8,32 @@ wrap {
 	width: 100%;
 	display: flex;
 	align-items: flex-start;
-	gap: var(--x6);
-	padding: var(--x3);
+	gap: var(--x3);
+	padding: var(--x2);
 }
 group {
 	width: 100%;
 	display: flex;
 	align-items: flex-start;
-	gap: var(--x3);
+	gap: var(--x2);
 	
 }
 
 tit {
-	font-size: 3rem;
+	font-size: var(--x4);
 	line-height: 2.2;
 	font-weight: 200;
 	letter-spacing: 0.4rem;
 }
 
 mtit {
-	font-size: 2.4rem;
+	font-size: var(--x3);
 	line-height: 2;
 	font-weight: 600;
 }
 
 stit {
-	font-size: 1.6rem;
+	font-size: var(--x2);
 	line-height: 2;
 	font-weight: 900;
 }
@@ -179,7 +179,7 @@ table{
 thead th {
 	font-weight: 700;
 	font-size: 1.2rem;
-	background-color: #f3f3f3;
+	background-color: var(--color-background-table);
 	text-align: left;
 }
 tbody th {
@@ -189,11 +189,11 @@ tbody th {
 }
 th,td{
 	padding: var(--x2) var(--x2);
-	background-color: #f3f3f3;
+	background-color: var(--color-background-table);
 	font-size: 1.3rem;
 	vertical-align: top;
 }
-@media (max-width:1023px) {
+@media (max-width: 800px) {
 	table {
 		display: flex;
 		width: 100%;
@@ -205,7 +205,7 @@ th,td{
 	tbody {
 		display: flex;
 		flex-wrap: wrap;
-		gap:var(--x2);
+		gap:var(--x1);
 	}
 	tr{
 		display: grid;

@@ -27,6 +27,7 @@
 
   /* 2단계: 의미론적 변수 (실제 UI 적용) */
   --color-background-default: var(--gray-100);
+  --color-background-table: var(--gray-200);
   --color-text-primary: var(--gray-800);
   --color-text-secondary: var(--gray-600);
   --color-border-light: var(--gray-300);
@@ -48,10 +49,42 @@
 	--x7: calc(0.8rem * 7);
 	--x8: calc(0.8rem * 8);
 	--x9: calc(0.8rem * 9);
+	--x10: calc(0.8rem * 10);
+	--x11: calc(0.8rem * 11);
+	--x12: calc(0.8rem * 12);
+	--x13: calc(0.8rem * 13);
+	--x14: calc(0.8rem * 14);
+	--x15: calc(0.8rem * 15);
+	--x16: calc(0.8rem * 16);
+	--x17: calc(0.8rem * 17);
+	--x18: calc(0.8rem * 18);
+	--x19: calc(0.8rem * 19);
+	--x20: calc(0.8rem * 10);
+	--x21: calc(0.8rem * 1);
+	--x22: calc(0.8rem * 2);
+	--x23: calc(0.8rem * 3);
+	--x24: calc(0.8rem * 4);
+	--x25: calc(0.8rem * 5);
+	--x26: calc(0.8rem * 6);
+	--x27: calc(0.8rem * 7);
+	--x28: calc(0.8rem * 8);
+	--x29: calc(0.8rem * 9);
+	--x30: calc(0.8rem * 10);
+	--x31: calc(0.8rem * 31);
+	--x32: calc(0.8rem * 32);
+	--x33: calc(0.8rem * 33);
+	--x34: calc(0.8rem * 34);
+	--x35: calc(0.8rem * 35);
+	--x36: calc(0.8rem * 36);
+	--x37: calc(0.8rem * 37);
+	--x38: calc(0.8rem * 38);
+	--x39: calc(0.8rem * 39);
+	--x40: calc(0.8rem * 10);
 }
 :root[data-mode="dark"] {
 	/* 1. 기본 배경 및 텍스트 */
 	--color-background-default: var(--gray-900); /* 밝은 배경 -> 어두운 배경 */
+	--color-background-table: var(--gray-800); /* 밝은 배경 -> 어두운 배경 */
 	--color-text-primary: var(--gray-200);      /* 어두운 텍스트 -> 밝은 텍스트 */
 	--color-text-secondary: var(--gray-400);    /* 조금 더 밝게 조정 */
 	--color-icon-default: var(--gray-300);      /* 아이콘 색상도 밝게 */
@@ -72,7 +105,7 @@
 	--bgcolor: var(--gray-900); /* 전체 페이지 배경색이 흰색이었다면 어두운 색으로 */
 	
 	/* 배경 그라데이션도 조정 */
-	--bgheader: rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0.8) 60%, rgba(0,0,0,0) 90%;
+	--bgheader: rgba(17,17,17,0.95) 10%, rgba(17,17,17,0.9) 40%, rgba(17,17,17,0.8) 60%, rgba(17,17,17,0) 90%;
 
 	.base-header--title .logo {
 		filter: invert(1) hue-rotate(180deg);
