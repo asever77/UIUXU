@@ -99,6 +99,80 @@ export const slideToggle = (element, duration = 300) => {
   return isHidden ? slideDown(element, duration) : slideUp(element, duration);
 };
 
+export class ScrollTrigger {
+  constructor(options) {
+    // 기본 옵션 설정
+    this.options = {
+      targetSelector: null, // 관찰할 요소의 CSS 선택자 (필수)
+      callback: () => {},  // 요소가 트리거될 때 실행할 함수 (필수)
+      root: null,          // Intersection Observer의 root 옵션 (null = 뷰포트)
+      rootMargin: '0px',   // Intersection Observer의 rootMargin 옵션
+      threshold: 0,        // Intersection Observer의 threshold 옵션 (0.0 ~ 1.0 또는 배열)
+      once: false           // 한 번 트리거되면 관찰을 중지할지 여부
+    };
+
+    // 사용자가 제공한 옵션으로 기본 옵션 오버라이드
+    Object.assign(this.options, options);
+
+    // 필수 옵션 검증
+    if (!this.options.targetSelector) {
+      console.error('ScrollTrigger: targetSelector 옵션은 필수입니다.');
+      return;
+    }
+    if (typeof this.options.callback !== 'function') {
+      console.error('ScrollTrigger: callback 옵션은 함수여야 합니다.');
+      return;
+    }
+
+    this.observer = null; // IntersectionObserver 인스턴스
+    this.init(); // 초기화 메서드 호출
+  }
+
+  init() {
+    const { root, rootMargin, threshold } = this.options;
+
+    // Intersection Observer 생성
+    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
+      root,
+      rootMargin,
+      threshold
+    });
+
+    // 모든 대상 요소를 찾아 관찰 시작
+    this.targetElements = this.options.targetSelector;
+    if (this.targetElements.length === 0) {
+      console.warn(`ScrollTrigger: '${this.options.targetSelector}'에 해당하는 요소를 찾을 수 없습니다.`);
+      return;
+    }
+
+    this.targetElements.forEach(element => {
+      this.observer.observe(element);
+    });
+  }
+
+  handleIntersection(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 요소가 뷰포트에 진입했을 때 콜백 실행
+        this.options.callback(entry.target); // 콜백에 해당 요소 전달
+
+        // once 옵션이 true이면, 콜백 실행 후 해당 요소의 관찰 중지
+        if (this.options.once) {
+          observer.unobserve(entry.target);
+        }
+      }
+    });
+  }
+
+  // 모든 관찰 중지 메서드 (필요시 외부에서 호출)
+  destroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
+  }
+}
+
 export class SmoothScroller {
   /**
    * @param {Object} opt
