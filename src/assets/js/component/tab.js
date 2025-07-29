@@ -24,7 +24,6 @@ export default class Tab {
     const defaults = {
       renderMode: 'dynamic', //'static', 'dynamic'
       scroll: false,
-      scrollWrap: window,
       loadAll: false,
       selected: 1,
       data: [],
