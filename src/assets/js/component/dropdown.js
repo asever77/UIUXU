@@ -25,6 +25,7 @@ export default class Dropdown {
     const defaults = {
       area: document.querySelector('.area-dropdown[data-area="body"]'),
       src: null,
+      scroll: null,
       ps: null, // bl,bc,br,tl,tc,tr,lt,lc,lb,rt,rc,rb, null(auto tl/bl)
       srcCallback: null,
       callback: null,

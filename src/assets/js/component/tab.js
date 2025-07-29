@@ -5,6 +5,7 @@ export default class Tab {
   constructor(opt) {
 		const defaults = {
       renderMode: 'dynamic', //'static', 'dynamic'
+      scroll: false,
       loadAll: false,
       selected: 1,
 			data: [], 
@@ -14,6 +15,7 @@ export default class Tab {
     this.data = this.options.data;
     this.id = this.options.id;
     this.loadAll = this.options.loadAll;
+    this.scroll = this.options.scroll;
     this.selected = this.options.selected;
     this.renderMode = this.options.renderMode;
 
@@ -42,6 +44,9 @@ export default class Tab {
     this.el_wrap = document.querySelector(`[data-tab-wrap="${this.id}"]`);
 
     if (this.el_tab.dataset.load === 'true') return false;
+    if (this.scroll) {
+      this.el_tab.dataset.tabType = "scroll"
+    }
 
     this.el_tab.dataset.load = true;
     let tabpanel_html = ``;
@@ -118,9 +123,26 @@ export default class Tab {
       this.el_wrap.innerHTML = tabpanel_html;
       if (!this.loadAll) {
         // 개별
-        this.loadPanel(Number(this.selected))
-      } 
-      else {
+        if (this.scroll) {
+          this.el_wrap.dataset.tabType = 'scroll';
+          this.data.forEach((item, index) => {
+            const n = index + 1;
+            this.el_wrap.querySelector(`#${this.id}-panel-${n}`).dataset.loaded = 'true';
+            this.el_wrap.querySelector(`#${this.id}-panel-${n}`).setAttribute('aria-expanded', 'true');
+            loadContent({
+              area: this.el_wrap.querySelector(`#${this.id}-panel-${n}`),
+              src: item.src,
+              insert: true,
+            })
+            .then(() => {
+              (item.callback && item.selected) && item.callback();
+            })
+            .catch(err => console.error('Error loading tab content:', err));
+          });
+        } else {
+          this.loadPanel(Number(this.selected));
+        }
+      } else {
         // 전체
         loadContent({
           area: this.el_wrap,
@@ -180,7 +202,6 @@ export default class Tab {
     })
     .then(() => {
       panel.dataset.loaded = 'true';
-      console.log(this.data[n]);
       this.data[n-1].callback && this.data[n-1].callback();
       tabID && this.expanded(tabID);
     })
@@ -233,9 +254,16 @@ export default class Tab {
     _this.setAttribute('aria-selected', true);
     _this.setAttribute('tabindex', '0');
     // tab panel
-
-    panelSelected.setAttribute('aria-expanded', false);
-    panelSelected.setAttribute('tabindex', '-1');
+    if (!this.scroll) {
+      panelSelected.setAttribute('aria-expanded', false);
+      panelSelected.setAttribute('tabindex', '-1');
+    } else {
+      currentPanel.scrollIntoView({
+        block: 'start',
+        behavior: 'smooth',
+        inline: 'nearest'
+      });
+    }
     currentPanel.setAttribute('aria-expanded', true);
     currentPanel.setAttribute('tabindex', '0');
   }

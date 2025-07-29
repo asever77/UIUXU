@@ -73,6 +73,12 @@
 								</div>
 							</div>
 						</box>
+
+						<stit>스크롤탭</stit>
+						<box>
+							<div data-tab="tab4" data-tab-style="small-box-type" style="top:6.2rem"></div>
+							<div data-tab-wrap="tab4"></div>
+						</box>
 					</group>
 
 					<group data-dir="col">
@@ -277,11 +283,36 @@
 				{ callback: () => { console.log('탭3 open'); },},
 			],
 		});
+
+		UI.exe.tab4 = new UX.Tab({
+			id: 'tab4',
+			scroll: true,
+			selected: 1, //1부터 시작
+			data: [
+				{ src: './tab/tab1.html', tab: '<span>tab1</span>', callback: () => { console.log('tab 1 open'); },},
+				{ src: './tab/tab2.html', tab: '<span>tab2</span>',
+					callback: () => {
+						console.log('tab 2 open');
+						UI.exe.tab2.init()
+					}
+				},
+				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
+				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
+				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
+				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
+				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
+				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
+				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+			],
+		});
 		
 
 		/* 실행 ---------------------------------------------- */
 		UI.exe.tab1.init();
 		UI.exe.tab3.init();
+		UI.exe.tab4.init();
 
 		UI.exe.tab1.ver();
 

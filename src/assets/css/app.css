@@ -1780,6 +1780,18 @@ body {
   display: block;
 }
 
+[data-tab-type=scroll][data-tab] {
+  position: sticky;
+}
+[data-tab-type=scroll][data-tab-wrap] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--x2);
+}
+[data-tab-type=scroll] [role=tabpanel] {
+  scroll-margin-top: 12rem;
+}
+
 /* tooltip */
 .tooltip {
   position: relative;
