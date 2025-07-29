@@ -66,11 +66,13 @@ export default class Dropdown {
     });
     console.log(`author: ${DROPDOWN_VERSION.author}`);
     console.log(`license: ${DROPDOWN_VERSION.license}`);
-    console.table(this.#option);
     console.groupEnd();
   }
 
   init() {
+    if (!this.#wrap) {
+      return false;
+    }
     this.#setupElements();
     this.#addEventListeners();
 

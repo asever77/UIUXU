@@ -26,3 +26,12 @@
     font-weight: 500;
   }
 }
+
+.base-header {
+    [data-toggle-target="nav"][data-state="selected"] {
+    .btn-icon {
+      filter: invert(1);
+    }
+  }
+  
+}

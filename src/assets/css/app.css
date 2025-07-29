@@ -426,7 +426,7 @@ codebox code {
   overflow: auto;
   color: #f2f2f2;
   font-size: 1.2rem;
-  line-height: 2.4;
+  line-height: 1.6;
   font-family: "Source Code Pro", monospace;
   -moz-tab-size: 2;
     -o-tab-size: 2;
@@ -522,7 +522,6 @@ thead th {
 tbody th {
   text-align: left;
   font-weight: 600;
-  padding: var(--x1) var(--x2);
 }
 
 th, td {
@@ -765,6 +764,10 @@ body {
 .btn-icon[data-mso-before]::before {
   font-size: 3rem;
   font-weight: 500;
+}
+
+.base-header [data-toggle-target=nav][data-state=selected] .btn-icon {
+  filter: invert(1);
 }
 
 .scroll-not {

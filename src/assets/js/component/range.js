@@ -20,6 +20,10 @@ export default class RangeSlider {
 
     this.option = { ...defaults, ...opt };
     this.rangeSlider = document.querySelector(`[data-rangeslider="${this.option.id}"]`);
+    if (!this.rangeSlider) {
+      return false;
+    }
+
     this.rangeSliderWrapper = this.rangeSlider.querySelector(`.slider-wrapper`);
     this.rangeInput = document.querySelector(`#${this.option.id}`);
 
@@ -55,6 +59,9 @@ export default class RangeSlider {
   }
 
   init() {
+    if (!this.rangeSlider) {
+      return false;
+    }
     // 기존의 요소와 이벤트 리스너를 제거합니다.
     this.clearElements();
     if (this.label) {

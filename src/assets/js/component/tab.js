@@ -1,21 +1,21 @@
 import { loadContent, ArrowNavigator, SmoothScroller } from '../utils/utils.js';
+import { TAB_VERSION } from "../config/versions.js";
 
 export default class Tab {
   constructor(opt) {
 		const defaults = {
-			renderMode: 'static', 
-      group: false,
+      renderMode: 'dynamic', //'static', 'dynamic'
+      loadAll: false,
       selected: 1,
 			data: [], 
-      callback: null,
 		};
 
-		this.option = { ...defaults, ...opt };
-    this.renderMode = this.option.renderMode;
-    this.data = this.option.data;
-    this.id = this.option.id;
-    this.group = this.option.group;
-    this.selected = this.option.selected;
+		this.options = { ...defaults, ...opt };
+    this.data = this.options.data;
+    this.id = this.options.id;
+    this.loadAll = this.options.loadAll;
+    this.selected = this.options.selected;
+    this.renderMode = this.options.renderMode;
 
     this.el_tab = null;
     this.el_wrap = null;
@@ -23,11 +23,17 @@ export default class Tab {
     this.el_tabPnls = null;
 
     this.smoothScroll = null;
-
-    if (this.el_tab) {
-      // this.init();
-    } 
   }
+
+  ver() {
+      console.groupCollapsed(`%cTab %c${TAB_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;');
+      TAB_VERSION.history.forEach(item => {
+      console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
+      });
+      console.log(`author: ${TAB_VERSION.author}`);
+      console.log(`license: ${TAB_VERSION.license}`);
+      console.groupEnd();
+    }
 
   init() {
     this.el_tab = document.querySelector(`[data-tab="${this.id}"]`);
@@ -39,75 +45,123 @@ export default class Tab {
 
     this.el_tab.dataset.load = true;
     let tabpanel_html = ``;
+    let tab_html = `<div role="tablist">`;
 
-    this.el_tabButton.forEach((item, index) => {
-      const n = index + 1;
-      const isSelected = this.selected === n;
-      item.setAttribute('id', `${this.id}-id-${n}`);
-      item.setAttribute('aria-controls', `${this.id}-panel-${n}`);
-      item.setAttribute('aria-selected', `${isSelected}`);
-      item.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
-      item.dataset.tabName = this.id;
-      item.dataset.n = index;
-    });
     this.data.forEach((item, index) => {
       const n = index + 1;
       const isSelected = this.selected === n;
 
-      if (!this.group) {
-         tabpanel_html += `<div role="tabpanel" aria-labelledby="${this.id}-id-${n}" id="${this.id}-panel-${n}" aria-expanded="${isSelected}" tabindex="${isSelected ? '0' : '-1'}" data-tab-name="${this.id}"></div>`;
+      if (item.tab) {
+        tab_html += `
+        <button 
+          type="button" 
+          role="tab" 
+          aria-controls="$${this.id}-panel-${n}" 
+          id="${this.id}-id-${n}" 
+          aria-selected="${isSelected}" 
+          tabindex="${isSelected ? '0' : '-1'}" 
+          data-tab-name="${this.id}" 
+          data-n="${n}">
+          ${item.tab}
+        </button>`;
+      }
+      if (!this.loadAll) {
+        tabpanel_html += `
+        <div 
+          role="tabpanel" 
+          aria-labelledby="${this.id}-id-${n}" 
+          id="${this.id}-panel-${n}" 
+          aria-expanded="${isSelected}" 
+          tabindex="${isSelected ? '0' : '-1'}" 
+          data-tab-name="${this.id}">
+        </div>`;
       } 
     });
+    tabpanel_html += `</div>`;
+
+    if (this.el_tabButton.length < 1) {
+      // 동적
+      this.el_tab.innerHTML = tab_html;
+      tab_html = null;
+    } else {
+      // 정적
+      this.el_tabButton.forEach((tab, index) => {
+        const n = index + 1;
+        const isSelected = this.selected === n;
+        tab.setAttribute('id', `${this.id}-id-${n}`);
+        tab.setAttribute('aria-controls', `${this.id}-panel-${n}`);
+        tab.setAttribute('aria-selected', `${isSelected}`);
+        tab.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
+        tab.dataset.tabName = this.id;
+        tab.dataset.n = n;
+      });
+    }
     
-    this.el_wrap.innerHTML = tabpanel_html;
     this.el_tabBtns = this.el_tab.querySelectorAll('[role="tab"]');
 
-    if (!this.group) {
-      this.data.forEach((item, index) => {
+    if (this.renderMode === 'static') {
+      // 정적
+      this.el_wrap.querySelectorAll('[role="tabpanel"]').forEach((panel, index) => {
         const n = index + 1;
+        const isSelected = this.selected === n;
+        panel.setAttribute('aria-labelledby', `${this.id}-id-${n}`);
+        panel.setAttribute('id', `${this.id}-panel-${n}`);
+        panel.setAttribute('aria-expanded', `${isSelected}`);
+        panel.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
+        panel.dataset.tabName = this.id;
+
+        if (isSelected && this.data && this.data.length > 0) {
+          this.data[index].callback && this.data[index].callback();
+        }
+      });
+    } else {
+      this.el_wrap.innerHTML = tabpanel_html;
+      if (!this.loadAll) {
+        // 개별
+        this.loadPanel(Number(this.selected))
+      } 
+      else {
+        // 전체
         loadContent({
-          area: this.el_wrap.querySelector(`#${this.id}-panel-${n}`),
-          src: item.src,
+          area: this.el_wrap,
+          src: this.loadAll.src,
           insert: true,
         })
         .then(() => {
-          (item.callback && item.selected) && item.callback();
+          this.el_wrap.querySelectorAll('[role="tabpanel"]').forEach((panel, index) => {
+            const n = index + 1;
+            const isSelected = this.selected === n;
+            panel.setAttribute('aria-labelledby', `${this.id}-id-${n}`);
+            panel.setAttribute('id', `${this.id}-panel-${n}`);
+            panel.setAttribute('aria-expanded', `${isSelected}`);
+            panel.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
+            panel.dataset.tabName = this.id;
+            panel.dataset.loaded = 'true';
+
+            if (isSelected && this.data && this.data.length > 0) {
+              this.data[index].callback && this.data[index].callback();
+            }
+          });
         })
         .catch(err => console.error('Error loading tab content:', err));
-      });
-    } 
-    else {
-      loadContent({
-        area: this.el_wrap,
-        src: this.group.src,
-        insert: true,
-      })
-      .then(() => {
-        this.el_wrap.querySelectorAll('[role="tabpanel"]').forEach((item, index) => {
-          const n = index + 1;
-          const isSelected = this.selected === n;
-          item.setAttribute('aria-labelledby', `${this.id}-id-${n}`);
-          item.setAttribute('id', `${this.id}-panel-${n}`);
-          item.setAttribute('aria-expanded', `${isSelected}`);
-          item.setAttribute('tabindex', `${isSelected ? '0' : '-1'}`);
-          item.dataset.tabName = this.id;
-
-          if (isSelected && this.data && this.data.length > 0) {
-            this.data[index].callback && this.data[index].callback();
-          }
-        });
-      })
-      .catch(err => console.error('Error loading tab content:', err));
+      }
     }
 
-    this.el_tabBtns.forEach((item, index) => {
-      item.addEventListener('click', this.handleToggle.bind(this));     
+    this.el_tabBtns.forEach((tab, index) => {
+      tab.addEventListener('click', this.handleToggle.bind(this));     
     });
 
-    const keyNavigator = new ArrowNavigator({
+    this.keyNavigator = new ArrowNavigator({
       container: this.el_tab,
-      callback: (el, index) => {
-        this.expanded(el.id);
+      callback: el => {
+        const panel = document.querySelector(`[aria-labelledby="${el.id}"]`);
+        const isLoad = panel.dataset.loaded;
+        if (isLoad !== 'true' && this.renderMode !== 'static') {
+          // 개별
+          this.loadPanel(Number(el.dataset.n), el.id)
+        } else {
+          this.expanded(el.id);
+        }
       }
     });
 
@@ -117,22 +171,43 @@ export default class Tab {
     });
   }
 
+  loadPanel (n, tabID) {
+    const panel = this.el_wrap.querySelector(`#${this.id}-panel-${n}`);
+    loadContent({
+      area: panel,
+      src: this.data[n - 1].src,
+      insert: true,
+    })
+    .then(() => {
+      panel.dataset.loaded = 'true';
+      console.log(this.data[n]);
+      this.data[n-1].callback && this.data[n-1].callback();
+      tabID && this.expanded(tabID);
+    })
+    .catch(err => console.error('Error loading tab content:', err))
+  }
+
   handleToggle (e) {
     const _this = e.currentTarget;
     const _wrap = _this.closest('[data-tab]');
     const tabSelected = _wrap.querySelector('[role="tab"][aria-selected="true"]');
     const tabID = _this.id;
-    const idx = Number(_this.dataset.n);
+    const idx = Number(_this.dataset.n) - 1;
+    const panel = document.querySelector(`[aria-labelledby="${tabID}"]`);
+    const isLoad = panel.dataset.loaded;
 
     tabSelected.setAttribute('aria-selected', false);
     _this.setAttribute('aria-selected', true);
-
-    if (this.data && this.data.length > 0) {
-      this.data[idx].callback && this.data[idx].callback();
-    }
-    
     this.smoothScroll.move(_this);
-    this.expanded(_this.id);
+
+    if (isLoad !== 'true' && this.renderMode !== 'static') {
+      this.loadPanel(Number(_this.dataset.n), tabID);
+    } else {
+      if (this.data && this.data.length > 0) {
+        this.data[idx].callback && this.data[idx].callback();
+      }
+      this.expanded(tabID);
+    }
   }
 
   expanded (id) {
@@ -140,8 +215,6 @@ export default class Tab {
     const _this = document.querySelector(`#${tabID}`);
     const _wrap = _this.closest('[data-tab]');
     const tabName = _wrap.dataset.tab;
-
-    console.log(tabName, tabID)
 
     const tabSelected = _wrap.querySelector(`[data-tab-name="${tabName}"][role="tab"][aria-selected="true"]`);
     const panelWrap = document.querySelector(`[data-tab-wrap="${tabName}"]`);
@@ -160,8 +233,6 @@ export default class Tab {
     _this.setAttribute('aria-selected', true);
     _this.setAttribute('tabindex', '0');
     // tab panel
-
-    console.log(panelWrap,panelSelected,currentPanel)
 
     panelSelected.setAttribute('aria-expanded', false);
     panelSelected.setAttribute('tabindex', '-1');
