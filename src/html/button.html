@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Button | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
+		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
+		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+	</style>
+</head>
+
+<body>
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Button">Button</h1>
+            <p>기본으로 사용하는 버튼(button, a, role="button")의 스타일로 data속성 조합으로 사용한다.</p>
+
+						<stit>기본 버튼</stit>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base">
+                <span>button tag</span>
+              </button>
+              <a href="#" class="btn-base">
+                <span>a tag</span>
+              </a>
+              <div role="button" tabindex="0" class="btn-base">
+                <span>role tag</span>
+              </div>
+						</box>
+          </group>
+
+          <group data-dir="col">
+            <stit>Size </stit>
+            <p>data-size="[ small | normal(기본값) | large ]"</p>
+						<box style="gap: 0.8rem; display: flex; align-items: flex-start;">
+              <button type="button" class="btn-base" data-size="small">
+                <span>small size</span>
+              </button>
+              <a href="#" class="btn-base" data-size="normal">
+                <span>normal size</span>
+              </a>
+              <div role="button" tabindex="0" class="btn-base" data-size="large">
+                <span>large size</span>
+              </div>
+						</box>
+          </group>
+          
+          <group data-dir="col">
+            <stit>Type</stit>
+            <p>data-type="[ text | box(기본값) | ... ]"</p>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base" data-type="text">
+                <span>text type</span>
+              </button>
+              <a href="#" class="btn-base" data-type="box">
+                <span>box type</span>
+              </a>
+						</box>
+          </group>
+          
+          <group data-dir="col">
+            <stit>Shadow</stit>
+            <p>data-shadow="[ none | base | deep | ... ]"</p>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base" data-shadow="base">
+                <span>text type</span>
+              </button>
+              <a href="#" class="btn-base" data-type="box" data-shadow="deep">
+                <span>box type</span>
+              </a>
+						</box>
+          </group>
+          
+          <group data-dir="col">
+            <stit>color</stit>
+            <p>data-color="[ primary | sub | ... ]", data-bgcolor="[ dark | gray | light | primary | sub | ... ]"</p>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base" data-color="primary">
+                <span>primary color</span>
+              </button>
+              <a href="#" class="btn-base" data-color="sub">
+                <span>sub color</span>
+              </a>
+              <div role="button" tabindex="0" class="btn-base" data-bgcolor="dark">
+                <span>dark bgcolor</span>
+              </div>
+              <button type="button" class="btn-base" data-bgcolor="gray">
+                <span>gray bgcolor</span>
+              </button>
+              <button type="button" class="btn-base" data-bgcolor="primary">
+                <span>primary bgcolor</span>
+              </button>
+              <a href="#" class="btn-base" data-bgcolor="sub">
+                <span>sub bgcolor</span>
+              </a>
+						</box>
+          </group>
+          
+          <group data-dir="col">
+            <stit>Icon</stit>
+            <p>data-icon-before="arrow", data-icon-after="arrow"</p>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base" data-icon-before="refresh" data-bgcolor="dark">
+                <span>text type</span>
+              </button>
+              <a href="#" class="btn-base" data-type="box" data-icon-after="refresh">
+                <span>box type</span>
+              </a>
+						</box>
+          </group>
+          
+          <group data-dir="col">
+            <stit>Icon (material)</stit>
+            <div>
+              <a href="https://fonts.google.com/icons" target="_blank">Material Symbols</a>
+              <p>data-mso-before="arrow", data-mso-after="arrow"</p>
+            </div>
+						<box style="gap: 0.8rem; display: flex;">
+              <button type="button" class="btn-base" data-mso-before="check">
+                <span>text type</span>
+              </button>
+              <a href="#" class="btn-base" data-type="box" data-mso-after="arrow_forward_ios" data-bgcolor="dark">
+                <span>box type</span>
+              </a>
+						</box>
+					</group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init();
+
+	</script>
+</body>
+
+</html>

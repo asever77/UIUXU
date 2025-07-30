@@ -1,0 +1,48 @@
+$size-normal: 1.6rem;
+
+[data-mso-after],
+[data-mso-before],
+[data-icon-after],
+[data-icon-before] {
+  display: flex;
+  align-items: center;
+  gap:0.4rem;
+}
+[data-icon-after]::after,
+[data-icon-before]::before {
+  content: "";
+  display: block;
+  width: $size-normal;
+  height: $size-normal;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: $size-normal;
+  transform: translateY(0.1rem);
+}
+
+[data-icon-after="refresh"]::after {
+  background-image: var(--icon-svg-refresh);
+}
+[data-icon-before="refresh"]::before {
+  background-image: var(--icon-svg-refresh);
+}
+
+// Material Symbols Rounded Icon
+[data-mso-after]::after,
+[data-mso-before]::before{
+  content: attr(data-mso-before);
+  font: inherit;
+  font-family: 'Material Symbols Rounded';
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  transform: translateY(0.1rem);
+}
+[data-mso-after]::after{
+  content: attr(data-mso-after);
+}
+

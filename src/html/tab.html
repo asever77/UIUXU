@@ -8,6 +8,12 @@
 	<!-- loads the entire Variable Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
+		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
+		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+	</style>
 </head>
 
 <body>
@@ -144,6 +150,14 @@
 									</td>
 								</tr>
 								<tr>
+									<th scope="row">scrollOffsetTop</th>
+									<td>Number</td>
+									<td>0</td>
+									<td>
+										상단에서 기입한 숫자의 위치만큼 떨어진 곳에서부터 콜백을 보냅니다. 
+									</td>
+								</tr>
+								<tr>
 									<th scope="row">data</th>
 									<td>Array&lt;object&gt;</td>
 									<td>[]</td>
@@ -258,14 +272,10 @@
 					}
 				},
 				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab4.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
+				{ src: './tab/tab5.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab6.html', tab: '<span>tab6</span>', callback: () => { console.log('tab 3 open'); },},
+				{ src: './tab/tab7.html', tab: '<span>tab7</span>', callback: () => { console.log('tab 4 open'); },},
 			],
 		});
 
@@ -295,6 +305,7 @@
 		UI.exe.tab4 = new UX.Tab({
 			id: 'tab4',
 			scroll: true,
+			scrollOffsetTop: 120,
 			selected: 1, //1부터 시작
 			data: [
 				{ src: './tab/tab1.html', tab: '<span>tab1</span>', callback: () => { console.log('tab 1 open'); },},
@@ -305,14 +316,10 @@
 					}
 				},
 				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
-				{ src: './tab/tab1.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
-				{ src: './tab/tab3.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab4.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 3 open'); },},
+				{ src: './tab/tab5.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 4 open'); },},
+				{ src: './tab/tab6.html', tab: '<span>tab6</span>', callback: () => { console.log('tab 5 open'); },},
+				{ src: './tab/tab7.html', tab: '<span>tab7</span>', callback: () => { console.log('tab 3 open'); },},
 			],
 		});
 		

@@ -21,21 +21,3 @@
   }
 }
 
-[data-mso-before]{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-[data-mso-before]::before{
-  content: attr(data-mso-before);
-  font: inherit;
-  font-family: 'Material Symbols Rounded';
-  line-height: 1;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-  transform: translateY(0.1rem);
-}
