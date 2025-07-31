@@ -166,40 +166,40 @@
     UI.exe.acco1.init();
 
     //외부 접근 컨트롤
-    setTimeout(() => {
-      UI.exe.acco1.show('acco1-1');
-    },1000);
-    setTimeout(() => {
-      UI.exe.acco1.hide('acco1-1', () => {
-        console.log('callback hide');
-      });
-    },2000);
-    setTimeout(() => {
-      document.querySelector('[data-accordion="acco1"]').insertAdjacentHTML('beforeend', `
-      <div data-accordion-item="acco1">
-        <div data-accordion-group="acco1">
-          <h3 data-accordion-head="acco1">
-            <button type="button" data-accordion-button="acco1"></button>
-            <b data-accordion-title="acco1" aria-hidden="true">title 4</b>
-          </h3>
-        </div>
-        <div data-accordion-body="acco1">
-          4444<br>
-          ddddd
-        </div>
-      </div>`);
-      UI.exe.acco1.update();
-    },3000);
-    setTimeout(() => {
-      UI.exe.acco1.destroy();
-    },4000);
-    setTimeout(() => {
-      UI.exe.acco1 = new UX.Accordion({
-        id: 'acco1',
-        expanded: 'acco1-0',
-      });
-      UI.exe.acco1.init();
-    },5000);
+    // setTimeout(() => {
+    //   UI.exe.acco1.show('acco1-1');
+    // },1000);
+    // setTimeout(() => {
+    //   UI.exe.acco1.hide('acco1-1', () => {
+    //     console.log('callback hide');
+    //   });
+    // },2000);
+    // setTimeout(() => {
+    //   document.querySelector('[data-accordion="acco1"]').insertAdjacentHTML('beforeend', `
+    //   <div data-accordion-item="acco1">
+    //     <div data-accordion-group="acco1">
+    //       <h3 data-accordion-head="acco1">
+    //         <button type="button" data-accordion-button="acco1"></button>
+    //         <b data-accordion-title="acco1" aria-hidden="true">title 4</b>
+    //       </h3>
+    //     </div>
+    //     <div data-accordion-body="acco1">
+    //       4444<br>
+    //       ddddd
+    //     </div>
+    //   </div>`);
+    //   UI.exe.acco1.update();
+    // },3000);
+    // setTimeout(() => {
+    //   UI.exe.acco1.destroy();
+    // },4000);
+    // setTimeout(() => {
+    //   UI.exe.acco1 = new UX.Accordion({
+    //     id: 'acco1',
+    //     expanded: 'acco1-0',
+    //   });
+    //   UI.exe.acco1.init();
+    // },5000);
 	</script>
 </body>
 
