@@ -24,9 +24,7 @@ export const UX = {
 
 	init: () => {
     UX._setupGlobalNamespace();
-
     UI.exe.toggle.main = new UX.ToggleController();
-
     UX._loadCommonLayout();
   },
 
@@ -58,13 +56,12 @@ export const UX = {
         insert: true,
       })
         .then(() => {
-          console.log('Callback: Header content loaded.');
-
           UI.exe.toggle.header = new UX.ToggleController();
 					UI.exe.toggle.modeChange = (v) => {
 						console.log(v,document.html)
 						document.querySelector('html').dataset.mode = v.state ? 'dark' : 'light';
 					}
+          
         })
         .catch((err) => console.error('Error loading header content:', err));
     }

@@ -13,7 +13,7 @@ body {
     display: flex;
     width: 100%;
     justify-content:space-between;
-    padding:var(--x2) var(--x2);
+    padding: var(--x2) var(--x2);
     align-items: center;
   }
 
@@ -32,7 +32,6 @@ body {
     .logo {
       display: block;
       width: var(--x18);
-      
     }
     sup {
       font-size: var(--x1);
@@ -42,7 +41,6 @@ body {
       padding: 0.1rem 0.4rem;
       display: flex;
       letter-spacing: 0;
-
     }
   }
 
@@ -57,28 +55,95 @@ body {
   top:0;
   left:0;
   width: 100%;
-  padding: 13rem var(--x4) 10rem;
+  padding: 10rem var(--x4) 11rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: var(--x4);
   
   z-index: 0;
   transform: translateY(-100vh);
   transition: transform 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  background-color: rgba($color: #000, $alpha: 0.8);
- 
-  &[data-state="selected"] {
+  transition-delay: 200ms;
+
+  &::before {
+    content:"";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -50vw;
+    width: calc(200vw);
+    height: calc(200vw);
+    background-color: var(--white);
+    z-index: 1;
+    pointer-events: none;
+    transform: rotate(0deg);
+    box-shadow: 0 0 0 rgba($color: #000000, $alpha: 0);
+    transition: all 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955) ;
+    opacity: 0.9;
+  }
+  &::after {
+    content:"";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: -50vw;
+    width: calc(200vw);
+    height: calc(200vw);
+    background-color: var(--black);
+    z-index: 0;
+    pointer-events: none;
+    transform: rotate(0deg);
+    transition: all 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955) ;
+    opacity: 0;
+  }
+  &[data-toggle-state="selected"] {
     transform: translateY(0);
     transition: transform 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  }
-  &--wrap {
-    display: flex;
-    justify-content: center;
-    gap: var(--x2);
-    a {
-      color: #fff;
+   
+    &::before {
+      transform: rotate(7deg);
+      box-shadow: 0rem .8rem 1.8rem rgba($color: #000000, $alpha: 0.1);
+      transition: all 800ms cubic-bezier(0.455, 0.03, 0.515, 0.955) ;
+    }
+     &::after {
+      transform: rotate(3deg);
+      background-color: var(--black);
+      bottom: 0;
+      opacity: 0.2;
+      transition: all 900ms cubic-bezier(0.455, 0.03, 0.515, 0.955) ;
     }
   }
+  &--wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--x2);
+    a {
+      color: var(--black);
+
+      &[aria-disabled="true"] {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    }
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap:var(--x2)
+    }
+  }
+}
+
+[data-toggle-state="selected"] .base-body {
+  padding-top: 28rem;
+  transition: padding 300ms ease;
+}
+.base-body {
+  transition: padding 300ms ease;
+  transition-delay: 200ms;
 }
 
 .base-footer {

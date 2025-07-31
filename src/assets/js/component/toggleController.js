@@ -1,7 +1,7 @@
 export default class ToggleController {
   constructor(opt = {}) {
     const defaults = {
-      area: document.body,
+      area: document.documentElement,
       callback: null,
     };
     this.option = { ...defaults, ...opt };
@@ -58,18 +58,20 @@ export default class ToggleController {
     const toggles = this.container.querySelectorAll(`[data-toggle-object="${name}"]`);
     const targets = this.container.querySelectorAll(`[data-toggle-target="${name}"]`);
 
+console.log(this.option.area)
+
     let newState;
     if (forceState !== null) { // 특정 상태로 강제 설정하는 경우
       newState = forceState ? 'selected' : '';
     } else { // 클릭 이벤트 등으로 현재 상태를 반전시키는 경우
       // 참조 요소의 현재 상태를 기반으로 새 상태를 결정합니다.
-      const currentState = referenceElement.dataset.state === 'selected';
+      const currentState = referenceElement.dataset.toggleState === 'selected';
       newState = currentState ? '' : 'selected';
     }
 
     // 찾은 모든 관련 요소들의 data-state를 업데이트합니다.
-    toggles.forEach(item => item.dataset.state = newState);
-    targets.forEach(item => item.dataset.state = newState);
+    toggles.forEach(item => item.dataset.toggleState = newState);
+    targets.forEach(item => item.dataset.toggleState = newState);
 
     // 참조 요소에 toggleCallback이 있는 경우에만 콜백을 시도합니다.
     const toggleCallback = referenceElement.dataset.toggleCallback;

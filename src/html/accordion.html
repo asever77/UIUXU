@@ -5,76 +5,148 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Accordion | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+    [data-accordion-item]:first-child [data-accordion-head]{border-top: 0;}
+		[data-accordion-head] {border-top: 1px solid var(--black);padding:1.2rem .8rem}
+    [data-accordion-section] {padding: 1.6rem .8rem;}
+	</style>
 </head>
 
-<body>
-	<div class="area-base">
-		<header class="base-header" data-type="nav"></header>
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
 		<div class="base-body">
 			<aside class="base-side"></aside>
 			<main class="base-content">
-				<wrap>
-					<tit>Accordion</tit>
-					<box>
-            <div data-accordion="acco1">
-              <div data-accordion-item="acco1">
-                <div data-accordion-head="acco1">
-                  <h3 data-accordion-title="acco1"><guide></guide>title 1</h3>
-                  <button type="button" data-accordion-button="acco1"><guide></guide></button>
-                  <a href="#link">링크</a>
-                </div>
-                  
-                <div data-accordion-body="acco1">
-                  <guide></guide>
-                  ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
-                </div>
-              </div>
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Accordion">Accordion</h1>
+						<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. 이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 
-              <div data-accordion-item="acco1">
-                <div data-accordion-group="acco1">
-                  <h3 data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
-                    <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
-                  </h3>
+            <box>
+              <div data-accordion="acco1">
+                <div data-accordion-item="acco1">
+                  <div data-accordion-head="acco1">
+                    <h3 data-accordion-title="acco1"><guide></guide>title 1</h3>
+                    <button type="button" data-accordion-button="acco1"><guide></guide></button>
+                    <a href="#link">링크</a>
+                  </div>
+                  <div data-accordion-body="acco1">
+                    <div data-accordion-section="acco1">
+                      <guide></guide>
+                      ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+                    </div>
+                  </div>
                 </div>
-                <div data-accordion-body="acco1">
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd
-                </div>
-              </div>
 
-              <div data-accordion-item="acco1">
-                <div data-accordion-group="acco1">
-                  <h3 data-accordion-head="acco1">
-                    <button type="button" data-accordion-button="acco1"></button>
-                    <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
-                  </h3>
+                <div data-accordion-item="acco1">
+                  <div data-accordion-group="acco1">
+                    <h3 data-accordion-head="acco1">
+                      <button type="button" data-accordion-button="acco1"></button>
+                      <b data-accordion-title="acco1" aria-hidden="true">title 2</b>
+                    </h3>
+                  </div>
+                  <div data-accordion-body="acco1">
+                    <div data-accordion-section="acco1">
+                      ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+                    </div>
+                  </div>
                 </div>
-                <div data-accordion-body="acco1">
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd<br>
-                  ddddd
+
+                <div data-accordion-item="acco1">
+                  <div data-accordion-group="acco1">
+                    <h3 data-accordion-head="acco1">
+                      <button type="button" data-accordion-button="acco1"></button>
+                      <b data-accordion-title="acco1" aria-hidden="true">title 3</b>
+                    </h3>
+                  </div>
+                  <div data-accordion-body="acco1">
+                    <div data-accordion-section="acco1">
+                      ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-					</box>
+            </box>
+           
+					</group>
+          <group data-dir="col">
+            <mtit>HTML 구조</mtit>
+            <p>아코디언을 사용하려면 특정 data-accordion 속성을 사용하여 HTML을 설정해야 합니다. 각 아코디언 인스턴스는 고유한 data-accordion ID를 필요로 합니다. 내부적으로 각 접을 수 있는 항목은 부모 아코디언의 ID와 일치하는 data-accordion-item 속성이 필요합니다.</p>
+            <p>각 항목에는 다음이 포함되어야 합니다.</p>
+            <ul class="bul-list" data-type="dot">
+              <li>data-accordion-button과 아코디언의 ID를 가진 버튼.</li>
+              <li>data-accordion-title과 아코디언의 ID를 가진 선택적 제목.</li>
+              <li>data-accordion-body와 아코디언의 ID를 가진 본문.</li>
+            </ul>
+          </group>
+
+					<group data-dir="col">
+						<mtit>Options</mtit>
+						<p>Tab 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한 설명입니다.</p>
+						<table>
+							<caption></caption>
+							<colgroup>
+								<col style="width: 12rem" />
+								<col style="width: 14rem;" />
+								<col style="width: 18rem;" />
+								<col style="width: auto;" />
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="col">옵션명</th>
+									<th scope="col">타입</th>
+									<th scope="col">기본값</th>
+									<th scope="col">설명</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">id</th>
+									<td>String</td>
+									<td>필수</td>
+									<td>아코디언 인스턴스의 고유 식별자입니다. 이는 HTML의 주 아코디언 컨테이너 요소에 있는 data-accordion 속성과 일치해야 합니다. </td>
+								</tr>
+								<tr>
+									<th scope="row">expanded</th>
+									<td>string 또는 null</td>
+									<td>null</td>
+									<td>
+										컴포넌트 로드 시 어떤 아코디언 항목이 초기에 확장되어야 하는지 지정합니다. 확장하려는 아코디언 버튼의 ID를 제공해야 합니다. null로 설정하면 기본적으로 어떤 항목도 확장되지 않습니다.  
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">singleOpen</th>
+									<td>boolean</td>
+									<td>true</td>
+									<td>
+										한 번에 하나의 아코디언 항목만 열릴 수 있는지(true) 또는 여러 항목이 동시에 열릴 수 있는지(false)를 결정합니다. true인 경우, 한 항목을 열면 현재 열려 있는 다른 항목이 자동으로 닫힙니다.
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</group>
+
+					<group data-dir="col">
+						<mtit>Code</mtit>
+						<codebox>
+							<code><pre contenteditable="true">
+ 
+							</pre></code>
+						</codebox>
+					</group>
 				</wrap>
 			</main>
 		</div>
 		<footer class="base-footer"></footer>
 	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
 
 	<!-- script -->
 	<script type="module">
@@ -86,21 +158,19 @@
   /* 선언 ---------------------------------------------- */
     UI.exe.acco1 = new UX.Accordion({
       id: 'acco1',
-      expanded: 'acco1_0',
+      expanded: 'acco1-0',
     });
 
 
   /* 실행 ---------------------------------------------- */
     UI.exe.acco1.init();
 
-    // 외부 접근 컨트롤
+    //외부 접근 컨트롤
     setTimeout(() => {
-      UI.exe.acco1.show('acco1_1', () => {
-        console.log('callback show');
-      });
+      UI.exe.acco1.show('acco1-1');
     },1000);
     setTimeout(() => {
-      UI.exe.acco1.hide('acco1_1', () => {
+      UI.exe.acco1.hide('acco1-1', () => {
         console.log('callback hide');
       });
     },2000);
@@ -126,7 +196,7 @@
     setTimeout(() => {
       UI.exe.acco1 = new UX.Accordion({
         id: 'acco1',
-        expanded: 'acco1_0',
+        expanded: 'acco1-0',
       });
       UI.exe.acco1.init();
     },5000);
