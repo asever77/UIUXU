@@ -123,7 +123,7 @@
     z-index: 1;
   }
 }
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 1023px) {
   [data-dropdown-panel] [data-dropdown-section] {
     position: fixed !important;
     width: 100% !important;
