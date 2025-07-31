@@ -126,38 +126,38 @@
 		filter: brightness(0.7) contrast(1.2);
 	}
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* 1. 기본 배경 및 텍스트 */
-		--color-background-default: var(--gray-900); 	/* 밝은 배경 -> 어두운 배경 */
-		--color-background-table: var(--gray-800); 		/* 밝은 배경 -> 어두운 배경 */
-		--color-text-primary: var(--gray-200);      	/* 어두운 텍스트 -> 밝은 텍스트 */
-		--color-text-secondary: var(--gray-400);    	/* 조금 더 밝게 조정 */
-		--color-icon-default: var(--gray-300);      	/* 아이콘 색상도 밝게 */
-		--color-disabled-text: var(--gray-600);     	/* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     /* 1. 기본 배경 및 텍스트 */
+// 		--color-background-default: var(--gray-900); 	/* 밝은 배경 -> 어두운 배경 */
+// 		--color-background-table: var(--gray-800); 		/* 밝은 배경 -> 어두운 배경 */
+// 		--color-text-primary: var(--gray-200);      	/* 어두운 텍스트 -> 밝은 텍스트 */
+// 		--color-text-secondary: var(--gray-400);    	/* 조금 더 밝게 조정 */
+// 		--color-icon-default: var(--gray-300);      	/* 아이콘 색상도 밝게 */
+// 		--color-disabled-text: var(--gray-600);     	/* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
 
-		--color-border-light: var(--gray-700); 
-		--color-border-dark: var(--gray-600); 
+// 		--color-border-light: var(--gray-700); 
+// 		--color-border-dark: var(--gray-600); 
 		
 
-		--color-card-background: var(--gray-800);
-		--color-modal-background: var(--gray-850); 
+// 		--color-card-background: var(--gray-800);
+// 		--color-modal-background: var(--gray-850); 
 		
-		--bgcolor: var(--gray-800);
+// 		--bgcolor: var(--gray-800);
 
-		--nav-bgcolor1: var(--gray-800);
-		--nav-bgcolor2: var(--white);
-		--nav-shadow: rgba($color: #fff, $alpha: 0.5);
+// 		--nav-bgcolor1: var(--gray-800);
+// 		--nav-bgcolor2: var(--white);
+// 		--nav-shadow: rgba($color: #fff, $alpha: 0.5);
 		
-		/* 배경 그라데이션도 조정 */
-		--bgheader: rgba(51,51,51,0.95) 10%, rgba(51,51,51,0.9) 40%, rgba(51,51,51,0.8) 60%, rgba(51,51,51,0) 90%;
+// 		/* 배경 그라데이션도 조정 */
+// 		--bgheader: rgba(51,51,51,0.95) 10%, rgba(51,51,51,0.9) 40%, rgba(51,51,51,0.8) 60%, rgba(51,51,51,0) 90%;
 
-		.base-header--title .logo {
-			filter: invert(1) hue-rotate(180deg);
-		}
-		/* 특정 아이콘에만 적용할 경우 */
-		.icon-light-only {
-			filter: brightness(0.7) contrast(1.2);
-		}
-  }
-}
+// 		.base-header--title .logo {
+// 			filter: invert(1) hue-rotate(180deg);
+// 		}
+// 		/* 특정 아이콘에만 적용할 경우 */
+// 		.icon-light-only {
+// 			filter: brightness(0.7) contrast(1.2);
+// 		}
+//   }
+// }
