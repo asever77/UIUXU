@@ -524,6 +524,7 @@ th, td {
   }
   tr {
     display: grid;
+    width: 100%;
     border: 1px solid var(--gray-400);
     border-radius: var(--x1);
     padding: var(--x1);
@@ -531,11 +532,13 @@ th, td {
   tbody th {
     width: 100%;
     text-align: left;
+    font-size: 1.6rem;
   }
   tbody td, tbody th {
     display: flex;
     padding: calc(var(--x1) / 2);
     background-color: transparent;
+    width: 100%;
   }
 }
 [data-heading=display] {
@@ -822,6 +825,14 @@ body {
   align-items: center;
   gap: 0.8rem;
   padding-bottom: 0.8rem;
+}
+.area-toast[data-ps=top] {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.8rem;
 }
 
 /* 기본 영역 z-index */
@@ -1624,6 +1635,14 @@ body {
 
 .ui-toast[data-type=toast][aria-hidden=false][data-ps=bottom] {
   animation-name: bottom-In;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.ui-toast[data-type=toast][aria-hidden=false][data-ps=top] {
+  animation-name: top-In;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
   animation-timing-function: linear;

@@ -226,7 +226,6 @@
 			}
 		}
 	}
-
 	
 	[data-dialog-item="wrap"]:focus{
 		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
@@ -333,6 +332,13 @@
 }
 .ui-toast[data-type="toast"][aria-hidden="false"][data-ps="bottom"] {
   animation-name: bottom-In;
+  animation-duration: 0.2s;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.ui-toast[data-type="toast"][aria-hidden="false"][data-ps="top"] {
+  animation-name: top-In;
   animation-duration: 0.2s;
   animation-iteration-count: 1;
   animation-timing-function: linear;

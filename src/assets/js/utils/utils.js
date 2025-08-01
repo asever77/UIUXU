@@ -99,6 +99,10 @@ export const slideToggle = (element, duration = 300) => {
   return isHidden ? slideDown(element, duration) : slideUp(element, duration);
 };
 
+export const getUrlParameter = (name) => { 
+  const urlParams = new URLSearchParams(window.location.search); 
+  return urlParams.get(name); 
+}
 export class ScrollTrigger {
   constructor(options) {
     // 기본 옵션 설정

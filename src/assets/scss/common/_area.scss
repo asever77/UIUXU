@@ -56,6 +56,14 @@
       gap: .8rem;
       padding-bottom: 0.8rem;
     }
+    &[data-ps="top"] {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+      align-items: center;
+      gap: .8rem;
+      padding-top: 0.8rem;
+    }
   }
 }
 /* 기본 영역 z-index */

@@ -201,17 +201,19 @@ export default class RangeSlider {
     const range = this.max - this.min;
     const end = value + this.range > this.max ? this.max : value + this.range;
     
-    if (this.labelArray) {
-      this.rangeLabel.textContent = this.labelArray[Number(this.rangeInput.value) - 1];
-    } else {
-      this.rangeLabel.textContent = (this.range === 0) ? `${this.labelAddText[0]}${value}${this.labelAddText[1]}` : `${this.labelAddText[0]}${value} ~ ${end}${this.labelAddText[1]}`;
-    }
+    if (this.rangeLabel) {
+      if (this.labelArray) {
+        this.rangeLabel.textContent = this.labelArray[Number(this.rangeInput.value) - 1];
+      } else {
+        this.rangeLabel.textContent = (this.range === 0) ? `${this.labelAddText[0]}${value}${this.labelAddText[1]}` : `${this.labelAddText[0]}${value} ~ ${end}${this.labelAddText[1]}`;
+      }
 
-    const percent = (value - this.min) / range;
-    const left = percent * 100;
-    const add = left < 50 ?
-      (this.pointerWidth / 2) * (Math.abs((left - 50) * 2) / 100) :
-      (this.pointerWidth / 2) * (Math.abs((left - 50) * 2) / 100) * -1;
-    this.rangeLabel.style.left = `calc(${left}% + ${add}px)`;
+      const percent = (value - this.min) / range;
+      const left = percent * 100;
+      const add = left < 50 ?
+        (this.pointerWidth / 2) * (Math.abs((left - 50) * 2) / 100) :
+        (this.pointerWidth / 2) * (Math.abs((left - 50) * 2) / 100) * -1;
+      this.rangeLabel.style.left = `calc(${left}% + ${add}px)`;
+    }
   }
 }
