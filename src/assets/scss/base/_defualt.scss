@@ -85,6 +85,9 @@ codebox code {
 	line-height: 1.6;
 	font-family: "Source Code Pro", monospace;
 	tab-size: 2;
+
+	i {color: var(--gray-600)}
+	b {color: var(--sub);}
 }
 
 guide {

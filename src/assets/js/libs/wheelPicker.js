@@ -431,7 +431,7 @@ export default class WheelPicker {
 				return;
 			}
 		}
-		throw new Error(`can not select value: ${value}, ${value} match nothing in current source`);
+		// throw new Error(`can not select value: ${value}, ${value} match nothing in current source`);
 	}
 
 	destroy() {

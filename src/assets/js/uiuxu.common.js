@@ -7,12 +7,15 @@ import Tooltip from './component/tooltip.js';
 import WheelPicker from './libs/wheelPicker.js';
 import ToggleController from './component/toggleController.js';
 import RangeSlider from './component/range.js';
+import ScrollEvent from './component/scrollEvent.js';
+import Drag from './component/drag.js';
 
 import { loadContent, RadioAllcheck } from './utils/utils.js';
 
 export const UX = {
 	Accordion,
 	ButtonSelection,
+  Drag,
 	Dialog,
 	Dropdown,
 	Tab,
@@ -21,6 +24,7 @@ export const UX = {
 	RadioAllcheck,
 	ToggleController,
 	RangeSlider,
+  ScrollEvent,
 
 	init: () => {
     UX._setupGlobalNamespace();
@@ -57,11 +61,31 @@ export const UX = {
       })
         .then(() => {
           UI.exe.toggle.header = new UX.ToggleController();
+          // nav open
+          console.log(localStorage.getItem('nav-open'))
+          if (localStorage.getItem('nav-open') === 'true') {
+            
+            document.querySelectorAll('[data-toggle-target="nav"]').forEach(item => {
+              item.dataset.toggleState = 'selected';
+            });
+            document.querySelector('[data-toggle-object="nav"]').dataset.toggleState = 'selected';
+          }
+          UI.exe.toggle.nav = (v) => {
+            localStorage.setItem('nav-open', v.state);
+          }
+          // darkmode
+          const el_html = document.querySelector('html');
+          if (localStorage.getItem('dark-mode')) {
+            el_html.dataset.mode = localStorage.getItem('dark-mode');
+          }
 					UI.exe.toggle.modeChange = (v) => {
-						console.log(v,document.html)
-						document.querySelector('html').dataset.mode = v.state ? 'dark' : 'light';
+            if (localStorage.getItem('dark-mode') === 'dark') {
+              el_html.dataset.mode = 'light';
+            } else {
+              el_html.dataset.mode = 'dark';
+            }
+            localStorage.setItem('dark-mode', el_html.dataset.mode);
 					}
-          
         })
         .catch((err) => console.error('Error loading header content:', err));
     }

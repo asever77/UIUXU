@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Scroll Event | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		[data-scrollevent-item] b{position: sticky; top:0};
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Scroll Event">Scroll Event</h1>
+
+						<box>
+
+							<div data-scrollevent="main">
+								<div data-scrollevent-item="a1" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-900);">
+									a1: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a2" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-800);">
+									a2: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a3" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 200dvh; background-color: var(--gray-700);">
+									a3: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a4" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-600);">
+									a4: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a5" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-500);">
+									a5: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a6" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-400);">
+									a6: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a7" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-300);">
+									a7: <b>0</b>
+								</div>
+								<div data-scrollevent-item="a8" style="font-size: 10rem; display: flex; align-items: flex-start; justify-content: center; color:#fff; font-weight: 700; width: 100%; height: 100dvh; background-color: var(--gray-200);">
+									a8: <b>0</b>
+								</div>
+							</div>
+						</box>
+          </group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init();
+
+		const mainpage = new UX.ScrollEvent({
+			id: 'main',
+			area: window
+		});
+		mainpage.init();
+	
+	</script>
+</body>
+
+</html>

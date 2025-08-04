@@ -27,8 +27,6 @@ export default class Drag {
     this.shiftPressed = false;
     this.lastArrowKey = null;
     this.repeatTimer = null;
-
-    this.init();
   }
 
   init() {

@@ -399,7 +399,8 @@ export class RadioAllcheck {
   //private
   #main;
   #subs;
-  #sum
+  #sum;
+  #btn;
   #callback;
   #isAllCheck;
   #isAllCheckRequired;
@@ -407,6 +408,7 @@ export class RadioAllcheck {
 	#sumRequired ;
 
   constructor(opt) {
+		console.log(opt)
     // opt 유효성 검사
     if (!opt || !opt.name) {
       throw new Errow('옵션 객체와 name 속성은 필수입니다.');
@@ -417,6 +419,7 @@ export class RadioAllcheck {
     this.#callback = callback;
     this.#main = document.querySelector(`[data-allcheck-main="${name}"]`);
     this.#subs = document.querySelectorAll(`[data-allcheck-sub="${name}"]`);
+    this.#btn = document.querySelector(`[data-allcheck-btn="${name}"]`);
     this.#subRequireds = document.querySelectorAll(`[data-allcheck-sub="${name}"][aria-required="true"]`);
 
     if (!this.#main || this.#subs.length === 0) {
@@ -442,6 +445,7 @@ export class RadioAllcheck {
     this.#subs.forEach(item => {
       item.checked = this.#isAllCheck;
     });
+    this.#btn.disabled = this.#isAllCheck ? false : true;
     this.#callback?.({
 			all: this.#isAllCheck,
 			required : this.#isAllCheck,
@@ -453,6 +457,7 @@ export class RadioAllcheck {
     this.#isAllCheck = (this.#sum === checkedSum);
     this.#isAllCheckRequired = (this.#sumRequired === checkedSumRequired);
     this.#main.checked = this.#isAllCheck;
+    this.#btn.disabled = this.#isAllCheckRequired ? false : true;
     this.#callback?.(
 			{
 				all: this.#isAllCheck,

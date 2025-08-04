@@ -61,6 +61,13 @@
     top:0;
     left:0;
   }
+  [role=tablist] {
+    width: auto;
+  }
+  [role=tablist] [role=tab] {
+    min-width: 0;
+    padding:0;
+  }
 }
 [data-dragdrop-object="event"] {
   position: absolute;
@@ -94,7 +101,7 @@
   
   * {display: block;}
 }
-[data-control-view="off"] [data-dragdrop-contral="group"] {
+[data-control-view="off"] [data-dragdrop-contral="group"][role="tablist"]{
   display: flex;
   animation-name: controlOff;
   animation-duration: 200ms;
@@ -102,7 +109,7 @@
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
-[data-control-view="on"] [data-dragdrop-contral="group"] {
+[data-control-view="on"] [data-dragdrop-contral="group"][role="tablist"] {
   display: flex;
 }
 [data-dragdrop-contral="group"] {
@@ -117,6 +124,7 @@
   border-radius: 0.6rem;
   padding:0.1rem 0.2rem;
 
+  &[role="tablist"] {display: none;}
   [data-dragdrop-contral] {
     position: relative;
     width: 2rem;

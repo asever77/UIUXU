@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drag | UIUXU</title>
-  <link rel="stylesheet" href="../assets/css/app.css">
- 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Drag | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+	
+	</style>
 </head>
-<body>
-  <div class="area-base">
+
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
 		<header class="base-header"></header>
 		<div class="base-body">
 			<aside class="base-side"></aside>
 			<main class="base-content">
-				<wrap>
-					<tit>Dialog</tit>
-					<box>
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Drag">Drag</h1>
+
+						<box>
             <div data-dragdrop="drag1">
               <div class="sample-target">
                 <div class="sample-target--item" data-dragdrop-target="item" data-value="1"></div>
@@ -53,24 +62,62 @@
                 </div>
 
               </div>
+              
+              <button type="button" class="btn-base" onclick="UI.exe.Drag1.init();">실행</button>
             </div>
+            
           </box>
-        </wrap>
-      </main>
-    </div>
-  </div>
-  
+          <p>스크롤 위치에 따른 오브젝트 위치값 계산 수정이 필요</p>
+          </group>
 
-  <!-- script -->
+					<group data-dir="col">
+						<mtit>Code</mtit>
+						<codebox>
+							<code><pre contenteditable="true">
+
+&lt;input type="checkbox" id="allcheck_0" name="allcheck" <b>data-allcheck-main="allcheck"</b>&gt;
+&lt;label for="allcheck_0"&gt;전체 체크&lt;/label&gt;
+
+&lt;input type="checkbox" id="allcheck_1" name="allcheck" <b>data-allcheck-sub="allcheck" aria-required="true"</b> checked&gt;
+&lt;label for="allcheck_1"&gt;필수 체크 1&lt;/label&gt;
+
+&lt;input type="checkbox" id="allcheck_3" name="allcheck" <b>data-allcheck-sub="allcheck"</b> checked&gt;
+&lt;label for="allcheck_3"&gt;선택 체크 3&lt;/label&gt;
+
+&lt;button type="button" class="btn-base" <b>data-allcheck-btn="allcheck"</b> disabled&gt;필수체크 활성화&lt;/button&gt;
+
+
+UI.exe.allcheck1 = new UX.RadioAllcheck({
+	name: 'allcheck',
+	callback: (result) => {
+		console.log(result); <i>// {all: (true | false), required: (true | false)}</i>
+	}
+});
+							</pre></code>
+						</codebox>
+					</group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
 	<script type="module">
-    import { UX } from '../assets/js/uiuxu.common.js';
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 
-    UI.exe.Drag1 = new UX.Drag({
+		UI.exe.Drag1 = new UX.Drag({
 			id: 'drag1',
       unit: 20,
       angle: 45,
 		});			
-  </script>
+	</script>
 </body>
+
 </html>
