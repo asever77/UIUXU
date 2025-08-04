@@ -1,19 +1,25 @@
-/* tooltip */
-.tooltip {
+/* tooltip hover */
+[data-tooltip] {
   position: relative;
   font-size: 1.4rem;
+  display: inline-flex;
+  vertical-align: text-top;
 
-  .offscreen {
+  [data-tooltip-desc] {
     display: none;
   }
 
-  &:focus .offscreen,
-  &:hover .offscreen {
+  &:focus [data-tooltip-desc],
+  &:hover [data-tooltip-desc] {
     display: flex;
+  }
+
+  &[data-mso-after]::after {
+    font-size: 1.8rem;
   }
 }
 
-.offscreen {
+[data-tooltip-desc] {
   display: flex;
   position: absolute;
   padding: .4rem .8rem;
@@ -25,6 +31,7 @@
   max-width: 30rem;
   box-shadow: 0 0.2rem .4rem rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
+  pointer-events: visible;
 
   &::before {
     content: "";

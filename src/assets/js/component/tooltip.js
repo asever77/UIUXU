@@ -32,7 +32,6 @@ export default class Tooltip {
     this.activeTooltip.setAttribute('aria-hidden', 'true');
     this.html.removeEventListener('click', this.boundOutsideClick);
     
-    // 이 툴팁을 '설명하는' 요소를 찾아 포커스합니다.
     const describedByElement = document.querySelector(`[aria-describedby="${this.activeTooltip.id}"]`);
     if (describedByElement) {
         describedByElement.focus();
@@ -60,12 +59,10 @@ export default class Tooltip {
    * @param {string} id - 열고자 하는 툴팁의 ID
    */
   showById(id) {
-    // 해당 툴팁을 설명하는 요소를 찾습니다.
     const targetElement = document.querySelector(`[aria-describedby="${id}"]`);
     if (targetElement) {
-        // activateTooltip 메서드에 전달할 이벤트 객체를 모의합니다.
         const dummyEvent = {
-            preventDefault: () => {}, // 아무 작업도 하지 않는 함수 제공
+            preventDefault: () => {}, 
             currentTarget: targetElement // 현재 대상 요소를 툴팁을 트리거하는 요소로 설정
         };
         this.show(dummyEvent);
