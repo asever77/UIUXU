@@ -5,11 +5,13 @@ export default class ScrollEvent {
   #wrap;
   #items;
   #area;
+  #callback;
   #scrolltrigger;
   #scrolltrigger2;
 
   constructor(opt) {
     this.#id = opt.id;
+    this.#callback = opt.callback;
     this.#wrap = document.querySelector(`[data-scrollevent="${this.#id}"]`);
     this.#items = this.#wrap.querySelectorAll(`[data-scrollevent-item]`);
     this.#area = window;
@@ -57,37 +59,42 @@ export default class ScrollEvent {
       const rect = item.getBoundingClientRect();
       const itemHeight = item.offsetHeight;
       const viewportHeight = window.innerHeight;
+      const root = document.documentElement;
+      const name = '--' + item.dataset.scrolleventItem + '-n';
+      const namePer = '--' + item.dataset.scrolleventItem + '-percent';
 
       // 오브젝트의 상단이 화면 하단과 오브젝트의 하단이 화면 하단 사이에 있을 때만 계산
       // (즉, 오브젝트가 화면 아래에서 서서히 나타나는 구간)
       if (rect.top <= viewportHeight && rect.bottom >= viewportHeight) {
         // 퍼센트 계산
         let percent = Math.max(0, Math.min(100, ((viewportHeight - rect.top) / itemHeight) * 100));
+        const per = Math.trunc(percent);
 
         // 텍스트 업데이트
         if (item.querySelector('b')) {
-          item.querySelector('b').textContent = `${Math.trunc(percent)}%`;
-        }
-        const name = '--' + item.dataset.scrolleventItem + '-n';
-        const namePer = '--' + item.dataset.scrolleventItem + '-percent';
-        const root = document.documentElement;
-        console.log(item.dataset.scrolleventItem)
-        console.log(Math.trunc(percent / 100))
-        root.style.setProperty('--percent', `${Math.trunc(percent)}%`);
-        root.style.setProperty(name, `${Math.trunc(percent) / 100}`);
-      } else {
-        // 오브젝트가 화면 밖에 있을 때
-        if (item.querySelector('b')) {
-          if (rect.top > viewportHeight) {
-            // 화면 아래에 있으면 0%
-            item.querySelector('b').textContent = '0%';
-          } else {
-            // 화면 하단을 지나 위로 올라갔으면 100%
-            item.querySelector('b').textContent = '100%';
-          }
+          item.querySelector('b').textContent = per;
         }
 
-        
+        root.style.setProperty(namePer, `${Math.trunc(percent)}%`);
+        root.style.setProperty(name, `${Math.trunc(percent) / 100}`);
+
+         this.#callback && this.#callback({
+          percent: per,
+          target: item
+        });
+      } else {
+        // 오브젝트가 화면 밖에 있을 때
+        if (rect.top > viewportHeight) {
+          // 화면 아래에 있으면 0%
+          if (item.querySelector('b')) item.querySelector('b').textContent = '0%';
+          root.style.setProperty(namePer, `0%`);
+          root.style.setProperty(name, `0`);
+        } else {
+          // 화면 하단을 지나 위로 올라갔으면 100%
+          if (item.querySelector('b')) item.querySelector('b').textContent = '100%';
+          root.style.setProperty(namePer, `100%`);
+          root.style.setProperty(name, `1`);
+        }
       }
     });
   }
