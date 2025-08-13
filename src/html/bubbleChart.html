@@ -2,29 +2,14 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>D3.js 버블 차트 (클래스 방식)</title>
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-  <style>
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-      gap: 20px;
-    }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chart Bubble | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
 
-    .chart-container {
-      border: 1px solid #ccc;
-      background-color: #fff;
-      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
+	<style>
     .bubble {
       cursor: pointer;
       stroke: #333;
@@ -56,18 +41,55 @@
       opacity: 0;
       transition: opacity 0.2s ease-in-out;
     }
-  </style>
+	</style>
 </head>
 
-<body>
-  <div id="chart" data-chart-bubble="chart1"></div>
-  <div id="tooltip" data-chart-tooltip="chart1"></div>
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Chart Bubble">Chart Bubble</h1>
 
-  <script type="module">
-    import ChartBubble from '../assets/js/component/chart_bubble.js';
+						<stit>Chart Bubble</stit>
+						<box style="justify-content: center; align-items: center; display: flex;">
+              <div style="position: relative;">
+                <div id="chart" data-chart-bubble="chart1"></div>
+                <div id="tooltip" data-chart-tooltip="chart1"></div>
+              </div>
+						</box>
 
-    // 첫 번째 버블 차트 인스턴스
-    const bubble_chart1 = new ChartBubble({
+          </group>
+
+					<group data-dir="col">
+						<mtit>Code</mtit>
+						<codebox>
+							<code><pre contenteditable="true">
+
+							</pre></code>
+						</codebox>
+					</group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init();
+
+		const bubble_chart1 = new UX.ChartBubble({
       id: 'chart1',
       areaWidth: 500,
       areaHeight: 500,
@@ -76,7 +98,7 @@
       maxRadius: 100,
       bubbleData: [
         { id: 'b1', color: '#000', percentage: 41, name: `아이템 1` },
-        { id: 'b2', color: '#111', percentage: 35, name: `아이템 2` },
+        { id: 'b2', color: '#111', percentage: 3.5, name: `아이템 2` },
         { id: 'b3', color: '#222', percentage: 15, name: `아이템 3` },
         { id: 'b4', color: '#333', percentage: 13, name: `아이템 4` },
         { id: 'b5', color: '#444', percentage: 8, name: `아이템 5` },
@@ -87,8 +109,7 @@
         { id: 'b10', color: '#999', percentage: 2, name: `아이템 10` },
       ],
     });
-
-  </script>
+	</script>
 </body>
 
 </html>

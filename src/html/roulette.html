@@ -4,71 +4,110 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Roulette | UIUXU </title>
+	<title>Roulette Event | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+   
+	</style>
 </head>
-<body>
-  <div class="area-base">
+
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
 		<header class="base-header"></header>
 		<div class="base-body">
 			<aside class="base-side"></aside>
 			<main class="base-content">
-				<wrap>
-					<tit>Event Loulette</tit>
-					<box>
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Roulette Event">Roulette Event</h1>
 
-            <div class="lucky-roulette" data-roulette="main">
-              <div class="lucky-roulette--arrow"></div>
-              <button type="button" class="lucky-roulette--start" data-roulette="start">롤렛 돌리기</button>
-              <div class="lucky-roulette--wrap" data-roulette="item">
-                <img src="test.png" alt="">
+						<stit>Roulette Event</stit>
+						<box >
+              <div class="lucky-roulette" data-roulette="main">
+                <div class="lucky-roulette--arrow"></div>
+                <button type="button" class="lucky-roulette--start" data-roulette="start">롤렛 돌리기</button>
+                <div class="lucky-roulette--wrap" data-roulette="item">
+                  
+                </div>
               </div>
-            </div>
 
-          </box>
-          <select id="test" style="margin:2rem auto; border: 1px solid #000; display: block; padding: 1rem;z-index: 10; position: relative; ">
-            <option value="1">10,000P</option>
-            <option value="2">1,000P</option>
-            <option value="3">500P</option>
-            <option value="4">100P</option>
-            <option value="5">10P</option>
-          </select>
- 
-        </wrap>
-      </main>
-    </div>
-  </div>
+						</box>
+          </group>
 
-  <script type="module">
-    import { UX } from '../assets/js/uiuxu.common.js';
+					<group data-dir="col">
+						<mtit>Code</mtit>
+						<codebox>
+							<code><pre contenteditable="true">
+
+							</pre></code>
+						</codebox>
+					</group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
-
-		document.addEventListener('DOMContentLoaded', () => {
-      UI.exe.luckyRouletteEvent = new UX.Roulette({
-        data: [1, 2, 3, 4, 5, 4, 3, 2],
+    
+    const rouletteData = [
+      //포인트 4종 (300, 500만원 제안)
+      {
+        type: 'point-4',
+        point: [1000, 5000, 1000, 10000, 1000, 5000, 1000, 10000],
+      },
+      //포인트 5종 (450, 500만원 제안) 카드/손보CNS/손해사정/손해보험
+      {
+        type: 'point-5',
+        point: [10000, 100, 500, 1000, 10, 1000, 500, 100],
+      },
+      //포인트 5종 (500만원 제안) 라이프생명
+      {
+        type: 'point-7',
+        point: [5000, 100, 500, 1000, 2000, 1000, 500, 100],
+      },
+      //포인트 6종 (100만원 제안) 라이프파트너스/펀드파트너스
+      {
+        type: 'point-6',
+        point: [10000, 100, 1000, 500, 5000, 100, 2000, 500], 
+      },
+    ];
+    UI.exe.luckyRouletteEvent = new UX.Roulette({
+      data: [1, 2, 3, 4, 5, 4, 3, 2],
+      speed: 6000,
+      turns: 5,
+      callback: () => {
+        UI.exe.luckyRouletteEvent.play({
+          result: UI.exe.luckyRouletteEvent.result,
+        });
+      }
+    });
+    UI.exe.luckyRouletteEvent = new LuckyRoulette({
         speed: 6000,
-        turns: 5,
+        turns: 6,
+        // 4종:rouletteData[0], 5종:rouletteData[1], 6종:rouletteData[2]
+        data: rouletteData[0], 
         callback: () => {
           UI.exe.luckyRouletteEvent.play({
-            /**
-             * 개발에서 룰렛 결과 설정값 지정. (1~5 사이 정수)
-             * 1 <- 10000
-             * 2 <- 1000
-             * 3 <- 500
-             * 4 <- 100
-             * 5 <- 10
-             * */
-           
             result: UI.exe.luckyRouletteEvent.result,
+            callback: (v) => {
+            }
           });
         }
       });
-      UI.exe.luckyRouletteEvent.result = 1; 
-
-      document.querySelector('#test').addEventListener('change', e => {
-        UI.exe.luckyRouletteEvent.result = Number(e.currentTarget.value);
-      });
-		});
+      OcareUI.exe.luckyRouletteEvent.result = 10000; 
 	</script>
 </body>
+
 </html>

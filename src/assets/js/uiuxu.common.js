@@ -9,6 +9,10 @@ import ToggleController from './component/toggleController.js';
 import RangeSlider from './component/range.js';
 import ScrollEvent from './component/scrollEvent.js';
 import Drag from './component/drag.js';
+import Countdown from './component/countdown.js';
+import ChartBubble from './component/chart_bubble.js';
+
+import Roulette from './event/roulette.js';
 
 import { loadContent, RadioAllcheck } from './utils/utils.js';
 
@@ -25,6 +29,9 @@ export const UX = {
 	ToggleController,
 	RangeSlider,
   ScrollEvent,
+  Countdown,
+  ChartBubble,
+  Roulette,
 
 	init: () => {
     UX._setupGlobalNamespace();
@@ -62,16 +69,14 @@ export const UX = {
         .then(() => {
           UI.exe.toggle.header = new UX.ToggleController();
           // nav open
-          console.log(localStorage.getItem('nav-open'))
-          if (localStorage.getItem('nav-open') === 'true') {
-            
-            document.querySelectorAll('[data-toggle-target="nav"]').forEach(item => {
-              item.dataset.toggleState = 'selected';
-            });
-            document.querySelector('[data-toggle-object="nav"]').dataset.toggleState = 'selected';
-          }
+          // if (localStorage.getItem('nav-open') === 'true') {
+          //   document.querySelectorAll('[data-toggle-target="nav"]').forEach(item => {
+          //     item.dataset.toggleState = 'selected';
+          //   });
+          //   document.querySelector('[data-toggle-object="nav"]').dataset.toggleState = 'selected';
+          // }
           UI.exe.toggle.nav = (v) => {
-            localStorage.setItem('nav-open', v.state);
+            // localStorage.setItem('nav-open', v.state);
           }
           // darkmode
           const el_html = document.querySelector('html');
