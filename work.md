@@ -123,6 +123,16 @@ KBHC-3694 - 3732 - 조현민
 
 KBHC-3747 - 3750 - 조현민
 오케어 챌린지 타임 - 9월 테마 챌린지
+  /html/MOK/NMOK_6_11L.html
+    - 수정사항 [KBHC-3747] 주석 표시, minlength 추가
+  /html/MOK/NMOK_1_1V.html
+    - 수정사항 [KBHC-3747] 주석 표시
+  /assets/css/main.css
+    - NMOK_6_11L 페이지 간격 하단 버튼 스타일 수정
+  /assets/js/ui.global.js 
+    - textLength 최소글자 초과에서 이상으로 변경
+    - textLength 코드 개선 업데이트
+
 
 ==========================================================
 
