@@ -1,4 +1,4 @@
-import { slideUp, slideDown, ArrowNavigator } from '../utils/utils.js';
+import { slideUp, slideDown, ArrowNavigator, getUrlParameter } from '../utils/utils.js';
 import { ACCORDION_VERSION } from "../config/versions.js";
 
 export default class Accordion {
@@ -76,9 +76,17 @@ export default class Accordion {
       accoBody.setAttribute('aria-labelledby', btnID);
       accoBody.setAttribute('hidden', '');
       
-      if (this.#expanded === btnID) {
-        accoBtn.setAttribute('aria-expanded', 'true');
-        accoBody.removeAttribute('hidden');
+      const para = getUrlParameter('acco');
+      if (para) {
+        if (para === btnID) {
+          accoBtn.setAttribute('aria-expanded', 'true');
+          accoBody.removeAttribute('hidden');
+        }
+      } else {
+        if (this.#expanded === btnID) {
+          accoBtn.setAttribute('aria-expanded', 'true');
+          accoBody.removeAttribute('hidden');
+        }
       }
 
       // 이벤트 리스너 추가

@@ -99,9 +99,17 @@ export const slideToggle = (element, duration = 300) => {
   return isHidden ? slideDown(element, duration) : slideUp(element, duration);
 };
 
-export const getUrlParameter = (name) => { 
-  const urlParams = new URLSearchParams(window.location.search); 
-  return urlParams.get(name); 
+export const getUrlParameter = (paraname) => { 
+  const _tempUrl = window.location.search.substring(1);
+  const _tempArray = _tempUrl.split('&');
+
+  for (let i = 0, len = _tempArray.length; i < len; i++) {
+    const that = _tempArray[i].split('=');
+
+    if (that[0] === paraname) {
+      return that[1];
+    }
+  }
 }
 export class ScrollTrigger {
   constructor(options) {
