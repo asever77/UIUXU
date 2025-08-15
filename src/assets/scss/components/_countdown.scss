@@ -1,0 +1,13 @@
+[data-countdown="wrap"] {
+  display: flex;
+}
+[data-countdown="item"] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+[data-countdown="number"] {
+  display: flex;
+  justify-content: center;
+}
