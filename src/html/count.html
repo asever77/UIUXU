@@ -10,14 +10,23 @@
 	<link rel="stylesheet" href="../assets/css/app.css">
 
 	<style>
-		[data-countdown="item"] {
-			height: 11rem;
-		}
-		[data-countdown="text"],
-		[data-countdown="number"] {
-			font-size: 8rem;
+		[data-countdown="wrap"][data-type="slot"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="item"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="text"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="number"] {
+			font-size: 4rem;
 			font-weight: 700;
-			height: 11rem;
+			line-height: 1;
+			height: 4rem;
+		}
+		[data-countdown="wrap"][data-type="updown"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="item"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="text"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="number"] {
+			font-size: 4rem;
+			font-weight: 700;
+			line-height: 1;
+			height: 4rem;
 		}
 	</style>
 </head>
@@ -33,9 +42,24 @@
 						<h1 data-heading="display" data-text="Count">Count</h1>
 
 						<stit>Slot Count</stit>
-						<box>
-              <div data-countdown="wrap" data-id="cd1"></div>
+						<box style="gap:1rem; display: flex; align-items: center;">
+              <div data-countdown="wrap" data-id="cd1">0000.00.00</div>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown1.start();">실행하기</button>
 						</box>
+						<stit>base Count</stit>
+						<box style="gap:1rem; display: flex; align-items: center;">
+							<div data-countdown="wrap" data-id="cd2" style="font-size: 4rem; font-weight: 700;">000</div>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown2.start();">실행하기</button>
+						</box>
+						<stit>updown Count</stit>
+						<box style="gap:1rem; display: flex; align-items: center;">
+							<div data-countdown="wrap" data-id="cd3" style="font-size: 4rem; font-weight: 700;">1436</div>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(-1);">-1</button>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(1);">+1</button>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(-7);">-7</button>
+							<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(7);">+7</button>
+						</box>
+
 
           </group>
 
@@ -63,12 +87,30 @@
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 
-		UI.exe.countdown1 = new UX.Countdown({
-      id: 'cd1',
-      number: '1977.05.10',
-			height: 10
-    });
-		UI.exe.countdown1.start();
+		document.addEventListener('DOMContentLoaded', () => {
+			UI.exe.countdown1 = new UX.Countdown({
+				id: 'cd1',
+				number: '1977.05.10',
+				effect: 'slot',
+			});
+			// UI.exe.countdown1.set();
+
+			UI.exe.countdown2 = new UX.Countdown({
+				id: 'cd2',
+				number: 134,
+				effect: 'base',
+				speed: 10
+			});
+
+			UI.exe.countdown3 = new UX.Countdown({
+				id: 'cd3',
+				number: 1436,
+				effect: 'updown',
+			});
+			// UI.exe.countdown2.set();
+		});
+
+		
 	</script>
 </body>
 

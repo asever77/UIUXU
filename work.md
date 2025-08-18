@@ -151,5 +151,19 @@ KBHC-3747 - 3750 - 조현민
 
 # 0825배포
 
-- [KBHC-3333] - 3335 - 권오택
-  오케어 챌린지 타임 - 하반기 ESG 걷기 챌린지 
+- [KBHC-3333] - 3335 오케어 챌린지 타임 - 하반기 ESG 걷기 챌린지 
+  - KBHC-3774(KBHC-3778) [퍼블리싱]하반기 국민은행 ESG 걷기 챌린지 개인기록 고도화
+  - 권오택
+http://10.0.5.126/publish/MVP2/www/html/EVE/NEVE_10_73L.html
+http://10.0.5.126/publish/MVP2/www/html/EVE/NEVE_10_52V.html
+http://10.0.5.126/publish/MVP2/www/html/EVE/NEVE_10_72V.html
+http://10.0.5.126/publish/MVP2/www/html/EVE/NEVE_10_74V.html
+
+  /html/EVE/NEVE_10_73L.html
+  /html/EVE/NEVE_10_52V.html
+  /html/EVE/NEVE_10_72V.html
+  /html/EVE/NEVE_10_74V.html
+  /assets/css/main.css
+  /assets/img/challenge/new25/~
+  /assets/img/event/NEVE_10_72/~
+  
