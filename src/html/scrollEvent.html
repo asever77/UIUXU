@@ -72,7 +72,13 @@
 
 		const mainpage = new UX.ScrollEvent({
 			id: 'main',
-			area: window
+			area: window,
+			rootMargin: '0px 0px -100% 0px',
+			threshold: [0], 
+			callback: (result) => {
+				const per = result.percent;
+				const item = result.target;
+			}
 		});
 		mainpage.init();
 	

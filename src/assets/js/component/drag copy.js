@@ -154,7 +154,6 @@ export default class Drag {
       };
 
       let inSuccess = false;
-
       this.areaPsData.forEach(area => {
         area.target.dataset.answer = '';
 
@@ -162,8 +161,8 @@ export default class Drag {
         if (area.x[0] - this.unit <= end_ps.x[0] && area.x[1] + this.unit >= end_ps.x[1] && area.y[0] - this.unit <= end_ps.y[0] && area.y[1] + this.unit >= end_ps.y[1]) {
           inSuccess = true;
           area.target.appendChild(this_item);
-          const x = Math.round((end_rect.left + window.scrollX - area.info.left) / this.unit) * this.unit;
-          const y = Math.round((end_rect.top + window.scrollY - area.info.top) / this.unit) * this.unit;
+          const x = Math.round((end_rect.left - area.info.left) / this.unit) * this.unit;
+          const y = Math.round((end_rect.top - area.info.top) / this.unit) * this.unit;
           this_item.style.transform = 'translate(' + x / 10 + 'rem, ' + y / 10 + 'rem)';
         }
 

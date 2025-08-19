@@ -54,16 +54,14 @@
                     </div>
             
                     <div class="sample-object--img" data-dragdrop-object="img" role="img" aria-label="이미지설명">
-                      <svg width="71" height="71" viewBox="0 0 71 71" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M42.4278 14.1428L28.2852 0.000184819L14.143 14.1423L28.2856 28.2849L0.00195312 56.5686L14.1441 70.7107L70.7127 14.1421L56.5705 3.8147e-06L42.4278 14.1428Z" fill="#594B9C"></path>
-                      </svg>
+                      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<rect width="40" height="40" fill="#1ee09f80"/>
+											</svg>
+
                     </div>
                   </div>
                 </div>
-
               </div>
-              
-              <button type="button" class="btn-base" onclick="UI.exe.Drag1.init();">실행</button>
             </div>
             
           </box>
@@ -110,13 +108,23 @@ UI.exe.allcheck1 = new UX.RadioAllcheck({
 		/* 준비 ---------------------------------------------- */
 		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
 		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init();
+		
+		document.addEventListener('DOMContentLoaded', () => {
+			UX.init();
+			
+			UI.exe.Drag1 = new UX.Drag({
+				id: 'drag1',
+				unit: 20,
+				angle: 45,
+			});
 
-		UI.exe.Drag1 = new UX.Drag({
-			id: 'drag1',
-      unit: 20,
-      angle: 45,
-		});			
+			// settimeout 3 이상에서만 정상 동작....
+			setTimeout(() => {
+				UI.exe.Drag1.init();		
+			},10)
+			
+		});
+			
 	</script>
 </body>
 

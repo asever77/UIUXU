@@ -22,33 +22,52 @@ export default class ScrollEvent {
     this.currentTop = Math.trunc(this.current.getBoundingClientRect().top);
     this.arrayTop = [];
     this.arrayHeight = [];
+    this.arrayID = [];
+    this.rootMargin = opt.rootMargin;
+    this.threshold = opt.threshold;
   }
   init() {
     const percent = (Number(Math.trunc((this.currentHeight -  this.currentTop) / this.currentHeight * 100)))
-
     this.current.querySelector('b') ? this.current.querySelector('b').textContent = percent + '%' : '';
-
     this.#items.forEach((item, index) => {
       item.dataset.n = index;
-      this.arrayTop.push(Math.trunc(item.getBoundingClientRect().top));
+      this.arrayTop.push(Math.trunc(item.getBoundingClientRect().top + window.scrollY));
       this.arrayHeight.push(Math.trunc(item.getBoundingClientRect().height));
+      this.arrayID.push(item.dataset.scrolleventItem);
     });
-    console.log(this.arrayTop);
-
-    this.#area.addEventListener('scroll', this.handlerScroll.bind(this))
-    const rootMarginTop2 = (window.innerHeight) * -1 + 'px';
-    const rootMarginTop = '0px';
+    this.#area.addEventListener('scroll', this.handlerScroll.bind(this));
     this.#scrolltrigger = new ScrollTrigger({
       targetSelector: this.#items,
-      rootMargin: `0px 0px ${rootMarginTop} 0px`, // 상단 scrollOffsetTop 안으로 들어올 때 트리거
-      threshold: 0, // 1픽셀이라도 들어오면 트리거
-      callback: (element) => {
-        console.log(element.dataset.scrolleventItem , '--------------------------------------');
-        const idx = Number(element.dataset.n);
-
+      rootMargin: this.rootMargin, 
+      threshold: this.threshold,  
+      callback: (data) => {
+        this.current = data.target;
         this.stepTop = window.scrollY;
-        this.current = element;
-        this.currentHeight = this.current.getBoundingClientRect().height;
+        this.currentHeight = data.rect.height;
+        this.ratio = data.ratio;
+
+        const foundIndex = this.arrayID.indexOf(this.current.dataset.scrolleventItem);
+        let value = {
+          prev: null,
+          current: this.current.dataset.scrolleventItem,
+          next: null,
+        }
+
+        if (foundIndex !== -1) {
+          value.prev = this.arrayID[foundIndex - 1]; // 이전 값
+          value.next = this.arrayID[foundIndex + 1]; // 다음 값
+        } else {
+          console.log('찾는 값이 배열에 없습니다.');
+        }
+        console.log(value.current, Math.round(this.ratio) === 1 ? '이전' : '현재');
+
+        // if (this.stepTop < this.currentHeight) {
+        //   console.log('이전:', value.prev);
+        //   console.log('현재:', value.current);
+        // } else {
+        //   console.log('이전:', value.current);
+        //   console.log('현재:', value.next);
+        // }
       }
     });
    
@@ -98,25 +117,4 @@ export default class ScrollEvent {
       }
     });
   }
-  // handlerScroll(e) {
-  //   const idx = Number(this.current.dataset.n);
-
-  //   console.log( window.scrollY - this.stepTop, this.currentHeight, this.arrayHeight[idx]);
-
-  //   const percent = Number(Math.trunc((window.scrollY -  this.stepTop) / this.currentHeight * 100));
-  //   const prevItem = this.#items[idx - 1];
-  //   const nextItem = this.#items[idx + 1];
-
-  //   if (idx === 0) {
-
-  //   } else if (this.sum - 1 === idx) {
-
-  //   } else {
-  //     prevItem.querySelector('b').textContent =  Number(Math.abs((window.scrollY - this.stepTop) / prevItem.getBoundingClientRect().height * 100).toFixed(2)) + '%';
-  //     nextItem.querySelector('b').textContent = 100 - Number(Math.abs((window.scrollY - this.stepTop) / nextItem.getBoundingClientRect().height * 100).toFixed(2)) + '%';
-  //   }
-
-  //   // console.log(window.scrollY);
-  //   this.current.querySelector('b').textContent = percent + '%';
-  // }
 } 

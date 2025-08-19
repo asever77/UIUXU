@@ -148,7 +148,7 @@ export class ScrollTrigger {
 
   init() {
     const { root, rootMargin, threshold } = this.options;
-
+    console.log('rootMargin',rootMargin)
     // Intersection Observer 생성
     this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
       root,
@@ -170,9 +170,16 @@ export class ScrollTrigger {
 
   handleIntersection(entries, observer) {
     entries.forEach(entry => {
+      //target: 대상 요소
+      //isIntersecting: 교차 여부
+      //intersectionRatio: 교차 비율
       if (entry.isIntersecting) {
         // 요소가 뷰포트에 진입했을 때 콜백 실행
-        this.options.callback(entry.target); // 콜백에 해당 요소 전달
+        this.options.callback({
+          target: entry.target,
+          ratio: entry.intersectionRatio.toPrecision(2),
+          rect: entry.boundingClientRect
+        }); // 콜백에 해당 요소 전달
 
         // once 옵션이 true이면, 콜백 실행 후 해당 요소의 관찰 중지
         if (this.options.once) {
