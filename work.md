@@ -120,8 +120,11 @@ KBHC-3691 - 3695 - 권오택
 
 KBHC-3694 - 3732 - 조현민 - 0922배포
 오케어 챌린지 타임 - 자산운용 ESG 챌린지 현황판
-
-
+  /html/EVE/NEVE_10_52V.html
+  /html/MOK/NMOK_1_1V.html
+  /html/EVE/NEVE_10_76P.html 추가
+  /html/EVE/NEVE_10_79L.html 추가
+  /assets/css/main.css
 
 ==========================================================
 

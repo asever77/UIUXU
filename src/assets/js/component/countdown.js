@@ -29,7 +29,7 @@ export default class Countdown {
     this.#lastWindowWidth = window.innerWidth;
     this.#wrap.dataset.type = this.#effect;
     this.#height = this.#wrap.offsetHeight;
-
+console.log(this.#initialTextContent)
     this.#wrap.insertAdjacentHTML('afterend', `<div data-countdown="a11y" class="a11y-hidden">${this.#targetNumber}</div>`);
     this.initializeElements();
   }
@@ -82,7 +82,7 @@ export default class Countdown {
         if (isNaN(Number(char))) {
           wrapper.dataset.countdown = 'text';
           const strip = document.createElement('div');
-          strip.dataset.countdown = 'text';
+          strip.dataset.countdown = 'group';
           strip.textContent = char;
           wrapper.setAttribute('aria-hidden', 'true');
           wrapper.appendChild(strip);
@@ -164,17 +164,19 @@ export default class Countdown {
   }
 
   change(value) {
-    const isIncrease = Math.sign(value) === 1; //증가이면 true, 감소이면 false
-    const previousNumber = this.#initialTextContent;
-    const insertOption = isIncrease ? 'beforeend' : 'afterbegin';
-    const groups = this.#wrap.querySelectorAll('[data-countdown="group"]');
-    this.#initialTextContent = Number(this.#initialTextContent) + Number(value) + '';
-
     if (this.#isAnimating === true) {
       return false;
     }
 
+    const isIncrease = Math.sign(value) === 1; //증가이면 true, 감소이면 false
+    const previousNumber = this.#initialTextContent;
+    const insertOption = isIncrease ? 'beforeend' : 'afterbegin';
+    const groups = this.#wrap.querySelectorAll('[data-countdown="group"]');
+
+    this.#initialTextContent = ((Number(this.#initialTextContent) * 100000000 + Number(value) * 100000000) / 100000000) + '';
     this.#isAnimating = true;
+
+   
 
     const onTransitionEnd = (e) => {
       const _this = e.currentTarget;
@@ -197,6 +199,9 @@ export default class Countdown {
     groups.forEach((group, index) => {
       const prev = previousNumber.split('');
       const next = this.#initialTextContent.split('');
+
+      console.log(previousNumber, this.#initialTextContent);
+
       if (prev[index] !== next[index]) {
         if (isIncrease) {
           group.insertAdjacentHTML(insertOption, `<div data-countdown="number" style="height:${this.#height}px">${next[index]}</div>`);
