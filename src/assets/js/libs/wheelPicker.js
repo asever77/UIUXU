@@ -200,11 +200,11 @@ export default class WheelPicker {
 			this.a11ySelect.addEventListener('change', this.selectA11y);
 
 			this.a11ySelect.addEventListener('focus', () => {
-				this.a11ySelect.style.pointerEvent = '';
+				this.a11ySelect.cloeset('.wheel-picker-a11y').style.pointerEvent = '';
 				this.a11ySelect.click();
 			});
 			this.a11ySelect.addEventListener('blur', () => {
-				this.a11ySelect.style.pointerEvent = 'none';
+				this.a11ySelect.cloeset('.wheel-picker-a11y').style.pointerEvent = 'none';
 			});
 		}
 
