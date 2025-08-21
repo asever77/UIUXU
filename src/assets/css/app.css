@@ -2714,7 +2714,7 @@ body {
 }
 .wheel-picker-a11y select:focus {
   opacity: 1;
-  background-color: red;
+  background-color: #fff;
 }
 
 [data-set=YYYY-MM-DD] {
