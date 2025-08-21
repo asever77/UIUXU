@@ -567,7 +567,7 @@ th, td {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
   font-size: var(--x6);
-  line-height: 2.2;
+  line-height: 1.2;
   font-weight: 100;
   letter-spacing: 0.09em;
 }
@@ -575,7 +575,7 @@ th, td {
   content: attr(data-text);
   font-family: "Bitcount Prop Single", system-ui;
   font-size: var(--x6);
-  line-height: 2.2;
+  line-height: 1.2;
   font-weight: 400;
   letter-spacing: 0.09em;
   position: absolute;
@@ -2296,6 +2296,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
 }
 
 [data-countdown=number] {
@@ -2710,7 +2711,7 @@ body {
 }
 .wheel-picker-a11y select:focus {
   opacity: 1;
-  background-color: #fff;
+  background-color: red;
 }
 
 [data-set=YYYY-MM-DD] {
