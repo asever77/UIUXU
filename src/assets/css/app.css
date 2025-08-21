@@ -2698,6 +2698,9 @@ body {
   display: flex;
   align-items: center;
 }
+.wheel-picker-a11y[data-state=on] {
+  pointer-events: visible;
+}
 .wheel-picker-a11y select {
   flex: 1;
   border: 0;

@@ -106,6 +106,10 @@
   height: 100%;
   display: flex;
   align-items: center;
+
+  &[data-state="on"] {
+    pointer-events: visible;
+  }
   select {
     flex:1;
     border: 0;
