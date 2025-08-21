@@ -47,6 +47,7 @@ export default class WheelPicker {
 		this.radius = this.itemHeight / Math.tan(this.itemAngle * Math.PI / 180); // 링 반경 
 
 		this.scroll = 0; // 단위는 항목의 높이(도)입니다.
+		this.a11ySelect = null;
 		this._init();
 	}
 
@@ -148,7 +149,6 @@ export default class WheelPicker {
 	}
 
 	_create(source) {
-
 		if (!source.length) {
 			return;
 		}
@@ -193,7 +193,17 @@ export default class WheelPicker {
 				transform: rotateX(${-this.itemAngle * i}deg) translate3d(0, 0, ${this.radius}px);" data-index="${i}">${source[i].text}</li>`
 		}
 
-		document.querySelector(this.el + '_a11y').innerHTML = selectOptionHTML;
+		if (document.querySelector(this.el + '_a11y')) {
+			this.a11ySelect = document.querySelector(this.el + '_a11y');
+			this.a11ySelect.innerHTML = selectOptionHTML;
+			this.a11ySelect.value = this.value;
+			this.a11ySelect.addEventListener('change', this.selectA11y);
+
+			this.a11ySelect.addEventListener('focus', () => {
+				console.log(11111111)
+				this.a11ySelect.click();
+			});
+		}
 
 		// 중간에 강조 표시 HTML
 		let highListHTML = '';
@@ -416,6 +426,10 @@ export default class WheelPicker {
 		if (!this.moving) {
 			this._selectByScroll(this.scroll);
 		}
+	}
+
+	selectA11y = (e) => {
+		this.select(Number(e.currentTarget.value));
 	}
 
 	select(value) {

@@ -14,7 +14,7 @@ import ChartBubble from './component/chart_bubble.js';
 
 import Roulette from './event/roulette.js';
 
-import { loadContent, RadioAllcheck } from './utils/utils.js';
+import { loadContent, RadioAllcheck, dayOption, createOptions  } from './utils/utils.js';
 
 export const UX = {
 	Accordion,
@@ -111,6 +111,8 @@ export const UX = {
 
   utils: {
     loadContent,
+    dayOption, 
+    createOptions
   },
 }
 

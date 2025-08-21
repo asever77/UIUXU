@@ -49,6 +49,30 @@ export const comma = (n) => {
   return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
 };
 
+export const dayOption = (YYYY, MM) => {
+  const lastDay = new Date(YYYY, MM, 0).getDate();
+  const currentDays = [];
+  for (let i = 1; i <= lastDay; i++) {
+    const formattedText = i.toString().padStart(2, '0');
+    currentDays.push({
+      value: i,
+      text: formattedText
+    });
+  }
+  return currentDays;
+};
+
+export const createOptions = (start, end) => {
+  const options = [];
+  for (let i = start; i <= end; i++) {
+    options.push({
+      value: i,
+      text: i < 10 ? '0' + i.toString() : i.toString()
+    });
+  }
+  return options;
+};
+
 export const slideUp = (element, duration = 300) => {
   return new Promise(resolve => {
     element.style.height = element.scrollHeight + 'px';
@@ -116,7 +140,8 @@ export const getUrlParameter = (paraname) => {
       return that[1];
     }
   }
-}
+};
+
 export class ScrollTrigger {
   constructor(options) {
     // 기본 옵션 설정
