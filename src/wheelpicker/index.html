@@ -90,7 +90,7 @@
       })
     });
     
-    
+
     // Wheel picker
     // 일 생성
     const dayOption = (YYYY, MM) => {
@@ -111,7 +111,7 @@
       for (let i = start; i <= end; i++) {
         options.push({
           value: i,
-          text: i.toString()
+          text: i < 10 ? '0' + i.toString() : i.toString()
         });
       }
       return options;
