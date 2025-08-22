@@ -61,15 +61,32 @@
     
     UI.exe.luckyRouletteEvent = new UX.Roulette({
       id: 'main',
-      data: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
-      speed: 6000,
+      speed: 5000,
       turns: 5,
-      onStart: (v) => {
-        UI.exe.luckyRouletteEvent.startSpin({ result: 2000 }).then((result) => {
-          console.log('당첨 결과:', result); // "바나나" 출력
+
+      data: [1000, 2000, 3000, 4000, 5000, 1000, 2000, 3000, 4000, 5000],
+      start: (v) => {
+        UI.exe.luckyRouletteEvent.play({
+          result: 2000,
+          callback: (v) => {
+            console.log(v);
+          }
         });
       }
     });
+
+
+    //  UI.exe.luckyRouletteEvent = new UX.Roulette({
+    //   id: 'main',
+    //   data: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
+    //   speed: 6000,
+    //   turns: 5,
+    //   onStart: (v) => {
+    //     UI.exe.luckyRouletteEvent.startSpin({ result: 2000 }).then((result) => {
+    //       console.log('당첨 결과:', result); // "바나나" 출력
+    //     });
+    //   }
+    // });
     
 
 	</script>

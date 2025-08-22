@@ -33,7 +33,7 @@ export default class Roulette {
     if (points) points.forEach(item => item.remove());
     this.data.forEach((item, index) => {
       this.group.insertAdjacentHTML('beforeend', `
-      <div data-roulette="item" style="transform:rotate(${360 - (deg * index)}deg) translateX(-50%);">
+      <div data-roulette="item" style="transform:rotate(${(deg * index)}deg) translateX(-50%);">
         <div>${item}</div>
         <div data-roulette="line" style="transform:rotate(${(deg / 2)}deg);"></div>
       </div>`);
