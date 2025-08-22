@@ -108,7 +108,7 @@
   align-items: center;
 
   &[data-state="on"] {
-    pointer-events: visible;
+    pointer-events: auto;
   }
   select {
     flex:1;

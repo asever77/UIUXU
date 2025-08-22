@@ -199,6 +199,10 @@ export default class WheelPicker {
 			this.a11ySelect.value = this.value;
 			this.a11ySelect.addEventListener('change', this.selectA11y);
 
+			this.a11ySelect.addEventListener('keyup', (e) => {
+				console.log('key', e.key)
+			});
+
 			this.a11ySelect.addEventListener('focus', () => {
 				this.a11ySelect.closest('.wheel-picker-a11y').dataset.state = 'on';
 				this.a11ySelect.click();
