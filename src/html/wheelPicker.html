@@ -38,19 +38,20 @@
                   <input type="radio" name="type" value="DD-MM-YYYY"> DD-MM-YYYY
                 </label>
               </fieldset>
-              <button type="button" class="btn-icon" data-mso-before="accessible_menu"></button>
+             
               <button type="button" data-set="MM-DD-YYYY" data-wheel-picker-button="aa1">
                 <span data-wheel-picker-set="YYYY">YYYY</span>
                 <span data-wheel-picker-set="MM">MM</span>
                 <span data-wheel-picker-set="DD">DD</span>
               </button>
 
-              <div class="wheel-picker-area" data-wheel-picker="aa1" data-set="YYYY-MM-DD">
+              <div class="wheel-picker--area" data-wheel-picker="aa1" data-set="YYYY-MM-DD">
                 <div class="wheel-picker" data-wheel-picker-set="YYYY" id="iosPicker_year" aria-hidden="true"></div>
                 <div class="wheel-picker" data-wheel-picker-set="MM" id="iosPicker_month" aria-hidden="true"></div>
                 <div class="wheel-picker" data-wheel-picker-set="DD" id="iosPicker_day" aria-hidden="true"></div>
 
-                <div class="wheel-picker-a11y">
+                <button type="button" class="wheel-picker--a11y-btn btn-icon" data-mso-before="accessible_menu" aria-label="접근성"></button>
+                <div class="wheel-picker--a11y">
                   <select data-set="YYYY" id="iosPicker_year_a11y" tabindex="0"></select>
                   <select data-set="MM" id="iosPicker_month_a11y" tabindex="0"></select>
                   <select data-set="DD" id="iosPicker_day_a11y"  tabindex="0"></select>
@@ -89,13 +90,18 @@
 
     // Wheel picker
     const wheelPickerButton = document.querySelector('[data-wheel-picker-button="aa1"]');
+    const a11yBtn = document.querySelector('.wheel-picker--a11y-btn');
+    a11yBtn.addEventListener('click', () => {
+      const el = document.querySelector('.wheel-picker--a11y');
+      el.dataset.state = el.dataset.state === 'on' ? '' : 'on';
+    });
     UI.exe.wheelPickerYear = new UX.WheelPicker({
       el: '#iosPicker_year',
       type: 'normal', // normal
       source: UX.utils.createOptions(2000, 2025),
       value:2023,
       onChange: (resultData) => {
-        wheelPickerButton.querySelector(' [data-wheel-picker-set="YYYY"]').textContent = resultData.text;
+        wheelPickerButton.querySelector('[data-wheel-picker-set="YYYY"]').textContent = resultData.text;
       }
     });
     UI.exe.wheelPickerMonth = new UX.WheelPicker({

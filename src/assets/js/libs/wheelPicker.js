@@ -154,14 +154,14 @@ export default class WheelPicker {
 		}
 
 		let template = `
-        <div class="wheel-picker-wrap">
-          <ul class="wheel-picker-options" style="transform: translate3d(0, 0, ${-this.radius}px) rotateX(0deg);">
+        <div class="wheel-picker--wrap">
+          <ul class="wheel-picker--options" style="transform: translate3d(0, 0, ${-this.radius}px) rotateX(0deg);">
             {{circleListHTML}}
-            <!-- <li class="wheel-picker-option">a0</li> -->
+            <!-- <li class="wheel-picker--option">a0</li> -->
           </ul>
-          <div class="wheel-picker-highlight">
-            <ul class="wheel-picker-highlight-list">
-              <!-- <li class="wheel-picker-highlight-item"></li> -->
+          <div class="wheel-picker--highlight">
+            <ul class="wheel-picker--highlight-list">
+              <!-- <li class="wheel-picker--highlight-item"></li> -->
               {{highListHTML}}
             </ul>
           </div>
@@ -185,7 +185,7 @@ export default class WheelPicker {
 		for (let i = 0; i < source.length; i++) {
 			selectOptionHTML += `<option value="${source[i].value}" ${this.value, this.source[i].value ? 'selected' : ''}>${source[i].text}</option>`;
 
-			circleListHTML += `<li class="wheel-picker-option" aria-hidden="true" 
+			circleListHTML += `<li class="wheel-picker--option" aria-hidden="true" 
 			style="
 				top: ${this.itemHeight * -0.5}px;
 				height: ${this.itemHeight}px;
@@ -199,23 +199,19 @@ export default class WheelPicker {
 			this.a11ySelect.value = this.value;
 			this.a11ySelect.addEventListener('change', this.selectA11y);
 
-			this.a11ySelect.addEventListener('keyup', (e) => {
-				console.log('key', e.key)
-			});
-
 			this.a11ySelect.addEventListener('focus', () => {
-				this.a11ySelect.closest('.wheel-picker-a11y').dataset.state = 'on';
+				this.a11ySelect.closest('.wheel-picker--a11y').dataset.state = 'on';
 				this.a11ySelect.click();
 			});
 			this.a11ySelect.addEventListener('blur', () => {
-				this.a11ySelect.closest('.wheel-picker-a11y').dataset.state = '';
+				this.a11ySelect.closest('.wheel-picker--a11y').dataset.state = '';
 			});
 		}
 
 		// 중간에 강조 표시 HTML
 		let highListHTML = '';
 		for (let i = 0; i < source.length; i++) {
-			highListHTML += `<li class="wheel-picker-highlight-item" style="height: ${this.itemHeight}px;">${source[i].text}</li>`;
+			highListHTML += `<li class="wheel-picker--highlight-item" style="height: ${this.itemHeight}px;">${source[i].text}</li>`;
 		}
 
 		if (this.options.type === 'infinite') {
@@ -223,7 +219,7 @@ export default class WheelPicker {
 			for (let i = 0; i < this.quarterCount; i++) {
 				// 머리
 				circleListHTML = `
-				<li class="wheel-picker-option"
+				<li class="wheel-picker--option"
 				style="
 					top: ${this.itemHeight * -0.5}px;
 					height: ${this.itemHeight}px;
@@ -235,7 +231,7 @@ export default class WheelPicker {
 
 				// 꼬리
 				circleListHTML += `
-				<li class="wheel-picker-option"
+				<li class="wheel-picker--option"
 				style="
 					top: ${this.itemHeight * -0.5}px;
 					height: ${this.itemHeight}px;
@@ -247,20 +243,20 @@ export default class WheelPicker {
 			}
 
 			// 머리와 꼬리 강조하기
-			highListHTML = `<li class="wheel-picker-highlight-item" style="height: ${this.itemHeight}px;">${source[sourceLength - 1].text}</li>` + highListHTML;
-			highListHTML += `<li class="wheel-picker-highlight-item" style="height: ${this.itemHeight}px;">${source[0].text}</li>`
+			highListHTML = `<li class="wheel-picker--highlight-item" style="height: ${this.itemHeight}px;">${source[sourceLength - 1].text}</li>` + highListHTML;
+			highListHTML += `<li class="wheel-picker--highlight-item" style="height: ${this.itemHeight}px;">${source[0].text}</li>`
 		}
 
 		this.elems.el.innerHTML = template
 			.replace('{{circleListHTML}}', circleListHTML)
 			.replace('{{highListHTML}}', highListHTML);
-		this.elems.circleList = this.elems.el.querySelector('.wheel-picker-options');
-		this.elems.circleItems = this.elems.el.querySelectorAll('.wheel-picker-option');
+		this.elems.circleList = this.elems.el.querySelector('.wheel-picker--options');
+		this.elems.circleItems = this.elems.el.querySelectorAll('.wheel-picker--option');
 
 
-		this.elems.highlight = this.elems.el.querySelector('.wheel-picker-highlight');
-		this.elems.highlightList = this.elems.el.querySelector('.wheel-picker-highlight-list');
-		this.elems.highlightitems = this.elems.el.querySelectorAll('.wheel-picker-highlight-item');
+		this.elems.highlight = this.elems.el.querySelector('.wheel-picker--highlight');
+		this.elems.highlightList = this.elems.el.querySelector('.wheel-picker--highlight-list');
+		this.elems.highlightitems = this.elems.el.querySelectorAll('.wheel-picker--highlight-item');
 
 		if (this.type === 'infinite') {
 			this.elems.highlightList.style.top = -this.itemHeight + 'px';
