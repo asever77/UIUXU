@@ -142,15 +142,50 @@ export const getUrlParameter = (paraname) => {
   }
 };
 
+export const getDeviceInfo = (appname) => {
+  const ua = navigator.userAgent;
+  let isDevice =  "desktop";
+  let isApp = false;
+  let os = "other";
+
+  if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      isDevice = "tablet";
+  }
+  if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|NetFront|Opera M(obi|ini)|S(ymbian|eries60|eries40)|UCWEB|Text.d|Windows C.E|Windows P.E/i.test(ua)) {
+      isDevice =  "mobile";
+  }
+  if (ua.includes(appname)) {
+    isApp = true;
+  }
+  if (/Windows/i.test(ua)) {
+    os = "windows";
+  } else if (/Macintosh|MacIntel|MacPPC|Mac68K/i.test(ua)) {
+    os = "macos";
+  } else if (/iPhone|iPad|iPod/i.test(ua)) {
+    os = "ios";
+  } else if (/Android/i.test(ua)) {
+    os = "android";
+  } else if (/Linux/i.test(ua)) {
+    os = "linux";
+  }
+  const data = {
+    touch: 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
+    device: isDevice,
+    os: os,
+    app: isApp
+  }
+  return data;
+}
+
 export class ScrollTrigger {
   constructor(options) {
     // 기본 옵션 설정
     this.options = {
       targetSelector: null, // 관찰할 요소의 CSS 선택자 (필수)
-      callback: () => {},  // 요소가 트리거될 때 실행할 함수 (필수)
-      root: null,          // Intersection Observer의 root 옵션 (null = 뷰포트)
-      rootMargin: '0px',   // Intersection Observer의 rootMargin 옵션
-      threshold: 0,        // Intersection Observer의 threshold 옵션 (0.0 ~ 1.0 또는 배열)
+      callback: () => {},   // 요소가 트리거될 때 실행할 함수 (필수)
+      root: null,           // Intersection Observer의 root 옵션 (null = 뷰포트)
+      rootMargin: '0px',    // Intersection Observer의 rootMargin 옵션
+      threshold: 0,         // Intersection Observer의 threshold 옵션 (0.0 ~ 1.0 또는 배열)
       once: false           // 한 번 트리거되면 관찰을 중지할지 여부
     };
 
@@ -441,84 +476,6 @@ export class ArrowNavigator {
   }
 }
 
-export class RadioAllcheck {
-  //private
-  #main;
-  #subs;
-  #sum;
-  #btn;
-  #callback;
-  #isAllCheck;
-  #isAllCheckRequired;
-	#subRequireds;
-	#sumRequired ;
-
-  constructor(opt) {
-		console.log(opt)
-    // opt 유효성 검사
-    if (!opt || !opt.name) {
-      throw new Errow('옵션 객체와 name 속성은 필수입니다.');
-    }
-
-    const { name, callback } = opt;
-
-    this.#callback = callback;
-    this.#main = document.querySelector(`[data-allcheck-main="${name}"]`);
-    this.#subs = document.querySelectorAll(`[data-allcheck-sub="${name}"]`);
-    this.#btn = document.querySelector(`[data-allcheck-btn="${name}"]`);
-    this.#subRequireds = document.querySelectorAll(`[data-allcheck-sub="${name}"][aria-required="true"]`);
-
-    if (!this.#main || this.#subs.length === 0) {
-      console.error(`${name}에 핻앟나느 체크박스 요소를 찾을 수가 없습니다.`);
-      return;
-    }
-
-    this.#sum = this.#subs.length;
-    this.#sumRequired = this.#subRequireds.length;
-    this.#updateState(); // 초기 상태 설정
-    this.#addEventListeners();
-  }
-
-  #addEventListeners() {
-    this.#main.addEventListener('change', this.#handleToggle);
-    this.#subs.forEach(item => {
-      item.addEventListener('change', this.#updateState);
-    });
-  }
-
-  #handleToggle = (e) => {
-    this.#isAllCheck = e.target.checked;
-    this.#subs.forEach(item => {
-      item.checked = this.#isAllCheck;
-    });
-    this.#btn.disabled = this.#isAllCheck ? false : true;
-    this.#callback?.({
-			all: this.#isAllCheck,
-			required : this.#isAllCheck,
-		});
-  }
-  #updateState = () => {
-    const checkedSum = Array.from(this.#subs).filter(item => item.checked).length;
-    const checkedSumRequired = Array.from(this.#subRequireds).filter(item => item.checked).length;
-    this.#isAllCheck = (this.#sum === checkedSum);
-    this.#isAllCheckRequired = (this.#sumRequired === checkedSumRequired);
-    this.#main.checked = this.#isAllCheck;
-    this.#btn.disabled = this.#isAllCheckRequired ? false : true;
-    this.#callback?.(
-			{
-				all: this.#isAllCheck,
-				required : this.#isAllCheckRequired,
-			}
-		);
-  }
-  destroy() {
-    this.#main.removeEventListener('change', this.#handleToggle);
-    this.#subs.forEach(item => {
-      item.removeEventListener('change', this.#updateState);
-    });
-  }
-}
-
 export class HoverMenu {
   constructor(opt) {
     this.id = opt.id,
@@ -627,6 +584,84 @@ export class FakeRadio  {
     this.checkedItem.dataset.radioChecked = 'false';
     _this.dataset.radioChecked = 'true';
     this.callback && this.callback(_this);
+  }
+}
+
+export class RadioAllcheck {
+  //private
+  #main;
+  #subs;
+  #sum;
+  #btn;
+  #callback;
+  #isAllCheck;
+  #isAllCheckRequired;
+	#subRequireds;
+	#sumRequired ;
+
+  constructor(opt) {
+		console.log(opt)
+    // opt 유효성 검사
+    if (!opt || !opt.name) {
+      throw new Errow('옵션 객체와 name 속성은 필수입니다.');
+    }
+
+    const { name, callback } = opt;
+
+    this.#callback = callback;
+    this.#main = document.querySelector(`[data-allcheck-main="${name}"]`);
+    this.#subs = document.querySelectorAll(`[data-allcheck-sub="${name}"]`);
+    this.#btn = document.querySelector(`[data-allcheck-btn="${name}"]`);
+    this.#subRequireds = document.querySelectorAll(`[data-allcheck-sub="${name}"][aria-required="true"]`);
+
+    if (!this.#main || this.#subs.length === 0) {
+      console.error(`${name}에 핻앟나느 체크박스 요소를 찾을 수가 없습니다.`);
+      return;
+    }
+
+    this.#sum = this.#subs.length;
+    this.#sumRequired = this.#subRequireds.length;
+    this.#updateState(); // 초기 상태 설정
+    this.#addEventListeners();
+  }
+
+  #addEventListeners() {
+    this.#main.addEventListener('change', this.#handleToggle);
+    this.#subs.forEach(item => {
+      item.addEventListener('change', this.#updateState);
+    });
+  }
+
+  #handleToggle = (e) => {
+    this.#isAllCheck = e.target.checked;
+    this.#subs.forEach(item => {
+      item.checked = this.#isAllCheck;
+    });
+    this.#btn.disabled = this.#isAllCheck ? false : true;
+    this.#callback?.({
+			all: this.#isAllCheck,
+			required : this.#isAllCheck,
+		});
+  }
+  #updateState = () => {
+    const checkedSum = Array.from(this.#subs).filter(item => item.checked).length;
+    const checkedSumRequired = Array.from(this.#subRequireds).filter(item => item.checked).length;
+    this.#isAllCheck = (this.#sum === checkedSum);
+    this.#isAllCheckRequired = (this.#sumRequired === checkedSumRequired);
+    this.#main.checked = this.#isAllCheck;
+    this.#btn.disabled = this.#isAllCheckRequired ? false : true;
+    this.#callback?.(
+			{
+				all: this.#isAllCheck,
+				required : this.#isAllCheckRequired,
+			}
+		);
+  }
+  destroy() {
+    this.#main.removeEventListener('change', this.#handleToggle);
+    this.#subs.forEach(item => {
+      item.removeEventListener('change', this.#updateState);
+    });
   }
 }
 

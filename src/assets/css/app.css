@@ -2710,17 +2710,6 @@ body {
   display: flex;
   align-items: center;
 }
-.wheel-picker--a11y[data-state=on] {
-  pointer-events: auto;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 1;
-  gap: 0.2rem;
-}
-.wheel-picker--a11y[data-state=on] select {
-  border: 1px solid var(--gray-500);
-  opacity: 1;
-  border-radius: 0.8rem;
-}
 .wheel-picker--a11y select {
   flex: 1;
   border: 0;
@@ -2734,6 +2723,23 @@ body {
 }
 .wheel-picker--a11y select:focus {
   opacity: 1;
+  background-color: #fff;
+}
+
+[data-touch=true] .wheel-picker--a11y[data-state=on] {
+  pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  gap: 0.2rem;
+}
+[data-touch=true] .wheel-picker--a11y[data-state=on] select {
+  border: 1px solid var(--gray-500);
+  opacity: 1;
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  -webkit-appearance: auto;
+     -moz-appearance: auto;
+          appearance: auto;
   background-color: #fff;
 }
 
@@ -2863,27 +2869,23 @@ button [data-wheel-picker-set]::before {
   display: none;
 }
 
-.lucky-roulette {
-  width: 30rem;
-  margin: 2rem auto;
-}
-
-.lucky-roulette {
+[data-roulette] {
+  margin: 0;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.lucky-roulette--start {
+[data-roulette=start] {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 10rem;
-  height: 10rem;
-  background-color: black;
+  width: 6rem;
+  height: 6rem;
+  border: 0.4rem solid #000;
   color: #fff;
   display: flex;
   align-items: center;
@@ -2892,16 +2894,48 @@ button [data-wheel-picker-set]::before {
   font-size: 1.4rem;
 }
 
-.lucky-roulette--start:disabled {
-  color: #888;
+[data-roulette=start]:disabled {
+  opacity: 0.5;
 }
 
-.lucky-roulette--arrow {
+[data-roulette=arrow] {
   position: absolute;
-  top: 0;
+  top: -1rem;
   left: calc(50% - 0.5rem);
-  background-color: red;
+  border: 0.3rem solid #000;
   width: 1rem;
   height: 2rem;
   z-index: 1;
+}
+
+[data-roulette=group] {
+  width: 30rem;
+  height: 30rem;
+  display: flex;
+  border: 1px solid #000;
+  border-radius: 50%;
+}
+
+[data-roulette=item] {
+  position: absolute;
+  left: 25%;
+  top: calc(50% - 2rem);
+  width: 50%;
+  height: 4rem;
+  padding-right: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border: 1px solid var(--gray-200);
+}
+
+[data-roulette=line] {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #000;
+  transform-origin: 100% 50%;
 }/*# sourceMappingURL=app.css.map */

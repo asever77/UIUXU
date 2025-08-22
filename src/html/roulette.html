@@ -25,15 +25,16 @@
 						<h1 data-heading="display" data-text="Roulette Event">Roulette Event</h1>
 
 						<stit>Roulette Event</stit>
-						<box >
-              <div class="lucky-roulette" data-roulette="main">
-                <div class="lucky-roulette--arrow"></div>
-                <button type="button" class="lucky-roulette--start" data-roulette="start">롤렛 돌리기</button>
-                <div class="lucky-roulette--wrap" data-roulette="item">
-                  
+						<box>
+              <div data-roulette="main">
+                <div data-roulette="arrow"></div>
+                <button type="button" data-roulette="start"></button>
+                <div data-roulette="wrap">
+                   <div data-roulette="group"></div>
+                  </div>
                 </div>
               </div>
-
+              <!-- <button type="button" onclick="UI.exe.luckyRouletteEvent.reset([1000, 2000, 3000, 4000, 5000])">리셋</button> -->
 						</box>
           </group>
 
@@ -41,7 +42,6 @@
 						<mtit>Code</mtit>
 						<codebox>
 							<code><pre contenteditable="true">
-
 							</pre></code>
 						</codebox>
 					</group>
@@ -56,57 +56,22 @@
 
 	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
     
-    const rouletteData = [
-      //포인트 4종 (300, 500만원 제안)
-      {
-        type: 'point-4',
-        point: [1000, 5000, 1000, 10000, 1000, 5000, 1000, 10000],
-      },
-      //포인트 5종 (450, 500만원 제안) 카드/손보CNS/손해사정/손해보험
-      {
-        type: 'point-5',
-        point: [10000, 100, 500, 1000, 10, 1000, 500, 100],
-      },
-      //포인트 5종 (500만원 제안) 라이프생명
-      {
-        type: 'point-7',
-        point: [5000, 100, 500, 1000, 2000, 1000, 500, 100],
-      },
-      //포인트 6종 (100만원 제안) 라이프파트너스/펀드파트너스
-      {
-        type: 'point-6',
-        point: [10000, 100, 1000, 500, 5000, 100, 2000, 500], 
-      },
-    ];
     UI.exe.luckyRouletteEvent = new UX.Roulette({
-      data: [1, 2, 3, 4, 5, 4, 3, 2],
+      id: 'main',
+      data: [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000],
       speed: 6000,
       turns: 5,
-      callback: () => {
-        UI.exe.luckyRouletteEvent.play({
-          result: UI.exe.luckyRouletteEvent.result,
+      onStart: (v) => {
+        UI.exe.luckyRouletteEvent.startSpin({ result: 2000 }).then((result) => {
+          console.log('당첨 결과:', result); // "바나나" 출력
         });
       }
     });
-    UI.exe.luckyRouletteEvent = new LuckyRoulette({
-        speed: 6000,
-        turns: 6,
-        // 4종:rouletteData[0], 5종:rouletteData[1], 6종:rouletteData[2]
-        data: rouletteData[0], 
-        callback: () => {
-          UI.exe.luckyRouletteEvent.play({
-            result: UI.exe.luckyRouletteEvent.result,
-            callback: (v) => {
-            }
-          });
-        }
-      });
-      OcareUI.exe.luckyRouletteEvent.result = 10000; 
+    
+
 	</script>
 </body>
 
