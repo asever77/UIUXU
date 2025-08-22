@@ -198,14 +198,6 @@ export default class WheelPicker {
 			this.a11ySelect.innerHTML = selectOptionHTML;
 			this.a11ySelect.value = this.value;
 			this.a11ySelect.addEventListener('change', this.selectA11y);
-
-			this.a11ySelect.addEventListener('focus', () => {
-				this.a11ySelect.closest('.wheel-picker--a11y').dataset.state = 'on';
-				this.a11ySelect.click();
-			});
-			this.a11ySelect.addEventListener('blur', () => {
-				this.a11ySelect.closest('.wheel-picker--a11y').dataset.state = '';
-			});
 		}
 
 		// 중간에 강조 표시 HTML

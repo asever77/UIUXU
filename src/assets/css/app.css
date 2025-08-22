@@ -2696,6 +2696,7 @@ body {
   height: 2.4rem;
   border-radius: 50%;
   border: 1px solid #000;
+  z-index: 11;
 }
 .wheel-picker--area .wheel-picker--a11y-btn::before {
   font-size: 1.8rem;
@@ -2711,6 +2712,14 @@ body {
 }
 .wheel-picker--a11y[data-state=on] {
   pointer-events: auto;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+  gap: 0.2rem;
+}
+.wheel-picker--a11y[data-state=on] select {
+  border: 1px solid var(--gray-500);
+  opacity: 1;
+  border-radius: 0.8rem;
 }
 .wheel-picker--a11y select {
   flex: 1;
