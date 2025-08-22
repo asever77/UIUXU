@@ -235,7 +235,7 @@ export default class Tab {
         rootMargin: `0px 0px ${rootMarginTop} 0px`, // 상단 scrollOffsetTop 안으로 들어올 때 트리거
         threshold: 0, // 1픽셀이라도 들어오면 트리거
         callback: (element) => {
-          const tab = document.querySelector(`[aria-controls="${element.id}"]`);
+          const tab = document.querySelector(`[aria-controls="${element.target.id}"]`);
           const name = tab.dataset.tabName;
           const selected = document.querySelector(`[data-tab-name="${name}"][aria-selected="true"]`);
 
