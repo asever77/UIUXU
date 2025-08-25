@@ -26,11 +26,16 @@ export default class Roulette {
 
   reset(data) {
     if (data) this.data = data;
-    const points = this.roulette.querySelectorAll('.roulette--point');
-    const deg = 360 / this.sum;
+    const items = this.roulette.querySelectorAll('[data-roulette="item"]');
+    this.wrap.style.transition = '';
+    this.wrap.style.transform = '';
+    this.sum = this.data.length;
+    this.deg = 360 / this.sum;
+    const deg = this.deg;
     this.group.style.transform = `rotate(90deg)`;
-
-    if (points) points.forEach(item => item.remove());
+    this.button.disabled = false;
+    
+    if (items) items.forEach(item => item.remove());
     this.data.forEach((item, index) => {
       this.group.insertAdjacentHTML('beforeend', `
       <div data-roulette="item" style="transform:rotate(${360 - (deg * index)}deg) translateX(-50%);">
@@ -38,6 +43,9 @@ export default class Roulette {
         <div data-roulette="line" style="transform:rotate(${(deg / 2)}deg);"></div>
       </div>`);
     });
+    setTimeout(() => {
+       this.wrap.style.transition = `transform ${this.speed}ms cubic-bezier(0.32, 0.92, 0.71, 1.01)`;
+    },0);
   }
 
   act() {
@@ -48,6 +56,7 @@ export default class Roulette {
   play (opt) {
     const playCallback = opt.callback;
     let _deg = 0;
+    this.degData = [];
     this.data.forEach(element => {
       this.degData.push([element, _deg]);
       _deg = _deg + this.deg;

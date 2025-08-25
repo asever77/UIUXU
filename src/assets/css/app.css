@@ -833,7 +833,7 @@ body {
   position: fixed;
 }
 .area-toast {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 400;
@@ -2302,6 +2302,164 @@ body {
 [data-countdown=number] {
   display: flex;
   justify-content: center;
+}
+
+.mdl-time-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.mdl-time-line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 5rem;
+  pointer-events: none;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  z-index: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 0.1rem solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 1.2rem;
+}
+.mdl-time-line div {
+  display: block;
+  width: 100%;
+  height: 5rem;
+  pointer-events: none;
+  max-width: 4.4rem;
+  min-width: 4.4rem;
+  margin: 0 1.6rem;
+}
+.mdl-time-line div:first-child {
+  max-width: 5.4rem;
+  min-width: 5.4rem;
+}
+.mdl-time-line::before {
+  content: ":";
+  display: block;
+  position: absolute;
+  top: 0.7rem;
+  left: 50%;
+  z-index: 12;
+  color: #fff;
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-left: 4rem;
+}
+.mdl-time-midday {
+  max-width: 9rem;
+  min-width: 9rem;
+}
+.mdl-time-midday button {
+  font-size: 1.6rem !important;
+}
+.mdl-time-hour {
+  max-width: 7rem;
+  min-width: 7rem;
+}
+.mdl-time-minute {
+  max-width: 8rem;
+  min-width: 8rem;
+}
+.mdl-time-midday, .mdl-time-hour, .mdl-time-minute {
+  position: relative;
+  overflow-y: auto;
+  height: 25rem;
+  margin: 0;
+  /* scroll hidden */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.mdl-time-midday::-webkit-scrollbar, .mdl-time-hour::-webkit-scrollbar, .mdl-time-minute::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  /* Remove scrollbar space */
+  height: 0;
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+  -webkit-appearance: none;
+}
+.mdl-time-midday button, .mdl-time-hour button, .mdl-time-minute button {
+  position: relative;
+  display: block;
+  margin: 0;
+  min-height: 5rem;
+  color: #78719C;
+  font-size: 3.2rem;
+  font-family: "KBF";
+}
+.mdl-time-midday button[data-selected=true], .mdl-time-hour button[data-selected=true], .mdl-time-minute button[data-selected=true] {
+  font-weight: 700;
+  color: #fff;
+}
+.mdl-time-btns {
+  position: absolute;
+  bottom: 1.6rem;
+  width: 100%;
+  padding: 0 var(--x3);
+}
+.mdl-time-btns .btn-base {
+  width: 100%;
+  background-color: #150f95;
+  color: #fff;
+  height: 3.6rem;
+  border: 0;
+  border-radius: 0.4rem;
+}
+.mdl-time-group {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 10rem;
+  padding-bottom: 10rem;
+  min-height: 15rem;
+}
+.mdl-time-view {
+  border: 0.1rem solid black;
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mdl-time {
+  position: relative;
+}
+.mdl-time::before, .mdl-time::after {
+  content: "";
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 6.4rem;
+  position: absolute;
+  left: 0;
+  pointer-events: none;
+}
+.mdl-time::before {
+  top: -0.625rem;
+  background: linear-gradient(180deg, #000000 25%, rgba(0, 0, 0, 0) 100%);
+}
+.mdl-time::after {
+  bottom: -0.625rem;
+  background: linear-gradient(0deg, #000000 25%, rgba(25, 21, 48, 0.01) 100%);
+}
+.mdl-time-hour button, .mdl-time-minute button {
+  font-weight: 300;
+  font-size: 2.8rem;
+}
+.mdl-time-hour button[data-selected=true], .mdl-time-minute button[data-selected=true] {
+  font-weight: 700;
 }
 
 .wheel-picker--wrap {

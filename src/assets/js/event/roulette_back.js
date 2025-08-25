@@ -42,7 +42,7 @@ export default class Roulette {
 
   act() {
     this.button.disabled = true;
-    this.start();
+    this.play();
   }
   
   play (opt) {

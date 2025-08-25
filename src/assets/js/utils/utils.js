@@ -43,10 +43,117 @@ export const loadContent = ({ area, src, insert = false, callback = null }) => {
 	});
 };
 
+export const scrollMove = {
+  options: {
+    selector: document.querySelector('html, body'),
+    focus: false,
+    top: 0,
+    left: 0,
+    add: 0,
+    align: 'default',
+    effect: 'smooth', //'auto'
+    callback: false,
+  },
+  move(option) {
+    const opt = Object.assign({}, this.options, option);
+    //const opt = {...this.options, ...option};
+    const top = opt.top;
+    const left = opt.left;
+    const callback = opt.callback;
+    const align = opt.align;
+    const add = opt.add;
+    const focus = opt.focus;
+    const effect = opt.effect;
+    let selector = opt.selector;
+
+    switch (align) {
+      case 'center':
+        selector.scrollTo({
+          top: Math.abs(top) - (selector.offsetHeight / 2) + add,
+          left: Math.abs(left) - (selector.offsetWidth / 2) + add,
+          behavior: effect
+        });
+        break;
+
+      case 'default':
+      default:
+        selector.scrollTo({
+          top: Math.abs(top) + add,
+          left: Math.abs(left) + add,
+          behavior: effect
+        });
+    }
+    this.checkEnd({
+      selector: selector,
+      nowTop: selector.scrollTop,
+      nowLeft: selector.scrollLeft,
+      align: align,
+      callback: callback,
+      focus: focus
+    });
+  },
+  checkEndTimer: {},
+  checkEnd(opt) {
+    const el_selector = opt.selector;
+    const align = opt.align
+    const focus = opt.focus
+    const callback = opt.callback
+
+    let nowTop = opt.nowTop;
+    let nowLeft = opt.nowLeft;
+
+    this.checkEndTimer = setTimeout(() => {
+      //스크롤 현재 진행 여부 판단
+      if (nowTop === el_selector.scrollTop && nowLeft === el_selector.scrollLeft) {
+        clearTimeout(this.checkEndTimer);
+        //포커스가 위치할 엘리먼트를 지정하였다면 실행
+        if (!!focus) {
+          focus.setAttribute('tabindex', 0);
+          focus.focus();
+        }
+        //스크롤 이동후 콜백함수 실행
+        if (!!callback) {
+          if (typeof callback === 'string') {
+            // Global.callback[callback]();
+          } else {
+            callback();
+          }
+        }
+      } else {
+        nowTop = el_selector.scrollTop;
+        nowLeft = el_selector.scrollLeft;
+
+        this.checkEnd({
+          selector: el_selector,
+          nowTop: nowTop,
+          nowLeft: nowLeft,
+          align: align,
+          callback: callback,
+          focus: focus
+        });
+      }
+    }, 100);
+  }
+}
+
+export const makeID = (v) => {
+  let idLength = v;
+  let idText = "";
+  let word_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*"; 
+  for (let i = 0; i < idLength; i++) {
+    idText += word_list.charAt(Math.floor(Math.random() * word_list.length));
+  };
+  return idText;
+};
+
 export const comma = (n) => {
   const parts = n.toString().split(".");
 
   return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+};
+
+export const add0 = (x) => {
+  return Number(x) < 10 ? '0' + x : x;
 };
 
 export const dayOption = (YYYY, MM) => {
@@ -175,6 +282,42 @@ export const getDeviceInfo = (appname) => {
     app: isApp
   }
   return data;
+}
+
+export const textLength = (opt) => {
+  const textInputs = document.querySelectorAll('[data-textlength-object]');
+  const submitButton = opt ? opt.btn ? opt.btn : null : null;
+  const updateInputStatus = (inputElement) => {
+    const targetId = inputElement.dataset.textlengthObject;
+    const counterElements = document.querySelectorAll(`[data-textlength-target="${targetId}"]`);
+    const minLength = Number(inputElement.getAttribute('minlength')) || 4;
+    const currentLength = inputElement.value.length;
+    const maxLength = Number(inputElement.getAttribute('maxlength'));
+    if (currentLength > maxLength) {
+      inputElement.value = inputElement.value.slice(0, maxLength);
+    }
+    if (counterElements) {
+      counterElements.forEach(item => {
+        item.textContent = currentLength;
+      });
+    }
+    inputElement.dataset.state = (currentLength >= minLength) ? 'on' : 'off';
+  };
+
+  const updateButtonState = () => {
+    if (!submitButton) return;
+    const allInputsValid = Array.from(textInputs).every(input => input.dataset.state === 'on');
+    submitButton.disabled = !allInputsValid;
+  };
+
+  textInputs.forEach(input => {
+    updateInputStatus(input);
+    updateButtonState();
+    input.addEventListener('keyup', () => {
+      updateInputStatus(input);
+      updateButtonState();
+    });
+  });
 }
 
 export class ScrollTrigger {

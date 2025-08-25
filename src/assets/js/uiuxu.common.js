@@ -11,10 +11,11 @@ import ScrollEvent from './component/scrollEvent.js';
 import Drag from './component/drag.js';
 import Countdown from './component/countdown.js';
 import ChartBubble from './component/chart_bubble.js';
+import TimeSelect from './component/timeSelect.js';
 
 import Roulette from './event/roulette.js';
 
-import { loadContent, RadioAllcheck, dayOption, createOptions, getDeviceInfo } from './utils/utils.js';
+import { loadContent, RadioAllcheck, dayOption, createOptions, getDeviceInfo, textLength } from './utils/utils.js';
 
 class UXCore {
   #setupGlobalNamespace() {
@@ -118,6 +119,7 @@ export const UX = {
   Countdown,
   ChartBubble,
   Roulette,
+  TimeSelect,
 
   init: () => uxInstance.init(),
 
@@ -126,5 +128,6 @@ export const UX = {
     dayOption,
     createOptions,
     RadioAllcheck,
+    textLength,
   },
 };

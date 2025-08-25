@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Time Select | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+	
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="Time Select">Time Select</h1>
+
+						<box style="background-color: #000">
+              <div class="mdl-time" data-id="nmdp_9_4p_time"></div>
+						</box>
+
+          </group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init();
+    
+    const inputTime = new UX.TimeSelect({
+        id: 'nmdp_9_4p_time',
+        value: '12:50',
+        miuntUnit: 1
+    });
+	</script>
+</body>
+
+</html>

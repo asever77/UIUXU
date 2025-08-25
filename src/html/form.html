@@ -4,42 +4,106 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Form | UIUXU </title>
+	<title>From | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+   
+	</style>
 </head>
 
-<body>
-	<div class="area-base">
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
 		<header class="base-header"></header>
 		<div class="base-body">
 			<aside class="base-side"></aside>
 			<main class="base-content">
-				<wrap>
-					<tit>Tab</tit>
-					<box>
-						<label for="a1">예약번호</label>
-            <input type="text" id="a1" aria-invalid="true" aria-describedby="error-msg">
-            <div id="erro-msg">올바르지 않습니다.</div>
-					</box>
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="From">From</h1>
+
+						<stit>textarea</stit>
+						<box>
+							<fieldset style="display: flex; flex-direction: column;">
+								<legend>제한 입력</legend>
+								<label for="test1">메시지(50자 이내)</label>
+								<textarea id="test1" aria-describedby="testMessage" maxlength="50" data-textlength-object="test1"></textarea>
+								<div aria-hidden="true">
+									<b data-textlength-target="test1">0</b>/50
+								</div>
+								<div aria-atomic="true" aria-live="off" id="testMessage">
+									총 50자 중<b data-textlength-target="test1">0</b>자 입력
+								</div>
+							</fieldset>
+						</box>
+
+						<stit>input clear</stit>
+						<box>
+							<fieldset style="display: flex; flex-direction: column;">
+								<legend>입력</legend>
+								<div class="form--wrap">
+									<div class="form--item">
+										<div class="form--head">
+											<div class="form--head-group">
+												<label for="test2">제목</label>
+												<button type="button">툴팁</button>
+											</div>
+										</div>
+										<div class="form--body">
+											<div class="form--body-group">
+												Helper Text 
+											</div>
+											<div class="form--body-group">
+												<div class="form--input">
+													<select>
+														<option>1111</option>
+													</select>
+													<input type="text" id="test2">
+													<button type="button">버튼</button>
+												</div>
+												
+											</div>
+											<div class="form--body-group">
+												Helper Text 
+											</div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</box>
+
+						<box>
+							<h3 id="timerange">항공권 조회 기간</h3>
+							<div role="group" aria-labelledby="timerange" aria-describedby="timerange-error">
+								<input name="range" type="radio" id="nine">
+								<label for="nine">9월</label>
+								<input name="range" type="radio" id="ten" >
+								<label for="ten">10월</label>
+								<input name="range" type="radio" id="eleven" >
+								<label for="eleven">11월</label>
+								<input name="range" type="radio" id="twelve" >
+								<label for="twelve">12월</label>
+							</div>
+							<p id="timerange-error">조회를 원하는 달을 선택하세요</p>
+						</box>
+          </group>
 				</wrap>
 			</main>
 		</div>
 		<footer class="base-footer"></footer>
 	</div>
 
-	<!-- system box -->
-	<div class="area-system"></div>
-	<!-- select combo box -->
-	<div class="area-select"></div>
-	<!-- toast -->
-	<div class="area-toast"></div>
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
 
 	<!-- script -->
 	<script type="module">
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
-		
- 
+
+		UX.utils.textLength();
 	</script>
 </body>
 

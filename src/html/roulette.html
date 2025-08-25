@@ -26,6 +26,8 @@
 
 						<stit>Roulette Event</stit>
 						<box>
+							<select id="test"></select>
+							<button type="button" id="reset">리셋</button>
               <div data-roulette="main">
                 <div data-roulette="arrow"></div>
                 <button type="button" data-roulette="start"></button>
@@ -59,21 +61,38 @@
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
     
+		const datas = [1000, 2000, 3000, 4000, 5000, 1000, 2000, 3000, 4000, 5000];
+		const datas2 = [1000, 2000, 3000, 4000, 5000];
+		let current = 1000;
     UI.exe.luckyRouletteEvent = new UX.Roulette({
       id: 'main',
       speed: 5000,
       turns: 5,
 
-      data: [1000, 2000, 3000, 4000, 5000, 1000, 2000, 3000, 4000, 5000],
+      data: datas,
       start: (v) => {
         UI.exe.luckyRouletteEvent.play({
-          result: 2000,
-          callback: (v) => {
-            console.log(v);
-          }
-        });
+					result: current,
+					callback: (v) => {
+						console.log(v);
+					}
+				});
       }
     });
+
+		
+
+		datas.forEach(item => {
+			document.querySelector('#test').insertAdjacentHTML('beforeend', `<option value="${item}">${item}</option>`);
+		});
+		document.querySelector('#test').addEventListener('change', (e) => {
+			current = Number(e.currentTarget.value);
+		});
+		document.querySelector('#reset').addEventListener('click', (e) => {
+			UI.exe.luckyRouletteEvent.reset(datas2);
+		})
+
+		
 
 
     //  UI.exe.luckyRouletteEvent = new UX.Roulette({
