@@ -75,18 +75,40 @@
 						</box>
 
 						<box>
-							<h3 id="timerange">항공권 조회 기간</h3>
-							<div role="group" aria-labelledby="timerange" aria-describedby="timerange-error">
-								<input name="range" type="radio" id="nine">
-								<label for="nine">9월</label>
-								<input name="range" type="radio" id="ten" >
-								<label for="ten">10월</label>
-								<input name="range" type="radio" id="eleven" >
-								<label for="eleven">11월</label>
-								<input name="range" type="radio" id="twelve" >
-								<label for="twelve">12월</label>
-							</div>
-							<p id="timerange-error">조회를 원하는 달을 선택하세요</p>
+							<fieldset>
+								<legend>항공권 조회 기간
+									<!-- 에러메시지 -->
+									<p id="timerange-error">조회를 원하는 달을 선택하세요</p>
+								</legend>
+								<div>
+									<input name="range" type="radio" id="nine">
+									<label for="nine">9월</label>
+									<input name="range" type="radio" id="ten" >
+									<label for="ten">10월</label>
+									<input name="range" type="radio" id="eleven" >
+									<label for="eleven">11월</label>
+									<input name="range" type="radio" id="twelve" >
+									<label for="twelve">12월</label>
+								</div>
+							</fieldset>
+							
+							<fieldset>
+								<legend>환불 신청 전 동의 사항
+									<!-- 에러 메시지 -->
+									<p id="error-massege">첫번째 항목에 동의해 주세요</p>
+								</legend>
+								<div>
+									<ul>
+											<li>환불 수수료는 최초 지불 수단에서 공제됩니다.</li>
+											<li>신용카드로 구매한 환불금은 승인 후 카드사로 이관되므로 환불금 수령시기는 해당 카드사에 문의해 주세요.</li>
+											<li>환불에 대한 책임은 신청자 본인에게 있습니다.</li>
+									</ul>
+									<input type="checkbox" id="agree1">
+									<label for="agree1">[동의] 환불 방법을 확인하였습니다.</label>
+									<input type="checkbox" id="agree2">
+									<label for="agree2">[동의] 위의 내용에 대해 모두 확인하였습니다.</label>
+								</div>
+							</fieldset>
 						</box>
           </group>
 				</wrap>
