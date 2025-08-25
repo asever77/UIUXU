@@ -16,6 +16,8 @@ export default class Accordion {
     const defaults = {
       expanded: null,
       singleOpen: true,
+      scrollIntoView: false,
+      scrollOptions: { behavior: 'smooth', block: 'nearest' },
     };
 
     this.#option = { ...defaults, ...opt };
@@ -27,7 +29,6 @@ export default class Accordion {
 
     this.#acco_items = this.#acco.querySelectorAll(`[data-accordion-item="${this.#id}"]`);
     this.#acco_btns = this.#acco.querySelectorAll(`[data-accordion-button="${this.#id}"]`);
-    this.isAnimating = false; // ✨ 개선점: 애니메이션 상태 추적을 위한 플래그
 
     // handleToggle 메서드의 this 바인딩을 한 번만 수행
     this.handleToggle = this.#handleToggle.bind(this);
@@ -149,11 +150,11 @@ export default class Accordion {
     slideDown(accoBody, 300).then(() => {
       button.disabled = false;
       this.#isAnimating = false;
-      // ✨ 개선점: 아이템이 열린 후 화면에 보이도록 스크롤
-      // button.closest(`[data-accordion-item="${this.#id}"]`).scrollIntoView({
-      //   behavior: 'smooth',
-      //   block: 'nearest'
-      // });
+      // 옵션으로 스크롤 보정 지원
+      if (this.#option.scrollIntoView) {
+        const scrollTarget = button.closest(`[data-accordion-item="${this.#id}"]`) || button;
+        scrollTarget.scrollIntoView(this.#option.scrollOptions || { behavior: 'smooth', block: 'nearest' });
+      }
       callback && callback();
     });
   }

@@ -37,41 +37,9 @@
   </style>
 </head>
 <body>
+  <div style="margin-inline: auto; width: 10rem; height: 900rem; background-color: aquamarine;margin-top: 5rem;
+    margin-bottom: 5rem;"></div>
 
-<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- 기본 약한 Glow -->
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="4" result="blur1"/>
-      <feGaussianBlur stdDeviation="10" result="blur2"/>
-      <feMerge>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-
-    <!-- 마우스 오버시 강한 Glow -->
-    <filter id="glow-strong" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="4" result="blur1"/>
-      <feGaussianBlur stdDeviation="15" result="blur2"/>
-      <feGaussianBlur stdDeviation="25" result="blur3"/>
-      <feColorMatrix in="blur3" result="glowColor" type="matrix"
-        values="1 0 0 0 0
-                0 1 0 0 0
-                0 0 1 0 0
-                0 0 0 0.6 0"/>
-      <feMerge>
-        <feMergeNode in="glowColor"/>
-        <feMergeNode in="blur2"/>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <text x="50" y="120">iPhone Glow</text>
-</svg>
 
 </body>
 </html>

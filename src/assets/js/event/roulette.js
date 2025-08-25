@@ -26,26 +26,29 @@ export default class Roulette {
 
   reset(data) {
     if (data) this.data = data;
-    const items = this.roulette.querySelectorAll('[data-roulette="item"]');
-    this.wrap.style.transition = '';
-    this.wrap.style.transform = '';
     this.sum = this.data.length;
     this.deg = 360 / this.sum;
-    const deg = this.deg;
+
+    this.wrap.style.transition = '';
+    this.wrap.style.transform = '';
     this.group.style.transform = `rotate(90deg)`;
+
     this.button.disabled = false;
-    
-    if (items) items.forEach(item => item.remove());
+    this.button.classList.remove('off');
+    this.arrow.classList.remove('off');
+
+    this.roulette.querySelectorAll('[data-roulette="item"]').forEach(el => el.remove());
     this.data.forEach((item, index) => {
       this.group.insertAdjacentHTML('beforeend', `
-      <div data-roulette="item" style="transform:rotate(${360 - (deg * index)}deg) translateX(-50%);">
-        <div>${item}</div>
-        <div data-roulette="line" style="transform:rotate(${(deg / 2)}deg);"></div>
-      </div>`);
+        <div data-roulette="item" style="transform:rotate(${360 - (this.deg * index)}deg) translateX(-50%);">
+          <div>${item}</div>
+          <div data-roulette="line" style="transform:rotate(${(this.deg / 2)}deg);"></div>
+        </div>`);
     });
+
     setTimeout(() => {
-       this.wrap.style.transition = `transform ${this.speed}ms cubic-bezier(0.32, 0.92, 0.71, 1.01)`;
-    },0);
+      this.wrap.style.transition = `transform ${this.speed}ms cubic-bezier(0.32, 0.92, 0.71, 1.01)`;
+    }, 0);
   }
 
   act() {
@@ -54,24 +57,30 @@ export default class Roulette {
   }
   
   play (opt) {
-    const playCallback = opt.callback;
-    let _deg = 0;
-    this.degData = [];
-    this.data.forEach(element => {
-      this.degData.push([element, _deg]);
-      _deg = _deg + this.deg;
-    });
+    const callback = opt.callback;
     const result = opt.result;
-    const filteredDegData = this.degData.filter(item => item[0] === result);
-    const radom = Math.floor(Math.random() * filteredDegData.length) ;
-    this.wrap.style.transform = `rotate(${filteredDegData[radom][1] + this.baseDeg + this.scope}deg)`;
+
+    let accumulatedDeg = 0;
+    this.degData = [];
+    this.data.forEach(value => {
+      this.degData.push([value, accumulatedDeg]);
+      accumulatedDeg += this.deg;
+    });
+    
+    const candidates = this.degData.filter(item => item[0] === result);
+    const randomIndex = Math.floor(Math.random() * candidates.length);
+  
+    this.wrap.style.transform = `rotate(${candidates[randomIndex][1] + this.baseDeg + this.scope}deg)`;
     this.arrow.classList.add('on');
+
     this.wrap.addEventListener('transitionend', () => {
       this.arrow.classList.remove('on');
       this.arrow.classList.add('off');
       this.button.classList.add('off');
       this.roulette.dataset.state="complete";
-      this.callback && this.callback(opt.result);
-    });
+
+      this.button.disabled = false;
+      callback && callback(result);
+    }, { once: true });
   }
 }
