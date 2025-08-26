@@ -7,6 +7,7 @@ export default class Dialog {
       type: 'modal', // 'modal', 'system', 'toast', 'snackbar'
       ps: 'center', // 'center', 'top', 'bottom', 'left', 'right', 'full'
       full: false,
+      load: 'pre',
 
       src: null,
       loadCallback: null,
@@ -41,6 +42,8 @@ export default class Dialog {
     this.type = this.option.type;
     this.ps = this.option.ps;
     this.full = this.option.full;
+    this.load = this.option.load;
+    this.lazyShow = this.option.load === 'lazy' ? true : false;
 
     this.src = this.option.src;
     this.loadCallback = this.option.loadCallback;
@@ -73,7 +76,9 @@ export default class Dialog {
     this.boundExtendStart = this.extendStart.bind(this);
     this.boundToastAnimationend = this.toastAnimationend.bind(this);
 
-    this.init();
+    if (this.load === 'pre') {
+      this.init();
+    }
 	}
 
   init() {
@@ -211,6 +216,7 @@ export default class Dialog {
 
     //load callback
     this.loadCallback && this.loadCallback();
+    this.lazyShow && this.show();
   }
 
   handleDimClick (e) {
@@ -460,32 +466,36 @@ export default class Dialog {
       this.initToast('show');
     }
     else {
-      document.querySelector('body').classList.add('scroll-not');
-      if (this.focus_back === null) this.focus_back = document.activeElement;
-      this.dialog.setAttribute('aria-hidden', 'false');
-      this.dialogWrap && this.dialogWrap.focus();
-      this.dialog.dataset.state = "show";
+      if (this.dialog === null) {
+        this.init();
+      } else {
+        document.querySelector('body').classList.add('scroll-not');
+        if (this.focus_back === null) this.focus_back = document.activeElement;
+        this.dialog.setAttribute('aria-hidden', 'false');
+        this.dialogWrap && this.dialogWrap.focus();
+        this.dialog.dataset.state = "show";
 
-      const openModals = document.querySelectorAll('[data-dialog][aria-hidden="false"]');
-      const zIndex = openModals.length;
-      const currentModal = document.querySelector('[data-dialog][aria-hidden="false"][data-current="true"]');
-      if (currentModal) currentModal.dataset.current = "false";
-      this.dialog.dataset.zindex = zIndex;
-      this.dialog.dataset.current = 'true';
-      // (this.option.drag) && this.dragEvent();
+        const openModals = document.querySelectorAll('[data-dialog][aria-hidden="false"]');
+        const zIndex = openModals.length;
+        const currentModal = document.querySelector('[data-dialog][aria-hidden="false"][data-current="true"]');
+        if (currentModal) currentModal.dataset.current = "false";
+        this.dialog.dataset.zindex = zIndex;
+        this.dialog.dataset.current = 'true';
+        // (this.option.drag) && this.dragEvent();
 
-      const trap = new FocusTrap(this.dialogWrap);
+        const trap = new FocusTrap(this.dialogWrap);
 
-      if (this.extend) {
-        const el_extend = this.dialog.querySelector('[data-dialog-item="extend"]');
-        el_extend.addEventListener('touchstart', this.boundExtendStart, {passive:true});
-        el_extend.addEventListener('mousedown', this.boundExtendStart, {passive:true});
-      }
-      if (this.move) {
-        this.dialogWrap.removeEventListener('touchstart', this.moveStart);
-        this.dialogWrap.removeEventListener('mousedown', this.moveStart);
-        this.dialogWrap.addEventListener('touchstart', this.moveStart, {passive:true});
-        this.dialogWrap.addEventListener('mousedown', this.moveStart, {passive:true});
+        if (this.extend) {
+          const el_extend = this.dialog.querySelector('[data-dialog-item="extend"]');
+          el_extend.addEventListener('touchstart', this.boundExtendStart, {passive:true});
+          el_extend.addEventListener('mousedown', this.boundExtendStart, {passive:true});
+        }
+        if (this.move) {
+          this.dialogWrap.removeEventListener('touchstart', this.moveStart);
+          this.dialogWrap.removeEventListener('mousedown', this.moveStart);
+          this.dialogWrap.addEventListener('touchstart', this.moveStart, {passive:true});
+          this.dialogWrap.addEventListener('mousedown', this.moveStart, {passive:true});
+        }
       }
     }
 	}

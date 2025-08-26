@@ -58,8 +58,6 @@ export default class ToggleController {
     const toggles = this.container.querySelectorAll(`[data-toggle-object="${name}"]`);
     const targets = this.container.querySelectorAll(`[data-toggle-target="${name}"]`);
 
-console.log(this.option.area)
-
     let newState;
     if (forceState !== null) { // 특정 상태로 강제 설정하는 경우
       newState = forceState ? 'selected' : '';

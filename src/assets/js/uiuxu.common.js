@@ -63,9 +63,9 @@ class UXCore {
         insert: true,
       })
       .then(() => {
-        UI.exe.toggle.header = new ToggleController();
-
         const el_html = document.querySelector('html');
+        UI.exe.toggle.header = new ToggleController();
+        
         if (localStorage.getItem('dark-mode')) {
           el_html.dataset.mode = localStorage.getItem('dark-mode');
         }
@@ -77,6 +77,15 @@ class UXCore {
           }
           localStorage.setItem('dark-mode', el_html.dataset.mode);
         };
+
+        UI.exe.toggle.guideToggle = (v) => {
+          if (v.state) {
+            el_html.dataset.guide = 'on';
+          } else {
+            el_html.dataset.guide = 'off';
+          }
+        }
+
       })
       .catch((err) => console.error('Error loading header content:', err));
     }

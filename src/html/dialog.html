@@ -166,6 +166,14 @@
 									</td>
 								</tr>
 								<tr>
+									<th scope="row">load</th>
+									<td>String</td>
+									<td>'pre'</td>
+									<td>
+										다이얼로그를 미리 불러올지 설정합니다. 'pre', 'lazy'
+									</td>
+								</tr>
+								<tr>
 									<th scope="row">loadCallback</th>
 									<td>Function</td>
 									<td>null</td>
@@ -316,12 +324,9 @@
 		<footer class="base-footer"></footer>
 	</div>
 
-	<!-- dropdown -->
+	<!-- dialog -->
 	<div class="area-dialog" data-area="body">
-		<div class="ui-dialog" role="dialog" aria-hidden="true" 
-		data-dialog="modalname2" 
-		aria-labelledby="modalname2-label"
-		aria-describedby="modalname2-decs"> 
+		<div class="ui-dialog" role="dialog" aria-hidden="true" data-dialog="modalname2" aria-labelledby="modalname2-label" aria-describedby="modalname2-decs"> 
 			<div class="ui-dialog--wrap" role="document" tabindex="-1" data-dialog-item="wrap">
 				<div class="ui-dialog--header">
 					<h1 id="modalname2-label">제목2</h1>
@@ -340,6 +345,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="area-dropdown" data-area="body"></div>
 	<div class="area-toast" data-area="body"></div>
 
@@ -357,12 +363,11 @@
 			type: 'modal',
 			ps: 'center',
 			full: false,
-
+			load: 'pre', 
 			src: './dialog/modal.html',
 			loadCallback: () => {
 				console.log('modal1 loadCallback')
 			},
-
 			extend: false,
 			move: true,
 			dim: true,
@@ -387,7 +392,8 @@
 			id: 'modalname3',
 			ps: 'top',
 			src: './dialog/modal3.html',
-			extend: false,
+			extend: false, 
+			load: 'lazy', 
 			loadCallback: () => {
 				console.log('modal3 loadCallback')
 			},
@@ -397,7 +403,8 @@
 			id: 'modalname4',
 			ps: 'left',
 			src: './dialog/modal4.html',
-			extend: false,
+			extend: false, 
+			load: 'lazy', 
 			loadCallback: () => {
 				console.log('modal4 loadCallback')
 			},
@@ -407,7 +414,8 @@
 			id: 'modalname5',
 			ps: 'right',
 			src: './dialog/modal5.html',
-			extend: false,
+			extend: false, 
+			load: 'lazy', 
 			loadCallback: () => {
 				console.log('modal5 loadCallback');
 			},
@@ -442,7 +450,6 @@
 				UI.exe.confirm1.hide()
 			},
 		});
-
 
 		UI.exe.toast1 = new UX.Dialog({
 			area: document.querySelector('.area-toast'),

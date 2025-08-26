@@ -89,10 +89,12 @@ codebox code {
 	i {color: var(--gray-600)}
 	b {color: var(--sub);}
 }
-
+[data-guide="on"] guide{
+	display: block;
+}
 guide {
 	opacity: .3;
-	display: block;
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;

@@ -26,71 +26,113 @@
 
 						<stit>textarea</stit>
 						<box>
-							<fieldset style="display: flex; flex-direction: column;">
-								<legend>제한 입력</legend>
-								<label for="test1">메시지(50자 이내)</label>
-								<textarea id="test1" aria-describedby="testMessage" maxlength="50" data-textlength-object="test1"></textarea>
-								<div aria-hidden="true">
-									<b data-textlength-target="test1">0</b>/50
-								</div>
-								<div aria-atomic="true" aria-live="off" id="testMessage">
-									총 50자 중<b data-textlength-target="test1">0</b>자 입력
-								</div>
-							</fieldset>
-						</box>
+							<fieldset class="form--wrap" data-grid="sample">
+								<guide></guide>
+								<legend>textarea 제한 입력</legend>
 
-						<stit>input clear</stit>
-						<box>
-							<fieldset style="display: flex; flex-direction: column;">
-								<legend>입력</legend>
-								<div class="form--wrap">
-									<div class="form--item">
-										<div class="form--head">
-											<div class="form--head-group">
-												<label for="test2">제목</label>
-												<button type="button">툴팁</button>
+								<div class="form--item" data-ps="row">
+									<guide></guide>
+									<div class="form--head">
+										<guide></guide>
+										<div class="form--title" for="test1">내용</div>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<guide></guide>
+											메시지(50자 이내)
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											<div class="form--group">
+												<textarea id="test1" class="inp-base" aria-describedby="testMessage" maxlength="50" data-textlength-object="test1"></textarea>
 											</div>
 										</div>
-										<div class="form--body">
-											<div class="form--body-group">
-												Helper Text 
+										<div class="form--group">
+											<guide></guide>
+											<div aria-hidden="true">
+												<b data-textlength-target="test1">0</b>/50
 											</div>
-											<div class="form--body-group">
-												<div class="form--input">
-													<select>
-														<option>1111</option>
-													</select>
-													<input type="text" id="test2">
-													<button type="button">버튼</button>
-												</div>
-												
-											</div>
-											<div class="form--body-group">
-												Helper Text 
+											<div aria-atomic="true" aria-live="off" id="testMessage">
+												총 50자 중<b data-textlength-target="test1">0</b>자 입력
 											</div>
 										</div>
 									</div>
 								</div>
+ 
+								<div class="form--item" data-ps="col">
+									<guide></guide>
+									<div class="form--head">
+										<guide></guide>
+										<label class="form--title" for="test2">제목</label>
+										<button type="button">툴팁</button>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<guide></guide>
+											Helper Text 
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											<div class="form--group">
+												<select class="inp-base">
+													<option value="1">1111</option>
+													<option value="2">2222</option>
+													<option value="3">3333</option>
+												</select>
+												<input type="text" class="inp-base" id="test2">
+												<button type="button" class="btn-base">버튼</button>
+											</div>
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											Helper Text 
+										</div>
+									</div>
+								</div>
+
+								<div class="form--item" data-ps="row">
+									<guide></guide>
+									<div class="form--head">
+										<em class="form--title">기간</em>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<fieldset class="form--group">
+											<legend>라디오그룹</legend>
+											<input type="radio" id="rd1-1" name="rd1">
+											<label for="rd1-1" class="label--radio"><span>9월</span></label>
+											<input type="radio" id="rd1-2" name="rd1">
+											<label for="rd1-2" class="label--radio"><span>10월</span></label>
+											<input type="radio" id="rd1-3" name="rd1">
+											<label for="rd1-3" class="label--radio"><span>11월</span></label>
+											<input type="radio" id="rd1-4" name="rd1">
+											<label for="rd1-4" class="label--radio"><span>12월</span></label>
+										</fieldset>
+									</div>
+								</div>
+
+								<div class="form--item" data-ps="row">
+									<guide></guide>
+									<div class="form--head">
+										<em class="form--title">기간</em>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<input type="checkbox" id="cb1-1" name="cb1">
+											<label for="cb1-1" class="label--check"><span>9월</span></label>
+											<input type="checkbox" id="cb1-2" name="cb1">
+											<label for="cb1-2" class="label--check"><span>10월</span></label>
+										</div>
+									</div>
+								</div>
+
 							</fieldset>
 						</box>
 
 						<box>
-							<fieldset>
-								<legend>항공권 조회 기간
-									<!-- 에러메시지 -->
-									<p id="timerange-error">조회를 원하는 달을 선택하세요</p>
-								</legend>
-								<div>
-									<input name="range" type="radio" id="nine">
-									<label for="nine">9월</label>
-									<input name="range" type="radio" id="ten" >
-									<label for="ten">10월</label>
-									<input name="range" type="radio" id="eleven" >
-									<label for="eleven">11월</label>
-									<input name="range" type="radio" id="twelve" >
-									<label for="twelve">12월</label>
-								</div>
-							</fieldset>
 							
 							<fieldset>
 								<legend>환불 신청 전 동의 사항
