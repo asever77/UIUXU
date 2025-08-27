@@ -1,5 +1,5 @@
 .inp{
-  &-base {
+  &--base {
     display: block;
     border:1px solid var(--gray-900);
     border-radius: var(--x1);
@@ -8,8 +8,20 @@
     width: 100%;
     min-height: 4rem;
   }
+  &--item {
+    flex: 1;
+    position: relative;
+
+    &[data-width="full"] {
+      flex:1;
+    }
+    &[data-width="small"] {
+      flex-shrink: 0;
+      width: 10rem;
+    }
+  }
 }
-select.inp-base {
+select.inp--base {
   padding-right: var(--x3);
   background-size: 2.4rem;
   background-position: right 0 top 50%;
@@ -28,7 +40,6 @@ select.inp-base {
       flex: 0;
       min-width: 2rem;
       min-height: 2rem;
-      margin-right: 0.5rem;
       border: 2px solid var(--gray-900);
       transition: box-shadow 0.5s, border 0.3s;
       border-radius: 50%;
@@ -45,7 +56,6 @@ select.inp-base {
       flex: 0;
       min-width: 2rem;
       min-height: 2rem;
-      margin-right: 0.5rem;
       border: 2px solid var(--gray-900);
       transition: box-shadow 0.5s, border 0.3s;
     }
@@ -63,7 +73,7 @@ select.inp-base {
 .form {
   &--wrap {
     position: relative;
-    display: block;
+    display: flex;
     flex-direction: row;
     border: 0;
     width: 100%;
@@ -85,22 +95,6 @@ select.inp-base {
     border: 0;
     margin: 0;
     padding: 0;
-
-    &[data-ps="col"] {
-      flex-direction: column;
-    }
-    &[data-ps="row"] {
-      flex-direction: row;
-      align-items: flex-start;
-      .form--head {
-        flex-shrink: 0;
-        display: flex;
-        flex-direction: column;
-      }
-      .form--body {
-        flex: 1;
-      }
-    }
   }
   &--head {
     position: relative;
@@ -112,28 +106,78 @@ select.inp-base {
     position: relative;
     display: flex;
     flex-direction: column;
+    flex:1;
+    width: 100%;
     gap: calc(var(--x1) - (var(--x1) / 2));
   }
   &--group {
     position: relative;
     display: flex;
+    justify-content: flex-start;
     width: 100%;
-    gap: calc(var(--x1) - (var(--x1) / 2));
+    gap: calc(var(--x1) - (var(--x1) / 2)) var(--x1);
+  }
+}
+[data-direction="col/row"],
+[data-direction="col"] {
+  flex-direction: column !important;
+}
+[data-direction="row/col"],
+[data-direction="row"] {
+  flex-direction: row !important;
+  align-items: flex-start;
+}
+@media screen and (max-width: 699px) {
+  [data-direction="col/row"] {
+    flex-direction: row !important;
+    align-items: flex-start;
+  }
+  [data-direction="row/col"] {
+    flex-direction: column !important;
   }
 }
 
-.form--wrap {
-  &[data-grid="sample"] {
-    display: grid;
-    grid-template-rows: repeat(4);
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-flow: row;
+// custom GRID style
+// sample grid
+[data-grid="sample"] {
+  display: grid;
+  grid-template-rows: repeat(1);
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
 
+  .form--item:nth-of-type(1) {
+    grid-column: span 2;
+  }
+  .form--item:nth-of-type(2) {
+    grid-row: span 2;
+  }
+}
+@media screen and (max-width: 699px) {
+  [data-grid="sample"] {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  
     .form--item:nth-of-type(1) {
-      grid-column: span 2;
+      grid-column: auto;
     }
     .form--item:nth-of-type(2) {
-      grid-row: span 2;
+      grid-row: auto;
+    }
+  }
+}
+// tel grid
+[data-grid="tel-group"] {
+  display: grid;
+  grid-template-columns: 8rem 1fr 10rem;
+}
+@media screen and (max-width: 699px) {
+  [data-grid="tel-group"] {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    .btn-base {
+      grid-column: span 2;
     }
   }
 }

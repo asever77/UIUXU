@@ -8,10 +8,6 @@
 	<!-- loads the entire Variable Font -->
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
-
-	<style>
-   
-	</style>
 </head>
 
 <body data-toggle-target="nav">
@@ -22,135 +18,13 @@
 			<main class="base-content">
 				<wrap data-dir="col">
 					<group data-dir="col">
-						<h1 data-heading="display" data-text="From">From</h1>
-
-						<stit>textarea</stit>
+						<h1 data-heading="display" data-text="Text Length">Text Length</h1>
 						<box>
-							<fieldset class="form--wrap" data-grid="sample">
-								<guide></guide>
-								<legend>textarea 제한 입력</legend>
-
-								<div class="form--item" data-ps="row">
-									<guide></guide>
-									<div class="form--head">
-										<guide></guide>
-										<div class="form--title" for="test1">내용</div>
-									</div>
-									<div class="form--body">
-										<guide></guide>
-										<div class="form--group">
-											<guide></guide>
-											메시지(50자 이내)
-										</div>
-										<div class="form--group">
-											<guide></guide>
-											<div class="form--group">
-												<textarea id="test1" class="inp-base" aria-describedby="testMessage" maxlength="50" data-textlength-object="test1"></textarea>
-											</div>
-										</div>
-										<div class="form--group">
-											<guide></guide>
-											<div aria-hidden="true">
-												<b data-textlength-target="test1">0</b>/50
-											</div>
-											<div aria-atomic="true" aria-live="off" id="testMessage">
-												총 50자 중<b data-textlength-target="test1">0</b>자 입력
-											</div>
-										</div>
-									</div>
-								</div>
- 
-								<div class="form--item" data-ps="col">
-									<guide></guide>
-									<div class="form--head">
-										<guide></guide>
-										<label class="form--title" for="test2">제목</label>
-										<button type="button">툴팁</button>
-									</div>
-									<div class="form--body">
-										<guide></guide>
-										<div class="form--group">
-											<guide></guide>
-											Helper Text 
-										</div>
-										<div class="form--group">
-											<guide></guide>
-											<div class="form--group">
-												<select class="inp-base">
-													<option value="1">1111</option>
-													<option value="2">2222</option>
-													<option value="3">3333</option>
-												</select>
-												<input type="text" class="inp-base" id="test2">
-												<button type="button" class="btn-base">버튼</button>
-											</div>
-										</div>
-										<div class="form--group">
-											<guide></guide>
-											Helper Text 
-										</div>
-									</div>
-								</div>
-
-								<div class="form--item" data-ps="row">
-									<guide></guide>
-									<div class="form--head">
-										<em class="form--title">기간</em>
-									</div>
-									<div class="form--body">
-										<guide></guide>
-										<fieldset class="form--group">
-											<legend>라디오그룹</legend>
-											<input type="radio" id="rd1-1" name="rd1">
-											<label for="rd1-1" class="label--radio"><span>9월</span></label>
-											<input type="radio" id="rd1-2" name="rd1">
-											<label for="rd1-2" class="label--radio"><span>10월</span></label>
-											<input type="radio" id="rd1-3" name="rd1">
-											<label for="rd1-3" class="label--radio"><span>11월</span></label>
-											<input type="radio" id="rd1-4" name="rd1">
-											<label for="rd1-4" class="label--radio"><span>12월</span></label>
-										</fieldset>
-									</div>
-								</div>
-
-								<div class="form--item" data-ps="row">
-									<guide></guide>
-									<div class="form--head">
-										<em class="form--title">기간</em>
-									</div>
-									<div class="form--body">
-										<guide></guide>
-										<div class="form--group">
-											<input type="checkbox" id="cb1-1" name="cb1">
-											<label for="cb1-1" class="label--check"><span>9월</span></label>
-											<input type="checkbox" id="cb1-2" name="cb1">
-											<label for="cb1-2" class="label--check"><span>10월</span></label>
-										</div>
-									</div>
-								</div>
-
-							</fieldset>
-						</box>
-
-						<box>
-							
-							<fieldset>
-								<legend>환불 신청 전 동의 사항
-									<!-- 에러 메시지 -->
-									<p id="error-massege">첫번째 항목에 동의해 주세요</p>
-								</legend>
-								<div>
-									<ul>
-											<li>환불 수수료는 최초 지불 수단에서 공제됩니다.</li>
-											<li>신용카드로 구매한 환불금은 승인 후 카드사로 이관되므로 환불금 수령시기는 해당 카드사에 문의해 주세요.</li>
-											<li>환불에 대한 책임은 신청자 본인에게 있습니다.</li>
-									</ul>
-									<input type="checkbox" id="agree1">
-									<label for="agree1">[동의] 환불 방법을 확인하였습니다.</label>
-									<input type="checkbox" id="agree2">
-									<label for="agree2">[동의] 위의 내용에 대해 모두 확인하였습니다.</label>
-								</div>
-							</fieldset>
+							<textarea class="inp--base" minlength="10" maxlength="50" data-length-object="test1" placeholder="최소 10글자 이상, 최대 50자 미만"></textarea>
+							<b data-length-target="test1">0</b>/50<br>
+							<input type="input" class="inp--base" minlength="2" maxlength="10" data-length-object="test2" placeholder="최소 2글자 이상, 최대 10자 미만"></textarea>
+							<b data-length-target="test2">0</b>/10<br>
+							<button type="button" class="btn-base" disabled>확인</button>
 						</box>
           </group>
 				</wrap>
@@ -167,7 +41,11 @@
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init();
 
-		UX.utils.textLength();
+		UX.utils.textLength({
+			callback: (result) => {
+				console.log(result);
+			}
+		});
 	</script>
 </body>
 

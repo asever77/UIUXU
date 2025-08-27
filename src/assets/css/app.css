@@ -130,7 +130,7 @@ html {
   font-size: var(--w375);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 700px) {
   html {
     font-size: 10px;
   }
@@ -309,7 +309,8 @@ caption {
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   margin: -1px 0 0;
 }
 
@@ -332,7 +333,8 @@ legend,
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -456,15 +458,15 @@ codebox code b {
 }
 
 guide {
-  opacity: 0.3;
+  opacity: 1;
   display: none;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: 1px dashed tomato;
-  background-color: rgba(255, 99, 71, 0.2);
+  border: 1px dashed rgba(255, 99, 71, 0.2);
+  background-color: rgba(255, 99, 71, 0.1);
   pointer-events: none;
   z-index: 1000;
 }
@@ -476,14 +478,14 @@ guide::after, guide::before {
 guide::after {
   width: 100%;
   height: 1px;
-  border-top: 1px dashed tomato;
+  border-top: 1px dashed rgba(255, 99, 71, 0.2);
   top: 50%;
   left: 0;
 }
 guide::before {
   width: 1px;
   height: 100%;
-  border-left: 1px dashed tomato;
+  border-left: 1px dashed rgba(255, 99, 71, 0.2);
   left: 50%;
   top: 0;
 }
@@ -553,7 +555,7 @@ th, td {
   vertical-align: top;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 700px) {
   table {
     display: flex;
     width: 100%;
@@ -686,7 +688,7 @@ body {
 .nav-main {
   position: fixed;
   top: 0;
-  left: calc(50% - 45rem);
+  left: 50%;
   max-width: 90rem;
   width: 100%;
   padding: 9rem var(--x2) 11rem;
@@ -695,7 +697,7 @@ body {
   justify-content: flex-start;
   gap: var(--x3);
   z-index: 0;
-  transform: translateY(-100vh);
+  transform: translate(-50%, -100vh);
   transition: transform 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 200ms;
 }
@@ -731,7 +733,7 @@ body {
   opacity: 0;
 }
 .nav-main[data-toggle-state=selected] {
-  transform: translateY(0);
+  transform: translate(-50%, 0);
   transition: transform 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 .nav-main[data-toggle-state=selected]::before {
@@ -791,7 +793,7 @@ body {
   z-index: 0;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 700px) {
   .nav-main {
     left: 0;
     height: 100dvh;
@@ -1037,7 +1039,7 @@ body {
   font-weight: 500;
 }
 
-.inp-base {
+.inp--base {
   display: block;
   border: 1px solid var(--gray-900);
   border-radius: var(--x1);
@@ -1046,8 +1048,19 @@ body {
   width: 100%;
   min-height: 4rem;
 }
+.inp--item {
+  flex: 1;
+  position: relative;
+}
+.inp--item[data-width=full] {
+  flex: 1;
+}
+.inp--item[data-width=small] {
+  flex-shrink: 0;
+  width: 10rem;
+}
 
-select.inp-base {
+select.inp--base {
   padding-right: var(--x3);
   background-size: 2.4rem;
   background-position: right 0 top 50%;
@@ -1066,7 +1079,6 @@ select.inp-base {
   flex: 0;
   min-width: 2rem;
   min-height: 2rem;
-  margin-right: 0.5rem;
   border: 2px solid var(--gray-900);
   transition: box-shadow 0.5s, border 0.3s;
   border-radius: 50%;
@@ -1082,7 +1094,6 @@ select.inp-base {
   flex: 0;
   min-width: 2rem;
   min-height: 2rem;
-  margin-right: 0.5rem;
   border: 2px solid var(--gray-900);
   transition: box-shadow 0.5s, border 0.3s;
 }
@@ -1096,7 +1107,7 @@ select.inp-base {
 
 .form--wrap {
   position: relative;
-  display: block;
+  display: flex;
   flex-direction: row;
   border: 0;
   width: 100%;
@@ -1119,21 +1130,6 @@ select.inp-base {
   margin: 0;
   padding: 0;
 }
-.form--item[data-ps=col] {
-  flex-direction: column;
-}
-.form--item[data-ps=row] {
-  flex-direction: row;
-  align-items: flex-start;
-}
-.form--item[data-ps=row] .form--head {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-}
-.form--item[data-ps=row] .form--body {
-  flex: 1;
-}
 .form--head {
   position: relative;
   display: flex;
@@ -1144,28 +1140,79 @@ select.inp-base {
   position: relative;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  width: 100%;
   gap: calc(var(--x1) - var(--x1) / 2);
 }
 .form--group {
   position: relative;
   display: flex;
+  justify-content: flex-start;
   width: 100%;
-  gap: calc(var(--x1) - var(--x1) / 2);
+  gap: calc(var(--x1) - var(--x1) / 2) var(--x1);
 }
 
-.form--wrap[data-grid=sample] {
+[data-direction="col/row"],
+[data-direction=col] {
+  flex-direction: column !important;
+}
+
+[data-direction="row/col"],
+[data-direction=row] {
+  flex-direction: row !important;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 699px) {
+  [data-direction="col/row"] {
+    flex-direction: row !important;
+    align-items: flex-start;
+  }
+  [data-direction="row/col"] {
+    flex-direction: column !important;
+  }
+}
+[data-grid=sample] {
   display: grid;
-  grid-template-rows: repeat(4);
+  grid-template-rows: repeat(1);
   grid-template-columns: repeat(2, 1fr);
   grid-auto-flow: row;
 }
-.form--wrap[data-grid=sample] .form--item:nth-of-type(1) {
+[data-grid=sample] .form--item:nth-of-type(1) {
   grid-column: span 2;
 }
-.form--wrap[data-grid=sample] .form--item:nth-of-type(2) {
+[data-grid=sample] .form--item:nth-of-type(2) {
   grid-row: span 2;
 }
 
+@media screen and (max-width: 699px) {
+  [data-grid=sample] {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  }
+  [data-grid=sample] .form--item:nth-of-type(1) {
+    grid-column: auto;
+  }
+  [data-grid=sample] .form--item:nth-of-type(2) {
+    grid-row: auto;
+  }
+}
+[data-grid=tel-group] {
+  display: grid;
+  grid-template-columns: 8rem 1fr 10rem;
+}
+
+@media screen and (max-width: 699px) {
+  [data-grid=tel-group] {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+  }
+  [data-grid=tel-group] .btn-base {
+    grid-column: span 2;
+  }
+}
 .scroll-not {
   overflow: hidden !important;
 }
@@ -2130,7 +2177,7 @@ select.inp-base {
   z-index: 1;
 }
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 700px) {
   [data-dropdown-panel] [data-dropdown-section] {
     position: fixed !important;
     width: 100% !important;

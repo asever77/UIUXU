@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>From | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+   .guide {
+		margin-top: 2rem;
+		& * {
+			position: relative;
+			flex: 1;
+			border:1px solid #bdbdbd;
+			padding:2.2rem 0.4rem 0.4rem;
+			width:100%;
+			&::before{
+				content:"";
+				padding: .4rem .8rem;
+				position: absolute;
+				top:-1.8rem;
+				left:-1px;
+				border-radius: 0.8rem 0.8rem 0 0;
+				background-color: #000;
+				color:#fff;
+				font-size: 0.8rem;
+				line-height: 1;
+				height: 1.8rem;
+				opacity: 1;
+				border:1px solid #bdbdbd;
+			}
+		}
+		.form--wrap{background-color: var(--gray-900);gap:2.4rem 0.4rem;}
+		.form--item{background-color: var(--gray-800);gap:2.4rem 0.4rem;}
+		.form--head{background-color: var(--gray-700);gap:2.4rem 0.4rem;}
+		.form--body{background-color: var(--gray-700);gap:2.4rem 0.4rem;}
+		.form--group{background-color: var(--gray-600);gap:2.4rem 0.4rem;}
+		.form--title{background-color: var(--gray-600);gap:2.4rem 0.4rem;}
+		.inp--item{background-color: var(--gray-500);gap:2.4rem 0.4rem;}
+
+		.form--wrap::before{content:"form--wrap"; background-color: var(--gray-900);}
+		.form--item::before{content:"form--item"; background-color: var(--gray-800);}
+		.form--head::before{content:"form--head"; background-color: var(--gray-700);}
+		.form--body::before{content:"form--body"; background-color: var(--gray-700);}
+		.form--group::before{content:"form--group"; background-color: var(--gray-600);}
+		.form--title::before{content:"form--title"; background-color: var(--gray-600);}
+		.inp--item::before{content:"inp--item"; background-color: var(--gray-500);}
+	 } 
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<div class="area-base" data-type="sub">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-side"></aside>
+			<main class="base-content">
+				<wrap data-dir="col">
+					<group data-dir="col">
+						<h1 data-heading="display" data-text="From">From</h1>
+
+						<stit>form layout</stit>
+						<p>form--wrap, form--item, form--head, form--body, form--group 으로 구성됩니다.</p>
+						<p>data-direction="{ col | row | row/col | col/row }" 값에서서 '/' 는 미디어쿼리 기준으로 앞은 데스크탑, 뒤는 모바일로 적용된다.</p>
+						<box>
+							<fieldset class="form--wrap" data-grid="sample">
+								<guide></guide>
+								<legend>textarea 제한 입력</legend>
+
+								<div class="form--item" data-direction="row/col">
+									<guide></guide>
+									<div class="form--head">
+										<guide></guide>
+										<div class="form--title" for="test1">내용</div>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<guide></guide>
+											메시지(50자 이내)
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											<div class="inp--item">
+												<guide></guide>
+												<textarea id="test1" class="inp--base" aria-describedby="testMessage" maxlength="50" data-length-object="test1"></textarea>
+											</div>
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											<div aria-hidden="true">
+												<b data-length-target="test1">0</b>/50
+											</div>
+											<div aria-atomic="true" aria-live="off" id="testMessage">
+												총 50자 중<b data-length-target="test1">0</b>자 입력
+											</div>
+										</div>
+									</div>
+								</div>
+ 
+								<div class="form--item" data-direction="col">
+									<guide></guide>
+									<div class="form--head">
+										<guide></guide>
+										<label class="form--title" for="test2">제목</label>
+										<button type="button">툴팁</button>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<guide></guide>
+											Helper Text 
+										</div>
+										<div class="form--group" data-grid="tel-group">
+											<guide></guide>
+											<div class="inp--item">
+												<guide></guide>
+												<select class="inp--base" name="선택">
+													<option value="1">010</option>
+													<option value="2">011</option>
+													<option value="3">012</option>
+												</select>
+											</div>
+											<div class="inp--item">
+												<guide></guide>
+												<input type="text" class="inp--base" id="test2">
+											</div>
+											<button type="button" class="btn-base">버튼</button>
+										</div>
+										<div class="form--group">
+											<guide></guide>
+											Helper Text 
+										</div>
+									</div>
+								</div>
+
+								<div class="form--item" data-direction="row/col">
+									<guide></guide>
+									<div class="form--head">
+										<em class="form--title">기간</em>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<fieldset class="form--group">
+											<legend>라디오그룹</legend>
+											<div class="inp--item">
+												<input type="radio" id="rd1-1" name="rd1">
+												<label for="rd1-1" class="label--radio"><span>9월</span></label>
+											</div>
+											<div class="inp--item">
+												<input type="radio" id="rd1-2" name="rd1">
+												<label for="rd1-2" class="label--radio"><span>10월</span></label>	
+											</div>
+											<div class="inp--item">
+												<input type="radio" id="rd1-3" name="rd1">
+												<label for="rd1-3" class="label--radio"><span>11월</span></label>
+											</div>
+											<div class="inp--item">
+												<input type="radio" id="rd1-4" name="rd1">
+												<label for="rd1-4" class="label--radio"><span>12월</span></label>
+											</div>
+										</fieldset>
+									</div>
+								</div>
+
+								<div class="form--item" data-direction="col">
+									<guide></guide>
+									<div class="form--head">
+										<em class="form--title">기간</em>
+									</div>
+									<div class="form--body">
+										<guide></guide>
+										<div class="form--group">
+											<div class="inp--item">
+												<input type="checkbox" id="cb1-1" name="cb1">
+												<label for="cb1-1" class="label--check"><span>9월</span></label>
+											</div>
+											<div class="inp--item">
+												<input type="checkbox" id="cb1-2" name="cb1">
+												<label for="cb1-2" class="label--check"><span>10월</span></label>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</fieldset>
+						</box>
+
+						<box>
+							<div class="guide">
+								<div class="form--wrap" data-direction="col">
+									<div class="form--item" data-direction="row/col">
+										<div class="form--head">
+											<div class="form--title"></div>
+										</div>
+										<div class="form--body">
+											<div class="form--group"></div>
+											<div class="form--group">
+												<div class="inp--item"></div>
+												<div class="inp--item"></div>
+											</div>
+											<div class="form--group"></div>
+										</div>
+									</div>
+									<div class="form--item" data-direction="col">
+										<div class="form--head">
+											<div class="form--title"></div>
+										</div>
+										<div class="form--body">
+											<div class="form--group"></div>
+											<div class="form--group">
+												<div class="inp--item"></div>
+												<div class="inp--item"></div>
+												<div class="inp--item"></div>
+											</div>
+											<div class="form--group"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</box>
+
+						
+          </group>
+				</wrap>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init();
+
+		UX.utils.textLength();
+	</script>
+</body>
+
+</html>

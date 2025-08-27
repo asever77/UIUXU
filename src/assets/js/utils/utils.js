@@ -285,11 +285,16 @@ export const getDeviceInfo = (appname) => {
 }
 
 export const textLength = (opt) => {
-  const textInputs = document.querySelectorAll('[data-textlength-object]');
-  const submitButton = opt ? opt.btn ? opt.btn : null : null;
+  const textInputs = document.querySelectorAll('[data-length-object]');
+  const callback = opt ? opt.callback ? opt.callback : null : null;
+
+  textInputs.forEach(item => {
+    
+  })
+
   const updateInputStatus = (inputElement) => {
-    const targetId = inputElement.dataset.textlengthObject;
-    const counterElements = document.querySelectorAll(`[data-textlength-target="${targetId}"]`);
+    const targetId = inputElement.dataset.lengthObject;
+    const counterElements = document.querySelectorAll(`[data-length-target="${targetId}"]`);
     const minLength = Number(inputElement.getAttribute('minlength')) || 4;
     const currentLength = inputElement.value.length;
     const maxLength = Number(inputElement.getAttribute('maxlength'));
@@ -305,7 +310,7 @@ export const textLength = (opt) => {
   };
 
   const updateButtonState = () => {
-    if (!submitButton) return;
+    if (!callback) return;
     const allInputsValid = Array.from(textInputs).every(input => input.dataset.state === 'on');
     submitButton.disabled = !allInputsValid;
   };
