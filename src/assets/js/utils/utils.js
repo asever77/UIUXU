@@ -287,10 +287,14 @@ export const getDeviceInfo = (appname) => {
 export const textLength = (opt) => {
   const textInputs = document.querySelectorAll('[data-length-object]');
   const callback = opt ? opt.callback ? opt.callback : null : null;
-
+  const resultInputs = [];
+  
   textInputs.forEach(item => {
-    
-  })
+    resultInputs.push({
+      name: item.dataset.lengthObject,
+      state: false
+    });
+  });
 
   const updateInputStatus = (inputElement) => {
     const targetId = inputElement.dataset.lengthObject;
@@ -306,21 +310,23 @@ export const textLength = (opt) => {
         item.textContent = currentLength;
       });
     }
-    inputElement.dataset.state = (currentLength >= minLength) ? 'on' : 'off';
-  };
+    const itemToUpdate = resultInputs.find(item => item.name === targetId);
 
-  const updateButtonState = () => {
-    if (!callback) return;
-    const allInputsValid = Array.from(textInputs).every(input => input.dataset.state === 'on');
-    submitButton.disabled = !allInputsValid;
+    if (currentLength >= minLength) {
+      inputElement.dataset.state = 'on';
+      itemToUpdate.state = true;
+    } else {
+      inputElement.dataset.state = 'off';
+      itemToUpdate.state = false;
+    }
+    
+    callback && callback(resultInputs);
   };
 
   textInputs.forEach(input => {
     updateInputStatus(input);
-    updateButtonState();
     input.addEventListener('keyup', () => {
       updateInputStatus(input);
-      updateButtonState();
     });
   });
 }
