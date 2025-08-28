@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>KB 헬스케어 MVP2 </title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<style>
+		html {
+			font-size: 62.5%;
+		}
+		body {
+			padding: 0;
+			margin: 0;
+		}
+		*::after,
+		*::before,
+		* {
+			box-sizing: border-box;
+		}
+
+		.IA {
+			display: flex;
+			justify-content: center;
+			height: 100vh;
+			width: 100%;
+			background-color: #eee;
+			flex-direction: row-reverse;
+			padding: 0 2rem;
+			gap:2rem;
+		}
+
+		.IA-list {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			max-width: 120rem;
+			overflow: auto;
+		}
+
+		.iframe[data-size="s"] {
+			width: 280px !important;
+		}
+
+		.iframe[data-size="m"] {
+			width: 375px !important;
+		}
+
+		.iframe[data-size="l"] {
+			width: 690px !important;
+		}
+
+		.iframe[data-size="xl"] {
+			width: 1024px !important;
+		}
+
+		.IA .iframe {
+			border: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: #fff;
+			border-radius: 0.8rem;
+			outline: .1rem solid #999;
+		}
+
+		.IA .iframe[name="base"] {
+			width: 375px;
+			flex: 1;
+		}
+
+		.IA .iframe[name="iphone5s"] {
+			width: calc(640px / 2);
+			height: calc(1136px /2)
+		}
+
+		.IA .iframe[name="iphoneSE"] {
+			width: calc(750px / 2);
+			height: calc(1334px / 2)
+		}
+
+		.IA .iframe[name="iphone13Mini"] {
+			width: calc(1080px / 3);
+			height: calc(2340px / 3)
+		}
+
+		.IA .iframe[name="iphone14"] {
+			width: calc(1170px / 3);
+			height: calc(2532px / 3)
+		}
+
+		.IA .iframe[name="iphone14Plus"] {
+			width: calc(1284px / 3);
+			height: calc(2778px / 3)
+		}
+
+		.IA .iframe[name="iphone14Pro"] {
+			width: calc(1179px / 3);
+			height: calc(2556px / 3)
+		}
+
+		.IA .iframe[name="iphone14ProMax"] {
+			width: calc(1290px / 3);
+			height: calc(2796px / 3)
+		}
+
+		.IA .iframe[name="galaxyFold3_s"] {
+			width: calc(832px / 2.8125);
+			height: calc(2268px / 2.8125)
+		}
+
+		.IA .iframe[name="galaxyFold3_m"] {
+			width: calc(1768px / 2.8125);
+			height: calc(2208px / 2.8125)
+		}
+
+		.IA .iframe[name="galaxyZFlip4"] {
+			width: calc(1080px / 2.625);
+			height: calc(2640px / 2.625)
+		}
+
+		.IA .iframe[name="galaxyS21Ultra"] {
+			width: calc(1440px / 3.75);
+			height: calc(3200px / 3.75)
+		}
+
+		.IA .iframe[name="tablet"] {
+			width: calc(1440px / 3.75);
+			height: calc(3200px / 3.75)
+		}
+
+		.IA button.selected::before {
+			background-color: rgb(212, 173, 0);
+		}
+
+		.IA button.selected {
+			color: #000;
+			padding-right: 10px;
+		}
+
+		.IA .base-main .item a {
+			text-align: center;
+			border: 0;
+			line-height: 1;
+			width: 100%;
+			display: block;
+			font-size: 13px;
+			height: 20px;
+			color: #000;
+		}
+
+		/* .IA .base-main .item::after{content:""; display: block; position: absolute; height: 100%;border-right:1px dashed red;left:34px;z-index: 1000;top:40px;opacity: 0.5;}
+        .IA .base-main .item::before{content:""; display: block; position: absolute; height: 100%;border-left:1px dashed red;right:34px;z-index: 1000;top:40px;opacity: 0.5;} */
+		.IA .base-main .item {
+			position: relative;
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			border-radius: 10px;
+		}
+
+		.IA .base-main .item .group {
+			width: 100%;
+			position: relative;
+			top: 0;
+			left: 0;
+			font-size: 12px;
+			display: flex;
+			gap: 5px;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 0 5px;
+			height: 36px;
+		}
+
+		.IA button[data-page="false"] {
+			color: #999
+		}
+
+		.IA .base-main .item .group select {
+			flex: 1;
+		}
+
+		.IA .base-main .item .group label {
+			color: #fff
+		}
+
+		.IA .btn-wrap {
+			display: flex;
+			justify-content: center;
+			gap: 4px;
+			padding: 4px 0;
+		}
+
+		.IA .btn-wrap button::before {
+			display: none;
+		}
+
+		.IA .btn-wrap button {
+			height: 20px;
+			display: flex;
+			font-size: 12px;
+			flex: 1;
+			justify-content: center;
+			align-items: baseline;
+			background-color: #fff;
+		}
+
+		.IA-list .ui-codinglist-iframe iframe {
+			width: 100%;
+			height: 100%;
+			border: 0;
+		}
+
+		.IA-list .ui-codinglist-iframe {
+			position: sticky;
+			height: 85vh;
+			top: 80px;
+			width: calc(100% - 1100px);
+			min-width: 375px;
+			max-width: 375px;
+			border: 1px solid black;
+		}
+
+		.IA-list .ui-codinglist-iframe a {
+			display: block;
+			width: 100%;
+			background-color: #000;
+			color: #fff;
+			text-align: center;
+			padding: 10px;
+			font-size: 14px;
+			border: 0;
+		}
+
+		.IA-list table {
+			border-spacing: 0;
+			border-collapse: collapse
+		}
+
+
+
+		.IA-list caption {
+			display: none;
+		}
+
+		.IA-list dl,
+		dt,
+		dd,
+		.IA-list ul,
+		li {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			position: relative;
+		}
+
+		.IA-list .ui-codinglist {
+			width: 100%;
+			padding: 0;
+		}
+
+		.IA-list .ui-codinglist[data-state] tbody tr.srch-hidden,
+		.IA-list .ui-codinglist[data-pub] tbody tr.srch-hidden {
+			display: none !important;
+		}
+
+		.IA-list .ui-codinglist[data-state] tbody tr,
+		.IA-list .ui-codinglist[data-pub] tbody tr {
+			display: none;
+		}
+
+		.IA-list .ui-codinglist[data-pub] tbody tr.worker-view {
+			display: table-row;
+		}
+
+		.IA-list .ui-codinglist[data-state] tbody tr.state-view {
+			display: table-row;
+		}
+
+		.IA-list .ui-codinglist[data-state][data-pub] tbody tr.state-view,
+		.IA-list .ui-codinglist[data-state][data-pub] tbody tr.worker-view {
+			display: none;
+		}
+
+		.IA-list .ui-codinglist[data-state][data-pub] tbody tr.worker-view.state-view {
+			display: table-row;
+		}
+
+		.IA-list .ui-codinglist tr[data-state=제외] td {
+			background-color: #fafafa;
+		}
+
+		.IA-list .ui-codinglist tr[data-state=제외] td:not(.d) * {
+			text-decoration-line: line-through;
+			pointer-events: none;
+			color: #ccc !important;
+		}
+
+		.IA-list .ui-codinglist .srch-area {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: .8rem;
+			height: 5rem;
+		}
+
+		.IA-list .ui-codinglist .srch-area .ui-select {
+			display: none;
+		}
+
+		.IA-list .ui-codinglist .srch-area input {
+			height: 4rem;
+			border-radius: 1.2rem;
+			padding: 0 1.6rem;
+			flex: 1;
+			font-size: 1.8rem;
+			border: 0.2rem solid #bebebe;
+		}
+
+		.IA-list .ui-codinglist .srch-area button {
+			height: 4rem;
+			padding: 0 1.6rem;
+			border-radius: 1.2rem;
+			font-size: 1.8rem;
+			border: 0;
+			background-color: #555;
+			color: #fff;
+		}
+
+		.IA-list .ui-codinglist .btn-outlined {
+			margin-left: 0.4rem;
+		}
+
+		.IA-list .ui-codinglist tbody .srch-hidden {
+			display: none;
+		}
+
+		.IA-list .ui-codinglist .sch_warn .state span,
+		.ui-codinglist .sch_warn .state:before {
+			color: #f44336 !important;
+		}
+
+		.IA-list .ui-codinglist .state,
+		.IA-list .ui-codinglist .id {
+			background-color: #fff;
+		}
+
+		.IA-list .ui-codinglist .d {
+			padding: .4rem !important;
+		}
+
+		.IA-list .ui-codinglist .state span {
+			display: inline-block;
+			vertical-align: middle;
+			color: #3a3a3a;
+		}
+
+		.IA-list .ui-codinglist .state span::before {
+			content: "panorama_fish_eye";
+			font-family: "Material Symbols Outlined";
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 0.3rem;
+			margin-top: -0.2rem;
+			font-weight: 900;
+			font-size: 1rem;
+			line-height: 1;
+			color: #3a3a3a;
+		}
+
+		.IA-list .ui-codinglist .end .state span {
+			color: #3182f6;
+		}
+
+		.IA-list .ui-codinglist .end .state span::before {
+			content: "check_circle_outline";
+			color: #3182f6;
+		}
+
+		.IA-list .ui-codinglist .del .state span {
+			color: #3a3a3a;
+		}
+
+		.IA-list .ui-codinglist .del .state span::before {
+			content: "remove_circle_outline";
+			color: #ccc;
+		}
+
+		.IA-list .ui-codinglist {
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 1.6rem;
+		}
+
+		.IA-list .ui-codinglist .tbl-base {
+			height: auto;
+			flex: 1;
+			background-color: #fff;
+		}
+
+		.IA-list .ui-codinglist .tbl-base table {
+			table-layout: auto;
+			border: 0 !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .name {
+			white-space: nowrap;
+		}
+
+		.IA-list .ui-codinglist .tbl-base thead th {
+			white-space: nowrap;
+			background-color: #d6d6d6;
+			color: #000;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+			border-top: 0 !important;
+		}
+
+		.IA-list #projectlist .tbl-base tr>*:first-child {
+			border-left: 0 !important
+		}
+
+		.IA-list .ui-codinglist .tbl-base thead th .btn-base {
+			min-width: 1.2rem;
+			width: 1.2rem;
+			height: 1.4rem;
+			display: inline-block;
+		}
+
+		/* .IA-list .ui-codinglist .tbl-base tbody tr.on {  outline: 1px solid #3a3a3a;  transform: scale(1.002);  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);}
+.IA-list .ui-codinglist .tbl-base tbody tr:hover {  outline: 1px solid #3a3a3a;} */
+		.IA-list .ui-codinglist .tbl-base tbody tr td {
+			border-left: 0;
+			line-height: 1.1;
+			vertical-align: middle;
+			transition: padding 0.2s ease-in;
+			border-top: 1px solid rgba(0, 0, 0, .05);
+			word-break: keep-all;
+		}
+
+		.IA-list .ui-codinglist .tbl-base th,
+		.IA-list .ui-codinglist .tbl-base td {
+			border-left: 0;
+			font-size: 1.1rem;
+			font-weight: 500;
+			padding: 0.4rem;
+			white-space: nowrap;
+			vertical-align: middle;
+			word-break: break-all;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .d1,
+		.IA-list .ui-codinglist .tbl-base .d2,
+		.IA-list .ui-codinglist .tbl-base .d3,
+		.IA-list .ui-codinglist .tbl-base .d4,
+		.IA-list .ui-codinglist .tbl-base .d5,
+		.IA-list .ui-codinglist .tbl-base .d6,
+		.IA-list .ui-codinglist .tbl-base .d7,
+		.IA-list .ui-codinglist .tbl-base .d8 {
+			color: #d9d9d9;
+			background-color: #f9f9f9;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .d2,
+		.IA-list .ui-codinglist .tbl-base .d3,
+		.IA-list .ui-codinglist .tbl-base .d4,
+		.IA-list .ui-codinglist .tbl-base .d5,
+		.IA-list .ui-codinglist .tbl-base .d6,
+		.IA-list .ui-codinglist .tbl-base .d7,
+		.IA-list .ui-codinglist .tbl-base .d8 {
+			white-space: normal;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c1 .d1,
+		.IA-list .ui-codinglist .tbl-base .c2 .d2,
+		.IA-list .ui-codinglist .tbl-base .c3 .d3,
+		.IA-list .ui-codinglist .tbl-base .c4 .d4,
+		.IA-list .ui-codinglist .tbl-base .c5 .d5,
+		.IA-list .ui-codinglist .tbl-base .c6 .d6,
+		.IA-list .ui-codinglist .tbl-base .c7 .d7,
+		.IA-list .ui-codinglist .tbl-base .c8 .d8 {
+			color: #3a3a3a;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c1 .d1 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c2 .d2 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c3 .d3 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c4 .d4 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c5 .d5 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c6 .d6 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c7 .d7 {
+			border-top: 1px solid rgba(0, 0, 0, .05) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c1 .d1.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c2 .d2.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c3 .d3.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c4 .d4.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c5 .d5.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c6 .d6.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c7 .d7.is {
+			background-color: #ffffd6 !important;
+			border: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .id+td,
+		.IA-list .ui-codinglist .tbl-base .is {
+			border-right: 0 !important;
+		}
+
+		.IA-list .ui-codinglist#projectlist .tbl-base tbody tr:hover td {
+			color: #fff !important;
+			background-color: #222 !important;
+		}
+
+		.IA-list .ui-codinglist#projectlist .tbl-base .on td {
+			color: #fff !important;
+			background-color: #111 !important;
+		}
+
+		.IA-list .ui-codinglist#projectlist .tbl-base tbody tr:hover td a,
+		.IA-list .ui-codinglist#projectlist .tbl-base .on td a {
+			color: #fff !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .on .id+td,
+		.IA-list .ui-codinglist .tbl-base .on .is {
+			position: static;
+		}
+
+		/* .IA-list .ui-codinglist#projectlist .tbl-base table tbody tr[data-src="false"],
+		.IA-list .ui-codinglist#projectlist .tbl-base table tbody tr[data-disabled="true"] {display: none;} */
+
+		.IA-list .ui-codinglist#projectlist .tbl-base table tbody tr[data-disabled="true"] td {
+			background-color: #ccc !important;
+			color: #fff !important;
+
+			.ui-coding-link {
+				color: #fff !important;
+			}
+		}
+
+		.IA-list .ui-codinglist#projectlist .tbl-base table tbody tr[data-src="false"] td {
+			background-color: #efefef !important;
+			color: #c9c6c6 !important;
+
+			.ui-coding-link {
+				color: #c9c6c6 !important;
+			}
+		}
+
+		.IA-list .ui-codinglist .tbl-base .d1.is {
+			border-left: 1px solid rgba(0, 0, 0, .3) !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c1.sch_warn .d1.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c2.sch_warn .d2.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c3.sch_warn .d3.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c4.sch_warn .d4.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c5.sch_warn .d5.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c6.sch_warn .d6.is {
+			background-color: #efefef !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c7.sch_warn .d7.is {
+			background-color: #efefef !important;
+		}
+
+		.sch_warn .ui-coding-link {
+			color: #ccc;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c1[data-state="제외"] .d1.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c2[data-state="제외"] .d2.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c3[data-state="제외"] .d3.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c4[data-state="제외"] .d4.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c5[data-state="제외"] .d5.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c6[data-state="제외"] .d6.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .c7[data-state="제외"] .d7.is {
+			background-color: #e7e7db !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .today-mod .date,
+		.IA-list .ui-codinglist .tbl-base .today-mod .mod {
+			color: red !important;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .today-mod td.state::after {
+			content: "수정";
+			display: inline-block;
+			background-color: tomato;
+			color: #fff;
+			margin: -2px 0 0 -20px;
+			vertical-align: middle;
+		}
+
+		.IA-list .ui-codinglist .tbl-base .today-mod td {
+			background-color: rgb(253, 234, 234);
+		}
+
+		.IA-list .ui-codinglist .tbl-base .name-tg {
+			display: none;
+		}
+
+		.IA-list .ui-codinglist.name-toggle-view .btn-base[data-material]::before {
+			content: "first_page";
+		}
+
+		.IA-list .ui-codinglist.name-toggle-view tr .name-tg {
+			display: table-cell;
+		}
+
+		.IA-list .ui-codinglist.name-toggle-view tr td.name-tg {
+			background-color: #FAFAFA;
+		}
+
+		.IA-list .ui-codinglist-header {
+			display: flex;
+			align-items: center;
+			gap: 1.6rem;
+			position: sticky;
+			z-index: 3;
+			top: 0;
+			padding: 0.8rem 0;
+			backdrop-filter: blur(1px);
+			-webkit-backdrop-filter: blur(1px);
+			justify-content: center;
+		}
+
+		.IA-list .ui-codinglist-state {
+			display: none;
+			position: relative;
+			top: 0;
+			padding: 0.8rem 1.6rem;
+			overflow: hidden;
+			border-radius: 0.4rem;
+			z-index: 3;
+			background: #424242;
+			color: #FAFAFA;
+			font-size: 1.2rem;
+			border: 1px solid #4dcbe3;
+		}
+
+		.IA-list .ui-codinglist-state dt {
+			font-weight: 600;
+			font-size: 1.2rem;
+			color: #4dcbe3;
+		}
+
+		.IA-list .ui-codinglist-state .bar {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 0;
+			z-index: 1;
+			height: 100%;
+			background-color: #6200ee;
+			box-shadow: 0 0 3rem rgba(74, 238, 0, 0.5);
+			transition: all 0.3s ease-out;
+		}
+
+		.IA-list .ui-codinglist-state dl {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			position: relative;
+			z-index: 2;
+		}
+
+		.IA-list .ui-codinglist-state ul {
+			display: flex;
+		}
+
+		.IA-list .ui-codinglist-state li {
+			flex: 1 auto;
+			margin-left: 1.6rem;
+		}
+
+		/* tbl */
+		.tbl-base {
+			margin: 0 0;
+			width: 100%;
+			position: relative;
+			font-size: 1.4rem;
+			height: calc(100vh - 60px);
+			overflow-y: auto;
+			outline: 1px solid #999;
+			border-radius: 0.8rem;
+		}
+
+		.IA-list .tbl-base table {
+			width: 100%;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		.IA-list .tbl-base table>thead {
+			position: sticky;
+			top: 0;
+			border-bottom: 2px solid var(--gray400);
+		}
+
+		.IA-list .tbl-base table>thead tr {
+			background: var(--gray400);
+		}
+
+		.IA-list .tbl-base table>thead th {
+			text-align: left;
+			padding: 0.5rem 1.5rem 0.7rem 0.5rem;
+			font-weight: 700;
+			color: var(--gray900);
+			background: var(--white);
+			border: 1px solid var(--gray300);
+		}
+
+		.IA-list .tbl-base table>thead th:first-child {
+			border-left: 0;
+		}
+
+		.IA-list .tbl-base table>tbody {
+			border-bottom: 2px solid var(--gray400);
+			position: relative;
+		}
+
+		.IA-list .tbl-base table>tbody.line-t,
+		.IA-list .tbl-base table>tbody+tbody {
+			border-top: 1px solid rgba(0, 0, 0, 1) !important;
+		}
+
+		.IA-list .tbl-base table>tbody.line-t tr:first-child>*,
+		.IA-list .tbl-base table>tbody+tbody tr:first-child>* {
+			border-top: 1px solid var(--gray400);
+		}
+
+		.IA-list .tbl-base table>tbody td,
+		.IA-list .tbl-base table>tbody th {
+			padding: 0.5rem 1.5rem 0.7rem 0.5rem;
+			font-weight: 300;
+			text-align: left;
+			background: var(--white);
+			vertical-align: top;
+		}
+
+		.IA-list .tbl-base table>tbody td:first-child,
+		.tbl-base table>tbody th:first-child {
+			border-left: 0;
+		}
+
+		.IA-list .tbl-base table>tbody th {
+			font-weight: 700;
+			background: var(--white);
+			color: var(--gray800);
+		}
+
+		.IA-list .tbl-base .ui-tablescroll-clone {
+			position: absolute;
+			width: 100%;
+			top: 0;
+			left: 0;
+			z-index: 1;
+		}
+
+		.IA-list .tbl-base .ui-tablescroll-clone>tbody {
+			border-bottom: 2px solid var(--gray400);
+		}
+
+		.IA-list .tbl-base .ui-tablescroll-clone>tbody td {
+			text-align: left;
+			padding: 0.5rem 1.5rem 0.7rem 0.5rem;
+			font-weight: 700;
+			color: var(--gray900);
+			background: var(--white);
+		}
+
+		.IA-list .tbl-base .ui-tablescroll-clone>tbody td:first-child {
+			border-left: 0;
+		}
+
+		/* ui-tblscroll */
+		.ui-tablescroll {
+			position: relative;
+		}
+
+		.IA-list .ui-tablescroll-wrap {
+			overflow-y: overlay;
+			height: 200px;
+			width: 100%;
+		}
+
+		.IA-list .ui-tablescroll-wrap.tbl-base {
+			border: 0;
+		}
+
+		.iframe-size {
+			display: flex;
+		}
+
+		.tab {
+			width: 100%;
+			display: flex;
+			justify-content: flex-start;
+			border-bottom: 1px solid #000;
+			background-color: #999;
+			position: fixed;
+			z-index: 10;
+		}
+
+		.tab button {
+			border: 1px solid black;
+			border-bottom: 0;
+			position: relative;
+			z-index: 1;
+			padding: .2rem .8rem;
+		}
+
+		.tab button.on {
+			background-color: #fff;
+			bottom: -1px;
+		}
+
+		.nav-tree {
+			max-height: 100vh;
+			position: relative;
+			width: 100%;
+			overflow-y: auto;
+			padding-bottom: 50px;
+		}
+
+		.nav-tree button {
+			display: flex;
+			align-items: flex-start;
+			gap: .3rem;
+		}
+
+		.icon {
+			display: none;
+			justify-content: center;
+			align-items: center;
+			width: 6px;
+			height: 6px;
+			min-width: 6px;
+			min-height: 6px;
+			max-width: 6px;
+			max-height: 6px;
+			border-radius: 50%;
+			background-color: #ccc;
+			transform: translate(0, 6px);
+		}
+
+		.icon.V {
+			background-color: gold;
+		}
+
+		.icon.P {
+			background-color: rgb(134, 233, 121);
+		}
+
+		.icon.L {
+			background-color: rgb(116, 186, 252);
+		}
+
+		.icon.T {
+			background-color: rgb(250, 173, 159);
+		}
+
+		.icon.I {
+			background-color: rgb(213, 167, 243);
+		}
+
+		.icon.M {
+			background-color: rgb(200, 198, 202);
+		}
+
+		.item.ui-codinglist-iframe {
+			display: flex;
+			flex-direction: column;
+			padding-bottom: 1.6rem;
+			flex-shrink: 0;
+		}
+
+		.item.ui-codinglist-iframe .group {
+			height: 5rem;
+			margin: 0.8rem 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.item.ui-codinglist-iframe .group a {
+			display: block;
+			width: 100%;
+			text-align: center;
+			font-size: 1.6rem;
+			color: #000;
+		}
+
+
+		@media (max-width: 800px) {
+			.IA-list .ui-codinglist-header::before {
+				display: none;
+			}
+
+			.item.ui-codinglist-iframe .group a {
+				font-size: 1.2rem;
+			}
+
+			.item.ui-codinglist-iframe .group {
+				height: auto;
+				margin: 0;
+				padding-bottom: 0.4rem;
+			}
+
+			.IA .iframe[name="base"] {
+				width: 100% !important;
+			}
+
+			.item.ui-codinglist-iframe {
+				width: 100%;
+				flex: 1;
+			}
+
+			.IA {
+				padding: 6.5rem 0.8rem 0;
+			}
+
+			.IA-list .ui-codinglist-header {
+				position: fixed;
+				top: 0;
+				width: 100vw;
+				left: 0;
+			}
+
+			.IA-list {
+				flex: 0;
+				width: 20rem;
+			}
+
+			.IA-list .tbl-base table>tbody.line-t,
+			.IA-list .tbl-base table>tbody+tbody,
+			.IA-list .tbl-base table>tbody {
+				border: 0 !important;
+			}
+
+			.IA-list .tbl-base table thead {
+				display: none;
+			}
+
+			.IA-list .tbl-base table td {
+				display: none;
+			}
+
+			.IA-list .tbl-base table td.id {
+				display: flex;
+				border: 0 !important;
+				text-align: center;
+			}
+
+			/* .IA-list .tbl-base table {
+				display: flex;
+				flex-direction: column;
+				gap:2.4rem;
+			} */
+			.IA-list .tbl-base table tbody {
+				display: flex;
+				flex-direction: column;
+				gap: 0.8rem;
+			}
+
+			.IA-list .tbl-base table tr {
+				display: flex;
+				width: 100%;
+				justify-content: center;
+			}
+
+			.tbl-base {
+				overflow-x: hidden;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<main class="base-wrap">
+		<section class="IA" data-tab="2">
+			<div class="IA-list">
+				<div class="ui-codinglist" id="projectlist"></div>
+			</div>
+			<div class="item ui-codinglist-iframe">
+				<div class="group">
+					<a href="" target="_tab">새창</a>
+					<div class="iframe-size">
+						<button type="button" data-size="s">소</button>
+						<button type="button" data-size="m">중</button>
+						<button type="button" data-size="l">대</button>
+						<button type="button" data-size="xl">특</button>
+					</div>
+				</div>
+				<iframe class="iframe" src="www/html/guide/guide_v2.html" name="base" title="" data-id="case1"
+					data-size="m"></iframe>
+			</div>
+		</section>
+	</main>
+
+	<script>
+		class WorkListPreview {
+			constructor(opt) {
+				this.file = opt.url;
+				this.id = opt.id;
+				this.main = document.querySelector('.base-main');
+				this.codingListContainer = document.querySelector('#' + this.id);
+				this.projectListSrchCode = null;
+				this.projectListSrchBtn = null;
+				this.allWorkItems = [];
+			}
+
+			/**
+			 * 현재 문서의 모든 iframe에 iframe.css 스타일시트를 추가합니다.
+			 * iframe 로드 완료를 보장하여 에러를 방지합니다.
+			 */
+			addIframeStylesheet(iframeElement) { // 인자로 iframe 요소를 받도록 수정
+				if (!iframeElement) {
+					console.warn('iframe 요소가 지정되지 않았습니다.');
+					return;
+				}
+
+				// iframe이 로드될 때까지 기다립니다.
+				iframeElement.addEventListener('load', () => {
+					try {
+						// contentWindow.document.head가 존재하는지 다시 확인
+						if (iframeElement.contentWindow && iframeElement.contentWindow.document && iframeElement.contentWindow.document.head) {
+							let _link = document.createElement('link');
+							_link.rel = 'stylesheet';
+							_link.href = '../../assets/css/iframe.css';
+							// 중복 추가 방지를 위해 이미 추가되었는지 확인
+							if (!iframeElement.contentWindow.document.head.querySelector(`link[href="${_link.href}"]`)) {
+								iframeElement.contentWindow.document.head.appendChild(_link);
+								console.log('iframe.css 스타일시트가 성공적으로 추가되었습니다.');
+							}
+						} else {
+							console.warn('iframe 문서 또는 head를 찾을 수 없습니다.');
+						}
+					} catch (e) {
+						console.error('iframe 스타일시트 추가 중 오류 발생:', e);
+					}
+				}, { once: true }); // load 이벤트는 한 번만 실행되도록 설정
+			}
+
+			/**
+			 * 지정된 JSON 파일에서 작업 목록 데이터를 가져옵니다.
+			 * @returns {Promise<Array>} 항목 목록으로 확인되는 Promise.
+			 */
+			async loadWorkItems() {
+				try {
+					const response = await fetch(this.file);
+					const json = await response.json();
+					return json.list;
+				} catch (error) {
+					console.error('작업 항목을 불러오는 중 오류 발생:', error);
+					return [];
+				}
+			}
+
+			/**
+			 * Date 객체를 'YYYY-MM-DD' 형식으로 포맷합니다.
+			 * @param {string|Date} dateString - 포맷할 날짜 문자열 (YYYYMMDD) 또는 Date 객체.
+			 * @returns {string} 포맷된 날짜 문자열 (YYYY-MM-DD).
+			 */
+			getFormattedDate(dateString) {
+				if (dateString instanceof Date) {
+					const year = dateString.getFullYear();
+					const month = String(dateString.getMonth() + 1).padStart(2, '0');
+					const day = String(dateString.getDate()).padStart(2, '0');
+					return `${year}-${month}-${day}`;
+				} else if (typeof dateString === 'string' && dateString.length === 8) {
+					const year = dateString.substring(0, 4);
+					const month = dateString.substring(4, 6);
+					const day = dateString.substring(6, 8);
+					return `${year}-${month}-${day}`;
+				}
+				return '';
+			}
+
+			/**
+			 * 두 날짜 간의 일수 차이를 계산합니다.
+			 * date2가 date1보다 뒤면 '-N' 형식의 문자열을 반환하고, 아니면 빈 문자열을 반환합니다.
+			 * @param {string} date1 - 첫 번째 날짜 (YYYY-MM-DD 또는 YYYYMMDD 형식).
+			 * @param {Date} date2 - 두 번째 날짜 (Date 객체).
+			 * @returns {string} 포맷된 날짜 차이.
+			 */
+			getDateDiff(date1, date2) {
+				const _date1 = new Date(this.getFormattedDate(date1));
+				const _date2 = date2;
+
+				_date1.setHours(0, 0, 0, 0);
+				_date2.setHours(0, 0, 0, 0);
+
+				const diffTime = _date2.getTime() - _date1.getTime();
+				const diffDays = Math.floor(diffTime / (1000 * 3600 * 24));
+
+				return diffDays < 0 ? '' : `-${diffDays}`;
+			}
+
+			/**
+			 * 'd' 속성의 변경에 따라 항목의 깊이 클래스를 결정합니다.
+			 * @param {Object} currentItem - 현재 데이터 항목.
+			 * @param {Object} prevItem - 이전 데이터 항목.
+			 */
+			applyDepthClasses(currentItem, prevItem) {
+				let depthChange = false;
+				for (let j = 1; j <= 10; j++) {
+					const prop = `d${j}`;
+					const classProp = `c${j}`;
+
+					if (currentItem[prop] !== '' && currentItem[prop] !== prevItem[prop]) {
+						currentItem[classProp] = ` c${j}`;
+						depthChange = true;
+					} else {
+						currentItem[classProp] = depthChange ? ` c${j}` : '';
+					}
+				}
+			}
+
+			/**
+			 * 작업 목록 항목에 대한 HTML을 생성합니다.
+			 * @param {Array} dataExecelList - 작업 항목 목록.
+			 * @returns {string} 목록에 대한 HTML 문자열.
+			 */
+			generateWorkListHTML(dataExecelList) {
+				let tableHTML = ``;
+				const today = new Date();
+
+				for (let i = 0; i < dataExecelList.length; i++) {
+					const dataCurrent = { ...dataExecelList[i] };
+					const dataPrevious = (i === 0) ? {} : dataExecelList[i - 1];
+
+					if (dataCurrent.memo === 'closed') {
+						continue;
+					}
+
+					// for (let j = 1; j <= 10; j++) {
+					// 	const dProp = `d${j}`;
+					// }
+
+					this.applyDepthClasses(dataCurrent, dataPrevious);
+
+					let stateClass = '';
+					if (dataCurrent.state === '완료') {
+						stateClass = 'end';
+					} else if (dataCurrent.state === '제외') {
+						stateClass = 'del';
+					} else if (dataCurrent.state === '약관') {
+						stateClass = 'trm';
+					}
+
+					let cls = stateClass +
+						(dataCurrent.c1 || '') + (dataCurrent.c2 || '') + (dataCurrent.c3 || '') + (dataCurrent.c4 || '') +
+						(dataCurrent.c5 || '') + (dataCurrent.c6 || '') + (dataCurrent.c7 || '') + (dataCurrent.c8 || '') +
+						(dataCurrent.c9 || '') + (dataCurrent.c10 || '');
+
+					if (dataCurrent.state !== '완료' && dataCurrent.date && dataCurrent.date !== '미정' && dataCurrent.date !== '일정') {
+						const care = this.getDateDiff(dataCurrent.date, today);
+						if (care !== '' && Number(care) < 3 && Number(care) >= 0) {
+							cls += ' sch_care';
+						} else if (care !== '' && Number(care) < 0) {
+							cls += ' sch_warn';
+						}
+					}
+
+					if (dataCurrent.state === '완료' && dataCurrent.wdate && dataCurrent.wdate !== '미정' && dataCurrent.wdate !== '작업일') {
+						const todayModify = this.getDateDiff(dataCurrent.wdate, today);
+						if (Number(todayModify) === 0) {
+							cls += ' today-mod';
+						}
+					}
+
+					if (i > 0 && dataCurrent.c1) {
+						tableHTML += `</tbody><tbody>`;
+					}
+
+					if (i === 0) {
+						tableHTML = `
+						<div class="tbl-base">
+							<table>
+								<caption>코딩리스트</caption>
+								<colgroup>
+									<col style="width:40px">
+									<col style="width:60px">
+									<col style="width:60px">
+									<col style="width:50px">
+									
+									<col style="width:30px">
+									<col style="width:50px">
+									<col span="10" style="width:auto">
+									<col style="width:120px">
+								</colgroup>
+								<thead>
+									<tr>
+										<th scope="col">${dataCurrent.state}</th>
+										<th scope="col">${dataCurrent.s_dt}</th>
+										<th scope="col">${dataCurrent.e_dt}</th>
+										<th scope="col">${dataCurrent.assignee}</th>
+
+										<th scope="col">${dataCurrent.type}</th>
+										<th scope="col">${dataCurrent.name}</th>
+										
+										<th scope="col">${dataCurrent.d1}</th>
+										<th scope="col">${dataCurrent.d2}</th>
+										<th scope="col">${dataCurrent.d3}</th>
+										<th scope="col">${dataCurrent.d4}</th>
+										<th scope="col">${dataCurrent.d5}</th>
+										<th scope="col">${dataCurrent.d6}</th>
+										<th scope="col">${dataCurrent.d7}</th>
+										<th scope="col">${dataCurrent.d8}</th>
+										<th scope="col">${dataCurrent.d9}</th>
+										<th scope="col">${dataCurrent.d10}</th>
+										<th scope="col">${dataCurrent.notes}</th>
+									</tr>
+								</thead>
+								<tbody>`;
+					} else {
+						tableHTML += `
+							<tr class="${cls}"
+								data-id="${dataCurrent.name || ''}"
+								data-pub="${dataCurrent.pub || ''}"
+								data-state="${dataCurrent.state || ''}"
+								data-disabled="${dataCurrent.notes === 'closed'}"
+								data-src="${dataCurrent.notes !== 'not'}">
+
+								<td>${dataCurrent.state}</td>
+								<td>${dataCurrent.s_dt}</td>
+								<td>${dataCurrent.e_dt}</td>
+								<td>${dataCurrent.assignee}</td>
+
+								<td class="type-${dataCurrent.type}" style="text-align:center"><span>${dataCurrent.type}</span></td>
+								<td class="id ico_pg">
+										${dataCurrent.name ? `<a class="ui-coding-link" href="${(dataCurrent.root || '')}" target="coding">${dataCurrent.name}</a>` : ''}
+								</td>
+								
+								<td class="d d1 ${dataCurrent.d1.trim().length ? 'is' : ''}"><span>${dataCurrent.d1.trim().length ? dataCurrent.d1 : ''}</span></td>
+								<td class="d d2 ${dataCurrent.d2.trim().length ? 'is' : ''}"><span>${dataCurrent.d2.trim().length ? dataCurrent.d2 : ''}</span></td>
+								<td class="d d3 ${dataCurrent.d3.trim().length ? 'is' : ''}"><span>${dataCurrent.d3.trim().length ? dataCurrent.d3 : ''}</span></td>
+								<td class="d d4 ${dataCurrent.d4.trim().length ? 'is' : ''}"><span>${dataCurrent.d4.trim().length ? dataCurrent.d4 : ''}</span></td>
+								<td class="d d5 ${dataCurrent.d5.trim().length ? 'is' : ''}"><span>${dataCurrent.d5.trim().length ? dataCurrent.d5 : ''}</span></td>
+								<td class="d d6 ${dataCurrent.d6.trim().length ? 'is' : ''}"><span>${dataCurrent.d6.trim().length ? dataCurrent.d6 : ''}</span></td>
+								<td class="d d7 ${dataCurrent.d7.trim().length ? 'is' : ''}"><span>${dataCurrent.d7.trim().length ? dataCurrent.d7 : ''}</span></td>
+								<td class="d d8 ${dataCurrent.d8.trim().length ? 'is' : ''}"><span>${dataCurrent.d8.trim().length ? dataCurrent.d8 : ''}</span></td>
+								<td class="d d9 ${dataCurrent.d9.trim().length ? 'is' : ''}"><span>${dataCurrent.d9.trim().length ? dataCurrent.d9 : ''}</span></td>
+								<td class="d d10 ${dataCurrent.d10.trim().length ? 'is' : ''}"><span>${dataCurrent.d10.trim().length ? dataCurrent.d10 : ''}</span></td>
+								<td class="notes"><span>${dataCurrent.notes}</span></td>
+							</tr>`;
+					}
+				}
+				tableHTML += `</tbody></table></div>`;
+				return tableHTML;
+			}
+
+			/**
+			 * 검색 기능을 초기화합니다.
+			 */
+			initSearch() {
+				this.projectListSrchCode = document.querySelector('#projectListSrchCode');
+				this.projectListSrchBtn = document.querySelector('#projectListSrchBtn');
+
+				const performSearch = () => {
+					const searchTerm = this.projectListSrchCode.value.trim();
+					const searchTerms = searchTerm.split(',').map(term => term.trim().toLowerCase()).filter(term => term !== '');
+
+					this.allWorkItems.forEach(item => {
+						const textContent = item.textContent.toLowerCase();
+						let shouldShow = true;
+
+						if (searchTerms.length > 0) {
+							shouldShow = searchTerms.every(term => textContent.includes(term));
+						}
+						item.style.display = shouldShow ? '' : 'none';
+					});
+				};
+
+				this.projectListSrchBtn.addEventListener('click', performSearch);
+				this.projectListSrchCode.addEventListener('keyup', (event) => {
+					if (event.key === 'Enter') {
+						performSearch();
+					}
+				});
+
+				const savedSearchTerm = sessionStorage.getItem('projectListSearchTerm');
+				if (savedSearchTerm) {
+					this.projectListSrchCode.value = savedSearchTerm;
+					performSearch();
+				}
+
+				this.projectListSrchCode.addEventListener('input', () => {
+					sessionStorage.setItem('projectListSearchTerm', this.projectListSrchCode.value.trim());
+				});
+			}
+
+			/**
+			 * 코딩 링크에 대한 이벤트 리스너를 설정합니다.
+			 */
+			setupCodingLinkListeners() {
+				const links = this.codingListContainer.querySelectorAll('.ui-coding-link');
+				const iframeElement = document.querySelector('.ui-codinglist-iframe iframe'); // iframe 요소 한 번만 찾기
+
+				links.forEach(link => {
+					link.addEventListener('click', (e) => {
+						e.preventDefault();
+						const targetHref = e.currentTarget.href;
+						const parentRow = e.currentTarget.closest('tr');
+						const pageId = parentRow.dataset.id;
+
+						sessionStorage.setItem('codinglist', pageId);
+
+						const iframeLink = document.querySelector('.ui-codinglist-iframe a');
+
+						if (iframeLink) {
+							iframeLink.href = targetHref;
+							iframeLink.textContent = '새창';
+						}
+
+						if (iframeElement) { // iframeElement가 null이 아닌지 확인
+							iframeElement.src = targetHref;
+							this.addIframeStylesheet(iframeElement); // iframe 요소 전달
+						} else {
+							console.warn('.ui-codinglist-iframe iframe 요소를 찾을 수 없습니다.');
+						}
+
+						const activeRow = this.codingListContainer.querySelector('.ui-codinglist tr.on');
+						if (activeRow) {
+							activeRow.classList.remove('on');
+						}
+						parentRow.classList.add('on');
+					});
+				});
+
+				const savedPageId = sessionStorage.getItem('codinglist');
+				if (savedPageId) {
+					const savedLink = this.codingListContainer.querySelector(`[data-id="${savedPageId}"] .ui-coding-link`);
+					if (savedLink) {
+						savedLink.click();
+					}
+				}
+			}
+
+			/**
+			 * WorkListPreview를 초기화합니다.
+			 */
+			async init() {
+				const items = await this.loadWorkItems();
+				if (items.length === 0) {
+					console.warn('JSON 파일에서 불러온 항목이 없습니다.');
+					return;
+				}
+
+				const listHTML = this.generateWorkListHTML(items);
+				this.codingListContainer.innerHTML = listHTML;
+
+				const headerInfo = `
+            <div class="ui-codinglist-header">
+                <div class="box-srch mt-x1">
+                    <div class="srch-area">
+                        <input type="search" id="projectListSrchCode" class="inp-base ui-inpcancel mr-x1" value="" placeholder="검색어를 입력해주세요. (예: 용어1, 용어2)">
+                        <button type="button" id="projectListSrchBtn" class="btn-base"><span>검색</span></button>
+                    </div>
+                </div>
+            </div>`;
+				this.codingListContainer.insertAdjacentHTML('afterbegin', headerInfo);
+
+				this.allWorkItems = Array.from(this.codingListContainer.querySelectorAll('.tbl-base tbody tr'));
+
+				this.initSearch();
+				this.setupCodingLinkListeners();
+
+				const selects = this.main.querySelectorAll('select');
+				selects.forEach(sel => {
+					sel.addEventListener('change', this.change.bind(this));
+				});
+			}
+
+			/**
+			 * select 요소의 변경 이벤트를 처리합니다.
+			 * @param {Event} event - 변경 이벤트.
+			 */
+			change(event) {
+				const select = event.currentTarget;
+				const value = select.value;
+				const id = select.dataset.id;
+				const iframe = document.querySelector(`iframe[data-id="${id}"]`);
+				if (iframe) {
+					iframe.name = value;
+				}
+			}
+
+			/**
+			 * 모든 iframe과 링크의 소스를 특정 URL로 설정합니다.
+			 * @param {string} url - 설정할 URL.
+			 */
+			set(url) {
+				const iframes = document.querySelectorAll('iframe');
+				const links = document.querySelectorAll('.base-main a[target]');
+				links.forEach(link => (link.href = url));
+				iframes.forEach(iframe => (iframe.src = url));
+			}
+		}
+
+
+		const kbhcList = new WorkListPreview({
+			id: 'projectlist',
+			url: '../assets/data/IA.json'
+		});
+		kbhcList.init();
+
+		const tabs = document.querySelectorAll('.tab button');
+		const act = (e) => {
+			const btn = e.currentTarget;
+			const n = btn.dataset.tab;
+			const pnls = document.querySelectorAll('.base-wrap > [data-tab]');
+			console.log(btn, n)
+			for (let that of pnls) {
+				that.classList.remove('on');
+			}
+			for (let that of tabs) {
+				that.classList.remove('on');
+			}
+
+			document.querySelector('.type-' + n).classList.add('on');
+			btn.classList.add('on');
+		}
+		for (let tab of tabs) {
+			tab.addEventListener('click', act);
+		}
+
+		const sizeBtn = document.querySelectorAll('.iframe-size button');
+		const actSize = (e) => {
+			const btn = e.currentTarget;
+			const size = btn.dataset.size;
+			document.querySelector('.iframe').dataset.size = size
+
+		}
+		for (let item of sizeBtn) {
+			item.addEventListener('click', actSize);
+		}
+
+
+	</script>
+</body>
+
+</html>
