@@ -1,0 +1,113 @@
+.IA {
+  display: flex;
+  padding:1rem;
+  gap:1rem;
+  width: 100%;
+
+  &--list {
+    flex: 1;
+    width: 100%;
+  }
+
+  .iframe {
+    border:1px solid var(--gray-600);
+
+    &[data-size="small"] {
+      width: 32rem; /* iPhone SE, etc. */
+      height: 56.8rem;
+    }
+    &[data-size="medium"] {
+      width: 37.5rem; /* iPhone 14, etc. */
+      height: 81.2rem;
+    }
+    
+    &[data-size="large"] {
+      width: 41.4rem; /* iPhone 14 Plus, etc. */
+      height: 89.6rem;
+    }
+    
+    &[data-size="foldable"] {
+      width: 67rem; /* Samsung Galaxy Fold, unfolded */
+      height: 84rem;
+    }
+  }
+  table {
+    border-radius:0;
+    margin: 0;
+    table-layout: auto;
+  }
+  thead th {
+    background-color: var(--gray-200);
+  }
+  td,th {
+    padding:.2rem;
+    font-size: 1.1rem;
+    background-color: #fff;
+    border:1px solid var(--gray-300);
+  }
+  .on td {
+    background-color: var(--gray-800);
+    color:var(--gray-100);
+    border-left-color:#000;
+    border-right-color:#000;
+  }
+  td:nth-child(1) {
+    width: 3rem;
+  }
+  
+  [data-state="지연"] td {
+    color: tomato;
+  }
+
+  .on td.d {
+    color:var(--gray-700);
+  }
+  td.d {
+    color:var(--gray-300)
+  }
+  tr.d1 td.d1,
+  tr.d2 td.d2,
+  tr.d3 td.d3,
+  tr.d4 td.d4,
+  tr.d5 td.d5,
+  tr.d6 td.d6,
+  tr.d7 td.d7,
+  tr.d8 td.d8,
+  tr.d9 td.d9,
+  tr.d10 td.d10,
+  [data-current="d1"] td.d1,
+  [data-current="d2"] td.d2,
+  [data-current="d3"] td.d3,
+  [data-current="d4"] td.d4,
+  [data-current="d5"] td.d5,
+  [data-current="d6"] td.d6,
+  [data-current="d7"] td.d7,
+  [data-current="d8"] td.d8,
+  [data-current="d9"] td.d9,
+  [data-current="d10"] td.d10{
+    color:var(--gray-900);
+  }
+
+  tr.d1.on td.d1,
+  tr.d2.on td.d2,
+  tr.d3.on td.d3,
+  tr.d4.on td.d4,
+  tr.d5.on td.d5,
+  tr.d6.on td.d6,
+  tr.d7.on td.d7,
+  tr.d8.on td.d8,
+  tr.d9.on td.d9,
+  tr.d10.on td.d10,
+  [data-current="d1"].on td.d1,
+  [data-current="d2"].on td.d2,
+  [data-current="d3"].on td.d3,
+  [data-current="d4"].on td.d4,
+  [data-current="d5"].on td.d5,
+  [data-current="d6"].on td.d6,
+  [data-current="d7"].on td.d7,
+  [data-current="d8"].on td.d8,
+  [data-current="d9"].on td.d9,
+  [data-current="d10"].on td.d10{
+    color:#fff;
+  }
+}

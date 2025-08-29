@@ -1497,6 +1497,112 @@ select.inp--base {
     opacity: 0;
   }
 }
+.IA {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+}
+.IA--list {
+  flex: 1;
+  width: 100%;
+}
+.IA .iframe {
+  border: 1px solid var(--gray-600);
+}
+.IA .iframe[data-size=small] {
+  width: 32rem; /* iPhone SE, etc. */
+  height: 56.8rem;
+}
+.IA .iframe[data-size=medium] {
+  width: 37.5rem; /* iPhone 14, etc. */
+  height: 81.2rem;
+}
+.IA .iframe[data-size=large] {
+  width: 41.4rem; /* iPhone 14 Plus, etc. */
+  height: 89.6rem;
+}
+.IA .iframe[data-size=foldable] {
+  width: 67rem; /* Samsung Galaxy Fold, unfolded */
+  height: 84rem;
+}
+.IA table {
+  border-radius: 0;
+  margin: 0;
+  table-layout: auto;
+}
+.IA thead th {
+  background-color: var(--gray-200);
+}
+.IA td, .IA th {
+  padding: 0.2rem;
+  font-size: 1.1rem;
+  background-color: #fff;
+  border: 1px solid var(--gray-300);
+}
+.IA .on td {
+  background-color: var(--gray-800);
+  color: var(--gray-100);
+  border-left-color: #000;
+  border-right-color: #000;
+}
+.IA td:nth-child(1) {
+  width: 3rem;
+}
+.IA [data-state=지연] td {
+  color: tomato;
+}
+.IA .on td.d {
+  color: var(--gray-700);
+}
+.IA td.d {
+  color: var(--gray-300);
+}
+.IA tr.d1 td.d1,
+.IA tr.d2 td.d2,
+.IA tr.d3 td.d3,
+.IA tr.d4 td.d4,
+.IA tr.d5 td.d5,
+.IA tr.d6 td.d6,
+.IA tr.d7 td.d7,
+.IA tr.d8 td.d8,
+.IA tr.d9 td.d9,
+.IA tr.d10 td.d10,
+.IA [data-current=d1] td.d1,
+.IA [data-current=d2] td.d2,
+.IA [data-current=d3] td.d3,
+.IA [data-current=d4] td.d4,
+.IA [data-current=d5] td.d5,
+.IA [data-current=d6] td.d6,
+.IA [data-current=d7] td.d7,
+.IA [data-current=d8] td.d8,
+.IA [data-current=d9] td.d9,
+.IA [data-current=d10] td.d10 {
+  color: var(--gray-900);
+}
+.IA tr.d1.on td.d1,
+.IA tr.d2.on td.d2,
+.IA tr.d3.on td.d3,
+.IA tr.d4.on td.d4,
+.IA tr.d5.on td.d5,
+.IA tr.d6.on td.d6,
+.IA tr.d7.on td.d7,
+.IA tr.d8.on td.d8,
+.IA tr.d9.on td.d9,
+.IA tr.d10.on td.d10,
+.IA [data-current=d1].on td.d1,
+.IA [data-current=d2].on td.d2,
+.IA [data-current=d3].on td.d3,
+.IA [data-current=d4].on td.d4,
+.IA [data-current=d5].on td.d5,
+.IA [data-current=d6].on td.d6,
+.IA [data-current=d7].on td.d7,
+.IA [data-current=d8].on td.d8,
+.IA [data-current=d9].on td.d9,
+.IA [data-current=d10].on td.d10 {
+  color: #fff;
+}
+
 /* accordion */
 [data-accordion] {
   width: 100%;
