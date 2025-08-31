@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tooltip | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/tooltip.html',
+			callback: () => {
+				UI.exe.tooltip = new UX.Tooltip([
+          {
+            id: 'tooltip1',
+            ps: 'rt',
+            cont: `<dl>
+              <dt>날씨111</dt>
+              <dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+            </dl>`,
+          },
+          {
+            id: 'tooltip2',
+            ps: 'tl',
+            cont: `<dl>
+              <dt>날씨222</dt>
+              <dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+            </dl>`,
+          }
+        ]);
+			}
+		});
+	</script>
+</body>
+
+</html>

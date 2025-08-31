@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Accordion | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+    [data-accordion-item]:first-child {border-top: 0;}
+    [data-accordion-item] {border-top: 1px solid var(--black);scroll-margin-top:6rem}
+		[data-accordion-head] {padding:1.2rem .8rem}
+    [data-accordion-section] {padding: 1.6rem .8rem;}
+
+    [data-guide="on"] {
+			[data-accordion],
+      [data-accordion-button],
+      [data-accordion-body],
+      [data-accordion-body],
+			[data-accordion-item],
+			[data-accordion-head],
+			[data-accordion-title]{
+				position: relative;
+				outline: 1px dashed rgba(255, 99, 71, 0.2);
+				outline-offset: -1px;
+				background-color: rgba(255, 99, 71, 0.04);
+				&::after,
+				&::before {
+					content: "";
+					position: absolute;
+					display: block;
+				}
+				&::after {
+					width: 100%;
+					height: 1px;
+					border-top: 1px dashed rgba(255, 99, 71, 0.2);
+					top: 50%;
+					left: 0;
+				}
+				&::before {
+					width: 1px;
+					height: 100%;
+					border-left: 1px dashed rgba(255, 99, 71, 0.2);
+					left: 50%;
+					top: 0;
+				}
+			}
+      [data-accordion-button] {
+        position: absolute;
+      }
+		}
+		
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+  	/* 준비 ---------------------------------------------- */
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/accordion.html',
+			callback: () => {
+				/* 선언 ---------------------------------------------- */
+				UI.exe.acco1 = new UX.Accordion({
+					id: 'acco1',
+					expanded: 'acco1-0',
+					scrollIntoView: true,
+					scrollOptions: { behavior: 'smooth', block: 'start' }
+				});
+
+				/* 실행 ---------------------------------------------- */
+				UI.exe.acco1.init();
+				//외부 접근 컨트롤
+				// setTimeout(() => {
+				//   UI.exe.acco1.show('acco1-1');
+				// },1000);
+				// setTimeout(() => {
+				//   UI.exe.acco1.hide('acco1-1', () => {
+				//     console.log('callback hide');
+				//   });
+				// },2000);
+				// setTimeout(() => {
+				//   document.querySelector('[data-accordion="acco1"]').insertAdjacentHTML('beforeend', `
+				//   <div data-accordion-item="acco1">
+				// 		<h3 data-accordion-head="acco1">
+				// 			<button type="button" data-accordion-button="acco1"></button>
+				// 			<b data-accordion-title="acco1" aria-hidden="true">title 4</b>
+				// 		</h3>
+				//     <div data-accordion-body="acco1">
+				//       4444<br>
+				//       ddddd
+				//     </div>
+				//   </div>`);
+				//   UI.exe.acco1.update();
+				// },3000);
+				// setTimeout(() => {
+				//   UI.exe.acco1.destroy();
+				// },4000);
+				// setTimeout(() => {
+				//   UI.exe.acco1 = new UX.Accordion({
+				//     id: 'acco1',
+				//     expanded: 'acco1-0',
+				//   });
+				//   UI.exe.acco1.init();
+				// },5000);
+			}
+		});
+	</script>
+</body>
+
+</html>

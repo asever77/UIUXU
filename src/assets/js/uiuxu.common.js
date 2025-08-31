@@ -52,60 +52,98 @@ class UXCore {
     }
   }
 
-  #loadCommonLayout() {
-    const el_header = document.querySelector('.base-header');
-    const el_footer = document.querySelector('.base-footer');
-    
-    if (el_header) {
+  #loadCommonLayout(data) {
+    if (data.layout) {
       loadContent({
-        area: el_header,
-        src: './inc/header.html',
+        area: document.querySelector('body'),
+        src: data.layout,
         insert: true,
       })
       .then(() => {
-        const el_html = document.querySelector('html');
-        UI.exe.toggle.header = new ToggleController();
+        console.log('base-layout');
+        const el_header = document.querySelector('.base-header');
+        const el_footer = document.querySelector('.base-footer');
+        const el_aside = document.querySelector('.base-aside');
+        const el_main = document.querySelector('.base-main');
         
-        if (localStorage.getItem('dark-mode')) {
-          el_html.dataset.mode = localStorage.getItem('dark-mode');
+        if (el_header) {
+          loadContent({
+            area: el_header,
+            src: './inc/header.html',
+            insert: true,
+          })
+          .then(() => {
+            console.log('base-header');
+            const el_html = document.querySelector('html');
+            UI.exe.toggle.header = new ToggleController();
+            
+            if (localStorage.getItem('dark-mode')) {
+              el_html.dataset.mode = localStorage.getItem('dark-mode');
+            }
+            UI.exe.toggle.modeChange = (v) => {
+              if (localStorage.getItem('dark-mode') === 'dark') {
+                el_html.dataset.mode = 'light';
+              } else {
+                el_html.dataset.mode = 'dark';
+              }
+              localStorage.setItem('dark-mode', el_html.dataset.mode);
+            };
+
+            UI.exe.toggle.guideToggle = (v) => {
+              if (v.state) {
+                el_html.dataset.guide = 'on';
+              } else {
+                el_html.dataset.guide = 'off';
+              }
+            }
+          })
+          .catch((err) => console.error('Error loading header content:', err));
         }
-        UI.exe.toggle.modeChange = (v) => {
-          if (localStorage.getItem('dark-mode') === 'dark') {
-            el_html.dataset.mode = 'light';
-          } else {
-            el_html.dataset.mode = 'dark';
-          }
-          localStorage.setItem('dark-mode', el_html.dataset.mode);
-        };
 
-        UI.exe.toggle.guideToggle = (v) => {
-          if (v.state) {
-            el_html.dataset.guide = 'on';
-          } else {
-            el_html.dataset.guide = 'off';
-          }
+        if (el_aside) {
+          loadContent({
+            area: el_aside,
+            src: './inc/aside.html',
+            insert: true,
+          })
+          .then(() => {
+            console.log('base-aside');
+          })
+          .catch((err) => console.error('Error loading header content:', err));
         }
 
-      })
-      .catch((err) => console.error('Error loading header content:', err));
-    }
+        if (el_main && data) {
+          loadContent({
+            area: el_main,
+            src: data.page,
+            insert: true,
+          })
+          .then(() => {
+            console.log('base-main');
+            data.callback();
+          })
+          .catch((err) => console.error('Error loading header content:', err));
+        }
 
-    if (el_footer) {
-      loadContent({
-        area: el_footer,
-        src: './inc/footer.html',
-        insert: true,
+        if (el_footer) {
+          loadContent({
+            area: el_footer,
+            src: './inc/footer.html',
+            insert: true,
+          })
+          .then(() => {
+            console.log('base-footer');
+          })
+          .catch((err) => console.error('Error loading footer content:', err));
+        }
       })
-      .then(() => {
-        console.log('Callback: Footer content loaded.');
-      })
-      .catch((err) => console.error('Error loading footer content:', err));
+      .catch((err) => console.error('Error loading layout content:', err));
     }
   }
 
-  init() {
+  init(data) {
     this.#setupGlobalNamespace();
-    this.#loadCommonLayout();
+    this.#loadCommonLayout(data);
     UI.exe.toggle.main = new ToggleController();
   }
 }
@@ -130,7 +168,7 @@ export const UX = {
   Roulette,
   TimeSelect,
 
-  init: () => uxInstance.init(),
+  init: (data) => uxInstance.init(data),
 
   utils: {
     loadContent,

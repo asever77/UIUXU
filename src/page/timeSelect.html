@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Time Select | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+	
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/timeSelect.html',
+			callback: () => {
+				const inputTime = new UX.TimeSelect({
+					id: 'nmdp_9_4p_time',
+					value: '12:50',
+					miuntUnit: 1
+				});
+			}
+		});
+	</script>
+</body>
+
+</html>

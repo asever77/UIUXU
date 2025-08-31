@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tab | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
+		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
+		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+
+		[data-guide="on"] {
+			[data-tab-name],
+			[role="tablist"],
+			[data-tab-wrap],
+			[data-tab]{
+				position: relative;
+				outline: 1px dashed rgba(255, 99, 71, 0.2);
+				outline-offset: -1px;
+				background-color: rgba(255, 99, 71, 0.04);
+				&::after,
+				&::before {
+					content: "";
+					position: absolute;
+					display: block;
+				}
+				&::after {
+					width: 100%;
+					height: 1px;
+					border-top: 1px dashed rgba(255, 99, 71, 0.2);
+					top: 50%;
+					left: 0;
+				}
+				&::before {
+					width: 1px;
+					height: 100%;
+					border-left: 1px dashed rgba(255, 99, 71, 0.2);
+					left: 50%;
+					top: 0;
+				}
+			}
+		}
+		
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/tab.html',
+			callback: () => {
+				/* 선언 ---------------------------------------------- */
+				// dropdown
+				UI.exe.tab1 = new UX.Tab({
+					id: 'tab1',
+					selected: 1, //1부터 시작
+					data: [
+						{ src: './tab/tab1.html', tab: '<span>tab1</span>', callback: () => { console.log('tab 1 open'); },},
+						{ src: './tab/tab2.html', tab: '<span>tab2</span>',
+							callback: () => {
+								console.log('tab 2 open');
+								UI.exe.tab2.init()
+							}
+						},
+						{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
+						{ src: './tab/tab4.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 4 open'); },},
+						{ src: './tab/tab5.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 5 open'); },},
+						{ src: './tab/tab6.html', tab: '<span>tab6</span>', callback: () => { console.log('tab 3 open'); },},
+						{ src: './tab/tab7.html', tab: '<span>tab7</span>', callback: () => { console.log('tab 4 open'); },},
+					],
+				});
+
+				UI.exe.tab2 = new UX.Tab({
+					id: 'tab2',
+					selected: 1,
+					loadAll: {
+						src: './tab/tab_group.html',
+					},
+					data: [
+						{ tab: '<span>tab2-1</span>', callback: () => { console.log('tab 2-1 open'); },},
+						{ tab: '<span>tab2-2</span>', callback: () => { console.log('tab 2-2 open'); },},
+					],
+				});
+
+				UI.exe.tab3 = new UX.Tab({
+					id: 'tab3',
+					renderMode: 'static',
+					selected: 2,
+					data: [
+						{ callback: () => { console.log('탭1 open'); },},
+						{ callback: () => { console.log('탭2 open'); },},
+						{ callback: () => { console.log('탭3 open'); },},
+					],
+				});
+
+				UI.exe.tab4 = new UX.Tab({
+					id: 'tab4',
+					scroll: true,
+					scrollOffsetTop: 120,
+					selected: 1, //1부터 시작
+					data: [
+						{ src: './tab/tab1.html', tab: '<span>tab1</span>', callback: () => { console.log('tab 1 open'); },},
+						{ src: './tab/tab2.html', tab: '<span>tab2</span>',
+							callback: () => {
+								console.log('tab 2 open');
+								UI.exe.tab2.init()
+							}
+						},
+						{ src: './tab/tab3.html', tab: '<span>tab3</span>', callback: () => { console.log('tab 3 open'); },},
+						{ src: './tab/tab4.html', tab: '<span>tab4</span>', callback: () => { console.log('tab 3 open'); },},
+						{ src: './tab/tab5.html', tab: '<span>tab5</span>', callback: () => { console.log('tab 4 open'); },},
+						{ src: './tab/tab6.html', tab: '<span>tab6</span>', callback: () => { console.log('tab 5 open'); },},
+						{ src: './tab/tab7.html', tab: '<span>tab7</span>', callback: () => { console.log('tab 3 open'); },},
+					],
+				});
+				
+
+				/* 실행 ---------------------------------------------- */
+				UI.exe.tab1.init();
+				UI.exe.tab3.init();
+				UI.exe.tab4.init();
+
+				UI.exe.tab1.ver();
+			}
+		});
+	</script>
+</body>
+</html>

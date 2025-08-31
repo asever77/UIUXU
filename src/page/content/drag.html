@@ -1,0 +1,75 @@
+<wrap data-dir="col">
+	<group data-dir="col">
+		<h1 data-heading="display" data-text="Drag">Drag</h1>
+
+		<box>
+		<div data-dragdrop="drag1">
+			<div class="sample-target">
+				<div class="sample-target--item" data-dragdrop-target="item" data-value="1"></div>
+				<div class="sample-target--item" data-dragdrop-target="item" data-value="2"></div>
+			</div>
+			<div class="sample-object" data-dragdrop-object="area">
+
+				<div class="sample-object--wrap" data-dragdrop-object="wrap">
+					<div class="sample-object--item" 
+					data-dragdrop-object="item" 
+					data-this="original"
+					data-mode="move" 
+					data-clone="1" 
+					data-value="1">
+						<button type="button" data-dragdrop-object="event" aria-label="이동"></button>
+
+						<div data-dragdrop-contral="group" role="tablist">
+							<!-- <button type="button" role="tab" aria-selected="true" data-dragdrop-contral="move" aria-label="이동"></button> -->
+							<button type="button" role="tab" aria-selected="false" data-dragdrop-contral="rotate" aria-label="회전"></button>
+
+							<button type="button" role="tab" aria-selected="false" data-dragdrop-contral="reversal" aria-label="반전"></button>
+
+							<button type="button" role="tab" aria-selected="false" data-dragdrop-contral="delete" aria-label="삭제"></button>
+
+
+							<!-- <button type="button" data-dragdrop-contral="delete" aria-label="닫기"></button> -->
+						</div>
+		
+						<div class="sample-object--img" data-dragdrop-object="img" role="img" aria-label="이미지설명">
+							<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<rect width="40" height="40" fill="#1ee09f80"/>
+							</svg>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</box>
+	<p>스크롤 위치에 따른 오브젝트 위치값 계산 수정이 필요</p>
+	</group>
+
+	<group data-dir="col">
+		<mtit>Code</mtit>
+		<codebox>
+			<code><pre contenteditable="true">
+
+&lt;input type="checkbox" id="allcheck_0" name="allcheck" <b>data-allcheck-main="allcheck"</b>&gt;
+&lt;label for="allcheck_0"&gt;전체 체크&lt;/label&gt;
+
+&lt;input type="checkbox" id="allcheck_1" name="allcheck" <b>data-allcheck-sub="allcheck" aria-required="true"</b> checked&gt;
+&lt;label for="allcheck_1"&gt;필수 체크 1&lt;/label&gt;
+
+&lt;input type="checkbox" id="allcheck_3" name="allcheck" <b>data-allcheck-sub="allcheck"</b> checked&gt;
+&lt;label for="allcheck_3"&gt;선택 체크 3&lt;/label&gt;
+
+&lt;button type="button" class="btn-base" <b>data-allcheck-btn="allcheck"</b> disabled&gt;필수체크 활성화&lt;/button&gt;
+
+
+UI.exe.allcheck1 = new UX.RadioAllcheck({
+name: 'allcheck',
+callback: (result) => {
+console.log(result); <i>// {all: (true | false), required: (true | false)}</i>
+}
+});
+			</pre></code>
+		</codebox>
+	</group>
+</wrap>

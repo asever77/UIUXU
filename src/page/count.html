@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Count | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		[data-countdown="wrap"][data-type="slot"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="item"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="text"],
+		[data-countdown="wrap"][data-type="slot"] [data-countdown="number"] {
+			font-size: 4rem;
+			font-weight: 700;
+			line-height: 1;
+			height: 4rem;
+		}
+		[data-countdown="wrap"][data-type="updown"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="item"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="text"],
+		[data-countdown="wrap"][data-type="updown"] [data-countdown="number"] {
+			font-size: 4rem;
+			font-weight: 700;
+			line-height: 1;
+			height: 4rem;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/count.html',
+			callback: () => {
+				UI.exe.countdown1 = new UX.Countdown({
+				id: 'cd1',
+				number: '1977.05.10',
+				effect: 'slot',
+			});
+			// UI.exe.countdown1.set();
+
+			UI.exe.countdown2 = new UX.Countdown({
+				id: 'cd2',
+				number: 134,
+				effect: 'base',
+				speed: 10
+			});
+
+			UI.exe.countdown3 = new UX.Countdown({
+				id: 'cd3',
+				number: 143.6,
+				effect: 'updown',
+			});
+			// UI.exe.countdown2.set();
+			}
+		});
+	</script>
+</body>
+</html>

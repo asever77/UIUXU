@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>From | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+   .guide {
+		margin-top: 2rem;
+		& * {
+			position: relative;
+			flex: 1;
+			border:1px solid #bdbdbd;
+			padding:2.2rem 0.4rem 0.4rem;
+			width:100%;
+			&::before{
+				content:"";
+				padding: .4rem .8rem;
+				position: absolute;
+				top:-1.8rem;
+				left:-1px;
+				border-radius: 0.8rem 0.8rem 0 0;
+				background-color: #000;
+				color:#fff;
+				font-size: 0.8rem;
+				line-height: 1;
+				height: 1.8rem;
+				opacity: 1;
+				border:1px solid #bdbdbd;
+			}
+		}
+		.form--wrap{background-color: var(--gray-900);gap:2.4rem 0.4rem;}
+		.form--item{background-color: var(--gray-800);gap:2.4rem 0.4rem;}
+		.form--head{background-color: var(--gray-700);gap:2.4rem 0.4rem;}
+		.form--body{background-color: var(--gray-700);gap:2.4rem 0.4rem;}
+		.form--group{background-color: var(--gray-600);gap:2.4rem 0.4rem;}
+		.form--title{background-color: var(--gray-600);gap:2.4rem 0.4rem;}
+		.inp--item{background-color: var(--gray-500);gap:2.4rem 0.4rem;}
+
+		.form--wrap::before{content:"form--wrap"; background-color: var(--gray-900);}
+		.form--item::before{content:"form--item"; background-color: var(--gray-800);}
+		.form--head::before{content:"form--head"; background-color: var(--gray-700);}
+		.form--body::before{content:"form--body"; background-color: var(--gray-700);}
+		.form--group::before{content:"form--group"; background-color: var(--gray-600);}
+		.form--title::before{content:"form--title"; background-color: var(--gray-600);}
+		.inp--item::before{content:"inp--item"; background-color: var(--gray-500);}
+	 } 
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/form.html',
+			callback: () => {
+				UX.utils.textLength();
+			}
+		});
+	</script>
+</body>
+</html>

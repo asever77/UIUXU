@@ -1,0 +1,297 @@
+<wrap data-dir="col">
+	<group data-dir="col">
+		<h1 data-heading="display" data-text="Dialog">Dialog</h1>
+		<p>Dialog 컴포넌트는 웹 애플리케이션에서 사용자에게 정보를 제공하거나, 입력을 받거나, 특정 작업을 확인하는 등 다양한 상호작용을 위한 팝업 UI를 쉽게 구현할 수 있도록 설계되었습니다. 이 컴포넌트는 모달(Modal), 시스템(System), **토스트(Toast)**와 같은 여러 유형의 다이얼로그를 지원하며, 접근성(ARIA)과 사용자 경험(UX)을 고려하여 개발되었습니다.</p>
+
+		<stit>Modal</stit>
+		<box>
+			<button type="button" class="btn-base" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>
+			<button type="button" class="btn-base" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>
+			<button type="button" class="btn-base" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>
+			<button type="button" class="btn-base" data-test-id="modal4" onclick="UI.exe.modal4.show()">left</button>
+			<button type="button" class="btn-base" data-test-id="modal5" onclick="UI.exe.modal5.show()">right</button>
+		</box>
+
+		<stit>Alert</stit>
+		<box>
+			<button type="button" class="btn-base" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>
+			<button type="button" class="btn-base" data-test-id="confirm1" onclick="UI.exe.confirm1.show()">confirm</button>
+		</box>
+
+		<stit>Toast - top</stit>
+		<box>
+			<button type="button" class="btn-base" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast1</button>
+			<button type="button" class="btn-base" data-test-id="toast2" onclick="UI.exe.toast2.show()">toast2</button>
+		</box>
+		<stit>Toast - bottom</stit>
+		<box>
+			<button type="button" class="btn-base" data-test-id="toast3" onclick="UI.exe.toast3.show()">toast3</button>
+			<button type="button" class="btn-base" data-test-id="toast4" onclick="UI.exe.toast4.show()">toast4</button>
+		</box>
+	</group>
+
+		<group data-dir="col">
+		<mtit>Options</mtit>
+		<p>드롭다운 컴포넌트는 constructor를 통해 다양한 옵션을 설정하여 유연하게 사용할 수 있습니다. 아래는 사용 가능한 옵션 목록입니다.</p>
+		<stit>modal</stit>
+		<table>
+			<caption></caption>
+			<colgroup>
+				<col style="width: 12rem" />
+				<col style="width: 14rem;" />
+				<col style="width: 18rem;" />
+				<col style="width: auto;" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">옵션명</th>
+					<th scope="col">타입</th>
+					<th scope="col">기본값</th>
+					<th scope="col">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">id</th>
+					<td>String</td>
+					<td>(필수)	</td>
+					<td>다이얼로그의 유형을 지정합니다. 'modal', 'system', 'toast'를 사용할 수 있습니다.</td>
+				</tr>
+				<tr>
+					<th scope="row">type</th>
+					<td>String</td>
+					<td>'modal'	</td>
+					<td>다이얼로그의 유형을 지정합니다. 'modal', 'system', 'toast'를 사용할 수 있습니다.</td>
+				</tr>
+				<tr>
+					<th scope="row">ps</th>
+					<td>String</td>
+					<td>'center'	</td>
+					<td>
+						다이얼로그가 나타나는 위치를 설정합니다. 'center', 'top', 'bottom', 'left', 'right', 'full'이 있습니다.
+					</td>
+				</tr>
+			
+				<tr>
+					<th scope="row">className</th>
+					<td>String</td>
+					<td>''	</td>
+					<td>
+						다이얼로그 최상위 요소에 추가할 CSS 클래스입니다.
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">area</th>
+					<td>DOM Element	</td>
+					<td>.area-dialog	</td>
+					<td>
+						다이얼로그가 추가될 부모 요소를 지정합니다.
+					</td>
+				</tr>
+				
+				<tr>
+					<th scope="row">focus_back</th>
+					<td>DOM Element	</td>
+					<td>null</td>
+					<td>
+						다이얼로그가 닫힌 후 포커스를 되돌릴 요소를 지정합니다.
+					</td>
+				</tr>
+				
+				<tr>
+					<th scope="row">dim</th>
+					<td>Boolean</td>
+					<td>true</td>
+					<td>
+						true일 경우, 다이얼로그 뒤에 어두운 배경(dimmed layer)이 생성됩니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">dimClick</th>
+					<td>Boolean</td>
+					<td>true</td>
+					<td>
+						true일 경우, 배경을 클릭하면 다이얼로그가 닫힙니다.
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">move</th>
+					<td>Boolean</td>
+					<td>true</td>
+					<td>
+						true일 경우, 다이얼로그를 드래그하여 이동시킬 수 있습니다. ps가 'center'일 때만 유효합니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">full</th>
+					<td>Boolean</td>
+					<td>false</td>
+					<td>
+						true일 경우, 다이얼로그가 전체 화면으로 표시됩니다.
+					</td>
+				</tr>
+
+				<tr>
+					<th scope="row">src</th>
+					<td>String</td>
+					<td>null</td>
+					<td>
+						다이얼로그 내부에 표시할 외부 HTML 파일의 경로입니다. modal 타입에서 사용됩니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">load</th>
+					<td>String</td>
+					<td>'pre'</td>
+					<td>
+						다이얼로그를 미리 불러올지 설정합니다. 'pre', 'lazy'
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">loadCallback</th>
+					<td>Function</td>
+					<td>null</td>
+					<td>
+						다이얼로그 콘텐츠 로딩이 완료된 후 실행되는 콜백 함수입니다.
+					</td>
+				</tr>
+				
+				<tr>
+					<th scope="row">extend</th>
+					<td>Boolean</td>
+					<td>true</td>
+					<td>
+						true일 경우, 다이얼로그를 드래그하여 확장/축소할 수 있는 기능을 활성화합니다. 모바일 환경에서 유용합니다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<stit>system</stit>
+		<table>
+			<caption></caption>
+			<colgroup>
+				<col style="width: 12rem" />
+				<col style="width: 14rem;" />
+				<col style="width: 18rem;" />
+				<col style="width: auto;" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">옵션명</th>
+					<th scope="col">타입</th>
+					<th scope="col">기본값</th>
+					<th scope="col">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">title</th>
+					<td>String</td>
+					<td>null</td>
+					<td>
+						다이얼로그의 제목을 설정합니다. system 타입에서 사용됩니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">confirmText	</th>
+					<td>String</td>
+					<td>''</td>
+					<td>
+						확인 버튼의 텍스트를 지정합니다. system 타입에서 사용됩니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">cancelText</th>
+					<td>String</td>
+					<td>''</td>
+					<td>
+						취소 버튼의 텍스트를 지정합니다. system 타입에서 사용됩니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">confirmCallback</th>
+					<td>Function</td>
+					<td>null</td>
+					<td>
+						확인 버튼 클릭 시 실행되는 콜백 함수입니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">cancelCallback</th>
+					<td>Function</td>
+					<td>null</td>
+					<td>
+						취소 버튼 클릭 시 실행되는 콜백 함수입니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">message</th>
+					<td>String</td>
+					<td>''	</td>
+					<td>
+						toast나 system 타입에서 표시할 메시지 내용을 설정합니다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<stit>toast</stit>
+		<table>
+			<caption></caption>
+			<colgroup>
+				<col style="width: 12rem" />
+				<col style="width: 14rem;" />
+				<col style="width: 18rem;" />
+				<col style="width: auto;" />
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">옵션명</th>
+					<th scope="col">타입</th>
+					<th scope="col">기본값</th>
+					<th scope="col">설명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th scope="row">toastRole</th>
+					<td>String</td>
+					<td>'status'</td>
+					<td>
+						toast 메시지의 중요도에 따라 role="status"는 "상태 정보"라는 명확한 의미를 전달, role="alert"는 "긴급 알림"이라는 의미를 전달합니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">delay</th>
+					<td>String</td>
+					<td>'short'	</td>
+					<td>
+						toast 타입에서 메시지가 표시되는 시간을 설정합니다. 'short' (2초), 'long' (3.5초) 중 선택할 수 있습니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">toastMessage</th>
+					<td>String</td>
+					<td>''	</td>
+					<td>
+						toast나 system 타입에서 표시할 메시지 내용을 설정합니다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</group>
+
+	<group data-dir="col">
+		<mtit>Code</mtit>
+		<codebox>
+			<code><pre contenteditable="true">
+
+			</pre></code>
+		</codebox>
+	</group>
+</wrap>
+
+<div class="area-dialog" data-area="main"></div>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Drag | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+	
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/drag.html',
+			callback: () => {
+				/* 선언 ---------------------------------------------- */
+				UI.exe.Drag1 = new UX.Drag({
+					id: 'drag1',
+					unit: 20,
+					angle: 45,
+				});
+
+				// settimeout 3 이상에서만 정상 동작....
+				setTimeout(() => {
+					UI.exe.Drag1.init();		
+				},10);
+			}
+		});
+			
+	</script>
+</body>
+</html>

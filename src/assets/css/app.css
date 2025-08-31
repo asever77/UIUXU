@@ -111,12 +111,12 @@
   --color-border-dark: var(--gray-600);
   --color-card-background: var(--gray-800);
   --color-modal-background: var(--gray-850);
-  --bgcolor: var(--gray-800);
+  --bgcolor: #17171c;
   --nav-bgcolor1: var(--gray-800);
   --nav-bgcolor2: var(--white);
   --nav-shadow: rgba(255, 255, 255, 0.05);
   /* 배경 그라데이션도 조정 */
-  --bgheader: rgba(51,51,51,0.95) 10%, rgba(51,51,51,0.9) 40%, rgba(51,51,51,0.8) 60%, rgba(51,51,51,0) 90%;
+  --bgheader: #17171ce7 10%, #17171ce7 40%, #17171cb9 60%, #17171c00 90%;
   /* 특정 아이콘에만 적용할 경우 */
 }
 :root[data-mode=dark] .base-header--title .logo {
@@ -309,8 +309,7 @@ caption {
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(1px, 1px, 1px, 1px);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   margin: -1px 0 0;
 }
 
@@ -333,8 +332,7 @@ legend,
   color: transparent !important;
   overflow: hidden !important;
   clip: rect(1px, 1px, 1px, 1px);
-  -webkit-clip-path: inset(50%);
-          clip-path: inset(50%);
+  clip-path: inset(50%);
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -403,8 +401,7 @@ box {
   display: block;
   gap: var(--x1);
   padding: var(--x2);
-  border-radius: var(--x1);
-  border: 1px dashed #e9e9e9;
+  border: 1px solid var(--gray-300);
 }
 box[data-color=pink] {
   background-color: #fff9fa;
@@ -419,7 +416,7 @@ box[data-color=blue] {
   border-color: #70b8f7;
 }
 box[data-color=gray] {
-  background-color: #e9e9e9;
+  background-color: var(--gray-300);
 }
 
 codebox {
@@ -591,21 +588,36 @@ th, td {
 [data-heading=display] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
-  font-size: var(--x6);
-  line-height: 1.2;
-  font-weight: 100;
+  font-size: var(--x18);
+  line-height: 1;
+  font-weight: 200;
   letter-spacing: 0.09em;
 }
 [data-heading=display]::before {
   content: attr(data-text);
   font-family: "Bitcount Prop Single", system-ui;
-  font-size: var(--x6);
-  line-height: 1.2;
+  font-size: 1em;
+  line-height: 1;
   font-weight: 400;
   letter-spacing: 0.09em;
   position: absolute;
-  opacity: 0.05;
+  left: 0;
+  opacity: 0.1;
+  color: rgb(240, 7, 182);
   transform: translate(0.03em, 0.03em);
+}
+[data-heading=display]::after {
+  content: attr(data-text);
+  font-family: "Bitcount Prop Single", system-ui;
+  font-size: 1em;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  position: absolute;
+  left: 0;
+  opacity: 0.1;
+  color: rgb(15, 243, 26);
+  transform: translate(-0.04em, -0.03em);
 }
 
 [data-heading=h1] {
@@ -642,6 +654,10 @@ body {
   background-color: var(--bgcolor);
 }
 
+.area-base[data-layout=base] {
+  padding: 0 var(--x2) var(--x2);
+}
+
 .base-header {
   position: sticky;
   top: 0;
@@ -666,6 +682,11 @@ body {
   display: flex;
   align-items: center;
   gap: var(--x1);
+}
+.base-header--title .logo-netive {
+  width: 5rem;
+  margin-right: 0.6rem;
+  transform: translateY(-0.4rem);
 }
 .base-header--title .logo {
   display: block;
@@ -778,19 +799,64 @@ body {
 }
 
 .base-body {
+  position: relative;
   transition: padding 300ms ease;
   transition-delay: 200ms;
+  display: flex;
+  gap: 0.8rem;
 }
 
 .base-footer {
   display: flex;
   padding: var(--x2) var(--x3) var(--x6);
   align-items: center;
+  justify-content: center;
 }
 
-.base-content {
+.base-aside {
+  position: sticky;
+  top: 6.2rem;
+  width: 20rem;
+  padding: var(--x2) 0;
+  overflow-y: auto;
+  max-height: calc(100dvh - 8rem);
+}
+
+.base-main {
   position: relative;
   z-index: 0;
+  flex: 1;
+}
+
+.nav-aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--x3);
+  padding: 0 0 0 var(--x2);
+}
+.nav-aside--wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--x2);
+}
+.nav-aside ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.nav-aside ul a {
+  text-decoration: none;
+}
+.nav-aside ul a[aria-disabled=true] {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+[data-grid=display-title] {
+  padding: var(--x2) 0;
+}
+[data-grid=display-title] [data-heading=display] {
+  margin-bottom: var(--x3);
 }
 
 @media (max-width: 700px) {
@@ -802,6 +868,7 @@ body {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: flex-start;
+    transform: translate(0, -100vh);
   }
   .nav-main::after, .nav-main::before {
     display: none;
@@ -820,15 +887,14 @@ body {
     flex-direction: column;
     gap: var(--x1);
   }
+  .nav-main[data-toggle-state=selected] {
+    transform: translate(0, 0);
+  }
 }
 .area-base {
-  max-width: 120rem;
   position: relative;
   margin: 0 auto;
   z-index: 0;
-}
-.area-base[data-type=sub] {
-  max-width: 90rem;
 }
 .area-dropdown {
   position: absolute;
@@ -2324,20 +2390,24 @@ select.inp--base {
 }
 
 [role=tablist] {
+  position: relative;
   display: flex;
   flex-wrap: nowrap;
   gap: 0;
-  width: 100%;
 }
 [role=tablist] [role=tab] {
+  position: relative;
   display: flex;
   padding: 1.2rem;
   cursor: pointer;
   min-width: 10rem;
 }
-
-[role=tab][aria-selected=true] {
+[role=tablist] [role=tab][aria-selected=true] {
   font-weight: 700;
+}
+
+[data-tab-wrap] {
+  position: relative;
 }
 
 [role=tabpanel],
@@ -2346,6 +2416,7 @@ select.inp--base {
 }
 
 [role=tabpanel][aria-expanded=true] {
+  position: relative;
   display: block;
 }
 

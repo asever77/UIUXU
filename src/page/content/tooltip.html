@@ -1,0 +1,50 @@
+<wrap data-dir="col">
+	<group data-dir="col">
+		<h1 data-heading="display" data-text="Tooltip">Tooltip</h1>
+		<p>Tooltip은 사용자에게 추가적인 정보를 제공하는 UI 요소입니다. 마우스를 올리거나 클릭했을 때, 또는 특정 요소에 키보드 포커스가 갔을 때 나타나며, 핵심 기능을 방해하지 않으면서 보충 설명을 제공합니다.</p>
+
+		<stit>Hover Tooltip (no script)</stit>
+		<box>
+			<div>
+				hover 툴팁 아이콘
+				<div aria-disabled="true" tabindex="0" role="button" data-tooltip="hover" data-mso-after="info">
+					<div data-tooltip-desc="t1" data-ps="tl">
+						<dl>
+							<dt>날씨</dt>
+							<dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+						</dl>
+					</div>
+				</div><br>
+				
+				<div aria-disabled="true" tabindex="0" role="button" data-tooltip="hover">
+					<span>hover 툴팁 텍스트</span>
+					<div data-tooltip-desc="t1" data-ps="tl">
+						<dl>
+							<dt>날씨</dt>
+							<dd>는 옛 브라우저 호환성을 고려한 방식이며, 대부분의 최신 브라우저에서는 window.scrollY만으로 충분합니다.</dd>
+						</dl>
+					</div>
+				</div>
+
+			</div>
+		</box>
+		<stit>Click Tooltip</stit>
+		<box>
+			click 툴팁 아이콘
+			<button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip1" data-mso-after="info" aria-label="툴팁"></button>
+			<br>
+			<button type="button" class="tooltip" data-tooltip="click" aria-describedby="tooltip2">click 툴팁 텍스트</button>
+		</box>
+	</group>
+
+	<group data-dir="col">
+		<mtit>Code</mtit>
+		<codebox>
+			<code><pre contenteditable="true">
+
+			</pre></code>
+		</codebox>
+	</group>
+</wrap>
+
+<div class="area-dialog" data-area="main"></div>

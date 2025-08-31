@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Roulette Event | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+   
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/roulette.html',
+			callback: () => {
+				const datas = [1000, 2000, 3000, 4000, 5000, 1000, 2000, 3000, 4000, 5000];
+				const datas2 = [1000, 2000, 3000, 4000, 5000];
+				let current = 1000;
+				UI.exe.luckyRouletteEvent = new UX.Roulette({
+					id: 'main',
+					speed: 5000,
+					turns: 5,
+
+					data: datas,
+					start: (v) => {
+						UI.exe.luckyRouletteEvent.play({
+							result: current,
+							callback: (v) => {
+								console.log(v);
+							}
+						});
+					}
+				});
+
+				datas.forEach(item => {
+					document.querySelector('#test').insertAdjacentHTML('beforeend', `<option value="${item}">${item}</option>`);
+				});
+				document.querySelector('#test').addEventListener('change', (e) => {
+					current = Number(e.currentTarget.value);
+				});
+				document.querySelector('#reset').addEventListener('click', (e) => {
+					UI.exe.luckyRouletteEvent.reset(datas2);
+				})
+			}
+		});
+	</script>
+</body>
+
+</html>

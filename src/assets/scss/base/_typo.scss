@@ -3,21 +3,36 @@
 [data-heading="display"] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
-	font-size: var(--x6);
-	line-height: 1.2;
-	font-weight: 100;
+	font-size: var(--x18);
+	line-height: 1;
+	font-weight: 200;
 	letter-spacing: 0.09em; 
 
   &::before {
     content: attr(data-text);
     font-family: "Bitcount Prop Single", system-ui;
-    font-size: var(--x6);
-    line-height: 1.2;
+    font-size: 1em;
+    line-height: 1;
     font-weight: 400;
     letter-spacing: 0.09em; 
     position: absolute;
-    opacity: 0.05;
+    left: 0;
+    opacity: 0.1;
+    color: rgb(240, 7, 182);
     transform: translate(.03em, .03em);
+  }
+  &::after {
+    content: attr(data-text);
+    font-family: "Bitcount Prop Single", system-ui;
+    font-size: 1em;
+    line-height: 1;
+    font-weight: 400;
+    letter-spacing: 0.09em; 
+    position: absolute;
+    left:0;
+    opacity: 0.1;
+    color: rgb(15, 243, 26);
+    transform: translate(-.04em, -.03em);
   }
 }
 

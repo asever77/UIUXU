@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chart Bubble | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+    .bubble {
+      cursor: pointer;
+      stroke: #333;
+      stroke-width: 1px;
+      transition: stroke-width 0.1s ease-in-out, stroke 0.1s ease-in-out;
+    }
+
+    .bubble-label {
+      font-size: 12px;
+      fill: white;
+      text-anchor: middle;
+      pointer-events: none;
+      font-weight: bold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .bubble-label-small {
+      font-size: 10px;
+    }
+
+    #tooltip {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px;
+      border-radius: 4px;
+      font-size: 14px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+	</style>
+</head>
+
+<body data-toggle-target="nav">
+	<!-- script -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/bubbleChart.html',
+			callback: () => {
+				/* 선언 ---------------------------------------------- */
+				UI.exe.bubble_chart1 = new UX.ChartBubble({
+          id: 'chart1',
+          areaWidth: 500,
+          areaHeight: 500,
+          gap: 4,
+          minRadius: 20,
+          maxRadius: 100,
+          bubbleData: [
+            { id: 'b1', color: '#000', percentage: 41, name: `아이템 1` },
+            { id: 'b2', color: '#111', percentage: 3.5, name: `아이템 2` },
+            { id: 'b3', color: '#222', percentage: 15, name: `아이템 3` },
+            { id: 'b4', color: '#333', percentage: 13, name: `아이템 4` },
+            { id: 'b5', color: '#444', percentage: 8, name: `아이템 5` },
+            { id: 'b6', color: '#555', percentage: 7, name: `아이템 6` },
+            { id: 'b7', color: '#666', percentage: 5, name: `아이템 7` },
+            { id: 'b8', color: '#777', percentage: 3.5, name: `아이템 8` },
+            { id: 'b9', color: '#888', percentage: 3, name: `아이템 9` },
+            { id: 'b10', color: '#999', percentage: 2, name: `아이템 10` },
+          ],
+        });
+			}
+		});
+	</script>
+</body>
+</html>

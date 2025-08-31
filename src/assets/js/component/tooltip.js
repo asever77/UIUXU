@@ -1,15 +1,29 @@
 import { FocusTrap } from '../utils/utils.js';
 export default class Tooltip {
-  constructor(selector) {
-    this.tooltips = document.querySelectorAll(selector);
+  constructor(data) {
+    this.tooltips = document.querySelectorAll('[data-tooltip="click"]');
     this.html = document.querySelector('html');
     this.activeTooltip = null;
     this.isOpen = false;
+    this.datas = data;
     this.boundOutsideClick = this.handleOutsideClick.bind(this);
     this.init();
   }
 
   init() {
+    let html = ``;
+    this.datas.forEach(item => {
+      console.log(item);
+      html += `<div role="tooltip" id="${item.id}" aria-hidden="true">
+        <div data-tooltip-desc="${item.id}" data-ps="${item.ps}">
+          ${item.cont}
+          <button type="button" data-tooltip-close="${item.id}">닫기</button>
+        </div>
+      </div>`;
+    });
+    document.querySelector('.area-tooltip').insertAdjacentHTML('beforeend', html);
+    html = '';
+
     this.tooltips.forEach(item => {
       item.removeEventListener('click', this.show.bind(this));
       item.addEventListener('click', this.show.bind(this));

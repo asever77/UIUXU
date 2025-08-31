@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>From | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page:'./content/textLength.html',
+			callback: () => {
+				UX.utils.textLength({
+					callback: (result) => {
+						let n = 0;
+						result.forEach(item => {
+							n = item.state ? n + 1 : n - 1;
+						});
+						console.log(n, result.length);
+						document.querySelector('.btn-base').disabled = (n === result.length) ? false : true;
+					}	
+				});
+			}
+		});
+
+		
+	</script>
+</body>
+
+</html>

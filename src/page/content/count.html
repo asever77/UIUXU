@@ -1,0 +1,35 @@
+<wrap data-dir="col">
+	<group data-dir="col">
+		<h1 data-heading="display" data-text="Count">Count</h1>
+
+		<stit>Slot Count</stit>
+		<box style="gap:1rem; display: flex; align-items: center;">
+			<div data-countdown="wrap" data-id="cd1">0000.00.00</div>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown1.start();">실행하기</button>
+		</box>
+		<stit>base Count</stit>
+		<box style="gap:1rem; display: flex; align-items: center;">
+			<div data-countdown="wrap" data-id="cd2" style="font-size: 4rem; font-weight: 700;">000</div>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown2.start();">실행하기</button>
+		</box>
+		<stit>updown Count</stit>
+		<box style="gap:1rem; display: flex; align-items: center;">
+			<div data-countdown="wrap" data-id="cd3" style="font-size: 4rem; font-weight: 700;">143.6</div>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(-1.7);">-1.7</button>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(1.3);">+1.3</button>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(-7);">-7</button>
+			<button type="button" class="btn-base" onclick="UI.exe.countdown3.change(7);">+7</button>
+		</box>
+
+
+	</group>
+
+	<group data-dir="col">
+		<mtit>Code</mtit>
+		<codebox>
+			<code><pre contenteditable="true">
+
+			</pre></code>
+		</codebox>
+	</group>
+</wrap>

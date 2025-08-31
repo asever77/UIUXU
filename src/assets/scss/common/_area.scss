@@ -1,14 +1,10 @@
 .area{
   &-base {
-    max-width: 120rem;
     position: relative;
     margin: 0 auto;
     z-index: 0;
-
-    &[data-type="sub"] {
-      max-width: 90rem;
-    }
   }
+
   &-dropdown {
     position: absolute;
     top: 0;

@@ -1,0 +1,41 @@
+<wrap data-dir="col">
+  <group data-dir="col">
+    <h1 data-heading="display" data-text="Wheel Picker">Wheel Picker</h1>
+
+    <stit>IOS style</stit>
+    <box>
+      <fieldset id="selectType" style="font-size: 1.2rem; display: inline-flex;">
+        <legend>날짜 타입 선택</legend>
+        <label>
+          <input type="radio" name="type" value="YYYY-MM-DD"> YYYY-MM-DD
+        </label>
+        <label>
+          <input type="radio" name="type" value="MM-DD-YYYY"> MM-DD-YYYY
+        </label>
+        <label>
+          <input type="radio" name="type" value="DD-MM-YYYY"> DD-MM-YYYY
+        </label>
+      </fieldset>
+      
+      <button type="button" data-set="MM-DD-YYYY" data-wheel-picker-button="aa1">
+        <span data-wheel-picker-set="YYYY">YYYY</span>
+        <span data-wheel-picker-set="MM">MM</span>
+        <span data-wheel-picker-set="DD">DD</span>
+      </button>
+
+      <div class="wheel-picker--area" data-wheel-picker="aa1" data-set="YYYY-MM-DD">
+        <div class="wheel-picker" data-wheel-picker-set="YYYY" id="iosPicker_year" aria-hidden="true"></div>
+        <div class="wheel-picker" data-wheel-picker-set="MM" id="iosPicker_month" aria-hidden="true"></div>
+        <div class="wheel-picker" data-wheel-picker-set="DD" id="iosPicker_day" aria-hidden="true"></div>
+
+        <button type="button" class="wheel-picker--a11y-btn btn-icon" data-mso-before="accessible_menu" aria-label="접근성"></button>
+        <div class="wheel-picker--a11y">
+          <select data-set="YYYY" id="iosPicker_year_a11y" tabindex="0"></select>
+          <select data-set="MM" id="iosPicker_month_a11y" tabindex="0"></select>
+          <select data-set="DD" id="iosPicker_day_a11y"  tabindex="0"></select>
+        </div>
+      </div>
+    </box>
+
+  </group>
+</wrap>
