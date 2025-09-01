@@ -10,9 +10,15 @@
 	<link rel="stylesheet" href="../assets/css/app.css">
 
 	<style>
-		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
-		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
-		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+		[role=tablist] [role=tab] {
+			min-width: 20rem; text-align: center; border-bottom:1px solid #ccc;
+		}
+		[role=tablist] [role=tab][aria-selected=true] {
+			border-color:#000;
+		}
+		[data-tab-type="scroll"] [role="tabpanel"] {
+			scroll-margin-top: 12rem;
+		}
 
 		[data-guide="on"] {
 			[data-tab-name],
@@ -52,15 +58,11 @@
 <body>
 	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init({
 			layout: './layout/base.html',
 			page:'./content/tab.html',
 			callback: () => {
-				/* 선언 ---------------------------------------------- */
-				// dropdown
 				UI.exe.tab1 = new UX.Tab({
 					id: 'tab1',
 					selected: 1, //1부터 시작
@@ -68,7 +70,6 @@
 						{ src: './tab/tab1.html', tab: '<span>tab1</span>', callback: () => { console.log('tab 1 open'); },},
 						{ src: './tab/tab2.html', tab: '<span>tab2</span>',
 							callback: () => {
-								console.log('tab 2 open');
 								UI.exe.tab2.init()
 							}
 						},
@@ -125,12 +126,9 @@
 				});
 				
 
-				/* 실행 ---------------------------------------------- */
 				UI.exe.tab1.init();
 				UI.exe.tab3.init();
 				UI.exe.tab4.init();
-
-				UI.exe.tab1.ver();
 			}
 		});
 	</script>

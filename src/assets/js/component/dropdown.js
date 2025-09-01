@@ -6,7 +6,6 @@ export default class Dropdown {
   // Private 필드 선언
   #option;
   #id;
-  #ps;
   #area;
   #callback;
   #src;
@@ -33,7 +32,7 @@ export default class Dropdown {
 
     this.#option = { ...defaults, ...opt };
     this.#id = this.#option.id;
-    this.#ps = this.#option.ps;
+    this.ps = this.#option.ps;
     this.#area = this.#option.area;
     this.#callback = this.#option.callback;
     this.#src = this.#option.src;
@@ -179,8 +178,8 @@ export default class Dropdown {
     const scroll_t = document.documentElement.scrollTop;
     this.#panel.style.height = rect.height + 'px';
 
-    if (this.#ps) {
-      this.#panel.dataset.ps = this.#ps;
+    if (this.ps) {
+      this.#panel.dataset.ps = this.ps;
     } else {
       this.#panel.dataset.ps = (rect.bottom + this.#panelInner.offsetHeight < viewportHeight) ? 'bl' : 'tl';
     }

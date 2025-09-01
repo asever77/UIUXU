@@ -10,20 +10,25 @@
 	<link rel="stylesheet" href="../assets/css/app.css">
 </head>
 
-<body data-toggle-target="nav">
+<body>
 	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
 		import { UX } from '../assets/js/uiuxu.common.js';
+
 		UX.init({
 			layout: './layout/base.html',
 			page:'./content/dropdown.html',
 			callback: () => {
-				/* 선언 ---------------------------------------------- */
+
+				let ps = 'bl';
+				document.querySelector('#psSelect').addEventListener('change', (e) => {
+					const ps = e.target.value;
+					UI.exe.dropdown1.ps = ps
+					
+				});
 				UI.exe.dropdown1 = new UX.Dropdown({
 					id: 'dropdown1',
-					ps: 'bl',
+					ps: ps,
 					src: './dropdown/dropdown1.html',
 					srcCallback: () => {
 						console.log(`./dropdown/dropdown1.html load complete callback`);
@@ -32,19 +37,10 @@
 						console.log(`dropdown init callback`);
 					},
 				});
-			
 
-				/* 실행 ---------------------------------------------- */
 				UI.exe.dropdown1.init();
 			}
 		});
-		
-
-		/* 선언 ---------------------------------------------- */
-    // dropdown
-		
-
 	</script>
 </body>
-
 </html>

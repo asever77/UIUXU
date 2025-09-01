@@ -9,7 +9,7 @@ wrap {
 	display: flex;
 	align-items: flex-start;
 	gap: var(--x3);
-	padding: var(--x2);
+	padding: 0;
 }
 group {
 	width: 100%;
@@ -43,7 +43,8 @@ box {
 	display: block;
 	gap: var(--x1);
 	padding: var(--x2);
-	border: 1px solid var(--gray-300);
+	border-radius: var(--x1);
+	background-color: #fff;
 
 	&[data-color="pink"] {
 		background-color: #fff9fa;
@@ -69,12 +70,17 @@ codebox {
 	width: 100%;
 	display: flex;
 	gap: var(--x1);
-	padding: var(--x2);
+	padding: 0 var(--x2);
+	overflow: hidden;
 	border-radius: var(--x1);
-	background-color: #282828;
+	background-color: #282c34;
 }
 codebox pre:focus {
 	outline: 0;
+}
+codebox pre {
+	padding: 0;
+	margin: 0;
 }
 codebox code {
 	width: 100%;

@@ -1,10 +1,26 @@
 <wrap data-dir="col">
-	<group data-dir="col">
+	<group data-dir="col" data-grid="display-title">
 		<h1 data-heading="display" data-text="Dropdown">Dropdown</h1>
-		<p>드롭다운 컴포넌트는 웹 페이지에서 사용자에게 선택 목록을 제공하거나, 특정 콘텐츠를 필요할 때만 보여주는 데 사용되는 UI 요소입니다. 이 가이드에서는 드롭다운 컴포넌트의 설정 가능한 옵션과 제공되는 주요 기능에 대해 설명합니다.</p>
+		<p>드롭다운 컴포넌트는 웹 페이지에서 사용자에게 선택 목록을 제공하거나, 특정 콘텐츠를 필요할 때만 보여주는 데 사용되는 UI 요소입니다. <br>이 가이드에서는 드롭다운 컴포넌트의 설정 가능한 옵션과 제공되는 주요 기능에 대해 설명합니다.</p>
+	</group>
 
+	<group data-dir="col">
 		<box>
-			<div style="display: flex; gap:0.8rem;">
+			<div style="display: flex; gap:0.8rem;justify-content: center;">
+				<select class="inp--base" id="psSelect" style="width: 12rem;">
+					<option value="bl">Bottom Left</option>
+					<option value="bc">Bottom Center</option>
+					<option value="br">Bottom Right</option>
+					<option value="tl">Top Left</option>
+					<option value="tc">Top Center</option>
+					<option value="tr">Top Right</option>
+					<option value="lt">Left Top</option>
+					<option value="lc">Left Center</option>
+					<option value="lb">Left Bottom</option>
+					<option value="rc">Right Center</option>
+					<option value="rt">Right Top</option>
+					<option value="rb">Right Bottom</option>
+				</select>
 				<div data-dropdown="dropdown1">
 					<button type="button" class="btn-base" data-dropdown-button="dropdown1">
 						<span data-dropdown-text="dropdown1">주요기능</span>

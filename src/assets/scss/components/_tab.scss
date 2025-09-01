@@ -1,11 +1,13 @@
 /* tab */
 [data-tab] {
+  position: relative;
   display: flex;
   overflow-x: auto;
   position: relative;
   scroll-behavior: smooth; 
   -ms-overflow-style: none; 
   scrollbar-width: none;
+  width: 100%;
 }
 [role="tablist"] {
   position: relative;

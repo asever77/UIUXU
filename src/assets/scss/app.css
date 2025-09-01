@@ -53,8 +53,8 @@
   --nav-bgcolor1: var(--white);
   --nav-bgcolor2: var(--black);
   --nav-shadow: rgba(0, 0, 0, 0.05);
-  --bgcolor: #F6F7F9;
-  --bgheader: rgba(246, 247, 249, 0.95) 10%, rgba(246, 247, 249,0.9) 40%, rgba(246, 247, 249,0.8) 60%, rgba(246, 247, 249,0) 90%;
+  --bgcolor: var(--white);
+  --bgheader: rgba(255,255,255,0.95) 10%, rgba(255,255,255,0.9) 40%, rgba(255,255,255,0.8) 60%, rgba(255,255,255,0) 90%;
   --gap: 0.8rem;
   --x1: calc(0.8rem * 1);
   --x2: calc(0.8rem * 2);
@@ -367,7 +367,7 @@ wrap {
   display: flex;
   align-items: flex-start;
   gap: var(--x3);
-  padding: 0;
+  padding: var(--x2);
 }
 
 group {
@@ -401,8 +401,7 @@ box {
   display: block;
   gap: var(--x1);
   padding: var(--x2);
-  border-radius: var(--x1);
-  background-color: #fff;
+  border: 1px solid var(--gray-300);
 }
 box[data-color=pink] {
   background-color: #fff9fa;
@@ -424,19 +423,13 @@ codebox {
   width: 100%;
   display: flex;
   gap: var(--x1);
-  padding: 0 var(--x2);
-  overflow: hidden;
+  padding: var(--x2);
   border-radius: var(--x1);
-  background-color: #282c34;
+  background-color: #282828;
 }
 
 codebox pre:focus {
   outline: 0;
-}
-
-codebox pre {
-  padding: 0;
-  margin: 0;
 }
 
 codebox code {
@@ -595,7 +588,7 @@ th, td {
 [data-heading=display] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
-  font-size: var(--x10);
+  font-size: var(--x18);
   line-height: 1;
   font-weight: 100;
   letter-spacing: 0.09em;
@@ -610,7 +603,7 @@ th, td {
   position: absolute;
   left: 0;
   opacity: 0.1;
-  color: rgb(190, 190, 190);
+  color: rgb(240, 7, 182);
   transform: translate(0.03em, 0.03em);
 }
 
@@ -814,14 +807,12 @@ body {
   padding: var(--x2) 0;
   overflow-y: auto;
   max-height: calc(100dvh - 8rem);
-  flex-shrink: 0;
 }
 
 .base-main {
   position: relative;
   z-index: 0;
   flex: 1;
-  width: calc(100vw - 20rem - var(--x8));
 }
 
 .nav-aside {
@@ -838,10 +829,9 @@ body {
 .nav-aside ul {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.8rem;
 }
 .nav-aside ul a {
-  font-size: 1.2rem;
   text-decoration: none;
 }
 .nav-aside ul a[aria-disabled=true] {
@@ -886,9 +876,6 @@ body {
   }
   .nav-main[data-toggle-state=selected] {
     transform: translate(0, 0);
-  }
-  .base-aside {
-    display: none;
   }
 }
 .area-base {
@@ -2381,14 +2368,12 @@ select.inp--base {
 
 /* tab */
 [data-tab] {
-  position: relative;
   display: flex;
   overflow-x: auto;
   position: relative;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  width: 100%;
 }
 
 [role=tablist] {

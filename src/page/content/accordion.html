@@ -1,7 +1,7 @@
 <wrap data-dir="col">
 	<group data-dir="col" data-grid="display-title">
 		<h1 data-heading="display" data-text="Accordion">Accordion</h1>
-		<p>  Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
+		<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 	</group>
 
 	<group data-dir="col">
@@ -15,7 +15,7 @@
 					</div>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
-							ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 						</div>
 					</div>
 				</div>
@@ -27,7 +27,7 @@
 					</h3>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
-							ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 						</div>
 					</div>
 				</div>
@@ -39,7 +39,7 @@
 					</h3>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
-							ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd<br>ddddd
+							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 						</div>
 					</div>
 				</div>
@@ -48,14 +48,24 @@
 	</group>
 
 	<group data-dir="col">
-		<mtit>HTML 구조</mtit>
-		<p>아코디언을 사용하려면 특정 data-accordion 속성을 사용하여 HTML을 설정해야 합니다. 각 아코디언 인스턴스는 고유한 data-accordion ID를 필요로 합니다. 내부적으로 각 접을 수 있는 항목은 부모 아코디언의 ID와 일치하는 data-accordion-item 속성이 필요합니다.</p>
-		<p>각 항목에는 다음이 포함되어야 합니다.</p>
-		<ul class="bul-list" data-type="dot">
-			<li>data-accordion-button과 아코디언의 ID를 가진 버튼.</li>
-			<li>data-accordion-title과 아코디언의 ID를 가진 선택적 제목.</li>
-			<li>data-accordion-body와 아코디언의 ID를 가진 본문.</li>
-		</ul>
+		<mtit>HTML</mtit>
+		<codebox>
+			<pre contenteditable="true"><code>
+&lt;div data-accordion="name"&gt;
+	&lt;div data-accordion-item="name"&gt;
+		&lt;div data-accordion-head="name"&gt;
+			&lt;h3 data-accordion-title="name"&gt;title 1&lt;/h3&gt;
+			&lt;button type="button" data-accordion-button="name"&gt;&lt;/button&gt;
+		&lt;/div&gt;
+		&lt;div data-accordion-body="name" hidden&gt;
+			&lt;div data-accordion-section="name"&gt;
+				...
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+			</code></pre>
+		</codebox>
 	</group>
 
 	<group data-dir="col">
@@ -98,6 +108,22 @@
 					<td>true</td>
 					<td>
 						한 번에 하나의 아코디언 항목만 열릴 수 있는지(true) 또는 여러 항목이 동시에 열릴 수 있는지(false)를 결정합니다. true인 경우, 한 항목을 열면 현재 열려 있는 다른 항목이 자동으로 닫힙니다.
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">scrollIntoView</th>
+					<td>boolean</td>
+					<td>false</td>
+					<td>
+						스크롤이벤트
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">scrollOptions</th>
+					<td>object</td>
+					<td>false</td>
+					<td>
+						{ behavior: 'smooth', block: 'start' }
 					</td>
 				</tr>
 			</tbody>

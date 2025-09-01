@@ -12,6 +12,7 @@ import Drag from './component/drag.js';
 import Countdown from './component/countdown.js';
 import ChartBubble from './component/chart_bubble.js';
 import TimeSelect from './component/timeSelect.js';
+import ListIA from './component/listIA.js';
 
 import Roulette from './event/roulette.js';
 
@@ -167,6 +168,7 @@ export const UX = {
   ChartBubble,
   Roulette,
   TimeSelect,
+  ListIA,
 
   init: (data) => uxInstance.init(data),
 

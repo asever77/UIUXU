@@ -10,29 +10,44 @@
 	<link rel="stylesheet" href="../assets/css/app.css">
 
 	<style>
-    [data-accordion-item]:first-child {border-top: 0;}
-    [data-accordion-item] {border-top: 1px solid var(--black);scroll-margin-top:6rem}
-		[data-accordion-head] {padding:1.2rem .8rem}
-    [data-accordion-section] {padding: 1.6rem .8rem;}
+		[data-accordion-item]:first-child {
+			border-top: 0;
+		}
 
-    [data-guide="on"] {
+		[data-accordion-item] {
+			border-top: 1px solid var(--gray-300);
+			scroll-margin-top: 6rem
+		}
+
+		[data-accordion-head] {
+			padding: 1.2rem .8rem
+		}
+
+		[data-accordion-section] {
+			padding: 1.6rem .8rem;
+		}
+
+		[data-guide="on"] {
+
 			[data-accordion],
-      [data-accordion-button],
-      [data-accordion-body],
-      [data-accordion-body],
+			[data-accordion-button],
+			[data-accordion-body],
+			[data-accordion-body],
 			[data-accordion-item],
 			[data-accordion-head],
-			[data-accordion-title]{
+			[data-accordion-title] {
 				position: relative;
 				outline: 1px dashed rgba(255, 99, 71, 0.2);
 				outline-offset: -1px;
 				background-color: rgba(255, 99, 71, 0.04);
+
 				&::after,
 				&::before {
 					content: "";
 					position: absolute;
 					display: block;
 				}
+
 				&::after {
 					width: 100%;
 					height: 1px;
@@ -40,6 +55,7 @@
 					top: 50%;
 					left: 0;
 				}
+
 				&::before {
 					width: 1px;
 					height: 100%;
@@ -48,29 +64,29 @@
 					top: 0;
 				}
 			}
-      [data-accordion-button] {
-        position: absolute;
-      }
+
+			[data-accordion-button] {
+				position: absolute;
+			}
 		}
-		
 	</style>
 </head>
 
 <body>
 	<!-- script -->
 	<script type="module">
-  	/* 준비 ---------------------------------------------- */
+		/* 준비 ---------------------------------------------- */
 		import { UX } from '../assets/js/uiuxu.common.js';
 		UX.init({
 			layout: './layout/base.html',
-			page:'./content/accordion.html',
+			page: './content/accordion.html',
 			callback: () => {
 				/* 선언 ---------------------------------------------- */
 				UI.exe.acco1 = new UX.Accordion({
 					id: 'acco1',
-					expanded: 'acco1-0',
-					scrollIntoView: true,
-					scrollOptions: { behavior: 'smooth', block: 'start' }
+					expanded: null,
+					// scrollIntoView: true,
+					// scrollOptions: { behavior: 'smooth', block: 'start' },
 				});
 
 				/* 실행 ---------------------------------------------- */
