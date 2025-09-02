@@ -97,6 +97,11 @@ class UXCore {
                 el_html.dataset.guide = 'off';
               }
             }
+
+            const aniLandomArray = ['판다', '개구리', '백곰', '여우', '트로피컬', '돼지', '똥', '로봇', '말풍선', '병아리', '유령', '썬글라스'];
+            const randomIndex = Math.floor(Math.random() * aniLandomArray.length); 
+
+            document.querySelector('.ani').src = `../assets/img/${aniLandomArray[randomIndex]}.png`;
           })
           .catch((err) => console.error('Error loading header content:', err));
         }
@@ -171,7 +176,6 @@ export const UX = {
   ListIA,
 
   init: (data) => uxInstance.init(data),
-
   utils: {
     loadContent,
     dayOption,

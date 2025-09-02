@@ -40,7 +40,13 @@ body {
     }
     .logo {
       display: block;
-      width: var(--x18);
+      width: var(--x18
+      );
+    }
+    .ani {
+      display: block;
+      width: 3rem;
+      margin-left: 1rem;
     }
     sup {
       font-size: var(--x1);
@@ -213,8 +219,8 @@ body {
 
 [data-grid="display-title"] {
   padding: var(--x2) 0;
-  [data-heading="display"] {
-    margin-bottom: var(--x3);
+  [data-heading="display"] + p {
+    margin-top: var(--x3);
   }
 }
 

@@ -1,7 +1,17 @@
 <wrap data-dir="col">
-	<group data-dir="col">
+	<group data-dir="col" data-grid="display-title">
 		<h1 data-heading="display" data-text="Tooltip">Tooltip</h1>
 		<p>Tooltip은 사용자에게 추가적인 정보를 제공하는 UI 요소입니다. 마우스를 올리거나 클릭했을 때, 또는 특정 요소에 키보드 포커스가 갔을 때 나타나며, 핵심 기능을 방해하지 않으면서 보충 설명을 제공합니다.</p>
+	</group>
+
+	<group data-dir="col">
+		<stit>WCAG 2.1 성공 기준 1.4.13 "Content on Hover or Focus"</stit>
+		<p>호버 콘텐츠는 툴팁과 같이 마우스 호버일 때 추가로 정보를 제공하는 요소입니다. WCAG2.1 에서는 아래와 같은 3가지 사항을 고려해야 합니다.</p>
+		<ul>
+			<li><b>1. Dismissible (해제 가능):</b> 추가 콘텐츠를 마우스 포인터를 움직이거나 키보드 초점을 옮기지 않고도 해제할 수 있는 메커니즘이 제공되어야 합니다. <br>예를 들어, 'Esc' 키를 눌러 팝업을 닫는 기능이 이에 해당합니다.</li>
+			<li><b>2. Hoverable (호버 가능):</b> 마우스 호버로 인해 추가 콘텐츠가 나타난 경우, 사용자는 마우스 포인터를 그 콘텐츠 위로 이동해도 콘텐츠가 사라지지 않아야 합니다. <br>이를 통해 사용자는 화면 확대와 같은 보조 기술을 사용하는 경우에도 콘텐츠를 충분히 탐색하고 읽을 수 있습니다.</li>
+			<li><b>3. Persistent (유지 가능):</b> 추가 콘텐츠는 사용자가 호버 또는 초점 상태를 제거하거나 명시적으로 해제하기 전까지 계속 유지되어야 합니다. <br>콘텐츠가 특정 시간 후에 자동으로 사라지면 안 됩니다.</li>
+		</ul>
 
 		<stit>Hover Tooltip (no script)</stit>
 		<box>
@@ -28,6 +38,8 @@
 
 			</div>
 		</box>
+
+
 		<stit>Click Tooltip</stit>
 		<box>
 			click 툴팁 아이콘

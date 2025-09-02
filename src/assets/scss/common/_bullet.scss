@@ -1,0 +1,44 @@
+[data-bullet] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  & > li {
+    position: relative;
+    padding-left: 1.6rem;
+
+    &::before {
+      content: attr(data-style);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 1.6rem;
+      position: absolute;
+      line-height: 1;
+      top: 0.4rem;
+      left: 0;
+    }
+  }
+}
+
+[data-bullet="dot"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  & > li {
+    position: relative;
+    padding-left: 1.6rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.9rem;
+      left: 0.6rem;
+      width: 0.4rem;
+      height: 0.4rem;
+      background-color: currentColor;
+      border-radius: 50%;
+    }
+  }
+}

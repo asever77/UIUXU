@@ -61,10 +61,11 @@
     top:0;
     left:0;
   }
-  [role=tablist] {
+  [role="tablist"] {
     width: auto;
+    position: absolute;
   }
-  [role=tablist] [role=tab] {
+  [role="tablist"] [role="tab"] {
     min-width: 0;
     padding:0;
   }

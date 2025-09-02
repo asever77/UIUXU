@@ -73,7 +73,6 @@ export default class Drag {
   }
 
   actEventStart(e) {
-    console.log(e);
     const el_this = e.currentTarget;
     const el_item = el_this.closest('[data-dragdrop-object="item"]');
     const el_wrap = el_this.closest('[data-dragdrop-object="wrap"]');
@@ -81,6 +80,8 @@ export default class Drag {
     const isMode = el_item.dataset.mode;
     const isClone = el_item.dataset.clone && el_item.dataset.this === 'original' ? Number(el_item.dataset.clone) : false;
     const clone_item = el_item.cloneNode(true);
+
+ console.log(el_item.dataset.clone, clone_item);
 
     let this_item = el_item;
     let this_event = el_item.querySelector('[data-dragdrop-object="event"]');
@@ -116,6 +117,9 @@ export default class Drag {
     let startAngle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI);
     startAngle = Math.round(startAngle); // 정수 변환
     let currentRotate = 0;
+
+   
+
     const transform = el_img.style.transform.match(/rotate\((-?\d+)deg\)/);
     if (transform) {
       currentRotate = parseInt(transform[1], 10);

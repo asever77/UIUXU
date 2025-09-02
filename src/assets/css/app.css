@@ -600,6 +600,9 @@ th, td {
   font-weight: 100;
   letter-spacing: 0.09em;
 }
+[data-heading=display]::first-letter {
+  font-weight: 100;
+}
 [data-heading=display]::before {
   content: attr(data-text);
   font-family: "Bitcount Prop Single", system-ui;
@@ -685,6 +688,11 @@ body {
 .base-header--title .logo {
   display: block;
   width: var(--x18);
+}
+.base-header--title .ani {
+  display: block;
+  width: 3rem;
+  margin-left: 1rem;
 }
 .base-header--title sup {
   font-size: var(--x1);
@@ -852,8 +860,8 @@ body {
 [data-grid=display-title] {
   padding: var(--x2) 0;
 }
-[data-grid=display-title] [data-heading=display] {
-  margin-bottom: var(--x3);
+[data-grid=display-title] [data-heading=display] + p {
+  margin-top: var(--x3);
 }
 
 @media (max-width: 700px) {
@@ -1279,6 +1287,47 @@ select.inp--base {
     grid-column: span 2;
   }
 }
+[data-bullet] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+[data-bullet] > li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+[data-bullet] > li::before {
+  content: attr(data-style);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.6rem;
+  position: absolute;
+  line-height: 1;
+  top: 0.4rem;
+  left: 0;
+}
+
+[data-bullet=dot] {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+[data-bullet=dot] > li {
+  position: relative;
+  padding-left: 1.6rem;
+}
+[data-bullet=dot] > li::before {
+  content: "";
+  position: absolute;
+  top: 0.9rem;
+  left: 0.6rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: currentColor;
+  border-radius: 50%;
+}
+
 .scroll-not {
   overflow: hidden !important;
 }
@@ -2088,6 +2137,7 @@ select.inp--base {
 }
 [data-dragdrop-object=item] [role=tablist] {
   width: auto;
+  position: absolute;
 }
 [data-dragdrop-object=item] [role=tablist] [role=tab] {
   min-width: 0;
