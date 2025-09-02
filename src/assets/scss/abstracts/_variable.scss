@@ -135,6 +135,8 @@
 	/* 배경 그라데이션도 조정 */
 	--bgheader: #17171ce7 10%, #17171ce7 40%, #17171cb9 60%, #17171c00 90%;
 
+	.logo-netive,
+	.img-main .logo,
 	.base-header--title .logo {
 		filter: invert(1) hue-rotate(180deg);
 	}
