@@ -129,24 +129,28 @@
 }
 
 html {
-  font-size: var(--w375);
+  font-size: 2.6667vw;
 }
 
 @media screen and (min-width: 700px) {
   html {
-    font-size: 0.85263vw;
+    font-size: 0.85263vmax;
   }
 }
 @media screen and (min-width: 1200px) {
   html {
-    font-size: 0.75263vw;
+    font-size: 0.75263vmax;
   }
 }
 @media screen and (min-width: 1400px) {
   html {
-    font-size: 0.5263vw;
+    font-size: 0.5263vmax;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   padding: 0;
@@ -661,11 +665,11 @@ th, td {
 
 body {
   background-color: var(--bgcolor);
+  transition: background 400ms ease;
 }
 
 .area-base[data-layout=base] {
   padding: 0 var(--x2) var(--x2);
-  overflow: hidden;
 }
 
 .base-header {
@@ -673,7 +677,6 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
-  background: linear-gradient(var(--bgheader));
 }
 .base-header--wrap {
   display: flex;
@@ -829,6 +832,12 @@ body {
   justify-content: center;
 }
 
+.base-wrap h2 {
+  font-size: var(--x3);
+  line-height: 2;
+  font-weight: 600;
+}
+
 .base-aside {
   position: sticky;
   top: 6.2rem;
@@ -862,6 +871,75 @@ body {
   z-index: 0;
   flex: 1;
   width: calc(100vw - 20rem - var(--x8));
+  display: flex;
+  flex-direction: row-reverse;
+  gap: var(--x4);
+  align-items: flex-start;
+}
+
+.base-content {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: var(--x8);
+}
+
+.base-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: var(--x1);
+}
+
+.base-box {
+  width: 100%;
+  display: block;
+  gap: var(--x1);
+  padding: var(--x2);
+  border-radius: var(--x1);
+  background-color: #fff;
+}
+.base-box[data-color=pink] {
+  background-color: #fff9fa;
+  border-color: pink;
+}
+.base-box[data-color=green] {
+  background-color: #f9fffb;
+  border-color: #5de75c;
+}
+.base-box[data-color=blue] {
+  background-color: #f9fcff;
+  border-color: #70b8f7;
+}
+.base-box[data-color=gray] {
+  background-color: var(--gray-300);
+}
+
+.aside-inner {
+  width: 12rem;
+  flex-shrink: 0;
+  position: sticky;
+  top: 7rem;
+}
+.aside-inner h3 {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0;
+  border-bottom: 0.4rem solid var(--gray-800);
+  margin-bottom: 1.6rem;
+}
+.aside-inner ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.aside-inner-wrap {
+  position: sticky;
+  top: 7rem;
+}
+
+.base-wrap h2:target {
+  scroll-margin-top: var(--x8);
 }
 
 .nav-aside {

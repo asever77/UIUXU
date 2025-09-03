@@ -3,25 +3,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 html {
-	font-size: var(--w375);
+	font-size: 2.6667vw;
 }
 @media screen and (min-width: 700px) {
   html {
-    font-size: 0.85263vw;
+    font-size: 0.85263vmax;
   }
 }
 @media screen and (min-width: 1200px) {
   html {
-    font-size: 0.75263vw;
+    font-size: 0.75263vmax;
   }
 }
 @media screen and (min-width: 1400px) {
   html {
-    font-size: 0.5263vw;
+    font-size: 0.5263vmax;
   }
 }
 
-
+html {
+  scroll-behavior: smooth;
+}
 html,
 body {
 	padding: 0;

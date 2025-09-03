@@ -1,11 +1,31 @@
-<wrap data-dir="col">
-	<group data-dir="col" data-grid="display-title">
+<aside class="aside-inner">
+	<div class="aside-inner-wrap">
+		<h3>Accordion</h3>
+		<nav>
+			<ul>
+				<li>
+					<a href="#anchor-1" class="selected">Example</a>
+				</li>
+				<li>
+					<a href="#anchor-2">Code</a>
+				</li>
+				<li>
+					<a href="#anchor-3">Options</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</aside>
+
+<article class="base-content" data-dir="col">
+	<section class="base-wrap" data-dir="col" data-grid="display-title">
 		<h1 data-heading="display" data-text="Accordion">Accordion</h1>
 		<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
-	</group>
+	</section>
 
-	<group data-dir="col">
-		<box>
+	<section class="base-wrap" data-dir="col">
+		<h2 id="anchor-1">Example</h2>
+		<div class="base-box">
 			<div data-accordion="acco1">
 				<div data-accordion-item="acco1">
 					<div data-accordion-head="acco1">
@@ -44,11 +64,11 @@
 					</div>
 				</div>
 			</div>
-		</box>
-	</group>
+		</div>
+	</section>
 
-	<group data-dir="col">
-		<mtit>Code</mtit>
+	<section class="base-wrap" data-dir="col">
+		<h2 id="anchor-2">Code</h2>
 		<div data-tab="codeGuide" data-tab-style="small-box-type">
 			<div role="tablist">
 				<button type="button" role="tab">
@@ -69,17 +89,17 @@
 					<codebox>
 						<pre contenteditable="true"><code>
 &lt;div data-accordion="name"&gt;
-&lt;div data-accordion-item="name"&gt;
-	&lt;div data-accordion-head="name"&gt;
-		&lt;h3 data-accordion-title="name"&gt;title 1&lt;/h3&gt;
-		&lt;button type="button" data-accordion-button="name"&gt;&lt;/button&gt;
-	&lt;/div&gt;
-	&lt;div data-accordion-body="name" hidden&gt;
-		&lt;div data-accordion-section="name"&gt;
-			...
+	&lt;div data-accordion-item="name"&gt;
+		&lt;div data-accordion-head="name"&gt;
+			&lt;h3 data-accordion-title="name"&gt;title 1&lt;/h3&gt;
+			&lt;button type="button" data-accordion-button="name"&gt;&lt;/button&gt;
+		&lt;/div&gt;
+		&lt;div data-accordion-body="name" hidden&gt;
+			&lt;div data-accordion-section="name"&gt;
+				...
+			&lt;/div&gt;
 		&lt;/div&gt;
 	&lt;/div&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 						</code></pre>
 					</codebox>
@@ -165,10 +185,10 @@ UI.exe.acco1.destroy();
 				</section>
 			</div>
 		</div>		
-	</group>
+	</section>
 
-	<group data-dir="col">
-		<mtit>Options</mtit>
+	<section class="base-wrap" data-dir="col">
+		<h2 id="anchor-3">Options</h2>
 		<p>Tab 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한 설명입니다.</p>
 		<table>
 			<caption></caption>
@@ -227,5 +247,6 @@ UI.exe.acco1.destroy();
 				</tr>
 			</tbody>
 		</table>
-	</group>
-</wrap>
+	</section>
+</article>
+

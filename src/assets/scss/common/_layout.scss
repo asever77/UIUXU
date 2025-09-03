@@ -1,10 +1,11 @@
 body {
   background-color: var(--bgcolor);
+  transition: background 400ms ease;
 }
 
 .area-base[data-layout="base"] {
   padding: 0 var(--x2) var(--x2);
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 .base-header {
@@ -12,7 +13,7 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
-  background: linear-gradient(var(--bgheader));
+  // background: linear-gradient(var(--bgheader));
 
   &--wrap {
     display: flex;
@@ -188,6 +189,12 @@ body {
   justify-content: center;
 }
 
+.base-wrap h2 {
+	font-size: var(--x3);
+	line-height: 2;
+	font-weight: 600;
+}
+
 .base-aside {
   position: sticky;
   top: 6.2rem;
@@ -225,6 +232,77 @@ body {
   z-index: 0;
   flex: 1;
   width: calc(100vw - 20rem - var(--x8));
+  display: flex;
+  flex-direction: row-reverse;
+  gap:var(--x4);
+  align-items: flex-start;
+}
+
+.base-content {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap:var(--x8);
+}
+.base-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: var(--x1);
+}
+.base-box {
+	width: 100%;
+	display: block;
+	gap: var(--x1);
+	padding: var(--x2);
+	border-radius: var(--x1);
+	background-color: #fff;
+
+	&[data-color="pink"] {
+		background-color: #fff9fa;
+		border-color: pink;
+	}
+
+	&[data-color="green"] {
+		background-color: #f9fffb;
+		border-color: #5de75c;
+	}
+
+	&[data-color="blue"] {
+		background-color: #f9fcff;
+		border-color: #70b8f7;
+	}
+
+	&[data-color="gray"] {
+		background-color: var(--gray-300);
+	}
+}
+.aside-inner {
+  width: 12rem;
+  flex-shrink: 0;
+  position: sticky;
+  top:7rem;
+
+  h3 {
+    display: block;
+    width: 100%;
+    padding:.6rem 0;
+    border-bottom:.4rem solid var(--gray-800);
+    margin-bottom: 1.6rem;
+  }
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap:.8rem;
+  }
+
+  &-wrap {
+    position: sticky;
+    top:7rem;
+  }
+}
+.base-wrap h2:target {
+  scroll-margin-top: var(--x8);
 }
 
 .nav-aside {

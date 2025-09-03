@@ -1,8 +1,19 @@
 // guide tag
-[data-dir="col"] {flex-direction: column;}
-[data-dir="col-re"] {flex-direction: column-reverse;}
-[data-dir="row"] {flex-direction: row;}
-[data-dir="row-re"] {flex-direction: row-reverse;}
+[data-dir="col"] {
+	flex-direction: column;
+}
+
+[data-dir="col-re"] {
+	flex-direction: column-reverse;
+}
+
+[data-dir="row"] {
+	flex-direction: row;
+}
+
+[data-dir="row-re"] {
+	flex-direction: row-reverse;
+}
 
 wrap {
 	width: 100%;
