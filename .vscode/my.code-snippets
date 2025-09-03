@@ -1,0 +1,19 @@
+{
+  "Print to console": {
+    "prefix": "log",
+    "body": [
+      "console.log('$1');",
+      "$2"
+    ],
+    "description": "Log output to console"
+  },
+  "For loop": {
+    "prefix": ["for", "for-loop"],
+    "body": [
+      "for (let j = 0; j < $1; j++) {",
+      "\t$2",
+      "}"
+    ],
+    "description": "A standard for loop"
+  }
+}
