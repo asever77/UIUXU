@@ -1852,6 +1852,7 @@ select.inp--base {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: 0.1rem;
 }
 .IA--list {
   flex: 1;

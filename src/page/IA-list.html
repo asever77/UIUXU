@@ -8,7 +8,10 @@
 	<title>KB 헬스케어 MVP2 </title>
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 	<link rel="stylesheet" href="../assets/css/app.css">
-
+	<style>
+		[data-selection] {display: flex; gap:0.4rem; padding: 0.4rem 0;}
+		[data-selection-item] {padding: 0.4rem 0.8rem; border: 1px solid var(--gray-300);}
+	</style>
 </head>
 
 <body>
@@ -46,15 +49,28 @@
 					tab.addEventListener('click', act);
 				}
 
-				const sizeBtn = document.querySelectorAll('.iframe-size button');
-				const actSize = (e) => {
-					const btn = e.currentTarget;
-					const size = btn.dataset.size;
-					document.querySelector('.IA').dataset.size = size
-				}
-				for (let item of sizeBtn) {
-					item.addEventListener('click', actSize);
-				}
+				UI.exe.deviceSize = new UX.ButtonSelection({
+					id: 'deviceSize',
+					type: 'radio',
+					label: '사이즈 선택',
+					data: [
+						{ text: '320', value: 'small', checked: true },
+						{ text: '375', value: 'medium', checked: false },
+						{ text: '414', value: 'large', checked: false },
+						{ text: '670', value: 'foldable', checked: false },
+						{ text: '1400', value: 'desktop', checked: false },
+					],
+					callback: (result) => {
+						console.log('deviceSize callback', result);
+
+						document.querySelector('.IA').dataset.size = result.value
+					},
+					onGroupExit: (value) => {
+						console.log('deviceSize onGroupExit', value);
+					}
+				});
+
+				UI.exe.deviceSize.init();
 			}
 		});
 	</script>

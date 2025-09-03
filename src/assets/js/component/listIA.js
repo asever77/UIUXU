@@ -374,7 +374,7 @@ export default class listIA {
 						<dl>
 							<dt>${getFormattedDate()}</dt>
 							<dd>
-								${this.total / this.completed}% (${this.completed}/${this.total})
+								${(this.total / this.completed).toFixed(2)}% (${this.completed}/${this.total})
 							</dd>
 						</dl>
 						<span class="IA--list-summary-bar" style="width:${this.total / this.completed}%"></span>
