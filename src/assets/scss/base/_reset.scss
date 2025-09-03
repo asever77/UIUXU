@@ -5,8 +5,17 @@
 html {
 	font-size: var(--w375);
 }
-
 @media screen and (min-width: 700px) {
+  html {
+    font-size: 0.85263vw;
+  }
+}
+@media screen and (min-width: 1200px) {
+  html {
+    font-size: 0.75263vw;
+  }
+}
+@media screen and (min-width: 1400px) {
   html {
     font-size: 0.5263vw;
   }

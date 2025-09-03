@@ -50,8 +50,7 @@
 				const actSize = (e) => {
 					const btn = e.currentTarget;
 					const size = btn.dataset.size;
-					document.querySelector('.iframe').dataset.size = size
-
+					document.querySelector('.IA').dataset.size = size
 				}
 				for (let item of sizeBtn) {
 					item.addEventListener('click', actSize);

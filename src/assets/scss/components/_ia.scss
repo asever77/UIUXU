@@ -1,35 +1,163 @@
 .IA {
   display: flex;
-  padding:1rem;
+  padding:0;
   gap:1rem;
   width: 100%;
-
+  height: calc(100dvh - 14rem);
+  &--view {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
   &--list {
     flex: 1;
     width: 100%;
-  }
+    overflow-y: auto;
+    height: 100%;
 
+    &-header {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: .5rem;
+      border-bottom:1px solid var(--gray-300);
+
+      [data-grid="ia-search"] {
+        display: grid;
+        grid-template-columns: 1fr 30rem 6rem;
+      }
+    }
+    &-summary {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-weight: bold;
+      border-radius: 0.8rem;
+      overflow: hidden; 
+      background-color: #424242;
+      border: 1px solid #4dcbe3;
+
+      dl{
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        padding: .2rem .6rem;
+        font-size: 1.4rem;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        padding:0 var(--x3);
+      }
+      &-bar {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        z-index: 1;
+        height: 100%;
+        background-color: #6200ee;
+        box-shadow: 0 0 3rem rgba(74, 238, 0, 0.5);
+        transition: all 0.3s ease-out;
+      }
+    }
+  }
+  &[data-size="small"] {
+    .iframe {
+    width: 32rem; /* iPhone SE, etc. */
+    }
+  }
+  &[data-size="medium"] {
+    .iframe {
+    width: 37.5rem; /* iPhone 14, etc. */
+    }
+  }
+  
+  &[data-size="large"] {
+    .iframe {
+    width: 41.4rem; /* iPhone 14 Plus, etc. */
+    }
+  }
+  
+  &[data-size="foldable"] {
+    .iframe {
+    width: 67rem; /* Samsung Galaxy Fold, unfolded */
+    }
+  }
+  &[data-size="desktop"] {
+    .IA--list-header {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      .form--group {
+        gap:0.4rem
+      }
+    }
+    .IA--view {
+      flex: 1;
+      width: 100%; /* Samsung Galaxy Fold, unfolded */
+
+      .iframe {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .IA--list {
+      flex:none;
+      width: 20rem;
+      flex-shrink: 0;
+      tbody {
+        display: flex;
+        gap: .4rem;
+        flex-direction: column;
+      }
+      tr {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        border: 1px solid var(--gray-300);
+        padding:0.2rem 0.6rem;
+        border-radius: 0.4rem;
+        gap:0 0.6rem;
+        flex-wrap: wrap;
+      }
+
+      th,td {
+        padding:0;
+        display: none;
+        border:0;
+        width: auto;
+        background-color: transparent;
+      }
+
+      td.is,
+      td:nth-child(1),
+      td:nth-child(6){
+        display: flex;
+      }
+      td:nth-child(6) {
+        font-size: 1.4rem;
+      }
+      thead {display: none;}
+
+      
+
+
+      [data-grid="ia-search"] {
+        grid-template-columns: 1fr 4rem;
+        .IA--list-summary{grid-column: span 2;}
+        dt {display: none;}
+      }
+    }
+  }
+  
   .iframe {
     border:1px solid var(--gray-600);
-
-    &[data-size="small"] {
-      width: 32rem; /* iPhone SE, etc. */
-      height: 56.8rem;
-    }
-    &[data-size="medium"] {
-      width: 37.5rem; /* iPhone 14, etc. */
-      height: 81.2rem;
-    }
-    
-    &[data-size="large"] {
-      width: 41.4rem; /* iPhone 14 Plus, etc. */
-      height: 89.6rem;
-    }
-    
-    &[data-size="foldable"] {
-      width: 67rem; /* Samsung Galaxy Fold, unfolded */
-      height: 84rem;
-    }
+    height: 100%;
   }
   table {
     border-radius:0;
@@ -40,16 +168,15 @@
     background-color: var(--gray-200);
   }
   td,th {
+    position: relative;
     padding:.2rem;
     font-size: 1.1rem;
     background-color: #fff;
     border:1px solid var(--gray-300);
   }
   .on td {
-    background-color: var(--gray-800);
-    color:var(--gray-100);
-    border-left-color:#000;
-    border-right-color:#000;
+    z-index: 1;
+    border-bottom:.2rem solid var(--gray-800);
   }
   td:nth-child(1) {
     width: 3rem;
@@ -108,6 +235,122 @@
   [data-current="d8"].on td.d8,
   [data-current="d9"].on td.d9,
   [data-current="d10"].on td.d10{
-    color:#fff;
+    font-weight: 700;
+  }
+}
+tr[data-state="대기"] {
+  td {
+    background-color: #fff;
+  }
+}
+tr[data-state="진행"] {
+  td {
+    background-color: #fcfff6;
+  }
+}
+tr[data-state="완료"] {
+  td {
+    background-color: #f6faff;
+  }
+}
+tr[data-state="제외"] {
+  td {
+    opacity: 0.2;
+  }
+}
+tr[data-state="지연"] {
+  td {
+    background-color: #fff5fa;
+  }
+}
+
+
+td [data-state="완료"] {
+  display: flex;
+  align-items: center;
+  gap:.2rem;
+  color: #3182f6;
+  font-weight: bold;
+
+  &::before {
+    content: "task_alt";
+    color: #3182f6;
+    font-family: "Material Symbols Rounded";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+td [data-state="진행"] {
+  display: flex;
+  align-items: center;
+  gap:.2rem;
+  color: #13cf52;
+  font-weight: bold;
+
+  &::before {
+    content: "play_circle";
+    color: #13cf52;
+    font-family: "Material Symbols Rounded";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+td [data-state="대기"] {
+  display: flex;
+  align-items: center;
+  gap:.2rem;
+  font-weight: bold;
+
+  &::before {
+    content: "do_not_disturb_on";
+    color: #000;
+    font-family: "Material Symbols Rounded";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+td [data-state="지연"] {
+  display: flex;
+  align-items: center;
+  gap:.2rem;
+  color: #f63131;
+  font-weight: bold;
+
+  &::before {
+    content: "warning";
+    color: #f63131;
+    font-family: "Material Symbols Rounded";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+td [data-state="제외"] {
+  display: flex;
+  align-items: center;
+  gap:.2rem;
+  color: #9b9b9b;
+  font-weight: bold;
+
+  &::before {
+    content: "hide_source";
+    color: #9b9b9b;
+    font-family: "Material Symbols Rounded";
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 900;
+    font-size: 1.2rem;
+    line-height: 1;
   }
 }

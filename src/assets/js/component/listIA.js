@@ -7,6 +7,11 @@ export default class listIA {
 		this.projectListSrchCode = null;
 		this.projectListSrchBtn = null;
 		this.allWorkItems = [];
+
+		this.total = 0;
+		this.completed = 0;
+		this.inProgress = 0;
+		this.notStarted = 0;	
 	}
 
 	/**
@@ -138,8 +143,11 @@ export default class listIA {
 	generateWorkListHTML(dataExecelList) {
 		let tableHTML = ``;
 		const today = new Date();
-
-		for (let i = 0; i < dataExecelList.length; i++) {
+		this.total = dataExecelList.length;
+		this.completed = dataExecelList.filter(item => item.state === '완료').length;
+		this.inProgress = dataExecelList.filter(item => item.state === '진행').length;
+		this.notStarted = dataExecelList.filter(item => item.state === '대기').length;	
+		for (let i = 0; i < this.total; i++) {
 			const dataCurrent = { ...dataExecelList[i] };
 			const dataPrevious = (i === 0) ? {} : dataExecelList[i - 1];
 			const isDelay = this.updateTaskState(dataCurrent)
@@ -221,7 +229,7 @@ export default class listIA {
 							data-current="${lastDepth}"
 							>
 
-								<td>${dataCurrent.state}</td>
+								<td><span data-state="${dataCurrent.state}">${dataCurrent.state}</span></td>
 								<td>${dataCurrent.s_dt}</td>
 								<td>${dataCurrent.e_dt}</td>
 								<td>${dataCurrent.assignee}</td>
@@ -349,15 +357,34 @@ export default class listIA {
 		const listHTML = this.generateWorkListHTML(items);
 		this.codingListContainer.innerHTML = listHTML;
 
+		function getFormattedDate() {
+			const today = new Date();
+			const year = today.getFullYear();
+			const month = String(today.getMonth() + 1).padStart(2, '0');
+			const day = String(today.getDate()).padStart(2, '0');
+			
+			return `${year}.${month}.${day}`;
+		}
+
+
 		const headerInfo = `
-            <div class="IA--list-header">
-                <div class="box-srch mt-x1">
-                    <div class="srch-area">
-                        <input type="search" id="projectListSrchCode" class="inp-base ui-inpcancel mr-x1" value="" placeholder="검색어를 입력해주세요. (예: 용어1, 용어2)">
-                        <button type="button" id="projectListSrchBtn" class="btn-base"><span>검색</span></button>
-                    </div>
-                </div>
-            </div>`;
+			<div class="IA--list-header">
+				<div class="form--group" data-grid="ia-search">
+					<div class="IA--list-summary">
+						<dl>
+							<dt>${getFormattedDate()}</dt>
+							<dd>
+								${this.total / this.completed}% (${this.completed}/${this.total})
+							</dd>
+						</dl>
+						<span class="IA--list-summary-bar" style="width:${this.total / this.completed}%"></span>
+					</div>
+					<div class="inp--item">
+						<input type="search" id="projectListSrchCode" class="inp--base" value="" placeholder="검색어를 입력해주세요. (예: 용어1, 용어2)">
+					</div>
+					<button type="button" id="projectListSrchBtn" class="btn-base"><span>검색</span></button>
+				</div>
+			</div>`;
 		this.codingListContainer.insertAdjacentHTML('afterbegin', headerInfo);
 
 		this.allWorkItems = Array.from(this.codingListContainer.querySelectorAll('.tbl-base tbody tr'));
