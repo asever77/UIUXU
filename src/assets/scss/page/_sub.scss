@@ -1,0 +1,29 @@
+.area-base[data-layout="base"] {
+  padding: 0 var(--x2) var(--x2);
+
+  .base-wrap h2 {
+    font-size: var(--x3);
+    line-height: 2;
+    font-weight: 600;
+  }
+
+  table {
+    table-layout: auto;
+  }
+}
+
+.base-content[data-grid="sub-content"] {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+  width: 100%;
+  gap: var(--x8);
+
+  [data-grid="display-title"] {
+    display: flex;
+    gap: var(--x3);
+    flex-direction: column;
+  }
+  
+}

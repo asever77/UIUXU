@@ -39,6 +39,31 @@
   // }
 }
 
+.h-1 {
+  font-size: var(--x7);
+  font-weight: 700; 
+}
+.h-2 {
+  font-size: var(--x5);
+  font-weight: 700; 
+}
+.h-3 {
+  font-size: var(--x4);
+  font-weight: 700; 
+}
+.h-4 {
+  font-size: var(--x3);
+  font-weight: 700; 
+}
+.h-5 {
+  font-size: var(--x2);
+  font-weight: 700; 
+}
+.h-6 {
+  font-size: var(--x1);
+  font-weight: 700; 
+}
+
 [data-heading="h1"] {
   font-size: var(--x6);
   font-weight: 700; 

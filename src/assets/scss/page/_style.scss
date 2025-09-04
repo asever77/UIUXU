@@ -1,0 +1,10 @@
+[role="tablist"] [role="tab"] {
+  justify-content: center;
+  min-width: 20rem; text-align: center; border-bottom:1px solid #ccc;
+}
+[role="tablist"] [role="tab"][aria-selected="true"] {
+  border-color:#000;
+}
+[data-tab-wrap="codeGuide"] {
+  width: 100%;
+}
