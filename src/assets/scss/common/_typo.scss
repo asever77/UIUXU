@@ -1,9 +1,13 @@
 
 // font
+// unicode-range: U+0041-005A, U+0061-007A;
+// unicode-range: U+0030-0039;
+
+
 [data-heading="display"] {
   position: relative;
   font-family: "Bitcount Prop Single", system-ui;
-	font-size: var(--x10);
+	font-size: var(--x２0);
 	line-height: 1;
 	font-weight: 100;
 	letter-spacing: 0.09em; 
@@ -40,51 +44,51 @@
 }
 
 .h-1 {
-  font-size: var(--x7);
+  font-size: var(--x20);
   font-weight: 700; 
 }
 .h-2 {
-  font-size: var(--x5);
+  font-size: var(--x10);
   font-weight: 700; 
 }
 .h-3 {
-  font-size: var(--x4);
+  font-size: var(--x8);
   font-weight: 700; 
 }
 .h-4 {
-  font-size: var(--x3);
+  font-size: var(--x6);
   font-weight: 700; 
 }
 .h-5 {
-  font-size: var(--x2);
+  font-size: var(--x4);
   font-weight: 700; 
 }
 .h-6 {
-  font-size: var(--x1);
+  font-size: var(--x2);
   font-weight: 700; 
 }
 
 [data-heading="h1"] {
-  font-size: var(--x6);
+  font-size: var(--x14);
   font-weight: 700; 
 }
 [data-heading="h2"] {
-  font-size: var(--x4);
+  font-size: var(--x8);
   font-weight: 700; 
 }
 [data-heading="h3"] {
-  font-size: var(--x3);
+  font-size: var(--x6);
   font-weight: 700; 
 }
 [data-heading="h4"] {
-  font-size: var(--x2);
+  font-size: var(--x4);
   font-weight: 700; 
 }
 [data-heading="h5"] {
-  font-size: var(--x1);
+  font-size: var(--x2);
   font-weight: 700;
 }
 [data-heading="h6"] {
-  font-size: var(--x1);
+  font-size: var(--x2);
   font-weight: 700;
 }

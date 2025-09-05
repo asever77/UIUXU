@@ -118,20 +118,21 @@ export default class TimeSelect {
 		}
 
 		this.hUnit = el_hour.querySelectorAll('button')[0].offsetHeight;
+		
 		scrollMove.move({
-			top: Number(this.hUnit * (isPM ? 1 : 0)),
+			top: Number(this.hUnit * (isPM ? 1 : 0)) / 10 + 'rem',
 			selector: el_midday,
 			effect: 'auto',
 			align: 'default'
 		});
 		scrollMove.move({
-			top: Number(this.hUnit * (hour - 1)),
+			top: Number(this.hUnit * (hour - 1)) / 10 + 'rem',
 			selector: el_hour,
 			effect: 'auto',
 			align: 'default'
 		});
 		scrollMove.move({
-			top: Number(this.hUnit * Number(minute / this.miuntUnit)),
+			top: Number(this.hUnit * Number(minute / this.miuntUnit)) / 10 + 'rem',
 			selector: el_minute,
 			effect: 'auto',
 			align: 'default'
@@ -457,6 +458,8 @@ export default class TimeSelect {
 				const onMouseMove = (e) => {
 					const tm = e.pageY - tn;
 					that.scrollTo(0, tn + ts - tm);
+
+						console.log(tn + ts - tm)
 
 					for (let btn of btns) {
 						btn.removeEventListener('click', _this.action);

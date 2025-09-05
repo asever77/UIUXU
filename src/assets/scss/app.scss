@@ -1,36 +1,8 @@
-@use 'abstracts/variable';
-
-@forward 'base/reset';
-@forward 'base/defualt';
-@forward 'base/typo';
-
-@forward 'common/layout';
-@forward 'common/area';
-@forward 'common/icon';
-@forward 'common/button';
-@forward 'common/form';
-@forward 'common/bullet';
-
-@forward 'components/common';
-@forward 'components/ia';
-@forward 'components/accordion';
-@forward 'components/dialog';
-@forward 'components/drag';
-@forward 'components/dropdown';
-@forward 'components/selection';
-@forward 'components/tab';
-@forward 'components/tooltip';
-@forward 'components/range';
-@forward 'components/countdown';
-@forward 'components/timeSelect';
-
-@forward 'page/main';
-@forward 'page/sub';
-@forward 'page/style';
+@forward 'abstracts/index';
+@forward 'common/index';
+@forward 'components/index';
+@forward 'pages/index';
 
 
-@forward 'libs/wheelpicker';
 
-@forward 'components/nav';
 
-@forward 'event/roulette';

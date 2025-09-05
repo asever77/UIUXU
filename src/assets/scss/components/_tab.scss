@@ -8,6 +8,7 @@
   -ms-overflow-style: none; 
   scrollbar-width: none;
   width: 100%;
+  z-index: 1;
 }
 [role="tablist"] {
   position: relative;
@@ -45,7 +46,7 @@
   &[data-tab-wrap] {
     display:flex;
     flex-direction: column;
-    gap:var(--x2);
+    gap:var(--x4);
   }
   [role="tabpanel"] {
     scroll-margin-top: 0;

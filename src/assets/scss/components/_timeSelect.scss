@@ -109,6 +109,7 @@
       position: relative;
       display: block;
       margin: 0;
+      max-height: $itmeheight;
       min-height: $itmeheight;
       color: #78719C;
       font-size: 3.2rem;
@@ -165,36 +166,35 @@
 
 
 
+.mdl-time{
+  position: relative;
 
- .mdl-time{
-    position: relative;
+  &::before, &::after{
+      content:'';
+      z-index: 10; 
+      display: block;
+      width: 100%;
+      height: 6.4rem;
+      position: absolute;
+      left: 0; 
+      pointer-events: none;
+  }
+  &::before{
+      top: -0.625rem;
+      background: linear-gradient(180deg, #000000 25%, rgba(0, 0, 0, 0) 100%);      
+  }
+  &::after{
+      bottom: -0.625rem;
+      background: linear-gradient(0deg, #000000 25%, rgba(25, 21, 48, 0.01) 100%);
+  }
 
-    &::before, &::after{
-        content:'';
-        z-index: 10; 
-        display: block;
-        width: 100%;
-        height: 6.4rem;
-        position: absolute;
-        left: 0; 
-        pointer-events: none;
-    }
-    &::before{
-        top: -0.625rem;
-        background: linear-gradient(180deg, #000000 25%, rgba(0, 0, 0, 0) 100%);      
-    }
-    &::after{
-        bottom: -0.625rem;
-        background: linear-gradient(0deg, #000000 25%, rgba(25, 21, 48, 0.01) 100%);
-    }
+  &-hour, &-minute{
+      button{ 
+          font-weight: 300;
+          font-size: 2.8rem;
 
-    &-hour, &-minute{
-        button{ 
-            font-weight: 300;
-            font-size: 2.8rem;
-
-            &[data-selected=true]{font-weight:700;}
-        }
-    }
+          &[data-selected=true]{font-weight:700;}
+      }
+  }
 
 }

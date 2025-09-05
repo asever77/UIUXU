@@ -8,13 +8,12 @@ body {
   top: 0;
   width: 100%;
   z-index: 1;
-  // background: linear-gradient(var(--bgheader));
 
   &--wrap {
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: var(--x2) var(--x2);
+    padding: var(--x4) var(--x4);
     align-items: center;
   }
 
@@ -27,7 +26,7 @@ body {
     h1 {
       display: flex;
       align-items: center;
-      gap: var(--x1);
+      gap: var(--x2);
 
     }
 
@@ -39,7 +38,7 @@ body {
 
     .logo {
       display: block;
-      width: var(--x18);
+      width: 14.4rem;
     }
 
     .ani {
@@ -50,7 +49,7 @@ body {
     }
 
     sup {
-      font-size: var(--x1);
+      font-size: var(--x2);
       border-radius: 0.4rem;
       background: linear-gradient(20deg, #111 50%, #444 55%);
       color: #000;
@@ -62,7 +61,7 @@ body {
 
   &--group {
     display: flex;
-    gap: var(--x2);
+    gap: var(--x4);
   }
 }
 
@@ -174,13 +173,13 @@ body {
   transition: padding 300ms ease;
   transition-delay: 200ms;
   display: flex;
-  gap: var(--x4);
+  gap: var(--x8);
   align-items: flex-start;
 }
 
 .base-footer {
   display: flex;
-  padding: var(--x2) var(--x3) var(--x2);
+  padding: var(--x4) var(--x6) var(--x4);
   align-items: center;
   justify-content: center;
 }
@@ -189,7 +188,7 @@ body {
   position: sticky;
   top: 6.2rem;
   width: 20rem;
-  padding: var(--x2) 0;
+  padding: var(--x4) 0;
   overflow-y: auto;
   max-height: calc(100dvh - 8rem);
   flex-shrink: 0;
@@ -208,7 +207,7 @@ body {
   /* 스크롤바 핸들 (드래그하는 부분) */
   &::-webkit-scrollbar-thumb {
     background: rgba($color: #000000, $alpha: 0.2);
-    border-radius: 5px;
+    border-radius: .4rem;
   }
 
   /* 스크롤바 핸들 호버 */
@@ -221,10 +220,10 @@ body {
   position: relative;
   z-index: 0;
   flex: 1;
-  width: calc(100vw - 20rem - var(--x8));
+  width: calc(100vw - 20rem - var(--x16));
   display: flex;
   flex-direction: row-reverse;
-  gap:var(--x4);
+  gap:var(--x8);
   align-items: flex-start;
 }
 
@@ -232,26 +231,26 @@ body {
   display: flex;
   width: 100%;
   justify-content: flex-start;
-  gap:var(--x8);
+  gap:var(--x16);
 }
 
 .base-wrap {
   display: flex;
   width: 100%;
   justify-content: flex-start;
-  gap: var(--x1);
+  gap: var(--x2);
 
   h2:target {
-    scroll-margin-top: var(--x8);
+    scroll-margin-top: var(--x16);
   }
 }
 
 .base-box {
 	width: 100%;
 	display: block;
-	gap: var(--x1);
-	padding: var(--x2);
-	border-radius: var(--x1);
+	gap: var(--x2);
+	padding: var(--x4);
+	border-radius: var(--x2);
 	background-color: #fff;
 
 	&[data-color="pink"] {
@@ -302,13 +301,13 @@ body {
 .nav-aside {
   display: flex;
   flex-direction: column;
-  gap: var(--x3);
-  padding: 0 0 0 var(--x2);
+  gap: var(--x6);
+  padding: 0 0 0 var(--x4);
 
   &--wrap {
     display: flex;
     flex-direction: column;
-    gap: var(--x2);
+    gap: var(--x4);
   }
 
   ul {
@@ -342,7 +341,7 @@ body {
   .base-main {
     height: 100%;
     flex: 1;
-    padding:0 var(--x2)
+    padding:0 var(--x4)
   }
 
   .base-body {
@@ -350,7 +349,7 @@ body {
   }
 
   .base-header--title .logo {
-    width: var(--x14);
+    width: 11.2rem;
     ;
   }
 
@@ -383,12 +382,12 @@ body {
   .nav-main--wrap {
     width: 100%;
     justify-content: flex-start;
-    padding: 0 var(--x4)
+    padding: 0 var(--x8)
   }
 
   .nav-main--wrap ul {
     flex-direction: column;
-    gap: var(--x1)
+    gap: var(--x2)
   }
 
   .nav-main[data-toggle-state="selected"] {

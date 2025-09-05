@@ -1,9 +1,10 @@
-@charset "utf-8";
+@use '_variables_for_code' as vars; 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap');
 
 $mode-setting: light;
 :root {
-	--opacity_1: 1;
-	--opacity_0: 0;
+	--font-family-base: "Noto Sans KR", sans-serif;
 
 	--a1-n:0;
 	--a2-n:0;
@@ -22,8 +23,6 @@ $mode-setting: light;
 	--a7-percent:0;
 	--a8-percent:0;
 
-	--w375: 2.6667vw;
-
 	--sat: env(safe-area-inset-top);
 	--sar: env(safe-area-inset-right);
 	--sab: env(safe-area-inset-bottom);
@@ -32,7 +31,6 @@ $mode-setting: light;
 	--primary: #225bbc;
 	--sub: #1ee09f;
 
-	//* 1단계: 기본 그레이스케일 팔레트 (밝기 레벨별) */
 	--white: #fff;
 	--gray-100: #f8f8f8;
 	--gray-200: #ededed;
@@ -45,7 +43,52 @@ $mode-setting: light;
 	--gray-900: #111111;
 	--black: #000;
 
-	/* 2단계: 의미론적 변수 (실제 UI 적용) */
+	--gap: 0.4rem;
+	--x1: calc(var(--gap) * 1);
+	--x2: calc(var(--gap) * 2);
+	--x3: calc(var(--gap) * 3);
+	--x4: calc(var(--gap) * 4);
+	--x5: calc(var(--gap) * 5);
+	--x6: calc(var(--gap) * 6);
+	--x7: calc(var(--gap) * 7);
+	--x8: calc(var(--gap) * 8);
+	--x9: calc(var(--gap) * 9);
+	--x10: calc(var(--gap) * 10);
+	--x11: calc(var(--gap) * 11);
+	--x12: calc(var(--gap) * 12);
+	--x13: calc(var(--gap) * 13);
+	--x14: calc(var(--gap) * 14);
+	--x15: calc(var(--gap) * 15);
+	--x16: calc(var(--gap) * 16);
+	--x17: calc(var(--gap) * 17);
+	--x18: calc(var(--gap) * 18);
+	--x19: calc(var(--gap) * 19);
+	--x20: calc(var(--gap) * 20);
+	--x21: calc(var(--gap) * 21);
+	--x22: calc(var(--gap) * 22);
+	--x23: calc(var(--gap) * 23);
+	--x24: calc(var(--gap) * 24);
+	--x25: calc(var(--gap) * 25);
+	--x26: calc(var(--gap) * 26);
+	--x27: calc(var(--gap) * 27);
+	--x28: calc(var(--gap) * 28);
+	--x29: calc(var(--gap) * 29);
+	--x30: calc(var(--gap) * 30);
+	--x31: calc(var(--gap) * 31);
+	--x32: calc(var(--gap) * 32);
+	--x33: calc(var(--gap) * 33);
+	--x34: calc(var(--gap) * 34);
+	--x35: calc(var(--gap) * 35);
+	--x36: calc(var(--gap) * 36);
+	--x37: calc(var(--gap) * 37);
+	--x38: calc(var(--gap) * 38);
+	--x39: calc(var(--gap) * 39);
+	--x40: calc(var(--gap) * 40);
+
+	--icon-svg-refresh:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z'/%3E%3C/svg%3E");
+}
+
+:root[data-mode="light"] {
 	--color-background-default: var(--gray-100);
 	--color-background-table: var(--gray-200);
 	--color-text-primary: var(--gray-800);
@@ -64,52 +107,6 @@ $mode-setting: light;
 	--nav-shadow: rgba(0, 0, 0, 0.05);
 
 	--bgcolor: #F6F7F9;
-	--bgheader: rgba(246, 247, 249, 0.95) 10%, rgba(246, 247, 249,0.9) 40%, rgba(246, 247, 249,0.8) 60%, rgba(246, 247, 249,0) 90%;
-
-	--gap: 0.8rem;
-
-	--x1: calc(0.8rem * 1);
-	--x2: calc(0.8rem * 2);
-	--x3: calc(0.8rem * 3);
-	--x4: calc(0.8rem * 4);
-	--x5: calc(0.8rem * 5);
-	--x6: calc(0.8rem * 6);
-	--x7: calc(0.8rem * 7);
-	--x8: calc(0.8rem * 8);
-	--x9: calc(0.8rem * 9);
-	--x10: calc(0.8rem * 10);
-	--x11: calc(0.8rem * 11);
-	--x12: calc(0.8rem * 12);
-	--x13: calc(0.8rem * 13);
-	--x14: calc(0.8rem * 14);
-	--x15: calc(0.8rem * 15);
-	--x16: calc(0.8rem * 16);
-	--x17: calc(0.8rem * 17);
-	--x18: calc(0.8rem * 18);
-	--x19: calc(0.8rem * 19);
-	--x20: calc(0.8rem * 10);
-	--x21: calc(0.8rem * 1);
-	--x22: calc(0.8rem * 2);
-	--x23: calc(0.8rem * 3);
-	--x24: calc(0.8rem * 4);
-	--x25: calc(0.8rem * 5);
-	--x26: calc(0.8rem * 6);
-	--x27: calc(0.8rem * 7);
-	--x28: calc(0.8rem * 8);
-	--x29: calc(0.8rem * 9);
-	--x30: calc(0.8rem * 10);
-	--x31: calc(0.8rem * 31);
-	--x32: calc(0.8rem * 32);
-	--x33: calc(0.8rem * 33);
-	--x34: calc(0.8rem * 34);
-	--x35: calc(0.8rem * 35);
-	--x36: calc(0.8rem * 36);
-	--x37: calc(0.8rem * 37);
-	--x38: calc(0.8rem * 38);
-	--x39: calc(0.8rem * 39);
-	--x40: calc(0.8rem * 10);
-
-	--icon-svg-refresh:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z'/%3E%3C/svg%3E");
 }
 :root[data-mode="dark"] {
 	/* 1. 기본 배경 및 텍스트 */
@@ -133,9 +130,6 @@ $mode-setting: light;
 	--nav-bgcolor2: var(--white);
 	--nav-shadow: rgba(255, 255, 255, 0.05);
 	
-	/* 배경 그라데이션도 조정 */
-	--bgheader: #17171ce7 10%, #17171ce7 40%, #17171cb9 60%, #17171c00 90%;
-
 	.logo-netive,
 	.img-main .logo,
 	.base-header--title .logo {
@@ -171,8 +165,6 @@ $mode-setting: light;
 		--nav-bgcolor2: var(--white);
 		--nav-shadow: rgba(255, 255, 255, 0.05);
 		
-		/* 배경 그라데이션도 조정 */
-		--bgheader: #17171ce7 10%, #17171ce7 40%, #17171cb9 60%, #17171c00 90%;
 
 		.logo-netive,
 		.img-main .logo,

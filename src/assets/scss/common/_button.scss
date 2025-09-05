@@ -9,10 +9,10 @@
   padding: .4rem 1.2rem .5rem;
   border: 1px solid var(--color-border-light);
   background-color: var(--white);
-  border-radius: var(--x1);
+  border-radius: var(--x2);
   font-size: 1.4rem;
   line-height: 1.2;
-  min-height: var(--x5);
+  min-height: var(--x10);
 
   &:hover {
     text-decoration: underline;
@@ -29,17 +29,17 @@
   &[data-size="small"] {
     font-size: 1.2rem;
     padding: .2rem .8rem .3rem;
-    min-height: var(--x3);
+    min-height: var(--x12);
   }
   &[data-size="normal"] {
     font-size: 1.4rem;
     padding: .4rem 1.2rem .5rem;
-    min-height: var(--x5);
+    min-height: var(--x20);
   }
   &[data-size="large"] {
     font-size: 1.8rem;
     padding: .8rem 1.6rem .9rem;
-    min-height: var(--x6);
+    min-height: var(--x24);
   }
 
   // type
@@ -48,7 +48,7 @@
   }
   &[data-type="box"] {
     border: 1px solid var(--color-border-light);
-    border-radius: var(--x1);
+    border-radius: var(--x4);
   }
 
   // text color
