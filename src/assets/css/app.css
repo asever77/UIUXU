@@ -97,6 +97,7 @@
   --nav-bgcolor1: var(--white);
   --nav-bgcolor2: var(--black);
   --nav-shadow: rgba(0, 0, 0, 0.05);
+  --box-background: var(--white);
   --bgcolor: #F6F7F9;
 }
 
@@ -113,6 +114,9 @@
   --color-card-background: var(--gray-800);
   --color-modal-background: var(--gray-850);
   --bgcolor: #17171c;
+  --primary: #225bbc;
+  --sub: #1ee09f;
+  --box-background: var(--black);
   --nav-bgcolor1: var(--gray-800);
   --nav-bgcolor2: var(--white);
   --nav-shadow: rgba(255, 255, 255, 0.05);
@@ -141,6 +145,9 @@
     --color-card-background: var(--gray-800);
     --color-modal-background: var(--gray-850);
     --bgcolor: #17171c;
+    --primary: #225bbc;
+    --sub: #1ee09f;
+    --box-background: var(--black);
     --nav-bgcolor1: var(--gray-800);
     --nav-bgcolor2: var(--white);
     --nav-shadow: rgba(255, 255, 255, 0.05);
@@ -862,7 +869,7 @@ body {
   gap: var(--x2);
   padding: var(--x4);
   border-radius: var(--x2);
-  background-color: #fff;
+  background-color: var(--box-background);
 }
 .base-box[data-color=pink] {
   background-color: #fff9fa;
@@ -4199,6 +4206,9 @@ button [data-wheel-picker-set]::before {
 .list-history--item-key {
   font-weight: 600;
   flex-shrink: 0;
+}
+.list-history--item:first-child::before {
+  background-color: var(--sub);
 }
 .list-history--item::before {
   content: "";

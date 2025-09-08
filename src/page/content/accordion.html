@@ -126,19 +126,19 @@
 import { UX } from '../assets/js/uiuxu.common.js';
 
 UI.exe.acco1 = new UX.Accordion({
-	id: 'acco1',
+	<b>id: 'acco1',
 	expanded: null,
 	scrollIntoView: true,
-	scrollOptions: { behavior: 'smooth', block: 'start' },
+	scrollOptions: { behavior: 'smooth', block: 'start' },</b>
 });
 
-UI.exe.acco1.init();
-UI.exe.acco1.show('acco1-1');
-UI.exe.acco1.hide('acco1-1', () => {
+UI.exe.acco1.<b>init()</b>;
+UI.exe.acco1.<b>show('acco1-1')</b>;
+UI.exe.acco1.<b>hide('acco1-1', () => {
   console.log('callback hide');
-});
-UI.exe.acco1.update();
-UI.exe.acco1.destroy();
+})</b>;
+UI.exe.acco1.<b>update()</b>;
+UI.exe.acco1.<b>destroy()</b>;
 						</code></pre>
 					</div>
 				</section>

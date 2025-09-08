@@ -106,6 +106,8 @@ $mode-setting: light;
 	--nav-bgcolor2: var(--black);
 	--nav-shadow: rgba(0, 0, 0, 0.05);
 
+	--box-background: var(--white);
+
 	--bgcolor: #F6F7F9;
 }
 :root[data-mode="dark"] {
@@ -125,6 +127,10 @@ $mode-setting: light;
 	--color-modal-background: var(--gray-850); 
 	
 	--bgcolor: #17171c;
+	--primary: #225bbc;
+	--sub: #1ee09f;
+
+	--box-background: var(--black);
 
 	--nav-bgcolor1: var(--gray-800);
 	--nav-bgcolor2: var(--white);
@@ -160,6 +166,10 @@ $mode-setting: light;
 		--color-modal-background: var(--gray-850); 
 		
 		--bgcolor: #17171c;
+		--primary: #225bbc;
+		--sub: #1ee09f;
+
+		--box-background: var(--black);
 
 		--nav-bgcolor1: var(--gray-800);
 		--nav-bgcolor2: var(--white);

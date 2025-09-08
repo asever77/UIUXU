@@ -251,7 +251,7 @@ body {
 	gap: var(--x2);
 	padding: var(--x4);
 	border-radius: var(--x2);
-	background-color: #fff;
+	background-color: var(--box-background);
 
 	&[data-color="pink"] {
 		background-color: #fff9fa;
