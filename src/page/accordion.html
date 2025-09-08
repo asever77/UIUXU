@@ -28,9 +28,8 @@
 		}
 
 		[data-guide="on"] {
-
 			[data-accordion],
-			[data-accordion-button],
+			/* [data-accordion-button], */
 			[data-accordion-body],
 			[data-accordion-body],
 			[data-accordion-item],
@@ -39,13 +38,14 @@
 				position: relative;
 				outline: 1px dashed rgba(255, 99, 71, 0.2);
 				outline-offset: -1px;
-				background-color: rgba(255, 99, 71, 0.04);
+				background-color: rgba(255, 99, 71, 0.1);
 
 				&::after,
 				&::before {
 					content: "";
 					position: absolute;
 					display: block;
+					pointer-events: none;
 				}
 
 				&::after {
@@ -63,10 +63,6 @@
 					left: 50%;
 					top: 0;
 				}
-			}
-
-			[data-accordion-button] {
-				position: absolute;
 			}
 		}
 	</style>
@@ -102,6 +98,8 @@
 				/* 실행 ---------------------------------------------- */
 				UI.exe.acco1.init();
 				UI.exe.codeGuide.init();
+
+				
 			}
 		});
 	</script>

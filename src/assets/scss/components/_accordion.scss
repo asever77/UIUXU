@@ -52,6 +52,7 @@
     height: 3rem;
     transform: translateY(-50%);
     transition: transform .3s ease;
+    text-align: center;
   }
 }
 [data-accordion-button]:disabled {

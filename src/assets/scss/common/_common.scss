@@ -1,0 +1,24 @@
+[data-dir="col"] {
+	flex-direction: column;
+}
+
+[data-dir="col-re"] {
+	flex-direction: column-reverse;
+}
+
+[data-dir="row"] {
+	flex-direction: row;
+}
+
+[data-dir="row-re"] {
+	flex-direction: row-reverse;
+}
+
+.ellp {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: normal;
+}

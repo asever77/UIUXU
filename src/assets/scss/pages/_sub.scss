@@ -1,5 +1,5 @@
 .area-base[data-layout="base"] {
-  padding: 0 var(--x2) var(--x2);
+  padding: 0 var(--x2) var(--x2) 0;
 
   table {
     table-layout: auto;
@@ -25,7 +25,6 @@
   width: 100%;
   gap: var(--x20);
   padding-top: var(--x10);
-  padding-bottom: var(--x20);
 
   [data-grid="display-title"] {
     display: flex;
@@ -40,7 +39,9 @@
       font-size: 1.6rem;
     }
   }
-  
+  .base-wrap:last-child {
+    min-height: calc(100dvh - var(--x16) - 5.6rem);
+  }
 }
 @media (max-width: 700px) {
   .base-content[data-grid="sub-content"] {

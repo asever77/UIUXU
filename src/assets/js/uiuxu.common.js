@@ -20,9 +20,8 @@ import { loadContent, RadioAllcheck, dayOption, createOptions, getDeviceInfo, te
 
 console.log(
   '%c ',
-  `padding: 40px 100px; background: url(../assets/img/logo_w.png) no-repeat 50% 50%; background-size: contain`
+  'padding:8px 176px; margin:10px 0; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALAAAAAYCAYAAABa+HfdAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAMFSURBVHgB7ZrfjdpAEMYHeOEBJCgABTq4VBCng3QQ0gEd4KskdHDXAb4K7lIBjhDwaCSQEDwwmTkbyUFrdn2MV16ff9Iexruez3w3tvYfAIGIQypzKhHGPPE5+ACSscpI7ZUZ1nxKKi8VaaK8gpKxykjtlRlWfaI/z5jNPKeYWKwyUntlhlWf8DZRTjGxWDk0J1QWicYrlTEUhOte2cKqT5oGKCiWK5ah3jhDagIFIPn7JGOVDZs+NXQBGwQYIhnLUO+VPh4UVSFJjUAY17xaLpdes9n0+Ph0Os1Go1GY0ufz7F2PyozkQhDCpk+uv4Gtaen0yubVarWartdrTBc+l2hPFZJTEELyt+liuf4GRltaOr28mkV6xW/eVqulHCz1+/2g3W57GZd+J9kA7sSmT02oqRyXbsM1nU4HbiQvc6uulNQJ/Eng5O12u1A16gSuIOfzOUh/z5G8M3CMOoEryGAwCKjr+MjHOZL3UXImwhqop2cYp6cLBMLY1NLpldGrw+EwRwO4HQhiICnmE7+B/2riPIAZunZbcB9nvKL/7VQzYHtnv99DFEXeZYpNCGs+cQIvNI1+ghljTf0fcB8nvMJ4w4yva8fJu9vt3o+p++Dz9BvIYM0nTuAXXRAy5KYgxpPgupsKwH1c8Wqsa5BO3guUxKZvRh3WfOIEfgY9Mwr4G6+2wtF3j8oTGDzt4OAIV0ElvFIlL0MJbNQ3NcCaT43kIu7Ee2BGmDoeghm81v4LhKH7Dunji6LqjfS+QgG44BXG+xyUAzMasL1st9tvqrrj8ThK75e48x7s+YTZm4YlKGyDNsZbKVWMoSBc8Yri+Ir4PtfRgM1X7JPwQRDrPmH21sR7KWRr49V9vyVaYdF6Kc3Se4VxEnEi84Pupes2m80wSeQJHXtQANZ9QvVTKy9UAWqvzLDuE8ad6AXexwKvnvgqUntlhnWfMF4B8TG/aJRcJzWaLT21V2YU5ZN2XyZd+APi0STPEQ7h/1E/r7jwqlEA8dQJj/6rsOL2IWqvzJD06R/mRBQ7GVNLKQAAAABJRU5ErkJggg==) no-repeat 0% 0%; background-size:'
 );
-
 
 class UXCore {
   #setupGlobalNamespace() {
@@ -67,7 +66,6 @@ class UXCore {
         insert: true,
       })
       .then(() => {
-        console.log('base-layout');
         const el_header = document.querySelector('.base-header');
         const el_footer = document.querySelector('.base-footer');
         const el_aside = document.querySelector('.base-aside');
@@ -80,7 +78,6 @@ class UXCore {
             insert: true,
           })
           .then(() => {
-            console.log('base-header');
             const el_html = document.querySelector('html');
             UI.exe.toggle.header = new ToggleController();
             
@@ -119,7 +116,6 @@ class UXCore {
             insert: true,
           })
           .then(() => {
-            console.log('base-aside');
           })
           .catch((err) => console.error('Error loading header content:', err));
         }
@@ -131,8 +127,28 @@ class UXCore {
             insert: true,
           })
           .then(() => {
-            console.log('base-main');
             data.callback();
+            const wraps = document.querySelectorAll('.base-content > .base-wrap');
+              const wrapTopArray = [];
+              wraps.forEach(item => {
+                wrapTopArray.push(item.getBoundingClientRect().top + document.documentElement.scrollTop + 64)
+                
+              });
+              const getCurrentSection = (scrollY) => {
+                const index = wrapTopArray.findIndex((pos, i) => {
+                  const next = wrapTopArray[i + 1] ?? Infinity; 
+                  return scrollY >= pos && scrollY < next;
+                });
+                return index; 
+              };
+              window.addEventListener('scroll', () => {
+                const y = window.scrollY;
+                const idx = getCurrentSection(y);
+
+                if (idx !== -1) {
+                  document.querySelector('.aside-inner--wrap').dataset.index = idx;
+                }
+              });
           })
           .catch((err) => console.error('Error loading header content:', err));
         }
@@ -144,7 +160,6 @@ class UXCore {
             insert: true,
           })
           .then(() => {
-            console.log('base-footer');
           })
           .catch((err) => console.error('Error loading footer content:', err));
         }
