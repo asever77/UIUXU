@@ -65,12 +65,12 @@ export default class Accordion {
       const accoTitle = item.querySelector(`[data-accordion-title="${this.#id}"]`);
       const accoBody = item.querySelector(`[data-accordion-body="${this.#id}"]`);
 
-      accoBtn.id = btnID;
+      accoTitle.id = btnID;
       accoBtn.setAttribute('aria-expanded', 'false');
       accoBtn.setAttribute('aria-controls', bodyID);
-      if(accoTitle) { // title 요소가 있을 경우에만 aria-label 설정
-        accoBtn.setAttribute('aria-label', accoTitle.textContent + ' 내용보기');
-      }
+      // if(accoTitle) { // title 요소가 있을 경우에만 aria-label 설정
+      //   accoBtn.setAttribute('aria-label', accoTitle.textContent + ' 내용보기');
+      // }
       
       accoBody.id =  bodyID;
       accoBody.setAttribute('role', 'region');

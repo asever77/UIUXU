@@ -192,9 +192,11 @@ export const slideUp = (element, duration = 300) => {
 
     const onEnd = () => {
       element.removeEventListener('transitionend', onEnd);
-      element.style.display = 'none';
-      element.style.height = '';
-      element.style.transition = '';
+      element.hidden = true;
+      element.style = '';
+      //element.style.display = 'none';
+      //element.style.height = '';
+      //element.style.transition = '';
       resolve();
     };
 
@@ -204,13 +206,9 @@ export const slideUp = (element, duration = 300) => {
 
 export const slideDown = (element, duration = 300) => {
   return new Promise(resolve => {
-    element.style.removeProperty('display');
-    const display = getComputedStyle(element).display;
-
-    if (display === 'none') {
-      element.style.display = 'block';
-    }
-
+    console.log(element.hidden)
+    element.hidden = false;
+    
     const height = element.scrollHeight;
     element.style.height = '0px';
     element.style.transition = `height ${duration}ms ease`;

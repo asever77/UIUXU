@@ -4,6 +4,9 @@
 		<nav>
 			<ul>
 				<li>
+					<a href="#anchor-0" class="selected">History</a>
+				</li>
+				<li>
 					<a href="#anchor-1" class="selected">Example</a>
 				</li>
 				<li>
@@ -18,21 +21,66 @@
 </aside>
 
 <article class="base-content" data-grid="sub-content">
-
 	<section class="base-wrap" data-dir="col" data-grid="display-title">
 		<h1 class="h-1" data-text="Accordion">Accordion</h1>
 		<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 id="anchor-1">Example</h2>
+		<h2 class="h-2" id="anchor-0">History</h2>
+		<ol class="list-history">
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.09.09 - </div>
+				<div class="list-history--item-value">Accordion 1.0.0 컴포넌트 생성</div>
+			</li>
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.09.09 - </div>
+				<div class="list-history--item-value">Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성  Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성  Accordion 1.0.0 컴포넌트 생성</div>
+			</li>
+		</ol>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-0">Accessibility</h2>
+		<div data-grid="wrap-group">
+			<div class="baee-group">
+				<h3 class="h-3">아코디언에 접근 가능한 제목을 제공한다.</h3>
+				<p>아코디언 헤더 내부의 제목은 페이지의 다른 콘텐츠의 구조에 맞추어 &lt;h1&gt;~&lt;h6&gt; 태그로 마크업한다. 스크린 리더 사용자가 아코디언 목록에서 어떤 정보를 확인할 수 있는지 개요를 파악하고 필요한 정보를 빠르게 탐색하는 데 도움이 된다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 제목 제공</li>
+					<li>WCAG 2.1 Info and Relationships (A)</li>
+				</ul>
+			</div>
+
+			<div class="baee-group">
+				<h3 class="h-3">아코디언의 활성화 상태 정보를 스크린 리더에서 확인할 수 있도록 한다.</h3>
+				<p>아코디언의 확장 상태에 대한 정보를 텍스트 정보로 제공(펼치기/접기, 축소됨/확장됨)하여 스크린 리더 사용자가 컨트롤의 상태를 인지할 수 있도록 해야 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+
+			<div class="baee-group">
+				<h3 class="h-3">헤더를 버튼 역할로 제공한다.</h3>
+				<p>헤더를 실행하였을 때 특정 섹션이나 화면으로 이동하는 것이 아니므로 &lt;button&gt;을 사용하거나 role="button"을 사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+		</div>
+		
+		
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-1">Example</h2>
 		<div class="base-box">
 			<div data-accordion="acco1">
 				<div data-accordion-item="acco1">
 					<div data-accordion-head="acco1">
-						<h3 data-accordion-title="acco1">title 1</h3>
-						<button type="button" data-accordion-button="acco1"></button>
-						<a href="#link">링크</a>
+						<h3 data-accordion-title="acco1">
+							<button type="button" data-accordion-button="acco1">title 1</button>
+						</h3>
 					</div>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
@@ -42,10 +90,11 @@
 				</div>
 
 				<div data-accordion-item="acco1">
-					<h3 data-accordion-head="acco1">
-						<button type="button" data-accordion-button="acco1"></button>
-						<b data-accordion-title="acco1" aria-hidden="true">title 2</b>
-					</h3>
+					<div data-accordion-head="acco1">
+						<h3 data-accordion-title="acco1">
+							<button type="button" data-accordion-button="acco1">title 2</button>
+						</h3>
+					</div>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
 							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
@@ -54,10 +103,11 @@
 				</div>
 
 				<div data-accordion-item="acco1">
-					<h3 data-accordion-head="acco1">
-						<button type="button" data-accordion-button="acco1"></button>
-						<b data-accordion-title="acco1" aria-hidden="true">title 3</b>
-					</h3>
+					<div data-accordion-head="acco1">
+						<h3 data-accordion-title="acco1">
+							<button type="button" data-accordion-button="acco1">title 3</button>
+						</h3>
+					</div>
 					<div data-accordion-body="acco1" hidden>
 						<div data-accordion-section="acco1">
 							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
@@ -69,7 +119,7 @@
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 id="anchor-2">Code</h2>
+		<h2 class="h-2" id="anchor-2">Code</h2>
 		<div data-tab="codeGuide" data-tab-style="small-box-type">
 			<div role="tablist">
 				<button type="button" role="tab">
@@ -189,7 +239,7 @@ UI.exe.acco1.destroy();
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 id="anchor-3">Options</h2>
+		<h2 class="h-2" id="anchor-3">Options</h2>
 		<p>Tab 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한 설명입니다.</p>
 		<table>
 			<caption></caption>

@@ -25,14 +25,18 @@
     z-index: 2;
   }
 }
-
-[data-accordion-button] {
+[data-accordion-title] ~ [data-accordion-button] {
   position: absolute;
+  text-align: left;
+}
+[data-accordion-button] {
+  position: relative;
   top:0;
   left:0;
   width: 100%;
   height: 100%;
   z-index: 1;
+  text-align: left;
 
   &[aria-expanded="true"]::after {
     content: "keyboard_arrow_up";
@@ -57,6 +61,7 @@
 [data-accordion-title] {
   position: relative;
   z-index: 0;
+  width: 100%;
 }
 
 [data-accordion-body] {

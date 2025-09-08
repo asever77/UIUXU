@@ -7,17 +7,19 @@
 [data-heading="display"],
 .h-1 {
   font-family: "Source Code Pro", monospace;
-  font-size: 2.8rem;
+  font-size: 10rem;
   font-weight: 700; 
 }
 .h-2 {
-  font-size: var(--x10);
-  font-weight: 700; 
+  font-family: "Source Code Pro", monospace;
+  font-size: 3.4rem;;
+  font-weight: 600; 
 }
 .h-3 {
-  font-size: var(--x8);
+  font-size: 1.8rem;
   font-weight: 700; 
 }
+
 .h-4 {
   font-size: var(--x6);
   font-weight: 700; 
@@ -29,29 +31,4 @@
 .h-6 {
   font-size: var(--x2);
   font-weight: 700; 
-}
-
-[data-heading="h1"] {
-  font-size: var(--x14);
-  font-weight: 700; 
-}
-[data-heading="h2"] {
-  font-size: var(--x8);
-  font-weight: 700; 
-}
-[data-heading="h3"] {
-  font-size: var(--x6);
-  font-weight: 700; 
-}
-[data-heading="h4"] {
-  font-size: var(--x4);
-  font-weight: 700; 
-}
-[data-heading="h5"] {
-  font-size: var(--x2);
-  font-weight: 700;
-}
-[data-heading="h6"] {
-  font-size: var(--x2);
-  font-weight: 700;
 }

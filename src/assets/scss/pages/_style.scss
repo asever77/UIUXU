@@ -1,6 +1,8 @@
 [role="tablist"] [role="tab"] {
   justify-content: center;
-  min-width: 20rem; text-align: center; border-bottom:1px solid #ccc;
+  text-align: center; 
+  border-bottom:1px solid #ccc;
+
 }
 [role="tablist"] [role="tab"][aria-selected="true"] {
   border-color:#000;
@@ -8,6 +10,51 @@
 [data-tab-wrap="codeGuide"] {
   width: 100%;
 }
+
+.list-history {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--x2);
+
+  &::before {
+    content:"";
+    position: absolute;
+    top: 0.5em;
+    left: 0.7rem;
+    width: .3rem;
+    height: calc(100% - 0.5em);
+    background-color: var(--gray-200);
+  }
+  &--item {
+    margin-bottom: .4rem;
+    font-size: 1.4rem;
+    color: var(--gray-800);
+    line-height: 1.6;
+    position: relative;
+    padding-left: 2rem;
+    display: flex;
+    gap: .4rem;
+
+    &-key {
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    &::before {
+      content:"";
+      position: absolute;
+      top:0.55em;
+      left:0.4rem;
+      display: block;
+      width: .9rem;
+      height: .9rem;
+      border-radius: 50%;
+      background-color: var(--gray-600);
+    }
+  }
+}
+
 @media screen and (max-width: 700px) {
   [role="tablist"] [role="tab"] {
     min-width: 0;
