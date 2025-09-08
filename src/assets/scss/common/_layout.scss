@@ -333,7 +333,7 @@ body {
 @media (max-width: 700px) {
   .area-base[data-layout="base"] {
     padding: 0;
-    height: 100dvh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
   }

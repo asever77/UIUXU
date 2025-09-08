@@ -1,19 +1,22 @@
 <aside class="aside-inner">
 	<div class="aside-inner-wrap">
-		<h3>Accordion</h3>
+		<h3 class="h-3">Index</h3>
 		<nav>
 			<ul>
 				<li>
-					<a href="#anchor-0" class="selected">History</a>
+					<a href="#anchor-ex" class="selected">Example</a>
 				</li>
 				<li>
-					<a href="#anchor-1" class="selected">Example</a>
+					<a href="#anchor-code">Code</a>
 				</li>
 				<li>
-					<a href="#anchor-2">Code</a>
+					<a href="#anchor-opt">Options</a>
 				</li>
 				<li>
-					<a href="#anchor-3">Options</a>
+					<a href="#anchor-a11y" class="selected">Accessibility</a>
+				</li>
+				<li>
+					<a href="#anchor-history" class="selected">History</a>
 				</li>
 			</ul>
 		</nav>
@@ -27,53 +30,7 @@
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 class="h-2" id="anchor-0">History</h2>
-		<ol class="list-history">
-			<li class="list-history--item">
-				<div class="list-history--item-key">2025.09.09 - </div>
-				<div class="list-history--item-value">Accordion 1.0.0 컴포넌트 생성</div>
-			</li>
-			<li class="list-history--item">
-				<div class="list-history--item-key">2025.09.09 - </div>
-				<div class="list-history--item-value">Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성  Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성 Accordion 1.0.0 컴포넌트 생성  Accordion 1.0.0 컴포넌트 생성</div>
-			</li>
-		</ol>
-	</section>
-
-	<section class="base-wrap" data-dir="col">
-		<h2 class="h-2" id="anchor-0">Accessibility</h2>
-		<div data-grid="wrap-group">
-			<div class="baee-group">
-				<h3 class="h-3">아코디언에 접근 가능한 제목을 제공한다.</h3>
-				<p>아코디언 헤더 내부의 제목은 페이지의 다른 콘텐츠의 구조에 맞추어 &lt;h1&gt;~&lt;h6&gt; 태그로 마크업한다. 스크린 리더 사용자가 아코디언 목록에서 어떤 정보를 확인할 수 있는지 개요를 파악하고 필요한 정보를 빠르게 탐색하는 데 도움이 된다.</p>
-				<ul data-bullet="dot">
-					<li>KWCAG 2.2 제목 제공</li>
-					<li>WCAG 2.1 Info and Relationships (A)</li>
-				</ul>
-			</div>
-
-			<div class="baee-group">
-				<h3 class="h-3">아코디언의 활성화 상태 정보를 스크린 리더에서 확인할 수 있도록 한다.</h3>
-				<p>아코디언의 확장 상태에 대한 정보를 텍스트 정보로 제공(펼치기/접기, 축소됨/확장됨)하여 스크린 리더 사용자가 컨트롤의 상태를 인지할 수 있도록 해야 한다.</p>
-				<ul data-bullet="dot">
-					<li>WCAG 2.1 Name, Role, Value (A)</li>
-				</ul>
-			</div>
-
-			<div class="baee-group">
-				<h3 class="h-3">헤더를 버튼 역할로 제공한다.</h3>
-				<p>헤더를 실행하였을 때 특정 섹션이나 화면으로 이동하는 것이 아니므로 &lt;button&gt;을 사용하거나 role="button"을 사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록 한다.</p>
-				<ul data-bullet="dot">
-					<li>WCAG 2.1 Name, Role, Value (A)</li>
-				</ul>
-			</div>
-		</div>
-		
-		
-	</section>
-
-	<section class="base-wrap" data-dir="col">
-		<h2 class="h-2" id="anchor-1">Example</h2>
+		<h2 class="h-2" id="anchor-ex">Example</h2>
 		<div class="base-box">
 			<div data-accordion="acco1">
 				<div data-accordion-item="acco1">
@@ -119,7 +76,7 @@
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 class="h-2" id="anchor-2">Code</h2>
+		<h2 class="h-2" id="anchor-code">Code</h2>
 		<div data-tab="codeGuide" data-tab-style="small-box-type">
 			<div role="tablist">
 				<button type="button" role="tab">
@@ -136,30 +93,35 @@
 		<div data-tab-wrap="codeGuide">
 			<div role="tabpanel">
 				<section>
-					<mtit class="a11y-hidden">HTML</mtit>
-					<codebox>
+					<h3 class="h-3 a11y-hidden">HTML</h3>
+					<div class="code-box">
 						<pre contenteditable="true"><code>
-&lt;div data-accordion="name"&gt;
-	&lt;div data-accordion-item="name"&gt;
-		&lt;div data-accordion-head="name"&gt;
-			&lt;h3 data-accordion-title="name"&gt;title 1&lt;/h3&gt;
-			&lt;button type="button" data-accordion-button="name"&gt;&lt;/button&gt;
+&lt;div <b>data-accordion="name"</b>&gt;
+	<i>//아코디언 콘텐츠 반복</i>
+	&lt;div <b>data-accordion-item="name"</b>&gt;
+		<i>//아코디언 제목</i>
+		&lt;div <b>data-accordion-head="name"</b>&gt;
+			&lt;h3 <b>data-accordion-title="name"</b>&gt;title 1
+				&lt;button type="button" <b>data-accordion-button="name"</b>&gt;&lt;/button&gt;
+			&lt;/h3&gt;
 		&lt;/div&gt;
-		&lt;div data-accordion-body="name" hidden&gt;
-			&lt;div data-accordion-section="name"&gt;
+		<i>//아코디언 내용</i>
+		&lt;div <b>data-accordion-body="name"</b> hidden&gt;
+			&lt;div <b>data-accordion-section="name"</b>&gt;
 				...
 			&lt;/div&gt;
 		&lt;/div&gt;
 	&lt;/div&gt;
+	<i>...</i>
 &lt;/div&gt;
 						</code></pre>
-					</codebox>
+					</div>
 				</section>
 			</div>
 			<div role="tabpanel">
 				<section>
-					<mtit class="a11y-hidden">javascript</mtit>
-					<codebox>
+					<h3 class="h-3 a11y-hidden">javascript</h3>
+					<div class="code-box">
 						<pre contenteditable="true"><code>
 import { UX } from '../assets/js/uiuxu.common.js';
 
@@ -178,12 +140,13 @@ UI.exe.acco1.hide('acco1-1', () => {
 UI.exe.acco1.update();
 UI.exe.acco1.destroy();
 						</code></pre>
+					</div>
 				</section>
 			</div>
 			<div role="tabpanel">
 				<section>
-					<mtit class="a11y-hidden">CSS</mtit>
-					<codebox>
+					<h3 class="h-3 a11y-hidden">CSS</h3>
+					<div class="code-box">
 						<pre contenteditable="true"><code>
 [data-accordion] {
   width: 100%;
@@ -233,13 +196,14 @@ UI.exe.acco1.destroy();
   overflow: hidden;
 }
 						</code></pre>
+					</div>
 				</section>
 			</div>
 		</div>		
 	</section>
 
 	<section class="base-wrap" data-dir="col">
-		<h2 class="h-2" id="anchor-3">Options</h2>
+		<h2 class="h-2" id="anchor-opt">Options</h2>
 		<p>Tab 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한 설명입니다.</p>
 		<table>
 			<caption></caption>
@@ -298,6 +262,54 @@ UI.exe.acco1.destroy();
 				</tr>
 			</tbody>
 		</table>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-a11y">Accessibility</h2>
+		<div data-grid="wrap-group">
+			<div class="base-group">
+				<h3 class="h-3">아코디언에 접근 가능한 제목을 제공한다.</h3>
+				<p>아코디언 헤더 내부의 제목은 페이지의 다른 콘텐츠의 구조에 맞추어 &lt;h1&gt;~&lt;h6&gt; 태그로 마크업한다. 스크린 리더 사용자가 아코디언 목록에서 어떤 정보를 확인할 수 있는지 개요를 파악하고 필요한 정보를 빠르게 탐색하는 데 도움이 된다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 제목 제공</li>
+					<li>WCAG 2.1 Info and Relationships (A)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">아코디언의 활성화 상태 정보를 스크린 리더에서 확인할 수 있도록 한다.</h3>
+				<p>아코디언의 확장 상태에 대한 정보를 텍스트 정보로 제공(펼치기/접기, 축소됨/확장됨)하여 스크린 리더 사용자가 컨트롤의 상태를 인지할 수 있도록 해야 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">헤더를 버튼 역할로 제공한다.</h3>
+				<p>헤더를 실행하였을 때 특정 섹션이나 화면으로 이동하는 것이 아니므로 &lt;button&gt;을 사용하거나 role="button"을 사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-history">History</h2>
+		<ol class="list-history">
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.09.08 - </div>
+				<div class="list-history--item-value">Accordion 1.1.0 웹접근성 수정으로 h태그 안에 button 태그 위치 수정.</div>
+			</li>
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.07.24 - </div>
+				<div class="list-history--item-value">Accordion 1.0.1 update, destroy 기능 추가</div>
+			</li>
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.07.22 - </div>
+				<div class="list-history--item-value">Accordion 1.0.0 아코디언 버전관리 시작</div>
+			</li>
+		</ol>
 	</section>
 </article>
 

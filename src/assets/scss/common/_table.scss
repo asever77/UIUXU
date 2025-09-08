@@ -20,6 +20,9 @@ th,td{
 	font-size: 1.3rem;
 	vertical-align: top;
 }
+tr *:first-child {
+	padding-left: var(--x4);
+}
 @media (max-width: 700px) {
 	table {
 		display: flex;

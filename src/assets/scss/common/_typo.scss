@@ -7,7 +7,7 @@
 [data-heading="display"],
 .h-1 {
   font-family: "Source Code Pro", monospace;
-  font-size: 10rem;
+  font-size: 7rem;
   font-weight: 700; 
 }
 .h-2 {
@@ -31,4 +31,20 @@
 .h-6 {
   font-size: var(--x2);
   font-weight: 700; 
+}
+@media screen and (max-width: 700px) {
+  [data-heading="display"],
+  .h-1 {
+    font-size: 4rem;
+    font-weight: 700; 
+  }
+  .h-2 {
+    font-size: 2.2rem;;
+    font-weight: 600; 
+  }
+  .h-3 {
+    font-size: 1.8rem;
+    font-weight: 700; 
+  }
+
 }
