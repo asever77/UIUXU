@@ -4,47 +4,10 @@
 // unicode-range: U+0030-0039;
 
 
-[data-heading="display"] {
-  position: relative;
-  font-family: "Bitcount Prop Single", system-ui;
-	font-size: var(--x２0);
-	line-height: 1;
-	font-weight: 100;
-	letter-spacing: 0.09em; 
-
-  &::first-letter {
-    font-weight: 100;
-  }
-  &::before {
-    content: attr(data-text);
-    font-family: "Bitcount Prop Single", system-ui;
-    font-size: 1em;
-    line-height: 1;
-    font-weight: 400;
-    letter-spacing: 0.09em; 
-    position: absolute;
-    left: 0;
-    opacity: 0.1;
-    color: rgb(190, 190, 190);
-    transform: translate(.03em, .03em);
-  }
-  // &::after {
-  //   content: attr(data-text);
-  //   font-family: "Bitcount Prop Single", system-ui;
-  //   font-size: 1em;
-  //   line-height: 1;
-  //   font-weight: 400;
-  //   letter-spacing: 0.09em; 
-  //   position: absolute;
-  //   left:0;
-  //   opacity: 0.1;
-  //   color: rgb(15, 243, 26);
-  //   transform: translate(-.04em, -.03em);
-  // }
-}
-
+[data-heading="display"],
 .h-1 {
-  font-size: var(--x20);
+  font-family: "Source Code Pro", monospace;
+  font-size: 2.8rem;
   font-weight: 700; 
 }
 .h-2 {

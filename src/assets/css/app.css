@@ -576,33 +576,10 @@ grid.main-content box {
     grid-row: span 1;
   }
 }
-[data-heading=display] {
-  position: relative;
-  font-family: "Bitcount Prop Single", system-ui;
-  font-size: var(--x２0);
-  line-height: 1;
-  font-weight: 100;
-  letter-spacing: 0.09em;
-}
-[data-heading=display]::first-letter {
-  font-weight: 100;
-}
-[data-heading=display]::before {
-  content: attr(data-text);
-  font-family: "Bitcount Prop Single", system-ui;
-  font-size: 1em;
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: 0.09em;
-  position: absolute;
-  left: 0;
-  opacity: 0.1;
-  color: rgb(190, 190, 190);
-  transform: translate(0.03em, 0.03em);
-}
-
+[data-heading=display],
 .h-1 {
-  font-size: var(--x20);
+  font-family: "Source Code Pro", monospace;
+  font-size: 2.8rem;
   font-weight: 700;
 }
 
@@ -4157,4 +4134,10 @@ button [data-wheel-picker-set]::before {
 
 [data-tab-wrap=codeGuide] {
   width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+  [role=tablist] [role=tab] {
+    min-width: 0;
+  }
 }/*# sourceMappingURL=app.css.map */
