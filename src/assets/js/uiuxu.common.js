@@ -18,13 +18,10 @@ import Roulette from './event/roulette.js';
 
 import { loadContent, RadioAllcheck, dayOption, createOptions, getDeviceInfo, textLength } from './utils/utils.js';
 
-
+const imageUrl = '../assets/img/logo_w.png';
 console.log(
   '%c ',
-  'font-size: 1px;' +
-  'padding: 70px 200px;' +
-  'background: url(../assets/img/logo_w.png) no-repeat 50% 50%;' + // 위치까지만 선언
-  'background-size: 100%' // 크기만 별도로 선언
+  `padding: 70px 200px; background: url(${imageUrl}) no-repeat 50% 50%; background-size: 100%` // 크기만 별도로 선언
 );
 
 
