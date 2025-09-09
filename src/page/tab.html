@@ -63,6 +63,17 @@
 			layout: './layout/base.html',
 			page:'./content/tab.html',
 			callback: () => {
+				UI.exe.codeGuide = new UX.Tab({
+					id: 'codeGuide',
+					renderMode: 'static',
+					selected: 1,
+					data: [
+						{ callback: () => { console.log('탭1 open'); },},
+						{ callback: () => { console.log('탭2 open'); },},
+						{ callback: () => { console.log('탭3 open'); },},
+					],
+				});
+
 				UI.exe.tab1 = new UX.Tab({
 					id: 'tab1',
 					selected: 1, //1부터 시작
@@ -129,6 +140,8 @@
 				UI.exe.tab1.init();
 				UI.exe.tab3.init();
 				UI.exe.tab4.init();
+
+				UI.exe.codeGuide.init();
 			}
 		});
 	</script>

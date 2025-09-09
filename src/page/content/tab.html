@@ -1,16 +1,268 @@
-<wrap data-dir="col">
-	<group data-dir="col">
-		<h1 data-heading="display" data-text="Tab">Tab</h1>
-		<p>Tab 컴포넌트는 콘텐츠를 탭 형태로 구성하고 표시하는 유연하고 접근성 높은 방법을 제공합니다. 이 컴포넌트는 정적 및 동적 콘텐츠 로딩을 모두 지원하여 다양한 사용 사례에 적합합니다. 이 가이드를 통해 Tab 컴포넌트의 기능, 설정 방법, 그리고 사용 가능한 옵션에 대해 자세히 알아보세요.</p>
+<aside class="aside-inner">
+	<div class="aside-inner--wrap" data-index="0">
+		<h3 class="h-3">Index</h3>
+		<nav>
+			<ul>
+				<li>
+					<a href="#anchor-ex" class="selected">Example</a>
+				</li>
+				<li>
+					<a href="#anchor-code">Code</a>
+				</li>
+				<li>
+					<a href="#anchor-opt">Options</a>
+				</li>
+				<li>
+					<a href="#anchor-a11y" class="selected">Accessibility</a>
+				</li>
+				<li>
+					<a href="#anchor-history" class="selected">History</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</aside>
 
-		<mtit>Options</mtit>
+<article class="base-content" data-grid="sub-content">
+	<section class="base-wrap" data-dir="col" data-grid="display-title">
+		<h1 class="h-1" id="anchor-info">Tab</h1>
+		<p>Tab 컴포넌트는 콘텐츠를 탭 형태로 구성하고 표시하는 유연하고 접근성 높은 방법을 제공합니다. 이 컴포넌트는 정적 및 동적 콘텐츠 로딩을 모두 지원하여 다양한 사용 사례에 적합합니다. 이 가이드를 통해 Tab 컴포넌트의 기능, 설정 방법, 그리고 사용 가능한 옵션에 대해 자세히 알아보세요.</p>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-ex">Example</h2>
+		<h3 class="h-3">동적구성 탭 + 이중 탭</h3>
+		<div class="base-box" style="width: 40rem;">
+			<div data-tab="tab1" data-tab-style="small-box-type"></div>
+			<div data-tab-wrap="tab1"></div>
+		</div>
+
+		<h3 class="h-3">정적구성 탭</h3>
+		<div class="base-box" style="width: 40rem;">
+			<div data-tab="tab3" data-tab-style="small-box-type">
+				<div role="tablist">
+					<button type="button" role="tab">
+						<span>탭1</span>
+					</button>
+					<button type="button" role="tab">
+						<span>탭2</span>
+					</button>
+					<button type="button" role="tab">
+						<span>탭3</span>
+					</button>
+				</div>
+			</div>
+			<div data-tab-wrap="tab3">
+				<div role="tabpanel">
+					<section>
+						<h2>탭1</h2>
+						<div>
+							tab33 내용이 들어갑니다.<br>
+							tab33 내용이 들어갑니다.<br>
+							tab33 내용이 들어갑니다.<br>
+						</div>
+					</section>
+				</div>
+				<div role="tabpanel">
+					<section>
+						<h2>탭2</h2>
+						<div>
+							tab4 내용이 들어갑니다.<br>
+							tab4 내용이 들어갑니다.<br>
+						</div>
+					</section>
+				</div>
+				<div role="tabpanel">
+					<section>
+						<h2>탭3</h2>
+						<div>
+							tab4 내용이 들어갑니다.<br>
+							tab4 내용이 들어갑니다.<br>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+
+		<h3 class="h-3">스크롤 탭</h3>
+		<div class="base-box" style="width: 40rem;">
+			<div data-tab="tab4" data-tab-style="small-box-type" style="top:6.2rem"></div>
+			<div data-tab-wrap="tab4"></div>
+		</div>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-code">Code</h2>
+		<div data-tab="codeGuide" data-tab-style="small-box-type">
+			<div role="tablist">
+				<button type="button" role="tab">
+					<span>HTML</span>
+				</button>
+				<button type="button" role="tab">
+					<span>Javascript</span>
+				</button>
+				<button type="button" role="tab">
+					<span>CSS</span>
+				</button>
+			</div>
+		</div>
+		<div data-tab-wrap="codeGuide">
+			<div role="tabpanel">
+				<section>
+					<h3 class="h-3 a11y-hidden">HTML</h3>
+					<div class="code-box">
+						<pre contenteditable="true"><code>
+&lt;div data-tab="tab2"&gt;&lt;/div&gt;
+&lt;div data-tab-wrap="tab2"&gt;&lt;/div&gt;
+
+&lt;div data-tab="tab3"&gt;
+	&lt;div role="tablist"&gt;
+		&lt;button type="button" role="tab"&gt;
+			&lt;span&gt;탭1&lt;/span&gt;
+		&lt;/button&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;div data-tab-wrap="tab3"&gt;
+	&lt;div role="tabpanel"&gt;
+		&lt;section&gt;
+		...
+		&lt;/section&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div role="tabpanel">
+				<section>
+					<h3 class="h-3 a11y-hidden">javascript</h3>
+					<div class="code-box">
+						<pre contenteditable="true"><code>
+&lt;script type="module"&gt;
+import Dropdown from './dropdown.js';
+
+// 동적: 개별
+const myTab = new UX.Tab({
+id: 'tab1',
+selected: 1, //1부터 시작
+data: [
+{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
+],
+});
+myTab.init();
+myTab.expanded('tab1-id-1');
+
+// 동적: 개별
+const myTab = new UX.Tab({
+id: 'tab1',
+selected: 1, //1부터 시작
+data: [
+{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
+],
+});
+myTab.init();
+myTab.expanded('tab1-id-1');
+
+// 동적: 전체
+const myTab2 = new UX.Tab({
+id: 'tab2',
+selected: 1,
+loadAll: {
+src: './tab/tab_group.html',
+},
+data: [
+{ tab: '&lt;span&gt;tab2-1&lt;/span&gt;', callback: () =&gt; { console.log('tab 2-1 open'); },},
+],
+});
+myTab2.init();
+myTab2.expanded('tab2-id-1');
+
+// 정적
+const myTab3 = new UX.Tab({
+id: 'tab3',
+renderMode: 'static',
+selected: 2,
+data: [
+{ callback: () =&gt; { console.log('탭1 open'); },},
+{ callback: () =&gt; { console.log('탭2 open'); },},
+{ callback: () =&gt; { console.log('탭3 open'); },},
+],
+});
+myTab3.init();
+myTab3.expanded('tab3-id-1');
+&lt;/script&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div role="tabpanel">
+				<section>
+					<h3 class="h-3 a11y-hidden">CSS</h3>
+					<div class="code-box">
+						<pre contenteditable="true"><code>
+[data-accordion] {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-item] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-group] {
+  display: flex;
+}
+
+[data-accordion-head] {
+  position: relative;
+  display: flex;
+
+  a {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+[data-accordion-button] {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+[data-accordion-button]:disabled {
+  opacity: 1;
+}
+
+[data-accordion-title] {
+  position: relative;
+  z-index: 0;
+}
+
+[data-accordion-body] {
+  position: relative;
+  overflow: hidden;
+}
+						</code></pre>
+					</div>
+				</section>
+			</div>
+		</div>		
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-opt">Options</h2>
 		<p>Tab 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한 설명입니다.</p>
 		<table>
 			<caption></caption>
 			<colgroup>
-				<col style="width: 12rem" />
-				<col style="width: 14rem;" />
-				<col style="width: 18rem;" />
+				<col style="width: auto" />
+				<col style="width: auto;" />
+				<col style="width: auto;" />
 				<col style="width: auto;" />
 			</colgroup>
 			<thead>
@@ -85,159 +337,33 @@
 				</tr>
 			</tbody>
 		</table>
-	</group>
-
-	<group data-dir="col">
-		<stit>동적구성 탭 + 이중탭</stit>
-		<box>
-			<div data-tab="tab1" data-tab-style="small-box-type"></div>
-			<div data-tab-wrap="tab1"></div>
-		</box>
-		<codebox>
-			<code><pre contenteditable="true">
-&lt;div data-tab="tab2"&gt;&lt;/div&gt;
-&lt;div data-tab-wrap="tab2"&gt;&lt;/div&gt;
-
-&lt;script type="module"&gt;
-import Dropdown from './dropdown.js';
-
-// 동적: 개별
-const myTab = new UX.Tab({
-id: 'tab1',
-selected: 1, //1부터 시작
-data: [
-{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
-],
-});
-myTab.init();
-myTab.expanded('tab1-id-1');
-&lt;/script&gt;
-			</pre></code>
-		</codebox>
-
-		<stit>정적구성 탭</stit>
-		<box>
-			<div data-tab="tab3" data-tab-style="small-box-type">
-				<div role="tablist">
-					<button type="button" role="tab">
-						<span>탭1</span>
-					</button>
-					<button type="button" role="tab">
-						<span>탭2</span>
-					</button>
-					<button type="button" role="tab">
-						<span>탭3</span>
-					</button>
-				</div>
-			</div>
-			<div data-tab-wrap="tab3">
-				<div role="tabpanel">
-					<section>
-						<h2>탭1</h2>
-						<div>
-							tab33 내용이 들어갑니다.<br>
-							tab33 내용이 들어갑니다.<br>
-							tab33 내용이 들어갑니다.<br>
-						</div>
-					</section>
-				</div>
-				<div role="tabpanel">
-					<section>
-						<h2>탭2</h2>
-						<div>
-							tab4 내용이 들어갑니다.<br>
-							tab4 내용이 들어갑니다.<br>
-						</div>
-					</section>
-				</div>
-				<div role="tabpanel">
-					<section>
-						<h2>탭3</h2>
-						<div>
-							tab4 내용이 들어갑니다.<br>
-							tab4 내용이 들어갑니다.<br>
-						</div>
-					</section>
-				</div>
-			</div>
-		</box>
-
-		<stit>스크롤탭</stit>
-		<box>
-			<div data-tab="tab4" data-tab-style="small-box-type" style="top:6.2rem"></div>
-			<div data-tab-wrap="tab4"></div>
-		</box>
-	</group>
-
+	</section>
 	
-	<group data-dir="col">
-		<mtit>Code</mtit>
-		<codebox>
-			<code><pre contenteditable="true">
-&lt;div data-tab="tab2"&gt;&lt;/div&gt;
-&lt;div data-tab-wrap="tab2"&gt;&lt;/div&gt;
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-a11y">Accessibility</h2>
+		<p>Tab 컴포넌트는 접근성을 고려하여 설계되었습니다. 다음은 주요 접근성 기능입니다:</p>
+		<ul>
+			<li>키보드 내비게이션: Tab 키를 사용하여 탭 사이를 이동하고, Enter 또는 Space 키로 탭을 활성화할 수 있습니다.</li>
+			<li>ARIA 속성: 적절한 ARIA 속성 (role, aria-selected, aria-controls 등)을 사용하여 스크린 리더가 탭 구조와 상태를 올바르게 해석할 수 있도록 합니다.</li>
+			<li>포커스 관리: 활성 탭이 변경될 때 포커스가 적절하게 이동하여 키보드 사용자에게 명확한 피드백을 제공합니다.</li>
+		</ul>
+	</section>
 
-&lt;div data-tab="tab2"&gt;&lt;/div&gt;
-&lt;div data-tab-wrap="tab2"&gt;&lt;/div&gt;
-
-&lt;div data-tab="tab3"&gt;
-&lt;div role="tablist"&gt;
-&lt;button type="button" role="tab"&gt;
-&lt;span&gt;탭1&lt;/span&gt;
-&lt;/button&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div data-tab-wrap="tab3"&gt;
-&lt;div role="tabpanel"&gt;
-&lt;section&gt;
-...
-&lt;/section&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;script type="module"&gt;
-import Dropdown from './Dropdown.js';
-
-// 동적: 개별
-const myTab = new UX.Tab({
-id: 'tab1',
-selected: 1, //1부터 시작
-data: [
-{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
-],
-});
-myTab.init();
-myTab.expanded('tab1-id-1');
-
-// 동적: 전체
-const myTab2 = new UX.Tab({
-id: 'tab2',
-selected: 1,
-loadAll: {
-src: './tab/tab_group.html',
-},
-data: [
-{ tab: '&lt;span&gt;tab2-1&lt;/span&gt;', callback: () =&gt; { console.log('tab 2-1 open'); },},
-],
-});
-myTab2.init();
-myTab2.expanded('tab2-id-1');
-
-// 정적
-const myTab3 = new UX.Tab({
-id: 'tab3',
-renderMode: 'static',
-selected: 2,
-data: [
-{ callback: () =&gt; { console.log('탭1 open'); },},
-{ callback: () =&gt; { console.log('탭2 open'); },},
-{ callback: () =&gt; { console.log('탭3 open'); },},
-],
-});
-myTab3.init();
-myTab3.expanded('tab3-id-1');
-&lt;/script&gt;
-			</pre></code>
-		</codebox>
-	</group>
-</wrap>
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-history">History</h2>
+		<ol class="list-history">
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.09.08 - </div>
+				<div class="list-history--item-value">Accordion 1.1.0 웹접근성 수정으로 h태그 안에 button 태그 위치 수정.</div>
+			</li>
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.07.24 - </div>
+				<div class="list-history--item-value">Accordion 1.0.1 update, destroy 기능 추가</div>
+			</li>
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.07.22 - </div>
+				<div class="list-history--item-value">Accordion 1.0.0 아코디언 버전관리 시작</div>
+			</li>
+		</ol>
+	</section>
+</article>

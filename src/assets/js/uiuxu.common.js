@@ -128,19 +128,28 @@ class UXCore {
           })
           .then(() => {
             data.callback();
-            const wraps = document.querySelectorAll('.base-content > .base-wrap');
+
+            setTimeout(() => {
+              const wraps = document.querySelectorAll('.base-content > .base-wrap:not([data-grid="display-title"])');
               const wrapTopArray = [];
               wraps.forEach(item => {
-                wrapTopArray.push(item.getBoundingClientRect().top + document.documentElement.scrollTop + 64)
+                wrapTopArray.push(item.getBoundingClientRect().top + document.documentElement.scrollTop - 124);
+
+                console.log(item, item.getBoundingClientRect().top);
                 
               });
               const getCurrentSection = (scrollY) => {
                 const index = wrapTopArray.findIndex((pos, i) => {
                   const next = wrapTopArray[i + 1] ?? Infinity; 
+
+                  console.log(scrollY, pos, next);
+
                   return scrollY >= pos && scrollY < next;
                 });
                 return index; 
               };
+
+              
               window.addEventListener('scroll', () => {
                 const y = window.scrollY;
                 const idx = getCurrentSection(y);
@@ -149,6 +158,7 @@ class UXCore {
                   document.querySelector('.aside-inner--wrap').dataset.index = idx;
                 }
               });
+            }, 100);
           })
           .catch((err) => console.error('Error loading header content:', err));
         }
