@@ -1,0 +1,5 @@
+@mixin create-spacing-vars($max: 100) {
+  @for $i from 1 through $max {
+    --x#{$i}: calc(var(--gap) * #{$i});
+  }
+}

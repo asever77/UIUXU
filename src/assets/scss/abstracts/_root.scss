@@ -1,4 +1,6 @@
 @use '_variables_for_code' as vars; 
+@use 'mixin';
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap');
 
@@ -31,110 +33,105 @@ $mode-setting: light;
 	--primary: #225bbc;
 	--sub: #1ee09f;
 
-	--white: #fff;
-	--gray-100: #f8f8f8;
-	--gray-200: #ededed;
-	--gray-300: #dddddd;
-	--gray-400: #cccccc;
-	--gray-500: #999999;
-	--gray-600: #777777;
-	--gray-700: #555555;
-	--gray-800: #333333;
-	--gray-900: #111111;
-	--black: #000;
+	--gray-0: #fff;
+	--gray-10: #f8f8f8;
+	--gray-20: #ededed;
+	--gray-30: #dddddd;
+	--gray-40: #cccccc;
+	--gray-50: #999999;
+	--gray-60: #777777;
+	--gray-70: #555555;
+	--gray-80: #333333;
+	--gray-90: #111111;
+	--gray-100: #000;
 
 	--gap: 0.4rem;
-	--x1: calc(var(--gap) * 1);
-	--x2: calc(var(--gap) * 2);
-	--x3: calc(var(--gap) * 3);
-	--x4: calc(var(--gap) * 4);
-	--x5: calc(var(--gap) * 5);
-	--x6: calc(var(--gap) * 6);
-	--x7: calc(var(--gap) * 7);
-	--x8: calc(var(--gap) * 8);
-	--x9: calc(var(--gap) * 9);
-	--x10: calc(var(--gap) * 10);
-	--x11: calc(var(--gap) * 11);
-	--x12: calc(var(--gap) * 12);
-	--x13: calc(var(--gap) * 13);
-	--x14: calc(var(--gap) * 14);
-	--x15: calc(var(--gap) * 15);
-	--x16: calc(var(--gap) * 16);
-	--x17: calc(var(--gap) * 17);
-	--x18: calc(var(--gap) * 18);
-	--x19: calc(var(--gap) * 19);
-	--x20: calc(var(--gap) * 20);
-	--x21: calc(var(--gap) * 21);
-	--x22: calc(var(--gap) * 22);
-	--x23: calc(var(--gap) * 23);
-	--x24: calc(var(--gap) * 24);
-	--x25: calc(var(--gap) * 25);
-	--x26: calc(var(--gap) * 26);
-	--x27: calc(var(--gap) * 27);
-	--x28: calc(var(--gap) * 28);
-	--x29: calc(var(--gap) * 29);
-	--x30: calc(var(--gap) * 30);
-	--x31: calc(var(--gap) * 31);
-	--x32: calc(var(--gap) * 32);
-	--x33: calc(var(--gap) * 33);
-	--x34: calc(var(--gap) * 34);
-	--x35: calc(var(--gap) * 35);
-	--x36: calc(var(--gap) * 36);
-	--x37: calc(var(--gap) * 37);
-	--x38: calc(var(--gap) * 38);
-	--x39: calc(var(--gap) * 39);
-	--x40: calc(var(--gap) * 40);
-
-	--icon-svg-refresh:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z'/%3E%3C/svg%3E");
+	@include mixin.create-spacing-vars; 
 }
 
 :root[data-mode="light"] {
-	--color-background-default: var(--gray-100);
-	--color-background-table: var(--gray-200);
-	--color-text-primary: var(--gray-800);
-	--color-text-secondary: var(--gray-600);
-	--color-border-light: var(--gray-300);
-	--color-border-dark: var(--gray-500);
-	--color-icon-default: var(--gray-700);
-	--color-disabled-text: var(--gray-400);
+	--color-background-default: var(--gray-10);
+	--color-background-table: var(--gray-20);
+	--color-text-primary: var(--gray-80);
+	--color-text-secondary: var(--gray-60);
+	--color-icon-default: var(--gray-70);
+	--color-disabled-text: var(--gray-40);
 
-	--btn-bgcolor-dark: var(--gray-800);
-	--btn-bgcolor-gray: var(--gray-300);
-	--btn-bgcolor-light: var(--white);
+	--btn-bgcolor-dark: var(--gray-80);
+	--btn-bgcolor-gray: var(--gray-30);
+	--btn-bgcolor-light: var(--gray-0);
 
-	--nav-bgcolor1: var(--white);
-	--nav-bgcolor2: var(--black);
+	--btn-color-text: var(--gray-100);
+	--btn-color-line: var(--gray-50);
+	--btn-color-line-hover: var(--gray-100);
+	--btn-color-bg: var(--gray-0);
+
+	--inp-color-text: var(--gray-100);
+	--inp-color-line: var(--gray-50);
+	--inp-color-line-hover: var(--gray-100);
+	--inp-color-bg: var(--gray-0);
+
+	--nav-bgcolor1: var(--gray-0);
+	--nav-bgcolor2: var(--gray-100);
 	--nav-shadow: rgba(0, 0, 0, 0.05);
 
-	--box-background: var(--white);
-
+	--box-background: var(--gray-0);
 	--bgcolor: #F6F7F9;
+
+	--aside-inner--text: var(--gray-90);
+	--aside-inner--bg: var(--gray-20);
+
+	--tab-color-line: var(--gray-40);
+	--tab-color-line-selected: var(--gray-100);
+
+	--list-history--line: var(--gray-20);
+	--list-history--text: var(--gray-80);
+	--list-history--circle: var(--gray-60);
 }
 :root[data-mode="dark"] {
-	/* 1. 기본 배경 및 텍스트 */
-	--color-background-default: var(--gray-900); 	/* 밝은 배경 -> 어두운 배경 */
-	--color-background-table: var(--gray-800); 		/* 밝은 배경 -> 어두운 배경 */
-	--color-text-primary: var(--gray-200);      	/* 어두운 텍스트 -> 밝은 텍스트 */
-	--color-text-secondary: var(--gray-400);    	/* 조금 더 밝게 조정 */
-	--color-icon-default: var(--gray-300);      	/* 아이콘 색상도 밝게 */
-	--color-disabled-text: var(--gray-600);     	/* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
+	--color-background-default: var(--gray-90);
+	--color-background-table: var(--gray-80);
+	--color-text-primary: var(--gray-20);
+	--color-text-secondary: var(--gray-40);
+	--color-icon-default: var(--gray-30);
+	--color-disabled-text: var(--gray-60);
 
-	--color-border-light: var(--gray-700); 
-	--color-border-dark: var(--gray-600); 
-	
+	--color-border-light: var(--gray-70); 
+	--color-border-dark: var(--gray-60); 
 
-	--color-card-background: var(--gray-800);
+	--btn-bgcolor-dark: var(--gray-80);
+	--btn-bgcolor-gray: var(--gray-30);
+	--btn-bgcolor-light: var(--gray-0);
+
+	--btn-color-text: var(--gray-0);
+	--btn-color-line: var(--gray-60);
+	--btn-color-line-hover: var(--gray-0);
+	--btn-color-bg: var(--gray-100);
+
+	--inp-color-text: var(--gray-0);
+	--inp-color-line: var(--gray-60);
+	--inp-color-line-hover: var(--gray-0);
+	--inp-color-bg: var(--gray-100);
+
+	--nav-bgcolor1: var(--gray-80);
+	--nav-bgcolor2: var(--gray-0);
+	--nav-shadow: rgba(255, 255, 255, 0.05);
+
+	--color-card-background: var(--gray-80);
 	--color-modal-background: var(--gray-850); 
 	
+	--box-background: var(--gray-90);
 	--bgcolor: #17171c;
-	--primary: #225bbc;
-	--sub: #1ee09f;
 
-	--box-background: var(--black);
+	--aside-inner--text: var(--gray-20);
+	--aside-inner--bg: var(--gray-90);
 
-	--nav-bgcolor1: var(--gray-800);
-	--nav-bgcolor2: var(--white);
-	--nav-shadow: rgba(255, 255, 255, 0.05);
+	--tab-color-line: var(--gray-60);
+	--tab-color-line-selected: var(--gray-10);
+
+	--list-history--line: var(--gray-80);
+	--list-history--text: var(--gray-20);
+	--list-history--circle: var(--gray-60);
 	
 	.logo-netive,
 	.img-main .logo,
@@ -146,35 +143,47 @@ $mode-setting: light;
 		filter: brightness(0.7) contrast(1.2);
 	}
 }
-
-
 @media (prefers-color-scheme: dark) {
+	:root[data-mode="dark"],
   :root {
-    /* 1. 기본 배경 및 텍스트 */
-		--color-background-default: var(--gray-900); 	/* 밝은 배경 -> 어두운 배경 */
-		--color-background-table: var(--gray-800); 		/* 밝은 배경 -> 어두운 배경 */
-		--color-text-primary: var(--gray-200);      	/* 어두운 텍스트 -> 밝은 텍스트 */
-		--color-text-secondary: var(--gray-400);    	/* 조금 더 밝게 조정 */
-		--color-icon-default: var(--gray-300);      	/* 아이콘 색상도 밝게 */
-		--color-disabled-text: var(--gray-600);     	/* 비활성화 텍스트는 어두운 배경에서 좀 더 잘 보이도록 */
+    --color-background-default: var(--gray-90);
+		--color-background-table: var(--gray-80);
+		--color-text-primary: var(--gray-20);
+		--color-text-secondary: var(--gray-40);
+		--color-icon-default: var(--gray-30);
+		--color-disabled-text: var(--gray-60);
 
-		--color-border-light: var(--gray-700); 
-		--color-border-dark: var(--gray-600); 
+		--color-border-light: var(--gray-70); 
+		--color-border-dark: var(--gray-60); 
+
+		--btn-bgcolor-dark: var(--gray-80);
+		--btn-bgcolor-gray: var(--gray-30);
+		--btn-bgcolor-light: var(--gray-0);
 		
+		--btn-color-text: var(--gray-0);
+		--btn-color-line: var(--gray-60);
+		--btn-color-bg: var(--gray-100);
 
-		--color-card-background: var(--gray-800);
+		--nav-bgcolor1: var(--gray-80);
+		--nav-bgcolor2: var(--gray-0);
+		--nav-shadow: rgba(255, 255, 255, 0.05);
+
+		--color-card-background: var(--gray-80);
 		--color-modal-background: var(--gray-850); 
 		
+		--box-background: var(--gray-90);
 		--bgcolor: #17171c;
-		--primary: #225bbc;
-		--sub: #1ee09f;
 
-		--box-background: var(--black);
+		--aside-inner--text: var(--gray-20);
+		--aside-inner--bg: var(--gray-90);
 
-		--nav-bgcolor1: var(--gray-800);
-		--nav-bgcolor2: var(--white);
-		--nav-shadow: rgba(255, 255, 255, 0.05);
+		--tab-color-line: var(--gray-60);
+		--tab-color-line-selected: var(--gray-10);
 		
+		--list-history--line: var(--gray-80);
+		--list-history--text: var(--gray-20);
+		--list-history--circle: var(--gray-60);
+	
 		.logo-netive,
 		.img-main .logo,
 		.base-header--title .logo {

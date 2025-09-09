@@ -58,7 +58,7 @@ box {
 	}
 
 	&[data-color="gray"] {
-		background-color: var(--gray-300);
+		background-color: var(--gray-30);
 	}
 }
 
@@ -89,7 +89,7 @@ codebox {
 		font-family: "Source Code Pro", monospace;
 		tab-size: 2;
 
-		i {color: var(--gray-600)}
+		i {color: var(--gray-60)}
 		b {color: var(--sub);}
 	}
 }

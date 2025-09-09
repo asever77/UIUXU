@@ -1,116 +1,149 @@
-<wrap data-dir="col">
-  <group data-dir="col">
-    <h1 data-heading="display" data-text="Button">Button</h1>
-    <p>기본으로 사용하는 버튼(button, a, role="button")의 스타일로 data속성 조합으로 사용합니다.</p>
+<aside class="aside-inner">
+	<div class="aside-inner--wrap" data-index="0">
+		<h3 class="h-3">Index</h3>
+		<nav>
+			<ul>
+				<li>
+					<a href="#anchor-ex" class="selected">Example</a>
+				</li>
+				<li>
+					<a href="#anchor-code">Code</a>
+				</li>
+				<li>
+					<a href="#anchor-opt">Options</a>
+				</li>
+				<li>
+					<a href="#anchor-a11y" class="selected">Accessibility</a>
+				</li>
+				<li>
+					<a href="#anchor-history" class="selected">History</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</aside>
 
-    <stit>기본 버튼</stit>
-    <p>class="btn-base"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base">
-        <span>button tag</span>
-      </button>
-      <a href="#" class="btn-base">
-        <span>a tag</span>
-      </a>
-      <div role="button" tabindex="0" class="btn-base">
-        <span>role tag</span>
-      </div>
-    </box>
-  </group>
+<article class="base-content" data-grid="sub-content">
+  <section class="base-wrap" data-dir="col" data-grid="display-title">
+		<h1 class="h-1">Button</h1>
+		<p>기본으로 사용하는 버튼(button, a, role="button")의 스타일로 data속성 조합으로 사용합니다.</p>
+	</section>
 
-  <group data-dir="col">
-    <stit>Size </stit>
-    <p>data-size="[ small | normal(기본값) | large ]"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap; align-items: flex-start;">
-      <button type="button" class="btn-base" data-size="small">
-        <span>small size</span>
-      </button>
-      <a href="#" class="btn-base" data-size="normal">
-        <span>normal size</span>
-      </a>
-      <div role="button" tabindex="0" class="btn-base" data-size="large">
-        <span>large size</span>
+  <section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-ex">Example</h2>
+
+    <div data-grid="wrap-group">
+      <div class="base-group">
+        <h3 class="h-3">기본 버튼</h3>
+        <p>class="btn-base"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base">
+            <span>button tag</span>
+          </button>
+          <a href="#" class="btn-base">
+            <span>a tag</span>
+          </a>
+          <div role="button" tabindex="0" class="btn-base">
+            <span>role tag</span>
+          </div>
+        </div>
       </div>
-    </box>
-  </group>
-  
-  <group data-dir="col">
-    <stit>Type</stit>
-    <p>data-type="[ text | box(기본값) | ... ]"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base" data-type="text">
-        <span>text type</span>
-      </button>
-      <a href="#" class="btn-base" data-type="box">
-        <span>box type</span>
-      </a>
-    </box>
-  </group>
-  
-  <group data-dir="col">
-    <stit>Shadow</stit>
-    <p>data-shadow="[ none | base | deep | ... ]"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base" data-shadow="base">
-        <span>text type</span>
-      </button>
-      <a href="#" class="btn-base" data-type="box" data-shadow="deep">
-        <span>box type</span>
-      </a>
-    </box>
-  </group>
-  
-  <group data-dir="col">
-    <stit>color</stit>
-    <p>data-color="[ primary | sub | ... ]", data-bgcolor="[ dark | gray | light | primary | sub | ... ]"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base" data-color="primary">
-        <span>primary color</span>
-      </button>
-      <a href="#" class="btn-base" data-color="sub">
-        <span>sub color</span>
-      </a>
-      <div role="button" tabindex="0" class="btn-base" data-bgcolor="dark">
-        <span>dark bgcolor</span>
+
+      <div class="base-group">
+        <h3 class="h-3">Size</h3>
+        <p>data-size="[ small | normal(기본값) | large ]"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-size="small">
+            <span>small size</span>
+          </button>
+          <a href="#" class="btn-base" data-size="normal">
+            <span>normal size</span>
+          </a>
+          <div role="button" tabindex="0" class="btn-base" data-size="large">
+            <span>large size</span>
+          </div>
+        </div>
       </div>
-      <button type="button" class="btn-base" data-bgcolor="gray">
-        <span>gray bgcolor</span>
-      </button>
-      <button type="button" class="btn-base" data-bgcolor="primary">
-        <span>primary bgcolor</span>
-      </button>
-      <a href="#" class="btn-base" data-bgcolor="sub">
-        <span>sub bgcolor</span>
-      </a>
-    </box>
-  </group>
-  
-  <group data-dir="col">
-    <stit>Icon</stit>
-    <p>data-icon-before="arrow", data-icon-after="arrow"</p>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base" data-icon-before="refresh" data-bgcolor="dark">
-        <span>text type</span>
-      </button>
-      <a href="#" class="btn-base" data-type="box" data-icon-after="refresh">
-        <span>box type</span>
-      </a>
-    </box>
-  </group>
-  
-  <group data-dir="col">
-    <stit>Icon (material)</stit>
-    <div>
-      <a href="https://fonts.google.com/icons" target="_blank">Material Symbols</a>
-      <p>data-mso-before="arrow", data-mso-after="arrow"</p>
+
+      <div class="base-group">
+        <h3 class="h-3">Type</h3>
+        <p>data-type="[ text | box(기본값) | ... ]"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-type="text">
+            <span>text type</span>
+          </button>
+          <a href="#" class="btn-base" data-type="box">
+            <span>box type</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="base-group">
+        <h3 class="h-3">Shadow</h3>
+        <p>data-shadow="[ none | base | deep | ... ]"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-shadow="base">
+            <span>text type</span>
+          </button>
+          <a href="#" class="btn-base" data-type="box" data-shadow="deep">
+            <span>box type</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="base-group">
+        <h3 class="h-3">color</h3>
+        <p>data-color="[ primary | sub | ... ]", data-bgcolor="[ dark | gray | light | primary | sub | ... ]"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-color="primary">
+            <span>primary color</span>
+          </button>
+          <a href="#" class="btn-base" data-color="sub">
+            <span>sub color</span>
+          </a>
+          <div role="button" tabindex="0" class="btn-base" data-bgcolor="dark">
+            <span>dark bgcolor</span>
+          </div>
+          <button type="button" class="btn-base" data-bgcolor="gray">
+            <span>gray bgcolor</span>
+          </button>
+          <button type="button" class="btn-base" data-bgcolor="primary">
+            <span>primary bgcolor</span>
+          </button>
+          <a href="#" class="btn-base" data-bgcolor="sub">
+            <span>sub bgcolor</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="base-group">
+        <h3 class="h-3">Icon</h3>
+        <p>data-icon-before="arrow", data-icon-after="arrow"</p>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-icon-before="refresh" data-bgcolor="dark">
+            <span>text type</span>
+          </button>
+          <a href="#" class="btn-base" data-type="box" data-icon-after="refresh">
+            <span>box type</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="base-group">
+        <h3 class="h-3">Icon (material)</h3>
+        <div>
+          <a href="https://fonts.google.com/icons" target="_blank">Material Symbols</a>
+          <p>data-mso-before="arrow", data-mso-after="arrow"</p>
+        </div>
+        <div class="base-box">
+          <button type="button" class="btn-base" data-mso-before="check">
+            <span>text type</span>
+          </button>
+          <a href="#" class="btn-base" data-type="box" data-mso-after="arrow_forward_ios" data-bgcolor="dark">
+            <span>box type</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <box style="gap: 0.8rem; display: flex; flex-wrap:wrap;">
-      <button type="button" class="btn-base" data-mso-before="check">
-        <span>text type</span>
-      </button>
-      <a href="#" class="btn-base" data-type="box" data-mso-after="arrow_forward_ios" data-bgcolor="dark">
-        <span>box type</span>
-      </a>
-    </box>
-  </group>
-</wrap>
+	</section>
+</article>

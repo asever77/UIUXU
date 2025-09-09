@@ -7,17 +7,18 @@
   cursor: pointer;
   text-decoration: none;
   padding: .4rem 1.2rem .5rem;
-  border: 1px solid var(--color-border-light);
-  background-color: var(--white);
+  border: 1px solid var(--btn-color-line);
+  background-color: var(--btn-color-bg);
   border-radius: var(--x2);
   font-size: 1.4rem;
   line-height: 1.2;
   min-height: var(--x10);
+  color: var(--btn-color-text);
 
   &:hover {
     text-decoration: underline;
     text-underline-offset: 0.3rem;
-    border: 1px solid var(--color-border-dark);
+    border: 1px solid var(--btn-color-line-hover);
   }
 
   &:disabled {
@@ -29,17 +30,17 @@
   &[data-size="small"] {
     font-size: 1.2rem;
     padding: .2rem .8rem .3rem;
-    min-height: var(--x12);
+    min-height: var(--x8);
   }
   &[data-size="normal"] {
     font-size: 1.4rem;
     padding: .4rem 1.2rem .5rem;
-    min-height: var(--x20);
+    min-height: var(--x12);
   }
   &[data-size="large"] {
     font-size: 1.8rem;
     padding: .8rem 1.6rem .9rem;
-    min-height: var(--x24);
+    min-height: var(--x16);
   }
 
   // type
@@ -47,8 +48,8 @@
     border: 0;
   }
   &[data-type="box"] {
-    border: 1px solid var(--color-border-light);
-    border-radius: var(--x4);
+    border: 1px solid var(--btn-color-line);
+    border-radius: var(--x2);
   }
 
   // text color
@@ -63,12 +64,12 @@
   &[data-bgcolor="primary"] {
     border-color: var(--primary);
     background-color: var(--primary);
-    color: var(--white);
+    color: var(--gray-0);
   }
   &[data-bgcolor="sub"] {
     border-color: var(--sub);
     background-color: var(--sub);
-    color: var(--white);
+    color: var(--gray-0);
   }
   &[data-bgcolor="gray"] {
     border-color: var(--btn-bgcolor-gray);
@@ -77,7 +78,7 @@
   &[data-bgcolor="dark"] {
     border-color: var(--btn-bgcolor-dark);
     background-color: var(--btn-bgcolor-dark);
-    color: var(--white);
+    color: var(--gray-0);
 
     &[data-icon-before]::before,
     &[data-icon-after]::after{
@@ -85,7 +86,7 @@
     }
     &[data-mso-before]::before,
     &[data-mso-after]::after{
-      color: var(--white);
+      color: var(--gray-0);
     }
   }
 

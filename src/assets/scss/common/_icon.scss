@@ -1,3 +1,6 @@
+@use '../abstracts/mixin';
+@use '../abstracts/svg';
+
 $size-normal: 1.6rem;
 
 [data-mso-after],
@@ -18,13 +21,6 @@ $size-normal: 1.6rem;
   background-position: 50% 50%;
   background-size: $size-normal;
   transform: translateY(0.1rem);
-}
-
-[data-icon-after="refresh"]::after {
-  background-image: var(--icon-svg-refresh);
-}
-[data-icon-before="refresh"]::before {
-  background-image: var(--icon-svg-refresh);
 }
 
 // Material Symbols Rounded Icon

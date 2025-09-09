@@ -274,7 +274,7 @@ body {
     display: block;
     width: 100%;
     padding:.6rem 0;
-    border-bottom:.4rem solid var(--gray-800);
+    border-bottom:.4rem solid var(--gray-80);
     margin-bottom: 1.6rem;
   }
   ul {
@@ -290,14 +290,17 @@ body {
     }
   }
 
-  [data-index="0"] li:nth-child(1) a {background-color: var(--gray-200);}
-  [data-index="1"] li:nth-child(2) a {background-color: var(--gray-200);}
-  [data-index="2"] li:nth-child(3) a {background-color: var(--gray-200);}
-  [data-index="3"] li:nth-child(4) a {background-color: var(--gray-200);}
-  [data-index="4"] li:nth-child(5) a {background-color: var(--gray-200);}
-  [data-index="5"] li:nth-child(6) a {background-color: var(--gray-200);}
-  [data-index="6"] li:nth-child(7) a {background-color: var(--gray-200);}
-  [data-index="7"] li:nth-child(8) a {background-color: var(--gray-200);}
+  [data-index="0"] li:nth-child(1) a,
+  [data-index="1"] li:nth-child(2) a,
+  [data-index="2"] li:nth-child(3) a,
+  [data-index="3"] li:nth-child(4) a,
+  [data-index="4"] li:nth-child(5) a,
+  [data-index="5"] li:nth-child(6) a,
+  [data-index="6"] li:nth-child(7) a,
+  [data-index="7"] li:nth-child(8) a {
+    background-color: var(--aside-inner--bg);
+    color: var(--aside-inner--text);
+  }
 
   &--wrap {
     position: sticky;
@@ -312,7 +315,7 @@ body {
 	padding: var(--x4);
 	border-radius: var(--x2);
 	background-color: var(--box-background);
-  border: .1rem solid var(--gray-400);
+  border: .1rem solid var(--gray-40);
 
 	&[data-color="pink"] {
 		background-color: #fff9fa;
@@ -330,7 +333,7 @@ body {
 	}
 
 	&[data-color="gray"] {
-		background-color: var(--gray-300);
+		background-color: var(--gray-30);
 	}
 }
 

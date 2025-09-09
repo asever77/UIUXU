@@ -1,11 +1,17 @@
+[data-tab] {
+  height: 5rem;
+}
+[role="tablist"] {
+  position: absolute;
+}
 [role="tablist"] [role="tab"] {
-  justify-content: center;
+  min-width: 16rem; 
   text-align: center; 
-  border-bottom:1px solid #ccc;
-
+  border-bottom:1px solid var(--tab-color-line);
+  height: 5rem;
 }
 [role="tablist"] [role="tab"][aria-selected="true"] {
-  border-color:#000;
+  border-color:var(--tab-color-line-selected);
   border-width:.4rem;
 }
 [data-tab-wrap="codeGuide"] {
@@ -25,12 +31,12 @@
     left: 0.7rem;
     width: .3rem;
     height: calc(100% - 0.5em);
-    background-color: var(--gray-200);
+    background-color: var(--list-history--line);
   }
   &--item {
     margin-bottom: .4rem;
     font-size: 1.4rem;
-    color: var(--gray-800);
+    color: var(--list-history--text);
     line-height: 1.6;
     position: relative;
     padding-left: 2rem;
@@ -42,7 +48,7 @@
       flex-shrink: 0;
     }
     &:first-child::before {
-      background-color: var(--sub);;
+      background-color: var(--sub);
     }
     &::before {
       content:"";
@@ -53,7 +59,7 @@
       width: .9rem;
       height: .9rem;
       border-radius: 50%;
-      background-color: var(--gray-600);
+      background-color: var(--list-history--circle);
     }
   }
 }

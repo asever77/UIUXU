@@ -1,7 +1,7 @@
 .inp{
   &--base {
     display: block;
-    border:1px solid var(--gray-900);
+    border:1px solid var(--gray-90);
     border-radius: var(--x1);
     padding:0.8rem;
     margin: 0;
@@ -40,7 +40,7 @@ select.inp--base {
       flex: 0;
       min-width: 2rem;
       min-height: 2rem;
-      border: 2px solid var(--gray-900);
+      border: 2px solid var(--gray-90);
       transition: box-shadow 0.5s, border 0.3s;
       border-radius: 50%;
     }
@@ -56,17 +56,17 @@ select.inp--base {
       flex: 0;
       min-width: 2rem;
       min-height: 2rem;
-      border: 2px solid var(--gray-900);
+      border: 2px solid var(--gray-90);
       transition: box-shadow 0.5s, border 0.3s;
     }
   }
 }
 :checked {
   & + .label--radio::before {
-    border: 0.6rem solid var(--gray-900);
+    border: 0.6rem solid var(--gray-90);
   }
   & + .label--check::before {
-    border: 0.6rem solid var(--gray-900);
+    border: 0.6rem solid var(--gray-90);
   }
 }
 
