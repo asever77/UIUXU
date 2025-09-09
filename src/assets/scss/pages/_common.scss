@@ -269,7 +269,7 @@ body {
   position: sticky;
   top:7rem;
   padding-right:var(--x4);
-  
+
   h3 {
     display: block;
     width: 100%;
@@ -312,6 +312,7 @@ body {
 	padding: var(--x4);
 	border-radius: var(--x2);
 	background-color: var(--box-background);
+  border: .1rem solid var(--gray-400);
 
 	&[data-color="pink"] {
 		background-color: #fff9fa;

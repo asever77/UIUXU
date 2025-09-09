@@ -57,8 +57,5 @@
     // column-count: 2;
     // grid-template-rows: masonry;
     column-gap: var(--x20);
-    & > *:first-child {
-      // grid-column: span 2;
-    }
   }
 }
