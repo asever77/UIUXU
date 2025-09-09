@@ -131,29 +131,26 @@ class UXCore {
 
             setTimeout(() => {
               const wraps = document.querySelectorAll('.base-content > .base-wrap:not([data-grid="display-title"])');
-              const wrapTopArray = [];
-              wraps.forEach(item => {
-                wrapTopArray.push(item.getBoundingClientRect().top + document.documentElement.scrollTop - 124);
-
-                console.log(item, item.getBoundingClientRect().top);
-                
-              });
+              let wrapTopArray = [];
+              const checkArray = () => {
+                wrapTopArray = [];
+                wraps.forEach(item => {
+                  wrapTopArray.push(item.getBoundingClientRect().top + document.documentElement.scrollTop - 94);
+                });
+              }
+              checkArray();
               const getCurrentSection = (scrollY) => {
                 const index = wrapTopArray.findIndex((pos, i) => {
                   const next = wrapTopArray[i + 1] ?? Infinity; 
-
-                  console.log(scrollY, pos, next);
-
                   return scrollY >= pos && scrollY < next;
                 });
                 return index; 
               };
-
               
               window.addEventListener('scroll', () => {
                 const y = window.scrollY;
                 const idx = getCurrentSection(y);
-
+                checkArray();
                 if (idx !== -1) {
                   document.querySelector('.aside-inner--wrap').dataset.index = idx;
                 }

@@ -10,11 +10,21 @@
 	<link rel="stylesheet" href="../assets/css/app.css">
 
 	<style>
-		[role=tablist] [role=tab] {
-			min-width: 20rem; text-align: center; border-bottom:1px solid #ccc;
+		[data-tab] {
+			height: 5rem;
 		}
-		[role=tablist] [role=tab][aria-selected=true] {
+		[role="tablist"] {
+			position: absolute;
+		}
+		[role="tablist"] [role="tab"] {
+			min-width: 20rem; 
+			text-align: center; 
+			border-bottom:1px solid #ccc;
+			height: 5rem;
+		}
+		[role="tablist"] [role="tab"][aria-selected="true"] {
 			border-color:#000;
+			border-width: .4rem;
 		}
 		[data-tab-type="scroll"] [role="tabpanel"] {
 			scroll-margin-top: 12rem;
@@ -52,6 +62,14 @@
 			}
 		}
 		
+		@media (min-width: 1400px) {
+			.base-content[data-grid="sub-content"]  > *:nth-child(1) {
+				grid-column: span 2;
+			}
+			.base-content[data-grid="sub-content"]  > *:nth-child(2) {
+				grid-row: span 4;
+			}
+		}
 	</style>
 </head>
 
@@ -73,7 +91,9 @@
 						{ callback: () => { console.log('탭3 open'); },},
 					],
 				});
+				UI.exe.codeGuide.init();
 
+				// tab
 				UI.exe.tab1 = new UX.Tab({
 					id: 'tab1',
 					selected: 1, //1부터 시작
@@ -91,7 +111,6 @@
 						{ src: './tab/tab7.html', tab: '<span>tab7</span>', callback: () => { console.log('tab 4 open'); },},
 					],
 				});
-
 				UI.exe.tab2 = new UX.Tab({
 					id: 'tab2',
 					selected: 1,
@@ -103,7 +122,6 @@
 						{ tab: '<span>tab2-2</span>', callback: () => { console.log('tab 2-2 open'); },},
 					],
 				});
-
 				UI.exe.tab3 = new UX.Tab({
 					id: 'tab3',
 					renderMode: 'static',
@@ -114,7 +132,6 @@
 						{ callback: () => { console.log('탭3 open'); },},
 					],
 				});
-
 				UI.exe.tab4 = new UX.Tab({
 					id: 'tab4',
 					scroll: true,
@@ -136,12 +153,9 @@
 					],
 				});
 				
-
 				UI.exe.tab1.init();
 				UI.exe.tab3.init();
 				UI.exe.tab4.init();
-
-				UI.exe.codeGuide.init();
 			}
 		});
 	</script>

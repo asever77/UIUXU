@@ -24,6 +24,9 @@
       align-items: center;
       padding-bottom: .5rem;
       border-bottom:1px solid var(--gray-300);
+      position: sticky;
+      top: 0;
+      z-index: 2;
 
       [data-grid="ia-search"] {
         display: grid;

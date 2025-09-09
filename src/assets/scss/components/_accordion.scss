@@ -19,11 +19,6 @@
 [data-accordion-head] {
   position: relative;
   display: flex;
-
-  a {
-    position: relative;
-    z-index: 2;
-  }
 }
 [data-accordion-title] ~ [data-accordion-button] {
   position: absolute;

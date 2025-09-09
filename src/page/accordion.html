@@ -77,7 +77,6 @@
 			layout: './layout/base.html',
 			page: './content/accordion.html',
 			callback: () => {
-				/* 선언 ---------------------------------------------- */
 				UI.exe.codeGuide = new UX.Tab({
 					id: 'codeGuide',
 					renderMode: 'static',
@@ -88,6 +87,9 @@
 						{ callback: () => { console.log('탭3 open'); },},
 					],
 				});
+				UI.exe.codeGuide.init();
+
+				// accordion
 				UI.exe.acco1 = new UX.Accordion({
 					id: 'acco1',
 					expanded: null,
@@ -95,11 +97,7 @@
 					// scrollOptions: { behavior: 'smooth', block: 'start' },
 				});
 
-				/* 실행 ---------------------------------------------- */
 				UI.exe.acco1.init();
-				UI.exe.codeGuide.init();
-
-				
 			}
 		});
 	</script>

@@ -264,11 +264,12 @@ body {
 
 /* aside-inner */
 .aside-inner {
-  width: 12rem;
+  width: 13.5rem;
   flex-shrink: 0;
   position: sticky;
   top:7rem;
-
+  padding-right:var(--x4);
+  
   h3 {
     display: block;
     width: 100%;

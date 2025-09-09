@@ -19,7 +19,19 @@
 			layout: './layout/base.html',
 			page:'./content/dropdown.html',
 			callback: () => {
+				UI.exe.codeGuide = new UX.Tab({
+					id: 'codeGuide',
+					renderMode: 'static',
+					selected: 1,
+					data: [
+						{ callback: () => { console.log('탭1 open'); },},
+						{ callback: () => { console.log('탭2 open'); },},
+						{ callback: () => { console.log('탭3 open'); },},
+					],
+				});
+				UI.exe.codeGuide.init();
 
+				// dropdown
 				let ps = 'bl';
 				document.querySelector('#psSelect').addEventListener('change', (e) => {
 					const ps = e.target.value;

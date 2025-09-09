@@ -123,22 +123,30 @@
 					<h3 class="h-3 a11y-hidden">javascript</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-import { UX } from '../assets/js/uiuxu.common.js';
+&lt;script <b>type="module"</b>&gt;
+	<b>import Accordion from './component/accordion.js';</b>
 
-UI.exe.acco1 = new UX.<b>Accordion</b>({
-	id: 'acco1',
-	expanded: null,
-	scrollIntoView: true,
-	scrollOptions: { behavior: 'smooth', block: 'start' },
-});
+	const acco1 = new <b>Accordion</b>({
+		<b>id</b>: 'acco1',
+		<b>expanded</b>: null,
+		<b>scrollIntoView</b>: true,
+		<b>scrollOptions</b>: { 
+			<b>behavior</b>: 'smooth', 
+			<b>block</b>: 'start' 
+		},
+	});
 
-UI.exe.acco1.<b>init</b>();
-UI.exe.acco1.<b>show</b>('acco1-1');
-UI.exe.acco1.<b>hide</b>('acco1-1', () => {
-  console.log('callback hide');
-});
-UI.exe.acco1.<b>update</b>();
-UI.exe.acco1.<b>destroy</b>();
+	<i>//실행</i>
+	acco1.<b>init</b>(); 
+	<i>//선택 열림</i>
+	acco1.<b>show</b>('acco1-1');
+	<i>//선택 닫힘</i>
+	acco1.<b>hide</b>('acco1-1', () =&gt; {...}); 
+	<i>//아코디언 동적 추가 후 업데이트</i>
+	acco1.<b>update</b>();
+	<i>//아코디언 구성 삭제</i>
+	acco1.<b>destroy</b>();
+&lt;/script&gt;
 						</code></pre>
 					</div>
 				</section>
@@ -167,11 +175,6 @@ UI.exe.acco1.<b>destroy</b>();
 [data-accordion-head] {
   position: relative;
   display: flex;
-
-  a {
-    position: relative;
-    z-index: 2;
-  }
 }
 
 [data-accordion-button] {

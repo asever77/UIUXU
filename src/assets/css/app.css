@@ -684,7 +684,6 @@ grid.main-content box {
   padding-top: 0.8rem;
 }
 
-/* 기본 영역 z-index */
 [data-mso-after],
 [data-mso-before],
 [data-icon-after],
@@ -1428,6 +1427,9 @@ tr *:first-child {
   align-items: center;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--gray-300);
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 .IA--list-header [data-grid=ia-search] {
   display: grid;
@@ -1752,10 +1754,6 @@ td [data-state=제외]::before {
 [data-accordion-head] {
   position: relative;
   display: flex;
-}
-[data-accordion-head] a {
-  position: relative;
-  z-index: 2;
 }
 
 [data-accordion-title] ~ [data-accordion-button] {
@@ -3805,10 +3803,11 @@ body {
 
 /* aside-inner */
 .aside-inner {
-  width: 12rem;
+  width: 13.5rem;
   flex-shrink: 0;
   position: sticky;
   top: 7rem;
+  padding-right: var(--x4);
 }
 .aside-inner h3 {
   display: block;
@@ -4117,7 +4116,7 @@ body {
   }
 }
 .area-base[data-layout=base] {
-  padding: 0 var(--x2) var(--x2) 0;
+  padding: 0 0 var(--x2) 0;
 }
 .area-base[data-layout=base] table {
   table-layout: auto;
@@ -4181,6 +4180,7 @@ body {
 
 [role=tablist] [role=tab][aria-selected=true] {
   border-color: #000;
+  border-width: 0.4rem;
 }
 
 [data-tab-wrap=codeGuide] {

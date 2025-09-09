@@ -31,63 +31,71 @@
 
 	<section class="base-wrap" data-dir="col">
 		<h2 class="h-2" id="anchor-ex">Example</h2>
-		<h3 class="h-3">동적구성 탭 + 이중 탭</h3>
-		<div class="base-box" style="width: 40rem;">
-			<div data-tab="tab1" data-tab-style="small-box-type"></div>
-			<div data-tab-wrap="tab1"></div>
-		</div>
-
-		<h3 class="h-3">정적구성 탭</h3>
-		<div class="base-box" style="width: 40rem;">
-			<div data-tab="tab3" data-tab-style="small-box-type">
-				<div role="tablist">
-					<button type="button" role="tab">
-						<span>탭1</span>
-					</button>
-					<button type="button" role="tab">
-						<span>탭2</span>
-					</button>
-					<button type="button" role="tab">
-						<span>탭3</span>
-					</button>
+		<div data-grid="wrap-group">
+			<div class="base-group">
+				<h3 class="h-3">동적구성 탭 + 전체 탭</h3>
+				<div class="base-box">
+					<div data-tab="tab1" data-tab-style="small-box-type"></div>
+					<div data-tab-wrap="tab1"></div>
 				</div>
 			</div>
-			<div data-tab-wrap="tab3">
-				<div role="tabpanel">
-					<section>
-						<h2>탭1</h2>
-						<div>
-							tab33 내용이 들어갑니다.<br>
-							tab33 내용이 들어갑니다.<br>
-							tab33 내용이 들어갑니다.<br>
+
+			<div class="base-group">
+				<h3 class="h-3">정적구성 탭</h3>
+				<div class="base-box">
+					<div data-tab="tab3" data-tab-style="small-box-type">
+						<div role="tablist">
+							<button type="button" role="tab">
+								<span>탭1</span>
+							</button>
+							<button type="button" role="tab">
+								<span>탭2</span>
+							</button>
+							<button type="button" role="tab">
+								<span>탭3</span>
+							</button>
 						</div>
-					</section>
-				</div>
-				<div role="tabpanel">
-					<section>
-						<h2>탭2</h2>
-						<div>
-							tab4 내용이 들어갑니다.<br>
-							tab4 내용이 들어갑니다.<br>
+					</div>
+					<div data-tab-wrap="tab3">
+						<div role="tabpanel">
+							<section>
+								<h2>탭1</h2>
+								<div>
+									tab33 내용이 들어갑니다.<br>
+									tab33 내용이 들어갑니다.<br>
+									tab33 내용이 들어갑니다.<br>
+								</div>
+							</section>
 						</div>
-					</section>
-				</div>
-				<div role="tabpanel">
-					<section>
-						<h2>탭3</h2>
-						<div>
-							tab4 내용이 들어갑니다.<br>
-							tab4 내용이 들어갑니다.<br>
+						<div role="tabpanel">
+							<section>
+								<h2>탭2</h2>
+								<div>
+									tab4 내용이 들어갑니다.<br>
+									tab4 내용이 들어갑니다.<br>
+								</div>
+							</section>
 						</div>
-					</section>
+						<div role="tabpanel">
+							<section>
+								<h2>탭3</h2>
+								<div>
+									tab4 내용이 들어갑니다.<br>
+									tab4 내용이 들어갑니다.<br>
+								</div>
+							</section>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<h3 class="h-3">스크롤 탭</h3>
-		<div class="base-box" style="width: 40rem;">
-			<div data-tab="tab4" data-tab-style="small-box-type" style="top:6.2rem"></div>
-			<div data-tab-wrap="tab4"></div>
+			<div class="base-group">
+				<h3 class="h-3">스크롤 탭</h3>
+				<div class="base-box">
+					<div data-tab="tab4" data-tab-style="small-box-type" style="top:6.2rem"></div>
+					<div data-tab-wrap="tab4"></div>
+				</div>
+			</div>
 		</div>
 	</section>
 
@@ -112,18 +120,20 @@
 					<h3 class="h-3 a11y-hidden">HTML</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-&lt;div data-tab="tab2"&gt;&lt;/div&gt;
-&lt;div data-tab-wrap="tab2"&gt;&lt;/div&gt;
+<i>//동적 탭</i>
+&lt;div <b>data-tab="tab1"</b>&gt;&lt;/div&gt;
+&lt;div <b>data-tab-wrap="tab1"</b>&gt;&lt;/div&gt;
 
-&lt;div data-tab="tab3"&gt;
-	&lt;div role="tablist"&gt;
-		&lt;button type="button" role="tab"&gt;
+<i>//정적 탭</i>
+&lt;div <b>data-tab="tab2"</b>&gt;
+	&lt;div <b>role="tablist"</b>&gt;
+		&lt;button type="button" <b>role="tab"</b>&gt;
 			&lt;span&gt;탭1&lt;/span&gt;
 		&lt;/button&gt;
 	&lt;/div&gt;
 &lt;/div&gt;
-&lt;div data-tab-wrap="tab3"&gt;
-	&lt;div role="tabpanel"&gt;
+&lt;div <b>data-tab-wrap="tab2"</b>&gt;
+	&lt;div <b>role="tabpanel"</b>&gt;
 		&lt;section&gt;
 		...
 		&lt;/section&gt;
@@ -138,58 +148,47 @@
 					<h3 class="h-3 a11y-hidden">javascript</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-&lt;script type="module"&gt;
-import Dropdown from './dropdown.js';
+&lt;script <b>type="module"</b>&gt;
+	<b>import Tab from './component/tab.js';</b>
+	
+	const myTab = new <b>Tab</b>({
+		<i>//공통</i>
+		<b>id</b>: 'tab1',
+		<b>selected</b>: 1, <i>//1부터 시작</i>
 
-// 동적: 개별
-const myTab = new UX.Tab({
-id: 'tab1',
-selected: 1, //1부터 시작
-data: [
-{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
-],
-});
-myTab.init();
-myTab.expanded('tab1-id-1');
+		<i>//동적: 개별</i>
+		<b>data</b>: [
+			{ 
+				<b>src</b>: './tab/tab1.html', 
+				<b>tab</b>: '&lt;span&gt;tab1&lt;/span&gt;', 
+				<b>callback</b>: () =&gt; {...},
+			},
+		],
 
-// 동적: 개별
-const myTab = new UX.Tab({
-id: 'tab1',
-selected: 1, //1부터 시작
-data: [
-{ src: './tab/tab1.html', tab: '&lt;span&gt;tab1&lt;/span&gt;', callback: () =&gt; { console.log('tab 1 open'); },},
-],
-});
-myTab.init();
-myTab.expanded('tab1-id-1');
+		<i>//동적: 전체</i>
+		<b>loadAll</b>: {
+			<b>src</b>: './tab/tab_group.html',
+		},
+		<b>data</b>: [
+			{ 
+				<b>tab</b>: '&lt;span&gt;tab2-1&lt;/span&gt;', 
+				<b>callback</b>: () =&gt; {...},
+			},
+		],
+		
+		<i>//정적</i>
+		<b>renderMode</b>: 'static',
+		<b>data</b>: [
+			{ 
+				<b>callback</b>: () =&gt; {...},
+			},
+		],
+	});
 
-// 동적: 전체
-const myTab2 = new UX.Tab({
-id: 'tab2',
-selected: 1,
-loadAll: {
-src: './tab/tab_group.html',
-},
-data: [
-{ tab: '&lt;span&gt;tab2-1&lt;/span&gt;', callback: () =&gt; { console.log('tab 2-1 open'); },},
-],
-});
-myTab2.init();
-myTab2.expanded('tab2-id-1');
-
-// 정적
-const myTab3 = new UX.Tab({
-id: 'tab3',
-renderMode: 'static',
-selected: 2,
-data: [
-{ callback: () =&gt; { console.log('탭1 open'); },},
-{ callback: () =&gt; { console.log('탭2 open'); },},
-{ callback: () =&gt; { console.log('탭3 open'); },},
-],
-});
-myTab3.init();
-myTab3.expanded('tab3-id-1');
+	<i>//실행</i>
+	myTab.<b>init();</b>
+	<i>//탭 열기</i>
+	myTab.<b>expanded('tab1-id-1');</b>
 &lt;/script&gt;
 						</code></pre>
 					</div>
@@ -200,52 +199,58 @@ myTab3.expanded('tab3-id-1');
 					<h3 class="h-3 a11y-hidden">CSS</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-[data-accordion] {
-  width: 100%;
+[data-tab] {
   position: relative;
   display: flex;
-  flex-direction: column;
-}
-
-[data-accordion-item] {
-  display: flex;
-  flex-direction: column;
-}
-
-[data-accordion-group] {
-  display: flex;
-}
-
-[data-accordion-head] {
+  overflow-x: auto;
   position: relative;
-  display: flex;
-
-  a {
-    position: relative;
-    z-index: 2;
-  }
-}
-
-[data-accordion-button] {
-  position: absolute;
-  top:0;
-  left:0;
+  scroll-behavior: smooth; 
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
   width: 100%;
-  height: 100%;
   z-index: 1;
 }
-[data-accordion-button]:disabled {
-  opacity: 1;
-}
-
-[data-accordion-title] {
+[role="tablist"] {
   position: relative;
-  z-index: 0;
-}
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
 
-[data-accordion-body] {
+  [role="tab"] {
+    position: relative;
+    display: flex;
+    padding: 1.2rem;
+    cursor: pointer;
+    min-width:10rem;
+
+    &[aria-selected="true"] {
+      font-weight: 700;
+    }
+  }
+}
+[data-tab-wrap] {
   position: relative;
-  overflow: hidden;
+}
+[role="tabpanel"],
+[role="tabpanel"][aria-expanded="false"] {
+  display: none;
+}
+[role="tabpanel"][aria-expanded="true"] {
+  position: relative;
+  display: block;
+}
+[data-tab-type="scroll"] {
+  &[data-tab] {
+    position: sticky;
+  }
+  &[data-tab-wrap] {
+    display:flex;
+    flex-direction: column;
+    gap:var(--x4);
+  }
+  [role="tabpanel"] {
+    scroll-margin-top: 0;
+  }
 }
 						</code></pre>
 					</div>
@@ -341,28 +346,63 @@ myTab3.expanded('tab3-id-1');
 	
 	<section class="base-wrap" data-dir="col">
 		<h2 class="h-2" id="anchor-a11y">Accessibility</h2>
-		<p>Tab 컴포넌트는 접근성을 고려하여 설계되었습니다. 다음은 주요 접근성 기능입니다:</p>
-		<ul>
-			<li>키보드 내비게이션: Tab 키를 사용하여 탭 사이를 이동하고, Enter 또는 Space 키로 탭을 활성화할 수 있습니다.</li>
-			<li>ARIA 속성: 적절한 ARIA 속성 (role, aria-selected, aria-controls 등)을 사용하여 스크린 리더가 탭 구조와 상태를 올바르게 해석할 수 있도록 합니다.</li>
-			<li>포커스 관리: 활성 탭이 변경될 때 포커스가 적절하게 이동하여 키보드 사용자에게 명확한 피드백을 제공합니다.</li>
-		</ul>
+		<div data-grid="wrap-group">
+			<div class="base-group">
+				<h3 class="h-3">탭의 선택 상태를 색상으로만 구분하지 않는다.</h3>
+				<p>탭의 선택 상태를 색상 이외의 수단으로 구분할 수 있는 시각적 단서를 제공해야 한다. 밑줄 제공, 1px 이상의 테두리 차이, 식별자 제공 등의 방법으로 크기나 형태 차원에서 정보를 구분하는 방법을 사용할 수 있다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 색에 무관한 콘텐츠 인식</li>
+					<li>WCAG 2.1 Use of Color (A)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">탭을 키보드로 탐색하고 실행할 수 있도록 한다.</h3>
+				<p>탭은 키보드로 포커스를 이동할 수 있어야 하며, Enter 또는 Space 키를 사용하여 탭을 활성화할 수 있어야 한다. 이를 통해 키보드 사용자도 탭 인터페이스를 완전히 활용할 수 있다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 키보드 사용 보장</li>
+					<li>WCAG 2.1 Keyboard (A)</li>
+					<li>WCAG 2.1 No Keyboard Trap (A)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">탭의 키보드 초점이 명확하게 표시되도록 한다.</h3>
+				<p>탭이 키보드 포커스를 받을 때 시각적으로 명확하게 표시되어야 한다. 기본 브라우저 포커스 스타일을 사용하거나, 사용자 정의 스타일을 적용하여 포커스가 어디에 있는지 쉽게 알 수 있도록 해야 한다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 초점 이동</li>
+					<li>WCAG 2.1 Focus Visible (AA)</li>
+					<li>WCAG 2.1 Non-text Contrast (AA)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">탭의 선택 상태를 스크린 리더로 확인할 수 있도록 한다.</h3>
+				<p>탭 레이블과 탭의 선택 상태를 텍스트로 제공하여 스크린 리더에서 정보를 인지할 수 있도록 해야 한다. 탭 버튼에 role="tab"로 역할을 부여하고 선택된 탭에 aria-selected="true"로 상태 정보를 전달하거나 title="현재 탭", title="선택됨"으로 선택 상태에 대한 정보를 제공할 수 있다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 적절한 대체 텍스트 제공</li>
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+
+			<div class="base-group">
+				<h3 class="h-3">탭과 패널의 역할 및 관계를 스크린 리더로 확인할 수 있도록 한다.</h3>
+				<p>탭 버튼 목록 영역은 role="tablist", 탭 버튼은 role="tab", 탭 패널은 role="tabpanel"로 역할을 부여한다. 그런 다음 탭 버튼과 탭 패널에 각각 id 속성과 속성값을 부여한 다음, 탭 버튼에는 aria-controls="[상응하는 탭 패널 id 속성값]", aria-labelledby="[상응하는 탭 버튼 id 속성값]"을 설정하여 탭과 패널 간 연결 관계를 프로그램적으로 전달할 수 있다.</p>
+				<ul data-bullet="dot">
+					<li>KWCAG 2.2 콘텐츠의 선형화</li>
+					<li>WCAG 2.1 Info and Relationships (A)</li>
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+		</div>
 	</section>
 
 	<section class="base-wrap" data-dir="col">
 		<h2 class="h-2" id="anchor-history">History</h2>
 		<ol class="list-history">
 			<li class="list-history--item">
-				<div class="list-history--item-key">2025.09.08 - </div>
-				<div class="list-history--item-value">Accordion 1.1.0 웹접근성 수정으로 h태그 안에 button 태그 위치 수정.</div>
-			</li>
-			<li class="list-history--item">
-				<div class="list-history--item-key">2025.07.24 - </div>
-				<div class="list-history--item-value">Accordion 1.0.1 update, destroy 기능 추가</div>
-			</li>
-			<li class="list-history--item">
-				<div class="list-history--item-key">2025.07.22 - </div>
-				<div class="list-history--item-value">Accordion 1.0.0 아코디언 버전관리 시작</div>
+				<div class="list-history--item-key">2025.09.09 - </div>
+				<div class="list-history--item-value">Tab 1.0.0 탭 버전관리 시작</div>
 			</li>
 		</ol>
 	</section>
