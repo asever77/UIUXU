@@ -1,43 +1,161 @@
-<wrap data-dir="col">
-	<group data-dir="col">
-		<h1 data-heading="display" data-text="Dialog">Dialog</h1>
+<aside class="aside-inner">
+	<div class="aside-inner--wrap" data-index="0">
+		<h3 class="h-3">Index</h3>
+		<nav>
+			<ul>
+				<li>
+					<a href="#anchor-ex" class="selected">Example</a>
+				</li>
+				<li>
+					<a href="#anchor-code">Code</a>
+				</li>
+				<li>
+					<a href="#anchor-opt">Options</a>
+				</li>
+				<li>
+					<a href="#anchor-a11y">Accessibility</a>
+				</li>
+				<li>
+					<a href="#anchor-history">History</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</aside>
+
+<article class="base-content" data-grid="sub-content">
+	<section class="base-wrap" data-dir="col" data-grid="display-title">
+		<h1 class="h-1">Dialog</h1>
 		<p>Dialog 컴포넌트는 웹 애플리케이션에서 사용자에게 정보를 제공하거나, 입력을 받거나, 특정 작업을 확인하는 등 다양한 상호작용을 위한 팝업 UI를 쉽게 구현할 수 있도록 설계되었습니다. 이 컴포넌트는 모달(Modal), 시스템(System), **토스트(Toast)**와 같은 여러 유형의 다이얼로그를 지원하며, 접근성(ARIA)과 사용자 경험(UX)을 고려하여 개발되었습니다.</p>
+	</section>
 
-		<stit>Modal</stit>
-		<box>
-			<button type="button" class="btn-base" data-test-id="modal1" onclick="UI.exe.modal1.show()">center</button>
-			<button type="button" class="btn-base" data-test-id="modal2" onclick="UI.exe.modal2.show()">bottom</button>
-			<button type="button" class="btn-base" data-test-id="modal3" onclick="UI.exe.modal3.show()">top</button>
-			<button type="button" class="btn-base" data-test-id="modal4" onclick="UI.exe.modal4.show()">left</button>
-			<button type="button" class="btn-base" data-test-id="modal5" onclick="UI.exe.modal5.show()">right</button>
-		</box>
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-ex">Example</h2>
+		<div style="display: flex; gap:2rem;">
+			<div class="base-box" style="position: relative;">
+				<div class="ui-dialog" role="dialog" aria-hidden="false" data-dialog="sample" aria-labelledby="sample-label" aria-describedby="sample-decs" data-ps="center" data-drag="false" data-state="show" data-zindex="1" data-current="true" style="position: absolute !important;"> 
+					<div class="ui-dialog--wrap" role="document" tabindex="-1" data-dialog-item="wrap">
+						<div class="ui-dialog--header">
+							<h1 id="sample-label">제목</h1>
+							<p id="sample-decs">간략한 소개 및 기능에 대한 설명</p>
+							<button type="button" aria-label="창닫기" data-dialog-button="close">닫기</button>
+						</div>
+						<div class="ui-dialog--main" data-dialog-item="main">
+							.........<br>
+							.........<br>
+							.........
+						</div>
+						<div class="ui-dialog--footer">
+							<button type="button" data-dialog-button="close">취소</button>
+							<button type="button">확인</button>
+						</div>
+					</div>
+				<div class="dim"></div></div>
+			</div>
+			<div class="base-box bb2">
+				<button type="button" class="btn-base" data-test-id="modal1" onclick="UI.exe.modal1.show()">modal-center</button>
+				<button type="button" class="btn-base" data-test-id="modal2" onclick="UI.exe.modal2.show()">modal-bottom</button>
+				<button type="button" class="btn-base" data-test-id="modal3" onclick="UI.exe.modal3.show()">modal-top</button>
+				<button type="button" class="btn-base" data-test-id="modal4" onclick="UI.exe.modal4.show()">modal-left</button>
+				<button type="button" class="btn-base" data-test-id="modal5" onclick="UI.exe.modal5.show()">modal-right</button>
 
-		<stit>Alert</stit>
-		<box>
-			<button type="button" class="btn-base" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>
-			<button type="button" class="btn-base" data-test-id="confirm1" onclick="UI.exe.confirm1.show()">confirm</button>
-		</box>
+				<button type="button" class="btn-base" data-test-id="alert1" onclick="UI.exe.alert1.show()">alert</button>
+				<button type="button" class="btn-base" data-test-id="confirm1" onclick="UI.exe.confirm1.show()">confirm</button>
 
-		<stit>Toast - top</stit>
-		<box>
-			<button type="button" class="btn-base" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast1</button>
-			<button type="button" class="btn-base" data-test-id="toast2" onclick="UI.exe.toast2.show()">toast2</button>
-		</box>
-		<stit>Toast - bottom</stit>
-		<box>
-			<button type="button" class="btn-base" data-test-id="toast3" onclick="UI.exe.toast3.show()">toast3</button>
-			<button type="button" class="btn-base" data-test-id="toast4" onclick="UI.exe.toast4.show()">toast4</button>
-		</box>
-	</group>
+				<button type="button" class="btn-base" data-test-id="toast1" onclick="UI.exe.toast1.show()">toast-top1</button>
+				<button type="button" class="btn-base" data-test-id="toast2" onclick="UI.exe.toast2.show()">toast-top2</button>
 
-		<group data-dir="col">
-		<mtit>Options</mtit>
-		<p>드롭다운 컴포넌트는 constructor를 통해 다양한 옵션을 설정하여 유연하게 사용할 수 있습니다. 아래는 사용 가능한 옵션 목록입니다.</p>
-		<stit>modal</stit>
+				<button type="button" class="btn-base" data-test-id="toast3" onclick="UI.exe.toast3.show()">toast-bottom3</button>
+				<button type="button" class="btn-base" data-test-id="toast4" onclick="UI.exe.toast4.show()">toast-bottom4</button>
+			</div>
+		</div>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-code">Code</h2>
+		<div data-tab="codeGuide" data-tab-style="small-box-type">
+			<div role="tablist">
+				<button type="button" role="tab">
+					<span>HTML</span>
+				</button>
+				<button type="button" role="tab">
+					<span>Javascript</span>
+				</button>
+			</div>
+		</div>
+		<div data-tab-wrap="codeGuide">
+			<div role="tabpanel">
+				<section>
+					<h3 class="h-3 a11y-hidden">HTML</h3>
+					<div class="code-box">
+						<pre contenteditable="true"><code>
+<i>//dropdown button</i>
+&lt;div <b>data-dropdown="dropdown1"</b>&gt;
+	&lt;button type="button" class="btn-base" <b>data-dropdown-button="dropdown1"</b>&gt;
+		&lt;span <b>data-dropdown-text="dropdown1"</b>&gt;주요기능&lt;/span&gt;
+	&lt;/button&gt;
+&lt;/div&gt;
+
+<i>//dropdown content</i>
+&lt;div <b>data-dropdown-panel="dropdown1"</b> <b>aria-hidden="true"</b>&gt;
+  &lt;div <b>data-dropdown-section="dropdown1"</b>&gt;
+		...
+  &lt;/div&gt;
+&lt;/div&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+			<div role="tabpanel">
+				<section>
+					<h3 class="h-3 a11y-hidden">javascript</h3>
+					<div class="code-box">
+						<pre contenteditable="true"><code>
+&lt;script <b>type="module"</b>&gt;
+	<b>import Dropdown from './component/dropdown.js';</b>
+
+	const drop1 = new <b>Dropdown</b>({
+		<b>id</b>: 'userMenu',
+		<i>//헤더 영역에 드롭다운 패널 삽입</i>
+		<b>area</b>: document.querySelector('area-dropdown[data-area="body"]'), 
+		<i>//외부 파일에서 메뉴 콘텐츠 로드</i>
+		<b>src</b>: './html/user-menu.html', 
+		<i>//버튼의 오른쪽 아래에 패널 위치</i>
+		<b>ps</b>: 'br', 
+		<b>srcCallback</b>: () =&gt; {
+			console.log('User menu content loaded!');
+			<i>//로드된 콘텐츠 내의 특정 버튼에 이벤트 리스너 추가 등</i>
+		},
+		<b>callback</b>: () =&gt; {
+			console.log('Dropdown initialized!');
+		}
+	});
+
+	<i>//실행</i>
+	drop1.<b>init()</b>;
+	<i>//선택 열림</i>
+	drop1.<b>show()</b>;
+	<i>//선택 닫힘</i>
+	drop1.<b>hide()</b>;
+	<i>//드랍다운 구성 삭제</i>
+	drop1.<b>destroy()</b>;
+&lt;/script&gt;
+						</code></pre>
+					</div>
+				</section>
+			</div>
+
+		</div>		
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-opt">Options</h2>
+		<p>아래는 사용 가능한 옵션 목록입니다.</p>
+		<h3 class="h-3">modal</h3>
 		<table>
 			<caption></caption>
 			<colgroup>
-				<col style="width: 12rem" />
+				<col style="width: 12rem;" />
 				<col style="width: 14rem;" />
 				<col style="width: 18rem;" />
 				<col style="width: auto;" />
@@ -54,33 +172,37 @@
 				<tr>
 					<th scope="row">id</th>
 					<td>String</td>
-					<td>(필수)	</td>
-					<td>다이얼로그의 유형을 지정합니다. 'modal', 'system', 'toast'를 사용할 수 있습니다.</td>
+					<td>(필수)</td>
+					<td>고유한 식별자이므로 다이얼로그를 생성할 때 반드시 지정해야 합니다.</td>
 				</tr>
 				<tr>
 					<th scope="row">type</th>
 					<td>String</td>
-					<td>'modal'	</td>
+					<td>'modal'</td>
 					<td>다이얼로그의 유형을 지정합니다. 'modal', 'system', 'toast'를 사용할 수 있습니다.</td>
 				</tr>
 				<tr>
 					<th scope="row">ps</th>
 					<td>String</td>
-					<td>'center'	</td>
+					<td>'center'</td>
 					<td>
 						다이얼로그가 나타나는 위치를 설정합니다. 'center', 'top', 'bottom', 'left', 'right', 'full'이 있습니다.
 					</td>
 				</tr>
-			
+				<tr>
+					<th scope="row">move</th>
+					<td>Boolean</td>
+					<td>true</td>
+					<td>true일 경우, 다이얼로그를 드래그하여 이동시킬 수 있습니다. ps가 'center'일 때만 유효합니다.</td>
+				</tr>
 				<tr>
 					<th scope="row">className</th>
 					<td>String</td>
-					<td>''	</td>
+					<td>''</td>
 					<td>
 						다이얼로그 최상위 요소에 추가할 CSS 클래스입니다.
 					</td>
 				</tr>
-
 				<tr>
 					<th scope="row">area</th>
 					<td>DOM Element	</td>
@@ -89,65 +211,42 @@
 						다이얼로그가 추가될 부모 요소를 지정합니다.
 					</td>
 				</tr>
-				
 				<tr>
 					<th scope="row">focus_back</th>
 					<td>DOM Element	</td>
 					<td>null</td>
-					<td>
-						다이얼로그가 닫힌 후 포커스를 되돌릴 요소를 지정합니다.
-					</td>
+					<td>다이얼로그가 닫힌 후 포커스를 되돌릴 요소를 지정합니다.</td>
 				</tr>
-				
 				<tr>
 					<th scope="row">dim</th>
 					<td>Boolean</td>
 					<td>true</td>
-					<td>
-						true일 경우, 다이얼로그 뒤에 어두운 배경(dimmed layer)이 생성됩니다.
-					</td>
+					<td>true일 경우, 다이얼로그 뒤에 어두운 배경(dimmed layer)이 생성됩니다.</td>
 				</tr>
 				<tr>
 					<th scope="row">dimClick</th>
 					<td>Boolean</td>
 					<td>true</td>
-					<td>
-						true일 경우, 배경을 클릭하면 다이얼로그가 닫힙니다.
-					</td>
+					<td>true일 경우, 배경을 클릭하면 다이얼로그가 닫힙니다.</td>
 				</tr>
-
-				<tr>
-					<th scope="row">move</th>
-					<td>Boolean</td>
-					<td>true</td>
-					<td>
-						true일 경우, 다이얼로그를 드래그하여 이동시킬 수 있습니다. ps가 'center'일 때만 유효합니다.
-					</td>
-				</tr>
+				
 				<tr>
 					<th scope="row">full</th>
 					<td>Boolean</td>
 					<td>false</td>
-					<td>
-						true일 경우, 다이얼로그가 전체 화면으로 표시됩니다.
-					</td>
+					<td>true일 경우, 다이얼로그가 전체 화면으로 표시됩니다.</td>
 				</tr>
-
 				<tr>
 					<th scope="row">src</th>
 					<td>String</td>
 					<td>null</td>
-					<td>
-						다이얼로그 내부에 표시할 외부 HTML 파일의 경로입니다. modal 타입에서 사용됩니다.
-					</td>
+					<td>다이얼로그 내부에 표시할 외부 HTML 파일의 경로입니다. modal 타입에서 사용됩니다.</td>
 				</tr>
 				<tr>
 					<th scope="row">load</th>
 					<td>String</td>
 					<td>'pre'</td>
-					<td>
-						다이얼로그를 미리 불러올지 설정합니다. 'pre', 'lazy'
-					</td>
+					<td>다이얼로그를 미리 불러올지 설정합니다. 'pre', 'lazy'</td>
 				</tr>
 				<tr>
 					<th scope="row">loadCallback</th>
@@ -157,7 +256,6 @@
 						다이얼로그 콘텐츠 로딩이 완료된 후 실행되는 콜백 함수입니다.
 					</td>
 				</tr>
-				
 				<tr>
 					<th scope="row">extend</th>
 					<td>Boolean</td>
@@ -169,7 +267,7 @@
 			</tbody>
 		</table>
 
-		<stit>system</stit>
+		<h3 class="h-3">system</h3>
 		<table>
 			<caption></caption>
 			<colgroup>
@@ -238,7 +336,7 @@
 			</tbody>
 		</table>
 
-		<stit>toast</stit>
+		<h3 class="h-3">toast</h3>
 		<table>
 			<caption></caption>
 			<colgroup>
@@ -282,16 +380,40 @@
 				</tr>
 			</tbody>
 		</table>
-	</group>
+	</section>
 
-	<group data-dir="col">
-		<mtit>Code</mtit>
-		<codebox>
-			<code><pre contenteditable="true">
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-a11y">Accessibility</h2>
+		<div data-grid="wrap-group">
+			<div class="base-group">
+				<h3 class="h-3">드랍다운을 버튼 역할로 제공한다.</h3>
+				<p>드랍다운을 실행하였을 때 특정 섹션이나 화면으로 이동하는 것이 아니므로 &lt;button&gt;을 사용하거나 role="button"을 사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
 
-			</pre></code>
-		</codebox>
-	</group>
+			<div class="base-group">
+				<h3 class="h-3">스크린 리더에서 확장/축소 상태 정보를 확인할 수 있도록 한다.</h3>
+				<p>aria-expanded 속성이나 title 속성을 활용하여 드랍다운 섹션의 활성화 상태 정보가 스크린 리더에 탐지될 수 있도록 해야 한다.</p>
+				<ul data-bullet="dot">
+					<li>WCAG 2.1 Name, Role, Value (A)</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section class="base-wrap" data-dir="col">
+		<h2 class="h-2" id="anchor-history">History</h2>
+		<ol class="list-history">
+			<li class="list-history--item">
+				<div class="list-history--item-key">2025.09.09 - </div>
+				<div class="list-history--item-value">Dropdown 1.0.0 </div>
+			</li>
+		</ol>
+	</section>
+
+
 </wrap>
 
 <div class="area-dialog" data-area="main"></div>

@@ -13,6 +13,28 @@
 		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
 		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
 		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+		.bb2 {
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			width: 20rem;
+			flex-shrink: 0;
+		}
+		.bb2 .btn-base{
+			margin-top:.8rem
+		}
+		@media (min-width: 1400px) {
+			.base-content[data-grid="sub-content"]  > *:nth-child(1) {
+				grid-column: span 2;
+			}
+			.base-content[data-grid="sub-content"]  > *:nth-child(2) {
+				grid-column: span 2;
+				display: flex;
+				flex-wrap: wrap;
+
+			}
+			
+		}
 	</style>
 </head>
 
@@ -26,6 +48,17 @@
 			layout: './layout/base.html',
 			page:'./content/dialog.html',
 			callback: () => {
+				UI.exe.codeGuide = new UX.Tab({
+					id: 'codeGuide',
+					renderMode: 'static',
+					selected: 1,
+					data: [
+						{ callback: () => { console.log('탭1 open'); },},
+						{ callback: () => { console.log('탭2 open'); },},
+					],
+				});
+				UI.exe.codeGuide.init();
+
 				// dialog
 				UI.exe.modal1 = new UX.Dialog({
 					id: 'modalname1',
