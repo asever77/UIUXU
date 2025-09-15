@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Range Slider | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+		 
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page: './content/rangeSlider.html',
+			callback: () => {
+				UI.exe.codeGuide = new UX.Tab({
+					id: 'codeGuide',
+					renderMode: 'static',
+					selected: 1,
+					data: [
+						{ callback: () => { console.log('탭1 open'); },},
+						{ callback: () => { console.log('탭2 open'); },},
+						{ callback: () => { console.log('탭3 open'); },},
+					],
+				});
+				UI.exe.codeGuide.init();
+
+				UI.exe.rs1 = new UX.RangeSlider({
+					id: 'range1',
+					value: [-50, 50],
+					title: 'range1',
+					min: -100,
+					max: 100,
+					step: 1,
+				});
+				UI.exe.rs2 = new UX.RangeSlider({
+				  id: 'range2',
+				  value: [0, 50],
+				  title: 'Your Slider Title',
+				  min: 0,
+				  max: 100,
+				  step: 1,
+				  text: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100'],
+				  tickmark: ['0', '10', '20', '30', '40', '50', '60', '70', '80', '90', '100']
+				});
+
+				UI.exe.rs1.init();
+				UI.exe.rs2.init();
+			}
+		});
+	</script>
+</body>
+
+</html>

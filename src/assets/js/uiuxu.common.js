@@ -6,7 +6,7 @@ import Tab from './component/tab.js';
 import Tooltip from './component/tooltip.js';
 import WheelPicker from './libs/wheelPicker.js';
 import ToggleController from './component/toggleController.js';
-import RangeSlider from './component/range.js';
+import RangeSlider from './component/rangeSlider.js';
 import ScrollEvent from './component/scrollEvent.js';
 import Drag from './component/drag.js';
 import Countdown from './component/countdown.js';

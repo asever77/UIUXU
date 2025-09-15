@@ -3651,6 +3651,252 @@ button [data-wheel-picker-set]::before {
   margin-right: 0.4rem;
 }
 
+/* range */
+.ui-range {
+  width: 100%;
+  height: 3rem;
+  padding: 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.ui-range[data-type=single] .ui-range-bar {
+  right: auto;
+}
+
+.ui-range[data-type=single] .ui-range-point::before {
+  content: "code" !important;
+}
+
+.ui-range[data-type=single] .ui-range-track {
+  z-index: 10;
+}
+
+.ui-range[data-orient=vertical] {
+  transform-origin: 5rem 5rem;
+  transform: rotate(-90deg);
+  margin-left: 6rem;
+}
+
+.ui-range[data-orient=vertical] .ui-range-point {
+  justify-content: center;
+}
+
+.ui-range[data-orient=vertical] .ui-range-txt {
+  top: 2.4rem;
+  left: 2rem;
+  transform: rotate(90deg);
+  transform-origin: 0 0;
+}
+
+.ui-range.same .ui-range-point {
+  pointer-events: none !important;
+}
+
+.ui-range.same .ui-range-inp.on {
+  z-index: 11;
+}
+
+.ui-range-inp {
+  width: 100%;
+  top: 0.5rem;
+  left: 0;
+  position: absolute;
+  border: none;
+  z-index: 10;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  height: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+
+.ui-range-inp:focus ~ .ui-range-track {
+  outline: 1px solid #000;
+}
+
+.ui-range-inp.on {
+  pointer-events: all;
+  z-index: 9;
+}
+
+.ui-range-inp::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0rem;
+  z-index: 13;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.ui-range-inp[data-range=from]:focus ~ .ui-range-track .left.ui-range-point, .ui-range-inp[data-range=to]:focus ~ .ui-range-track .right.ui-range-point {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.ui-range-track {
+  position: relative;
+  width: 100%;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+  background-color: #fff;
+  pointer-events: none;
+  z-index: 12;
+}
+
+.ui-range-bar {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0.1rem;
+  background-color: #2E7EF6;
+}
+
+.ui-range-point {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 0.3rem solid #2E7EF6;
+  background-color: #fff;
+  pointer-events: none;
+  z-index: 13;
+  cursor: pointer;
+}
+
+.ui-range-point.on {
+  z-index: 14;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.ui-range-point::before {
+  line-height: 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.ui-range-point.left {
+  left: 0;
+  transform: translate(-0.6rem, -50%);
+}
+
+.ui-range-point.left::before {
+  content: "";
+}
+
+.ui-range-point.right {
+  right: 0;
+  transform: translate(0.6rem, -50%);
+}
+
+.ui-range-point.right::before {
+  content: "";
+}
+
+.ui-range-txt {
+  position: absolute;
+  top: -1.8rem;
+  text-align: center;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.ui-range-btn {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 2rem;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.ui-range-btn:disabled {
+  pointer-events: none;
+}
+
+.ui-range-btn:disabled::before,
+.ui-range-btn:disabled span {
+  display: none;
+}
+
+.ui-range-btn::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 0.4rem;
+  background-color: var(--black);
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0);
+  top: 0;
+}
+
+.ui-range-marks {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 0;
+}
+
+.ui-range-inp.on[data-range=from] ~ .ui-range-marks[data-from=true] {
+  z-index: 1;
+}
+
+.ui-range-inp.on[data-range=to] ~ .ui-range-marks[data-to=true] {
+  z-index: 1;
+}
+
+/* 세로형 슬라이더를 위한 스타일 */
+.ui-range[data-orient=vertical] .ui-range-inp,
+.ui-range[data-orient=vertical] .ui-range-track {
+  transform: rotate(-90deg);
+}
+.ui-range[data-orient=vertical] .ui-range-txt {
+  right: 0;
+  top: auto;
+  text-align: right;
+  bottom: calc(100% + 0.5rem);
+  transform: rotate(90deg) translateY(1.3rem);
+  transform-origin: 100% 100%;
+  padding: 0.3rem 0.8rem 0.2rem 0.8rem;
+  min-width: 4rem;
+  border-radius: 0.2rem;
+  background-color: #2E7EF6;
+  font-size: 0.9rem;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 body {
   background-color: var(--bgcolor);
   transition: background 400ms ease;
