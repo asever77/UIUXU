@@ -1,5 +1,4 @@
 import { slideUp, slideDown, ArrowNavigator, getUrlParameter } from '../utils/utils.js';
-import { ACCORDION_VERSION } from "../config/versions.js";
 
 export default class Accordion {
   #option;
@@ -34,19 +33,7 @@ export default class Accordion {
     this.handleToggle = this.#handleToggle.bind(this);
   }
 
-  ver() {
-    console.groupCollapsed(`%cAccordion %c${ACCORDION_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;'); // 기본적으로 접힌 상태
-    ACCORDION_VERSION.history.forEach(item => {
-      console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
-    });
-    console.log(`author: ${ACCORDION_VERSION.author}`);
-    console.log(`license: ${ACCORDION_VERSION.license}`);
-    console.table(this.#option);
-    console.groupEnd();
-  }
-  
   init() {
-    this.ver();
     this.#initializeAccordionItems();
     
     // 🚀 개선점: foucsabledSelector를 동적으로 설정하여 모든 아코디언에서 동작하도록 수정

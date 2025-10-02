@@ -79,12 +79,14 @@ class UXCore {
           })
           .then(() => {
             const el_html = document.querySelector('html');
-            UI.exe.toggle.header = new ToggleController();
-            
+
+            // 다크모드 초기 상태 설정
             if (localStorage.getItem('dark-mode')) {
               el_html.dataset.mode = localStorage.getItem('dark-mode');
             }
-            UI.exe.toggle.modeChange = (v) => {
+
+            // ToggleController에 전달할 콜백 함수들 정의
+            const modeChangeCallback = (v) => {
               if (localStorage.getItem('dark-mode') === 'dark') {
                 el_html.dataset.mode = 'light';
               } else {
@@ -93,13 +95,23 @@ class UXCore {
               localStorage.setItem('dark-mode', el_html.dataset.mode);
             };
 
-            UI.exe.toggle.guideToggle = (v) => {
+            const guideToggleCallback = (v) => {
               if (v.state) {
                 el_html.dataset.guide = 'on';
               } else {
                 el_html.dataset.guide = 'off';
               }
-            }
+            };
+
+            // 헤더의 토글 버튼들을 위한 ToggleController 인스턴스 생성
+            UI.exe.toggle.header = new ToggleController({
+              area: document.querySelector('.base-header'), // 범위를 헤더로 한정
+              callbacks: {
+                guideToggle: guideToggleCallback,
+                modeChange: modeChangeCallback,
+                nav: () => { /* 네비게이션 토글 시 추가 동작이 필요하면 여기에 작성 */ }
+              }
+            });
 
             const aniLandomArray = ['판다', '개구리', '백곰', '여우', '트로피컬', '돼지', '똥', '로봇', '말풍선', '병아리', '유령', '썬글라스'];
             const randomIndex = Math.floor(Math.random() * aniLandomArray.length); 

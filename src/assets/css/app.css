@@ -159,6 +159,11 @@
   --inp-color-line: var(--gray-50);
   --inp-color-line-hover: var(--gray-100);
   --inp-color-bg: var(--gray-0);
+  --range-color-text: var(--gray-100);
+  --range-color-line: var(--gray-50);
+  --range-color-line-hover: var(--gray-100);
+  --range-color-track: var(--gray-30);
+  --range-color-pointer: var(--primary);
   --nav-bgcolor1: var(--gray-0);
   --nav-bgcolor2: var(--gray-100);
   --nav-shadow: rgba(0, 0, 0, 0.05);
@@ -281,7 +286,7 @@ html {
 }
 @media screen and (min-width: 1400px) {
   html {
-    font-size: 0.5263vmax;
+    font-size: 0.5vmax;
   }
 }
 html,
@@ -960,6 +965,9 @@ select.inp--base {
   background-position: right 0 top 50%;
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-120 300-300l58-58 122 122 122-122 58 58-180 180ZM358-598l-58-58 180-180 180 180-58 58-122-122-122 122Z'/%3E%3C/svg%3E");
+  color: var(--inp-color-text);
+  background-color: var(--inp-color-bg);
+  border: 1px solid var(--inp-color-line);
 }
 
 .label--radio {
@@ -3665,215 +3673,23 @@ button [data-wheel-picker-set]::before {
   -moz-user-select: none;
   user-select: none;
 }
-
 .ui-range[data-type=single] .ui-range-bar {
   right: auto;
 }
-
 .ui-range[data-type=single] .ui-range-point::before {
   content: "code" !important;
 }
-
 .ui-range[data-type=single] .ui-range-track {
   z-index: 10;
 }
-
 .ui-range[data-orient=vertical] {
   transform-origin: 5rem 5rem;
   transform: rotate(-90deg);
   margin-left: 6rem;
 }
-
 .ui-range[data-orient=vertical] .ui-range-point {
   justify-content: center;
 }
-
-.ui-range[data-orient=vertical] .ui-range-txt {
-  top: 2.4rem;
-  left: 2rem;
-  transform: rotate(90deg);
-  transform-origin: 0 0;
-}
-
-.ui-range.same .ui-range-point {
-  pointer-events: none !important;
-}
-
-.ui-range.same .ui-range-inp.on {
-  z-index: 11;
-}
-
-.ui-range-inp {
-  width: 100%;
-  top: 0.5rem;
-  left: 0;
-  position: absolute;
-  border: none;
-  z-index: 10;
-  -moz-appearance: none;
-  appearance: none;
-  opacity: 0;
-  padding: 0;
-  margin: 0;
-  height: 2rem;
-  cursor: pointer;
-  background-color: transparent;
-  pointer-events: none;
-  -webkit-appearance: none;
-}
-
-.ui-range-inp:focus ~ .ui-range-track {
-  outline: 1px solid #000;
-}
-
-.ui-range-inp.on {
-  pointer-events: all;
-  z-index: 9;
-}
-
-.ui-range-inp::-webkit-slider-thumb {
-  pointer-events: all;
-  appearance: none;
-  background-color: transparent;
-  box-shadow: none;
-  width: 2rem;
-  height: 2rem;
-  margin-top: 0rem;
-  z-index: 13;
-  cursor: pointer;
-  -webkit-appearance: none;
-}
-
-.ui-range-inp[data-range=from]:focus ~ .ui-range-track .left.ui-range-point, .ui-range-inp[data-range=to]:focus ~ .ui-range-track .right.ui-range-point {
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-}
-
-.ui-range-track {
-  position: relative;
-  width: 100%;
-  height: 0.2rem;
-  border-radius: 0.1rem;
-  background-color: #fff;
-  pointer-events: none;
-  z-index: 12;
-}
-
-.ui-range-bar {
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border-radius: 0.1rem;
-  background-color: #2E7EF6;
-}
-
-.ui-range-point {
-  position: absolute;
-  top: 50%;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-  width: 1.2rem;
-  height: 1.2rem;
-  border-radius: 50%;
-  border: 0.3rem solid #2E7EF6;
-  background-color: #fff;
-  pointer-events: none;
-  z-index: 13;
-  cursor: pointer;
-}
-
-.ui-range-point.on {
-  z-index: 14;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
-}
-
-.ui-range-point::before {
-  line-height: 2rem;
-  color: #fff;
-  font-size: 1.2rem;
-  pointer-events: none;
-}
-
-.ui-range-point.left {
-  left: 0;
-  transform: translate(-0.6rem, -50%);
-}
-
-.ui-range-point.left::before {
-  content: "";
-}
-
-.ui-range-point.right {
-  right: 0;
-  transform: translate(0.6rem, -50%);
-}
-
-.ui-range-point.right::before {
-  content: "";
-}
-
-.ui-range-txt {
-  position: absolute;
-  top: -1.8rem;
-  text-align: center;
-  font-size: 1.2rem;
-  pointer-events: none;
-}
-
-.ui-range-btn {
-  display: flex;
-  justify-content: center;
-  font-size: 1.2rem;
-  width: 2rem;
-  padding: 0;
-  position: relative;
-  text-align: center;
-  padding-top: 0.8rem;
-  margin-top: 0.8rem;
-}
-
-.ui-range-btn:disabled {
-  pointer-events: none;
-}
-
-.ui-range-btn:disabled::before,
-.ui-range-btn:disabled span {
-  display: none;
-}
-
-.ui-range-btn::before {
-  content: "";
-  display: block;
-  width: 1px;
-  height: 0.4rem;
-  background-color: var(--black);
-  left: 50%;
-  position: absolute;
-  transform: translate(-50%, 0);
-  top: 0;
-}
-
-.ui-range-marks {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  height: 0;
-}
-
-.ui-range-inp.on[data-range=from] ~ .ui-range-marks[data-from=true] {
-  z-index: 1;
-}
-
-.ui-range-inp.on[data-range=to] ~ .ui-range-marks[data-to=true] {
-  z-index: 1;
-}
-
-/* 세로형 슬라이더를 위한 스타일 */
 .ui-range[data-orient=vertical] .ui-range-inp,
 .ui-range[data-orient=vertical] .ui-range-track {
   transform: rotate(-90deg);
@@ -3895,6 +3711,159 @@ button [data-wheel-picker-set]::before {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+.ui-range.same .ui-range-point {
+  pointer-events: none !important;
+}
+.ui-range.same .ui-range-point.on {
+  z-index: 11;
+}
+.ui-range-inp {
+  width: 100%;
+  top: 0.5rem;
+  left: 0;
+  position: absolute;
+  border: none;
+  z-index: 10;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  height: 2rem;
+  cursor: pointer;
+  background-color: transparent;
+  pointer-events: none;
+  -webkit-appearance: none;
+}
+.ui-range-inp:focus ~ .ui-range-track {
+  outline: 1px solid #000;
+}
+.ui-range-inp.on {
+  pointer-events: all;
+  z-index: 9;
+}
+.ui-range-inp.on[data-range=from] ~ .ui-range-marks[data-from=true] {
+  z-index: 1;
+}
+.ui-range-inp.on[data-range=to] ~ .ui-range-marks[data-to=true] {
+  z-index: 1;
+}
+.ui-range-inp::-webkit-slider-thumb {
+  pointer-events: all;
+  appearance: none;
+  background-color: transparent;
+  box-shadow: none;
+  width: 2rem;
+  height: 2rem;
+  margin-top: 0rem;
+  z-index: 13;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.ui-range-inp[data-range=from]:focus ~ .ui-range-track .left.ui-range-point, .ui-range-inp[data-range=to]:focus ~ .ui-range-track .right.ui-range-point {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+.ui-range-track {
+  position: relative;
+  width: 100%;
+  height: 0.2rem;
+  border-radius: 0.1rem;
+  background-color: var(--range-color-track);
+  pointer-events: none;
+  z-index: 12;
+}
+.ui-range-bar {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 0.1rem;
+  background-color: var(--range-color-pointer);
+}
+.ui-range-point {
+  position: absolute;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  border: 0.3rem solid var(--range-color-pointer);
+  background-color: var(--range-color-pointer);
+  pointer-events: none;
+  z-index: 13;
+  cursor: pointer;
+}
+.ui-range-point.on {
+  z-index: 14;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+.ui-range-point::before {
+  line-height: 2rem;
+  color: #fff;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+.ui-range-point.left {
+  left: 0;
+  transform: translate(-0.6rem, -50%);
+}
+.ui-range-point.left::before {
+  content: "";
+}
+.ui-range-point.right {
+  right: 0;
+  transform: translate(0.6rem, -50%);
+}
+.ui-range-point.right::before {
+  content: "";
+}
+.ui-range-txt {
+  position: absolute;
+  top: -1.8rem;
+  text-align: center;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+.ui-range-btn {
+  display: flex;
+  justify-content: center;
+  font-size: 1.2rem;
+  width: 2rem;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+.ui-range-btn:disabled {
+  pointer-events: none;
+}
+.ui-range-btn:disabled::before, .ui-range-btn:disabled span {
+  display: none;
+}
+.ui-range-btn::before {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 0.4rem;
+  background-color: var(--black);
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, 0);
+  top: 0;
+}
+.ui-range-marks {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 0;
 }
 
 body {
@@ -4457,7 +4426,8 @@ body {
 }
 
 .base-content[data-grid=sub-content] {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   gap: var(--x20);
   padding-top: var(--x10);
@@ -4485,13 +4455,6 @@ body {
   }
   .area-base[data-layout=base] {
     padding: 0 0 var(--x2);
-  }
-}
-@media (min-width: 1400px) {
-  .base-content[data-grid=sub-content] {
-    grid-template-columns: 1fr 1fr;
-    -moz-column-gap: var(--x20);
-         column-gap: var(--x20);
   }
 }
 [data-tab] {

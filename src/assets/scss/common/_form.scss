@@ -27,6 +27,9 @@ select.inp--base {
   background-position: right 0 top 50%;
   background-repeat: no-repeat;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24px' viewBox='0 -960 960 960' width='24px' fill='%231f1f1f'%3E%3Cpath d='M480-120 300-300l58-58 122 122 122-122 58 58-180 180ZM358-598l-58-58 180-180 180 180-58 58-122-122-122 122Z'/%3E%3C/svg%3E");
+  color: var(--inp-color-text);
+  background-color: var(--inp-color-bg);
+  border: 1px solid var(--inp-color-line);
 }
 .label {
   &--radio {

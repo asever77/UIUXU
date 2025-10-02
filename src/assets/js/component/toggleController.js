@@ -2,10 +2,12 @@ export default class ToggleController {
   constructor(opt = {}) {
     const defaults = {
       area: document.documentElement,
-      callback: null,
+      // 단일 콜백 대신 여러 콜백을 담는 객체를 받습니다.
+      callbacks: {},
     };
     this.option = { ...defaults, ...opt };
     this.container = this.option.area;
+    this.callbacks = this.option.callbacks; // 주입된 콜백 객체를 저장합니다.
     // 클릭 리스너를 붙일 data-toggle-object 요소들은 여전히 쿼리합니다.
     // 하지만 toggleById는 이와 독립적으로 작동할 수 있습니다.
     this.toggles = this.container.querySelectorAll('[data-toggle-object]');
@@ -71,10 +73,11 @@ export default class ToggleController {
     toggles.forEach(item => item.dataset.toggleState = newState);
     targets.forEach(item => item.dataset.toggleState = newState);
 
-    // 참조 요소에 toggleCallback이 있는 경우에만 콜백을 시도합니다.
+    // data-toggle-callback 속성에서 콜백 이름을 가져옵니다.
     const toggleCallback = referenceElement.dataset.toggleCallback;
-    if (toggleCallback && UI.exe.toggle?.[toggleCallback]) {
-      UI.exe.toggle[toggleCallback]({
+    // 주입된 콜백 객체에 해당 이름의 함수가 있는지 확인하고 실행합니다.
+    if (toggleCallback && typeof this.callbacks[toggleCallback] === 'function') {
+      this.callbacks[toggleCallback]({
         state: newState === 'selected' ? true : false,
         event: forceState !== null ? 'programmatic' : 'click', // 호출된 방식을 구분합니다.
         name,
