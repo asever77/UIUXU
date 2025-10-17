@@ -82,9 +82,9 @@
 					renderMode: 'static',
 					selected: 1,
 					data: [
-						{ callback: () => { console.log('탭1 open'); },},
-						{ callback: () => { console.log('탭2 open'); },},
-						{ callback: () => { console.log('탭3 open'); },},
+						{ callback: () => { logger.debug('HTML open', null, 'Accordion'); },},
+						{ callback: () => { logger.debug('Javascript open', null, 'Accordion'); },},
+						{ callback: () => { logger.debug('CSS open', null, 'Accordion'); },},
 					],
 				});
 				UI.exe.codeGuide.init();
@@ -92,7 +92,7 @@
 				// accordion
 				UI.exe.acco1 = new UX.Accordion({
 					id: 'acco1',
-					expanded: null,
+					expanded: 'acco1-0',
 					// scrollIntoView: true,
 					// scrollOptions: { behavior: 'smooth', block: 'start' },
 				});

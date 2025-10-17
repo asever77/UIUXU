@@ -1,4 +1,6 @@
 import { ArrowNavigator } from '../utils/utils.js';
+import { logger } from '../utils/logger.js';
+import { ErrorHandler, ValidationError, ElementNotFoundError, TypeMismatchError } from '../utils/errors.js';
 
 export default class ButtonSelection {
    constructor(opt) {
@@ -13,17 +15,28 @@ export default class ButtonSelection {
     }
     this.option = { ...defaults, ...opt };
 
-    if (!this.option.id) {
-      console.error('ButtonSelection: "id" 옵션은 필수입니다.');
-      return; // ID가 제공되지 않으면 종료
+    // 필수 파라미터 검증
+    try {
+      ErrorHandler.requireParams(this.option, ['id'], 'ButtonSelection');
+    } catch (error) {
+      ErrorHandler.handle(error, 'ButtonSelection');
+      return;
     }
   }
 
   init() {
     this.selection = document.querySelector(`[data-selection="${this.option.id}"]`);
-    if (!this.selection) {
-      console.error(`ButtonSelection: data-selection="${this.option.id}" 요소를 찾을 수 없습니다.`);
-      return; // 컨테이너 요소를 찾을 수 없으면 종료
+    
+    // DOM 요소 존재 검증
+    try {
+      ErrorHandler.requireElement(
+        this.selection,
+        `[data-selection="${this.option.id}"]`,
+        'ButtonSelection'
+      );
+    } catch (error) {
+      ErrorHandler.handle(error, 'ButtonSelection');
+      return;
     }
 
     this.data = this.option.data;
@@ -75,7 +88,7 @@ export default class ButtonSelection {
       item.addEventListener('keydown', (e) => this.handleTabExit(e, index));
 
      if (this.selectedValues.has(item.dataset.value)) {
-      console.log(item.dataset.value, item);
+      logger.debug('Selected item', { value: item.dataset.value, element: item }, 'ButtonSelection');
       this.callback && this.callback({
         element: item,
         value: item.dataset.value
@@ -89,7 +102,7 @@ export default class ButtonSelection {
         container: this.selection,
         foucsabledSelector: '[data-selection-item]',
         callback: (el, index) => {
-          console.log('handleArrowKey', el, index);
+          logger.debug('Arrow key navigation', { element: el, index }, 'ButtonSelection');
           this.handleArrowKey(el);
         }
       });
@@ -233,6 +246,39 @@ export default class ButtonSelection {
           });
         }
       }
+    }
+  }
+
+  /**
+   * ButtonSelection을 제거하고 리소스를 정리합니다.
+   * 메모리 누수 방지를 위해 컴포넌트를 파괴할 때 호출해야 합니다.
+   * 
+   * @example
+   * UI.exe.buttonSelection.destroy();
+   * UI.exe.buttonSelection = null;
+   */
+  destroy() {
+    try {
+      // 1. 모든 이벤트 리스너 제거
+      if (this.items) {
+        this.items.forEach((item, index) => {
+          item.removeEventListener('click', this.handleClick);
+          item.removeEventListener('keydown', this.handleKeyDown);
+          // 익명 함수로 등록된 이벤트는 제거 불가하지만 참조 제거로 GC 가능
+        });
+      }
+
+      // 2. 데이터 초기화
+      this.selection = null;
+      this.items = null;
+      this.selectedValues.clear();
+      this.callback = null;
+      this.onGroupExit = null;
+
+      logger.info(`ButtonSelection "${this.option.id}" destroyed successfully`, null, 'ButtonSelection');
+      
+    } catch (error) {
+      logger.error('ButtonSelection destroy failed', error, 'ButtonSelection');
     }
   }
 }

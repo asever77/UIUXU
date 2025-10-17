@@ -29,7 +29,7 @@ export default class Countdown {
     this.#lastWindowWidth = window.innerWidth;
     this.#wrap.dataset.type = this.#effect;
     this.#height = this.#wrap.offsetHeight;
-console.log(this.#initialTextContent)
+    logger.debug('Initial text content', this.#initialTextContent, 'Countdown');
     this.#wrap.insertAdjacentHTML('afterend', `<div data-countdown="a11y" class="a11y-hidden">${this.#targetNumber}</div>`);
     this.initializeElements();
   }
@@ -200,7 +200,7 @@ console.log(this.#initialTextContent)
       const prev = previousNumber.split('');
       const next = this.#initialTextContent.split('');
 
-      console.log(previousNumber, this.#initialTextContent);
+      logger.debug('Number transition', { previous: previousNumber, next: this.#initialTextContent }, 'Countdown');
 
       if (prev[index] !== next[index]) {
         if (isIncrease) {

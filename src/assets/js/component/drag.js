@@ -30,7 +30,7 @@ export default class Drag {
   }
 
   init() {
-    console.log(this.items);
+    logger.debug('Drag items initialized', this.items, 'Drag');
     this.areas.forEach(item => {
       const area_rect = item.getBoundingClientRect();
       this.areaPsData.push({
@@ -81,7 +81,7 @@ export default class Drag {
     const isClone = el_item.dataset.clone && el_item.dataset.this === 'original' ? Number(el_item.dataset.clone) : false;
     const clone_item = el_item.cloneNode(true);
 
- console.log(el_item.dataset.clone, clone_item);
+    logger.debug('Clone item', { clone: el_item.dataset.clone, element: clone_item }, 'Drag');
 
     let this_item = el_item;
     let this_event = el_item.querySelector('[data-dragdrop-object="event"]');
@@ -307,12 +307,12 @@ export default class Drag {
         break;
 
       default:
-        console.log('스페이스나 엔터로 복사하고 방향키로 이동해주세요');
+        logger.info('스페이스나 엔터로 복사하고 방향키로 이동해주세요', null, 'Drag');
     }
   }
 
   keyMove(e) {
-    console.log(e);
+    logger.debug('Key move event', e, 'Drag');
 
     const el_this = e.currentTarget;
     const el_item = el_this.closest('[data-dragdrop-object="item"]');
@@ -348,14 +348,14 @@ export default class Drag {
       x = x * 10;
       y = y * 10;
     }
-    console.log(e);
+    logger.debug('Arrow key pressed', e, 'Drag');
     switch (e.code) {
       case 'ArrowLeft':
         e.preventDefault();
         if (this.shiftPressed) {
           let newRotate = currentRotate - this.angle;
 
-          console.log(newRotate);
+          logger.debug('Rotate left', newRotate, 'Drag');
           if (newRotate < 0) {
             newRotate = 360 - Math.abs(newRotate);
           }

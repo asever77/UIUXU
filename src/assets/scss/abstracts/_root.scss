@@ -1,203 +1,182 @@
-@use '_variables_for_code' as vars; 
-@use 'mixin';
+@use "_variables_for_code" as vars;
+@use "mixin";
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap");
 
 $mode-setting: light;
 :root {
-	--font-family-base: "Noto Sans KR", sans-serif;
+  --font-family-base: "Noto Sans KR", sans-serif;
 
-	--a1-n:0;
-	--a2-n:0;
-	--a3-n:0;
-	--a4-n:0;
-	--a5-n:0;
-	--a6-n:0;
-	--a7-n:0;
-	--a8-n:0;
-	--a1-percent:0;
-	--a2-percent:0;
-	--a3-percent:0;
-	--a4-percent:0;
-	--a5-percent:0;
-	--a6-percent:0;
-	--a7-percent:0;
-	--a8-percent:0;
+  --a1-n: 0;
+  --a2-n: 0;
+  --a3-n: 0;
+  --a4-n: 0;
+  --a5-n: 0;
+  --a6-n: 0;
+  --a7-n: 0;
+  --a8-n: 0;
+  --a1-percent: 0;
+  --a2-percent: 0;
+  --a3-percent: 0;
+  --a4-percent: 0;
+  --a5-percent: 0;
+  --a6-percent: 0;
+  --a7-percent: 0;
+  --a8-percent: 0;
 
-	--sat: env(safe-area-inset-top);
-	--sar: env(safe-area-inset-right);
-	--sab: env(safe-area-inset-bottom);
-	--sal: env(safe-area-inset-left);
+  --sat: env(safe-area-inset-top);
+  --sar: env(safe-area-inset-right);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
 
-	--primary: #225bbc;
-	--sub: #1ee09f;
+  --primary: #225bbc;
+  --sub: #1ee09f;
 
-	--gray-0: #fff;
-	--gray-10: #f8f8f8;
-	--gray-20: #ededed;
-	--gray-30: #dddddd;
-	--gray-40: #cccccc;
-	--gray-50: #999999;
-	--gray-60: #777777;
-	--gray-70: #555555;
-	--gray-80: #333333;
-	--gray-90: #111111;
-	--gray-100: #000;
+  --gray-0: #fff;
+  --gray-10: #f8f8f8;
+  --gray-20: #ededed;
+  --gray-30: #dddddd;
+  --gray-40: #cccccc;
+  --gray-50: #999999;
+  --gray-60: #777777;
+  --gray-70: #555555;
+  --gray-80: #333333;
+  --gray-90: #111111;
+  --gray-100: #000;
 
-	--gap: 0.4rem;
-	@include mixin.create-spacing-vars; 
+  --gap: 0.4rem;
+  @include mixin.create-spacing-vars;
 }
 
-:root[data-mode="light"] {
-	--color-background-default: var(--gray-10);
-	--color-background-table: var(--gray-20);
-	--color-text-primary: var(--gray-80);
-	--color-text-secondary: var(--gray-60);
-	--color-icon-default: var(--gray-70);
-	--color-disabled-text: var(--gray-40);
+:root {
+  --color-background-default: var(--gray-10);
+  --color-background-table: var(--gray-20);
+  --color-text-primary: var(--gray-80);
+  --color-text-secondary: var(--gray-60);
+  --color-icon-default: var(--gray-70);
+  --color-disabled-text: var(--gray-40);
 
-	--btn-bgcolor-dark: var(--gray-80);
-	--btn-bgcolor-gray: var(--gray-30);
-	--btn-bgcolor-light: var(--gray-0);
+  --btn-bgcolor-dark: var(--gray-80);
+  --btn-bgcolor-gray: var(--gray-30);
+  --btn-bgcolor-light: var(--gray-0);
 
-	--btn-color-text: var(--gray-100);
-	--btn-color-line: var(--gray-50);
-	--btn-color-line-hover: var(--gray-100);
-	--btn-color-bg: var(--gray-0);
+  --btn-color-text: var(--gray-100);
+  --btn-color-line: var(--gray-50);
+  --btn-color-line-hover: var(--gray-100);
+  --btn-color-bg: var(--gray-0);
 
-	--inp-color-text: var(--gray-100);
-	--inp-color-line: var(--gray-50);
-	--inp-color-line-hover: var(--gray-100);
-	--inp-color-bg: var(--gray-0);
+  --inp-color-text: var(--gray-100);
+  --inp-color-line: var(--gray-50);
+  --inp-color-line-hover: var(--gray-100);
+  --inp-color-bg: var(--gray-0);
 
-	--range-color-text: var(--gray-100);
-	--range-color-line: var(--gray-50);
-	--range-color-line-hover: var(--gray-100);
-	--range-color-track: var(--gray-30);
-	--range-color-pointer: var(--primary);
+  --range-color-text: var(--gray-100);
+  --range-color-line: var(--gray-50);
+  --range-color-line-hover: var(--gray-100);
+  --range-color-track: var(--gray-30);
+  --range-color-pointer: var(--primary);
 
-	--nav-bgcolor1: var(--gray-0);
-	--nav-bgcolor2: var(--gray-100);
-	--nav-shadow: rgba(0, 0, 0, 0.05);
+  --nav-bgcolor1: var(--gray-0);
+  --nav-bgcolor2: var(--gray-100);
+  --nav-shadow: rgba(0, 0, 0, 0.05);
 
-	--box-background: var(--gray-0);
-	--bgcolor: #F6F7F9;
+  --box-background: var(--gray-0);
+  --bgcolor: #f6f7f9;
 
-	--aside-inner--text: var(--gray-90);
-	--aside-inner--bg: var(--gray-20);
+  --aside-inner--text: var(--gray-90);
+  --aside-inner--bg: var(--gray-20);
 
-	--tab-color-line: var(--gray-40);
-	--tab-color-line-selected: var(--gray-100);
+  --tab-color-line: var(--gray-40);
+  --tab-color-line-selected: var(--gray-100);
 
-	--list-history--line: var(--gray-20);
-	--list-history--text: var(--gray-80);
-	--list-history--circle: var(--gray-60);
+  --list-history--line: var(--gray-20);
+  --list-history--text: var(--gray-80);
+  --list-history--circle: var(--gray-60);
 }
 :root[data-mode="dark"] {
-	--color-background-default: var(--gray-90);
-	--color-background-table: var(--gray-80);
-	--color-text-primary: var(--gray-20);
-	--color-text-secondary: var(--gray-40);
-	--color-icon-default: var(--gray-30);
-	--color-disabled-text: var(--gray-60);
+  --color-background-default: var(--gray-90);
+  --color-background-table: var(--gray-80);
+  --color-text-primary: var(--gray-20);
+  --color-text-secondary: var(--gray-40);
+  --color-icon-default: var(--gray-30);
+  --color-disabled-text: var(--gray-60);
 
-	--color-border-light: var(--gray-70); 
-	--color-border-dark: var(--gray-60); 
+  --color-border-light: var(--gray-70);
+  --color-border-dark: var(--gray-60);
 
-	--btn-bgcolor-dark: var(--gray-80);
-	--btn-bgcolor-gray: var(--gray-30);
-	--btn-bgcolor-light: var(--gray-0);
+  --btn-bgcolor-dark: var(--gray-80);
+  --btn-bgcolor-gray: var(--gray-30);
+  --btn-bgcolor-light: var(--gray-0);
 
-	--btn-color-text: var(--gray-0);
-	--btn-color-line: var(--gray-60);
-	--btn-color-line-hover: var(--gray-0);
-	--btn-color-bg: var(--gray-100);
+  --btn-color-text: var(--gray-0);
+  --btn-color-line: var(--gray-60);
+  --btn-color-line-hover: var(--gray-0);
+  --btn-color-bg: var(--gray-100);
 
-	--inp-color-text: var(--gray-0);
-	--inp-color-line: var(--gray-60);
-	--inp-color-line-hover: var(--gray-0);
-	--inp-color-bg: var(--gray-100);
+  --inp-color-text: var(--gray-0);
+  --inp-color-line: var(--gray-60);
+  --inp-color-line-hover: var(--gray-0);
+  --inp-color-bg: var(--gray-100);
 
-	--nav-bgcolor1: var(--gray-80);
-	--nav-bgcolor2: var(--gray-0);
-	--nav-shadow: rgba(255, 255, 255, 0.05);
+  --nav-bgcolor1: var(--gray-80);
+  --nav-bgcolor2: var(--gray-0);
+  --nav-shadow: rgba(255, 255, 255, 0.05);
 
-	--color-card-background: var(--gray-80);
-	--color-modal-background: var(--gray-850); 
-	
-	--box-background: var(--gray-90);
-	--bgcolor: #17171c;
+  --color-card-background: var(--gray-80);
+  --color-modal-background: var(--gray-850);
 
-	--aside-inner--text: var(--gray-20);
-	--aside-inner--bg: var(--gray-90);
+  --box-background: var(--gray-90);
+  --bgcolor: #17171c;
 
-	--tab-color-line: var(--gray-60);
-	--tab-color-line-selected: var(--gray-10);
+  --aside-inner--text: var(--gray-20);
+  --aside-inner--bg: var(--gray-90);
 
-	--list-history--line: var(--gray-80);
-	--list-history--text: var(--gray-20);
-	--list-history--circle: var(--gray-60);
-	
-	.logo-netive,
-	.img-main .logo,
-	.base-header--title .logo {
-		filter: invert(1) hue-rotate(180deg);
-	}
-	/* 특정 아이콘에만 적용할 경우 */
-	.icon-light-only {
-		filter: brightness(0.7) contrast(1.2);
-	}
+  --tab-color-line: var(--gray-60);
+  --tab-color-line-selected: var(--gray-10);
+
+  --list-history--line: var(--gray-80);
+  --list-history--text: var(--gray-20);
+  --list-history--circle: var(--gray-60);
 }
 @media (prefers-color-scheme: dark) {
-	:root[data-mode="dark"],
   :root {
     --color-background-default: var(--gray-90);
-		--color-background-table: var(--gray-80);
-		--color-text-primary: var(--gray-20);
-		--color-text-secondary: var(--gray-40);
-		--color-icon-default: var(--gray-30);
-		--color-disabled-text: var(--gray-60);
+    --color-background-table: var(--gray-80);
+    --color-text-primary: var(--gray-20);
+    --color-text-secondary: var(--gray-40);
+    --color-icon-default: var(--gray-30);
+    --color-disabled-text: var(--gray-60);
 
-		--color-border-light: var(--gray-70); 
-		--color-border-dark: var(--gray-60); 
+    --color-border-light: var(--gray-70);
+    --color-border-dark: var(--gray-60);
 
-		--btn-bgcolor-dark: var(--gray-80);
-		--btn-bgcolor-gray: var(--gray-30);
-		--btn-bgcolor-light: var(--gray-0);
-		
-		--btn-color-text: var(--gray-0);
-		--btn-color-line: var(--gray-60);
-		--btn-color-bg: var(--gray-100);
+    --btn-bgcolor-dark: var(--gray-80);
+    --btn-bgcolor-gray: var(--gray-30);
+    --btn-bgcolor-light: var(--gray-0);
 
-		--nav-bgcolor1: var(--gray-80);
-		--nav-bgcolor2: var(--gray-0);
-		--nav-shadow: rgba(255, 255, 255, 0.05);
+    --btn-color-text: var(--gray-0);
+    --btn-color-line: var(--gray-60);
+    --btn-color-bg: var(--gray-100);
 
-		--color-card-background: var(--gray-80);
-		--color-modal-background: var(--gray-850); 
-		
-		--box-background: var(--gray-90);
-		--bgcolor: #17171c;
+    --nav-bgcolor1: var(--gray-80);
+    --nav-bgcolor2: var(--gray-0);
+    --nav-shadow: rgba(255, 255, 255, 0.05);
 
-		--aside-inner--text: var(--gray-20);
-		--aside-inner--bg: var(--gray-90);
+    --color-card-background: var(--gray-80);
+    --color-modal-background: var(--gray-850);
 
-		--tab-color-line: var(--gray-60);
-		--tab-color-line-selected: var(--gray-10);
-		
-		--list-history--line: var(--gray-80);
-		--list-history--text: var(--gray-20);
-		--list-history--circle: var(--gray-60);
-	
-		.logo-netive,
-		.img-main .logo,
-		.base-header--title .logo {
-			filter: invert(1) hue-rotate(180deg);
-		}
-		/* 특정 아이콘에만 적용할 경우 */
-		.icon-light-only {
-			filter: brightness(0.7) contrast(1.2);
-		}
+    --box-background: var(--gray-90);
+    --bgcolor: #17171c;
+
+    --aside-inner--text: var(--gray-20);
+    --aside-inner--bg: var(--gray-90);
+
+    --tab-color-line: var(--gray-60);
+    --tab-color-line-selected: var(--gray-10);
+
+    --list-history--line: var(--gray-80);
+    --list-history--text: var(--gray-20);
+    --list-history--circle: var(--gray-60);
   }
 }

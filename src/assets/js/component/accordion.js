@@ -1,4 +1,6 @@
 import { slideUp, slideDown, ArrowNavigator, getUrlParameter } from '../utils/utils.js';
+import { logger } from '../utils/logger.js';
+import { ErrorHandler, ValidationError, ElementNotFoundError, StateError } from '../utils/errors.js';
 
 export default class Accordion {
   #option;
@@ -21,10 +23,32 @@ export default class Accordion {
 
     this.#option = { ...defaults, ...opt };
     this.#id = this.#option.id;
+    
+    // 필수 파라미터 검증
+    try {
+      ErrorHandler.requireParams(this.#option, ['id'], 'Accordion');
+    } catch (error) {
+      ErrorHandler.handle(error, 'Accordion');
+      return;
+    }
+    
     this.#expanded = this.#option.expanded;
     this.#singleOpen = this.#option.singleOpen;
     this.#acco = document.querySelector(`[data-accordion="${this.#id}"]`);
-    if (!this.#acco) return; // 아코디언이 없으면 실행 중단
+    
+    // DOM 요소 존재 검증
+    if (!this.#acco) {
+      try {
+        ErrorHandler.requireElement(
+          this.#acco, 
+          `[data-accordion="${this.#id}"]`, 
+          'Accordion'
+        );
+      } catch (error) {
+        ErrorHandler.handle(error, 'Accordion');
+        return;
+      }
+    }
 
     this.#acco_items = this.#acco.querySelectorAll(`[data-accordion-item="${this.#id}"]`);
     this.#acco_btns = this.#acco.querySelectorAll(`[data-accordion-button="${this.#id}"]`);
@@ -85,7 +109,10 @@ export default class Accordion {
   // 🚀 개선점: 화살표 함수 대신 private 메서드로 변경 및 this 바인딩 처리
   #handleToggle(e) {
     // ✨ 개선점: 애니메이션 중에는 클릭 이벤트를 무시
-    if (this.#isAnimating) return;
+    if (this.#isAnimating) {
+      logger.debug('애니메이션 진행 중 - 클릭 무시', null, 'Accordion');
+      return;
+    }
 
     const button = e.currentTarget;
     const isExpanded = button.getAttribute('aria-expanded') === 'true';
@@ -111,10 +138,18 @@ export default class Accordion {
   #show(target, callback = false) {
     // target이 문자열이면 ID로 간주하여 버튼 엘리먼트를 찾고, 아니면 엘리먼트로 간주
     const button = typeof target === 'string' ? document.querySelector(`#${target}`) : target;
+    
     // 해당하는 버튼이 없으면 함수 종료
     if (!button) {
-      console.warn(`Accordion item with target "${target}" not found.`);
-      return;
+      try {
+        throw new ElementNotFoundError(
+          `Accordion item을 찾을 수 없습니다`,
+          { target: target, type: typeof target }
+        );
+      } catch (error) {
+        ErrorHandler.handle(error, 'Accordion');
+        return;
+      }
     }
 
     this.#isAnimating = true;
@@ -159,7 +194,7 @@ export default class Accordion {
     const button = typeof target === 'string' ? document.querySelector(`#${target}`) : target;
 
     if (!button) {
-      console.warn(`Accordion item with target "${target}" not found.`);
+      logger.warn(`Accordion item with target "${target}" not found.`, null, 'Accordion');
       return;
     }
 
@@ -226,6 +261,42 @@ export default class Accordion {
     //   // 혹은 ArrowNavigator를 다시 생성할 수도 있습니다. (기존 인스턴스 파괴 후)
     //   // this.#arrowNavigator = new ArrowNavigator({...});
     // }
-    console.log(`Accordion "${this.#id}" has been updated.`);
+    logger.info(`Accordion "${this.#id}" has been updated.`, null, 'Accordion');
+  }
+
+  /**
+   * 아코디언을 제거하고 리소스를 정리합니다.
+   * 메모리 누수 방지를 위해 컴포넌트를 파괴할 때 호출해야 합니다.
+   * 
+   * @example
+   * // 컴포넌트 사용 후
+   * UI.exe.acco.destroy();
+   * UI.exe.acco = null;
+   */
+  destroy() {
+    try {
+      // 1. 모든 이벤트 리스너 제거
+      if (this.#acco_btns) {
+        this.#acco_btns.forEach(button => {
+          button.removeEventListener('click', this.handleToggle);
+        });
+      }
+
+      // 2. ArrowNavigator 정리 (있다면)
+      if (this.#arrowNavigator && typeof this.#arrowNavigator.destroy === 'function') {
+        this.#arrowNavigator.destroy();
+      }
+
+      // 3. private 필드 초기화
+      this.#acco = null;
+      this.#acco_items = null;
+      this.#acco_btns = null;
+      this.#arrowNavigator = null;
+
+      logger.info(`Accordion "${this.#id}" destroyed successfully`, null, 'Accordion');
+      
+    } catch (error) {
+      logger.error('Accordion destroy failed', error, 'Accordion');
+    }
   }
 }

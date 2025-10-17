@@ -27,10 +27,12 @@
   &[data-ps="bl"] [data-dropdown-section] {
     top: 100%;
     bottom: auto;
-    left:0;
+    left: 0;
     right: auto;
   }
-  &[data-ps="bc"] {justify-content: center}
+  &[data-ps="bc"] {
+    justify-content: center;
+  }
   &[data-ps="bc"] [data-dropdown-section] {
     top: 100%;
     bottom: auto;
@@ -40,16 +42,18 @@
   &[data-ps="br"] [data-dropdown-section] {
     top: 100%;
     bottom: auto;
-    left:auto;
+    left: auto;
     right: 0;
   }
   &[data-ps="tl"] [data-dropdown-section] {
     top: auto;
     bottom: 100%;
-    left:0;
+    left: 0;
     right: auto;
   }
-  &[data-ps="tc"] {justify-content: center}
+  &[data-ps="tc"] {
+    justify-content: center;
+  }
   &[data-ps="tc"] [data-dropdown-section] {
     top: auto;
     bottom: 100%;
@@ -60,7 +64,7 @@
   &[data-ps="tr"] [data-dropdown-section] {
     top: auto;
     bottom: 100%;
-    left:auto;
+    left: auto;
     right: 0;
   }
 
@@ -71,7 +75,9 @@
     right: 100%;
   }
 
-  &[data-ps="lc"] {align-items: center;}
+  &[data-ps="lc"] {
+    align-items: center;
+  }
   &[data-ps="lc"] [data-dropdown-section] {
     top: auto;
     bottom: auto;
@@ -84,13 +90,15 @@
     left: auto;
     right: 100%;
   }
-   &[data-ps="rt"] [data-dropdown-section] {
+  &[data-ps="rt"] [data-dropdown-section] {
     top: 0;
     bottom: auto;
     left: 100%;
     right: auto;
   }
-  &[data-ps="rc"] {align-items: center;}
+  &[data-ps="rc"] {
+    align-items: center;
+  }
   &[data-ps="rc"] [data-dropdown-section] {
     top: auto;
     bottom: auto;
@@ -120,10 +128,10 @@
     position: fixed !important;
     width: 100% !important;
     height: 100% !important;
-    top:0 !important;
-    bottom:0 !important;
-    left:0 !important;
-    right:0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     height: 100%;
     overflow-y: auto;
     border: 0;
@@ -137,6 +145,6 @@
   overflow: hidden;
   position: absolute;
   pointer-events: visible;
-  border: 1px solid #000;
-  background-color: #fff;
+  border: 1px solid var(--gray-100);
+  background-color: var(--gray-0);
 }

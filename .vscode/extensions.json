@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "syler.sass-indented",
+    "formulahendry.auto-rename-tag",
+    "vincaslt.highlight-matching-tag",
+    "christian-kohler.path-intellisense",
+    "ritwickdey.liveserver"
+  ]
+}
