@@ -527,6 +527,8 @@ export default class Dialog {
       currentModal.focus();
     }
 
-    if (zIndex === 0) document.querySelector('body').classList.remove('scroll-not');
+    console.log(zIndex)
+
+    if (zIndex <= 1) document.querySelector('body').classList.remove('scroll-not');
 	}
 }

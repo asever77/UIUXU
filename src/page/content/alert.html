@@ -25,54 +25,26 @@
 
 <article class="base-content" data-grid="sub-content">
 	<section class="base-wrap" data-dir="col" data-grid="display-title">
-		<h1 class="h-1">Accordion</h1>
-		<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
+		<h1 class="h-1">Alert</h1>
+		<p>사용자에게 중요한 정보나 상태를 전달하는 Alert 컴포넌트입니다. 다양한 상황에 맞는 시각적 피드백을 제공합니다.</p>
 	</section>
 
 	<section class="base-wrap" data-dir="col">
 		<h2 class="h-2" id="anchor-ex">Example</h2>
 		<div class="base-box">
 
-			<div data-accordion="acco1">
-				<div data-accordion-item="acco1">
-					<div data-accordion-head="acco1">
-						<h3 data-accordion-title="acco1">
-							<button type="button" data-accordion-button="acco1">title 1</button>
-						</h3>
-					</div>
-					<div data-accordion-body="acco1" hidden>
-						<div data-accordion-section="acco1">
-							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
-						</div>
-					</div>
-				</div>
-
-				<div data-accordion-item="acco1">
-					<div data-accordion-head="acco1">
-						<h3 data-accordion-title="acco1">
-							<button type="button" data-accordion-button="acco1">title 2</button>
-						</h3>
-					</div>
-					<div data-accordion-body="acco1" hidden>
-						<div data-accordion-section="acco1">
-							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
-						</div>
-					</div>
-				</div>
-
-				<div data-accordion-item="acco1">
-					<div data-accordion-head="acco1">
-						<h3 data-accordion-title="acco1">
-							<button type="button" data-accordion-button="acco1">title 3</button>
-						</h3>
-					</div>
-					<div data-accordion-body="acco1" hidden>
-						<div data-accordion-section="acco1">
-							<p>Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성 좋고 유연한 방법을 제공합니다. <br>이를 통해 사용자는 콘텐츠 섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가 효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.</p>
-						</div>
-					</div>
-				</div>
-			</div>
+      <dl data-alert="alert1" class="base-alert base-alert--info" role="alert">
+        <div>
+          <dt>
+            <b>시스템 점검 안내</b>
+          </dt>
+          <dd>
+            2024년 1월 15일 02:00 ~ 06:00 시스템 점검이 예정되어 있습니다. 점검 시간 동안 서비스 이용이 제한될 수 있습니다.
+          </dd>
+        </div>
+      </dl>
+       
+			 
 		</div>
 	</section>
 
@@ -97,24 +69,7 @@
 					<h3 class="h-3 a11y-hidden">HTML</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-&lt;div <b>data-accordion="name"</b>&gt;
-	<i>//아코디언 콘텐츠 반복</i>
-	&lt;div <b>data-accordion-item="name"</b>&gt;
-		<i>//아코디언 제목</i>
-		&lt;div <b>data-accordion-head="name"</b>&gt;
-			&lt;h3 <b>data-accordion-title="name"</b>&gt;title 1
-				&lt;button type="button" <b>data-accordion-button="name"</b>&gt;&lt;/button&gt;
-			&lt;/h3&gt;
-		&lt;/div&gt;
-		<i>//아코디언 내용</i>
-		&lt;div <b>data-accordion-body="name"</b> hidden&gt;
-			&lt;div <b>data-accordion-section="name"</b>&gt;
-				...
-			&lt;/div&gt;
-		&lt;/div&gt;
-	&lt;/div&gt;
-	<i>...</i>
-&lt;/div&gt;
+
 						</code></pre>
 					</div>
 				</section>
@@ -124,30 +79,7 @@
 					<h3 class="h-3 a11y-hidden">javascript</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-&lt;script <b>type="module"</b>&gt;
-	<b>import Accordion from './component/accordion.js';</b>
-
-	const acco1 = new <b>Accordion</b>({
-		<b>id</b>: 'acco1',
-		<b>expanded</b>: null,
-		<b>scrollIntoView</b>: true,
-		<b>scrollOptions</b>: { 
-			<b>behavior</b>: 'smooth', 
-			<b>block</b>: 'start' 
-		},
-	});
-
-	<i>//실행</i>
-	acco1.<b>init</b>(); 
-	<i>//선택 열림</i>
-	acco1.<b>show</b>('acco1-1');
-	<i>//선택 닫힘</i>
-	acco1.<b>hide</b>('acco1-1', () =&gt; {...}); 
-	<i>//아코디언 동적 추가 후 업데이트</i>
-	acco1.<b>update</b>();
-	<i>//아코디언 구성 삭제</i>
-	acco1.<b>destroy</b>();
-&lt;/script&gt;
+ 
 						</code></pre>
 					</div>
 				</section>
@@ -157,48 +89,7 @@
 					<h3 class="h-3 a11y-hidden">CSS</h3>
 					<div class="code-box">
 						<pre contenteditable="true"><code>
-[data-accordion] {
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-[data-accordion-item] {
-  display: flex;
-  flex-direction: column;
-}
-
-[data-accordion-group] {
-  display: flex;
-}
-
-[data-accordion-head] {
-  position: relative;
-  display: flex;
-}
-
-[data-accordion-button] {
-  position: absolute;
-  top:0;
-  left:0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-[data-accordion-button]:disabled {
-  opacity: 1;
-}
-
-[data-accordion-title] {
-  position: relative;
-  z-index: 0;
-}
-
-[data-accordion-body] {
-  position: relative;
-  overflow: hidden;
-}
+ 
 						</code></pre>
 					</div>
 				</section>

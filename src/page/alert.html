@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Alert | UIUXU </title>
+	<!-- loads the entire Variable Font -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+	<link rel="stylesheet" href="../assets/css/app.css">
+
+	<style>
+
+	</style>
+</head>
+
+<body>
+	<!-- script -->
+	<script type="module">
+		/* 준비 ---------------------------------------------- */
+		import { UX } from '../assets/js/uiuxu.common.js';
+		UX.init({
+			layout: './layout/base.html',
+			page: './content/alert.html',
+			callback: () => {
+				//console.log('init');
+			}
+		});
+	</script>
+</body>
+
+</html>

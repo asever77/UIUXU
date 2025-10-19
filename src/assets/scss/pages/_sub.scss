@@ -26,6 +26,8 @@
   width: 100%;
   gap: var(--x20);
   padding-top: var(--x10);
+  max-width: 90rem;
+  margin: 0 auto;
 
   [data-grid="display-title"] {
     display: flex;
