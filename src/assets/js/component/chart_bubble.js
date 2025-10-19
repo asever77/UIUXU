@@ -1,4 +1,5 @@
 // assets/js/component/chart_bubble.js
+import { logger } from '../utils/logger.js';
 
 class ChartBubble {
   constructor(options) {
@@ -23,7 +24,7 @@ class ChartBubble {
     this.maxRadius = this.options.maxRadius;
 
     if (!Array.isArray(this.options.bubbleData)) {
-      console.error('옵션은 배열이어야 함');
+      logger.error('옵션은 배열이어야 함', null, 'ChartBubble');
       this.bubbleData = [];
     } else {
       this.bubbleData = this.options.bubbleData;
@@ -39,7 +40,7 @@ class ChartBubble {
 
   init() {
     if (!d3) {
-      console.error("D3.js 라이브러리를 찾을 수 없음");
+      logger.error("D3.js 라이브러리를 찾을 수 없음", null, 'ChartBubble');
       return;
     }
 
@@ -103,7 +104,7 @@ class ChartBubble {
   }
 
   handleClick(event, d) {
-    console.log("클릭된 버블:", d);
+    logger.info("클릭된 버블", d, 'ChartBubble');
     alert(`"${d.name}" (${d.percentage}%)이(가) 클릭되었습니다!`);
   }
 

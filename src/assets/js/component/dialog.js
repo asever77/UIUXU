@@ -1,4 +1,6 @@
 import { loadContent, FocusTrap } from '../utils/utils.js';
+import { logger } from '../utils/logger.js';
+import { ErrorHandler, ElementNotFoundError, StateError } from '../utils/errors.js';
 
 export default class Dialog {
   constructor(opt) {
@@ -96,7 +98,7 @@ export default class Dialog {
         // this.initToast();
         break;
       default:
-        console.warn('Unknown modal type:', this.type);
+        logger.warn('Unknown modal type', this.type, 'Dialog');
     }
   }
 
@@ -172,19 +174,27 @@ export default class Dialog {
 				src: this.src,
 				insert: true,
 				callback: () => {
-          console.log('callback');
+          logger.debug('Modal content loaded', null, 'Dialog');
         },
 			})
 			.then(() => this.buildDialog())
-			.catch(err => console.error('Error loading modal content:', err));
+			.catch(err => logger.error('Error loading modal content', err, 'Dialog'));
 		} else {
       this.buildDialog();
     }
   }
   buildDialog() {
     this.dialog = document.querySelector(`[data-dialog="${this.id}"]`);
-    if (!this.dialog) {
-      console.error('Modal element not found');
+    
+    // DOM 요소 존재 검증
+    try {
+      ErrorHandler.requireElement(
+        this.dialog,
+        `[data-dialog="${this.id}"]`,
+        'Dialog'
+      );
+    } catch (error) {
+      ErrorHandler.handle(error, 'Dialog');
       return;
     }
 
@@ -256,7 +266,7 @@ export default class Dialog {
         this.cancelCallback && this.cancelCallback();
         break;
       default:
-        console.warn(`Unknown button action: ${action}`);
+        logger.warn(`Unknown button action: ${action}`, null, 'Dialog');
     }
   }
 
@@ -361,7 +371,7 @@ export default class Dialog {
       }
     }
     const dragEnd = () => {
-      console.log('dragEnd')
+      logger.debug('Drag ended', null, 'Dialog');
       document.removeEventListener(eventMove, dragMove);
       document.removeEventListener(eventEnd, dragEnd);
       //확장에서 축소를 위한 드래그체크
@@ -429,7 +439,7 @@ export default class Dialog {
           }
         });
       } else if ( (Math.abs(y_m - y) < dragScope || y_m === undefined) && this.dialog.dataset.state === 'drag-full') {
-        console.log('성공 원복');
+        logger.debug('성공 원복', null, 'Dialog');
         //성공 원복
         // console.log('성공 원복', this.dialog.dataset.state, y_m - y, (h / 3) * 2);
         // if (this.dialog.dataset.state === 'drag-full') {
@@ -446,11 +456,11 @@ export default class Dialog {
         this.dialogWrap.setAttribute('style', fullMaxHeight);
       } else if (isDragState) {
         //취소 풀원복
-        console.log('취소 풀원복', isDragState);
+        logger.debug('취소 풀원복', isDragState, 'Dialog');
         this.dialogWrap.setAttribute('style', fullMaxHeight);
       } else {
         //취소 원복
-        console.log('취소 원복');
+        logger.debug('취소 원복', null, 'Dialog');
         const el_extend = this.dialog.querySelector('[data-dialog-item="extend"]');
         el_extend.removeEventListener('touchstart', this.boundExtendStart, { passive: true });
         // el_extend.removeEventListener('mousedown', this.boundExtendStart, { passive: true });

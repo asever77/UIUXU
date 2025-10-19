@@ -17,6 +17,11 @@ import ListIA from './component/listIA.js';
 import Roulette from './event/roulette.js';
 
 import { loadContent, RadioAllcheck, dayOption, createOptions, getDeviceInfo, textLength } from './utils/utils.js';
+import { logger } from './utils/logger.js';
+import { setupGlobalErrorHandler, ErrorHandler } from './utils/errors.js';
+
+// 전역 에러 핸들러 설정
+setupGlobalErrorHandler();
 
 console.log(
   '%c ',
@@ -118,7 +123,7 @@ class UXCore {
 
             document.querySelector('.ani').src = `../assets/img/${aniLandomArray[randomIndex]}.png`;
           })
-          .catch((err) => console.error('Error loading header content:', err));
+          .catch((err) => logger.error('Error loading header content', err, 'UXCore'));
         }
 
         if (el_aside) {
@@ -129,7 +134,7 @@ class UXCore {
           })
           .then(() => {
           })
-          .catch((err) => console.error('Error loading header content:', err));
+          .catch((err) => logger.error('Error loading aside content', err, 'UXCore'));
         }
 
         if (el_main && data) {
@@ -169,7 +174,7 @@ class UXCore {
               });
             }, 100);
           })
-          .catch((err) => console.error('Error loading header content:', err));
+          .catch((err) => logger.error('Error loading main content', err, 'UXCore'));
         }
 
         if (el_footer) {
@@ -180,10 +185,10 @@ class UXCore {
           })
           .then(() => {
           })
-          .catch((err) => console.error('Error loading footer content:', err));
+          .catch((err) => logger.error('Error loading footer content', err, 'UXCore'));
         }
       })
-      .catch((err) => console.error('Error loading layout content:', err));
+      .catch((err) => logger.error('Error loading layout content', err, 'UXCore'));
     }
   }
 

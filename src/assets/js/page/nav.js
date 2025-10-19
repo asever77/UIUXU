@@ -1,3 +1,5 @@
+import { logger } from '../utils/logger.js';
+
 export default class Nav {
   constructor(opt) {
     this.id = opt.id;
@@ -53,7 +55,7 @@ export default class Nav {
     }
   }
   actKey(e) {
-    console.log(e.key);
+    logger.debug('Key pressed', e.key, 'Nav');
     switch (e.key) {
       case 'ArrowDown':
       case 'ArrowrRght':

@@ -1,0 +1,116 @@
+{
+  "name": "uiuxu",
+  "version": "1.0.0",
+  "description": "Modern UI/UX Component Library with Vite Build System",
+  "type": "module",
+  "author": "asever77",
+  "license": "MIT",
+  "main": "dist/index.cjs",
+  "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs"
+    },
+    "./accordion": {
+      "import": "./dist/accordion.esm.js",
+      "require": "./dist/accordion.cjs"
+    },
+    "./button-selection": {
+      "import": "./dist/buttonSelection.esm.js",
+      "require": "./dist/buttonSelection.cjs"
+    },
+    "./dialog": {
+      "import": "./dist/dialog.esm.js",
+      "require": "./dist/dialog.cjs"
+    },
+    "./dropdown": {
+      "import": "./dist/dropdown.esm.js",
+      "require": "./dist/dropdown.cjs"
+    },
+    "./tab": {
+      "import": "./dist/tab.esm.js",
+      "require": "./dist/tab.cjs"
+    },
+    "./tooltip": {
+      "import": "./dist/tooltip.esm.js",
+      "require": "./dist/tooltip.cjs"
+    },
+    "./utils/logger": {
+      "import": "./dist/logger.esm.js",
+      "require": "./dist/logger.cjs"
+    },
+    "./utils/errors": {
+      "import": "./dist/errors.esm.js",
+      "require": "./dist/errors.cjs"
+    },
+    "./styles": "./dist/uiuxu.css",
+    "./dist/uiuxu.css": "./dist/uiuxu.css",
+    "./uiuxu.css": "./dist/uiuxu.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/asever77/UIUXU.git"
+  },
+  "bugs": {
+    "url": "https://github.com/asever77/UIUXU/issues"
+  },
+  "homepage": "https://github.com/asever77/UIUXU#readme",
+  "keywords": [
+    "ui",
+    "ux",
+    "components",
+    "javascript",
+    "scss",
+    "vite",
+    "accordion",
+    "dialog",
+    "modal",
+    "dropdown",
+    "tooltip",
+    "button-selection",
+    "ui-library",
+    "component-library",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "build:lite": "vite build --config vite.config.lite.js",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build:lib",
+    "scss:watch": "sass --watch src/assets/scss:src/assets/css",
+    "scss:build": "sass src/assets/scss:src/assets/css --style=compressed",
+    "lint": "eslint src/**/*.js",
+    "clean": "rimraf dist dist-lite"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10",
+    "sass": "^1.79.5",
+    "terser": "^5.36.0",
+    "eslint": "^9.13.0",
+    "rimraf": "^6.0.1",
+    "vite-plugin-html": "^3.2.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

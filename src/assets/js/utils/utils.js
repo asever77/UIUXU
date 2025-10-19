@@ -1,3 +1,5 @@
+import { logger } from './logger.js';
+
 /**
  * Loads content from a specified source and inserts it into a DOM element.
  * @param {Object} options - Options for the function.
@@ -15,16 +17,17 @@
 		.then(() => {
 			//로드 후 실행
 		})
-		.catch(err => console.error('Error loading header content:', err));
+		.catch(err => logger.error('Error loading content', err));
 */
 export const loadContent = ({ area, src, insert = false, callback = null }) => {
 	return new Promise((resolve, reject) => {
 		if (!(area instanceof Element)) {
-			console.error('Invalid selector provided.');
+			logger.error('Invalid selector provided', null, 'loadContent');
 			reject(new Error('Invalid DOM element.'));
 			return;
 		}
 		if (!src) {
+			logger.error('Source (src) is required', null, 'loadContent');
 			reject(new Error('Source (src) is required'));
 			return;
 		}
@@ -206,7 +209,6 @@ export const slideUp = (element, duration = 300) => {
 
 export const slideDown = (element, duration = 300) => {
   return new Promise(resolve => {
-    console.log(element.hidden)
     element.hidden = false;
     
     const height = element.scrollHeight;

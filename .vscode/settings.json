@@ -1,21 +1,61 @@
 {
-    "liveSassCompile.settings.formats": [
-        {
-            "format": "expanded",
-            "extensionName": ".css",
-            "savePath": "~/../css",
-            "savePathReplacementPairs": null
-        }
-    ],
-    "liveSassCompile.settings.includeItems": [
-        "/src/assets/scss/app.scss",
-    ],
+  // Vite 개발 서버 사용 (Live Sass Compile 대체)
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "~/../css",
+      "savePathReplacementPairs": null
+    }
+  ],
+  "liveSassCompile.settings.includeItems": [
+    "/src/assets/scss/app.scss",
+    "/src/assets/scss/uiuxu.scss"
+  ],
 
-    "liveServer.settings.donotVerifyTags": true,
-    "liveServer.settings.donotShowInfoMsg": true,
-    
-    "editor.wordWrap": "on",
-    "git.autofetch": true,
-    "git.ignoreRebaseWarning": true,
-    "liveServer.settings.port": 5508
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.port": 5508,
+
+  // 편집기 설정
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2,
+
+  // Git 설정
+  "git.autofetch": true,
+  "git.ignoreRebaseWarning": true,
+
+  // 파일 연결
+  "files.associations": {
+    "*.html": "html",
+    "*.scss": "scss"
+  },
+
+  // SCSS 린트
+  "scss.lint.unknownAtRules": "ignore",
+  "css.lint.unknownAtRules": "ignore",
+
+  // 언어별 포맷터
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2
+  },
+
+  // Emmet
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  }
 }
