@@ -11,31 +11,47 @@ export default defineConfig({
       // 진입점
       entry: {
         index: resolve(__dirname, "src/assets/js/uiuxu.common.js"),
-        // 개별 컴포넌트 진입점
+
+        // 개별 컴포넌트 진입점 (component/ 폴더)
         accordion: resolve(__dirname, "src/assets/js/component/accordion.js"),
         buttonSelection: resolve(
           __dirname,
           "src/assets/js/component/buttonSelection.js"
         ),
-        dialog: resolve(__dirname, "src/assets/js/component/dialog.js"),
-        dropdown: resolve(__dirname, "src/assets/js/component/dropdown.js"),
-        tab: resolve(__dirname, "src/assets/js/component/tab.js"),
-        tooltip: resolve(__dirname, "src/assets/js/component/tooltip.js"),
-        rangeSlider: resolve(
-          __dirname,
-          "src/assets/js/component/rangeSlider.js"
-        ),
-        timeSelect: resolve(__dirname, "src/assets/js/component/timeSelect.js"),
-        countdown: resolve(__dirname, "src/assets/js/component/countdown.js"),
-        drag: resolve(__dirname, "src/assets/js/component/drag.js"),
-        form: resolve(__dirname, "src/assets/js/component/form.js"),
         chartBubble: resolve(
           __dirname,
           "src/assets/js/component/chart_bubble.js"
         ),
-        // 유틸리티
-        logger: resolve(__dirname, "src/assets/js/utils/logger.js"),
+        countdown: resolve(__dirname, "src/assets/js/component/countdown.js"),
+        dialog: resolve(__dirname, "src/assets/js/component/dialog.js"),
+        drag: resolve(__dirname, "src/assets/js/component/drag.js"),
+        dropdown: resolve(__dirname, "src/assets/js/component/dropdown.js"),
+        listIA: resolve(__dirname, "src/assets/js/component/listIA.js"),
+        nav: resolve(__dirname, "src/assets/js/component/nav.js"),
+        rangeSlider: resolve(
+          __dirname,
+          "src/assets/js/component/rangeSlider.js"
+        ),
+        roulette: resolve(__dirname, "src/assets/js/component/roulette.js"),
+        scrollEvent: resolve(
+          __dirname,
+          "src/assets/js/component/scrollEvent.js"
+        ),
+        tab: resolve(__dirname, "src/assets/js/component/tab.js"),
+        timeSelect: resolve(__dirname, "src/assets/js/component/timeSelect.js"),
+        toggleController: resolve(
+          __dirname,
+          "src/assets/js/component/toggleController.js"
+        ),
+        tooltip: resolve(__dirname, "src/assets/js/component/tooltip.js"),
+        wheelPicker: resolve(
+          __dirname,
+          "src/assets/js/component/wheelPicker.js"
+        ),
+
+        // 유틸리티 (utils/ 폴더)
         errors: resolve(__dirname, "src/assets/js/utils/errors.js"),
+        logger: resolve(__dirname, "src/assets/js/utils/logger.js"),
         utils: resolve(__dirname, "src/assets/js/utils/utils.js"),
       },
       name: "UIUXU",

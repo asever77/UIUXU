@@ -1,6 +1,5 @@
-import { DROPDOWN_VERSION } from "../config/versions.js";
-import { loadContent } from '../utils/utils.js';
-import { FocusTrap } from '../utils/utils.js';
+import { loadContent } from "../utils/utils.js";
+import { FocusTrap } from "../utils/utils.js";
 
 export default class Dropdown {
   // Private 필드 선언
@@ -40,33 +39,33 @@ export default class Dropdown {
 
     this.#wrap = document.querySelector(`[data-dropdown="${this.#id}"]`);
     if (!this.#wrap) {
-      console.error(`Error: Dropdown wrapper with data-dropdown="${this.#id}" not found.`);
+      console.error(
+        `Error: Dropdown wrapper with data-dropdown="${this.#id}" not found.`
+      );
       return;
     }
     if (!this.#area) {
-      console.error(`Error: Dropdown wrapper with data-area="${this.#id}" not found.`);
-      return; 
+      console.error(
+        `Error: Dropdown wrapper with data-area="${this.#id}" not found.`
+      );
+      return;
     }
-    this.#button = this.#wrap.querySelector(`[data-dropdown-button="${this.#id}"]`);
-    this.#text = this.#button ? this.#button.querySelector(`[data-dropdown-text="${this.#id}"]`) : null;
+    this.#button = this.#wrap.querySelector(
+      `[data-dropdown-button="${this.#id}"]`
+    );
+    this.#text = this.#button
+      ? this.#button.querySelector(`[data-dropdown-text="${this.#id}"]`)
+      : null;
     this.#panel = document.querySelector(`[data-dropdown-panel="${this.#id}"]`);
-    this.#panelInner = document.querySelector(`[data-dropdown-section="${this.#id}"]`);
+    this.#panelInner = document.querySelector(
+      `[data-dropdown-section="${this.#id}"]`
+    );
     this.#html = document.documentElement;
 
     this.#boundHandleToggle = this.#handleToggle.bind(this);
     this.#boundHandleOutsideClick = this.#handleOutsideClick.bind(this);
 
-    this.#isArea = this.#wrap.querySelector('[data-dropdown-panel]');
-  }
-
-  ver() {
-    console.groupCollapsed(`%cdropdown %c${DROPDOWN_VERSION.ver}`, 'color: gold; font-weight: normal;', 'color: white; font-weight: bold;');
-    DROPDOWN_VERSION.history.forEach(item => {
-    console.log(`ver: ${item.ver} \ndate: ${item.date} \ndescription: ${item.description}`);
-    });
-    console.log(`author: ${DROPDOWN_VERSION.author}`);
-    console.log(`license: ${DROPDOWN_VERSION.license}`);
-    console.groupEnd();
+    this.#isArea = this.#wrap.querySelector("[data-dropdown-panel]");
   }
 
   init() {
@@ -77,8 +76,8 @@ export default class Dropdown {
     this.#addEventListeners();
 
     // resize 이벤트 리스너도 destroy 시 제거 필요
-    window.addEventListener('resize', this.reset); 
-    this.#button.addEventListener('click', this.#boundHandleToggle); // init에서 이미 한 번 추가되는 부분
+    window.addEventListener("resize", this.reset);
+    this.#button.addEventListener("click", this.#boundHandleToggle); // init에서 이미 한 번 추가되는 부분
     this.#callback && this.#callback();
   }
 
@@ -89,64 +88,69 @@ export default class Dropdown {
         src: this.#src,
         insert: true,
       })
-      .then(() => {
-        if (this.#text) {
-          this.#text.dataset.dropdownText = this.#id;
-        }
-        if (this.#button) {
-          this.#button.dataset.dropdownButton = this.#id;
-          this.#button.setAttribute('aria-controls', this.#id);
-          this.#button.setAttribute('aria-expanded', 'false');
-        }
-  
-        this.#panel = document.querySelector(`[data-dropdown-panel="${this.#id}"]`);
-        this.#panelInner = document.querySelector(`[data-dropdown-section="${this.#id}"]`);
-        this.#panel.dataset.dropdownPanel = this.#id;
-        this.#panel.setAttribute('aria-hidden', 'true');
-        this.#panel.setAttribute('tabindex', '-1');
-        this.#panel.id = this.#id;
+        .then(() => {
+          if (this.#text) {
+            this.#text.dataset.dropdownText = this.#id;
+          }
+          if (this.#button) {
+            this.#button.dataset.dropdownButton = this.#id;
+            this.#button.setAttribute("aria-controls", this.#id);
+            this.#button.setAttribute("aria-expanded", "false");
+          }
 
-        this.#isArea = this.#wrap.querySelector('[data-dropdown-panel]');
-        this.#srcCallback && this.#srcCallback();
-      })
-      .catch(err => console.error('Error loading tab content:', err));
+          this.#panel = document.querySelector(
+            `[data-dropdown-panel="${this.#id}"]`
+          );
+          this.#panelInner = document.querySelector(
+            `[data-dropdown-section="${this.#id}"]`
+          );
+          this.#panel.dataset.dropdownPanel = this.#id;
+          this.#panel.setAttribute("aria-hidden", "true");
+          this.#panel.setAttribute("tabindex", "-1");
+          this.#panel.id = this.#id;
+
+          this.#isArea = this.#wrap.querySelector("[data-dropdown-panel]");
+          this.#srcCallback && this.#srcCallback();
+        })
+        .catch((err) => console.error("Error loading tab content:", err));
     } else {
       if (this.#text) {
         this.#text.dataset.dropdownText = this.#id;
       }
       if (this.#button) {
         this.#button.dataset.dropdownButton = this.#id;
-        this.#button.setAttribute('aria-controls', this.#id);
-        this.#button.setAttribute('aria-expanded', 'false');
+        this.#button.setAttribute("aria-controls", this.#id);
+        this.#button.setAttribute("aria-expanded", "false");
       }
       if (this.#panel) {
         this.#panel.dataset.dropdownPanel = this.#id;
-        this.#panel.setAttribute('aria-hidden', 'true');
-        this.#panel.setAttribute('tabindex', '-1');
+        this.#panel.setAttribute("aria-hidden", "true");
+        this.#panel.setAttribute("tabindex", "-1");
         this.#panel.id = this.#id;
       }
     }
   }
-  
+
   #addEventListeners() {
     if (this.#button) {
       // init()에서 이미 추가되므로 중복될 수 있습니다. init()에서 한 번만 추가하도록 조정하거나,
-      // init()의 `this.button.addEventListener('click', this.boundHandleToggle);` 라인을 제거하고 
+      // init()의 `this.button.addEventListener('click', this.boundHandleToggle);` 라인을 제거하고
       // 여기서만 추가하는 것을 권장합니다.
-      this.#button.addEventListener('click', this.#boundHandleToggle); 
+      this.#button.addEventListener("click", this.#boundHandleToggle);
     }
   }
 
   #removeEventListeners() {
     if (this.#button) {
-      this.#button.removeEventListener('click', this.#boundHandleToggle);
+      this.#button.removeEventListener("click", this.#boundHandleToggle);
     }
-    this.#html.removeEventListener('click', this.#boundHandleOutsideClick);
+    this.#html.removeEventListener("click", this.#boundHandleOutsideClick);
   }
 
   #handleOutsideClick = (e) => {
     if (!this.#wrap || !this.#panel) return; // destroy 후 호출 방지
-    const isClickInsideDropdown = this.#wrap.contains(e.target) || this.#panel.contains(e.target);
+    const isClickInsideDropdown =
+      this.#wrap.contains(e.target) || this.#panel.contains(e.target);
     if (!isClickInsideDropdown) {
       this.hide();
     }
@@ -154,60 +158,69 @@ export default class Dropdown {
 
   #handleToggle = () => {
     if (!this.#button || !this.#panel) return;
-    const isExpanded = this.#button.getAttribute('aria-expanded') === 'true';
+    const isExpanded = this.#button.getAttribute("aria-expanded") === "true";
     isExpanded ? this.hide() : this.show();
   };
 
   reset = () => {
-    const expanded = document.querySelector('[data-dropdown-panel][aria-hidden="false"]');
-    console.log(expanded, this)
+    const expanded = document.querySelector(
+      '[data-dropdown-panel][aria-hidden="false"]'
+    );
+    console.log(expanded, this);
     if (expanded && expanded !== this.#panel) {
-      expanded.setAttribute('aria-hidden', true);
-      document.querySelector(`[data-dropdown-button="${expanded.dataset.dropdownPanel}"]`).setAttribute('aria-expanded', false);
+      expanded.setAttribute("aria-hidden", true);
+      document
+        .querySelector(
+          `[data-dropdown-button="${expanded.dataset.dropdownPanel}"]`
+        )
+        .setAttribute("aria-expanded", false);
     }
-  }
+  };
 
   show() {
     if (!this.#button || !this.#panel) return;
 
-    this.#button.setAttribute('aria-expanded', true);
-    this.#panel.setAttribute('aria-hidden', false); 
+    this.#button.setAttribute("aria-expanded", true);
+    this.#panel.setAttribute("aria-hidden", false);
 
     const rect = this.#button.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
     const scroll_t = document.documentElement.scrollTop;
-    this.#panel.style.height = rect.height + 'px';
+    this.#panel.style.height = rect.height + "px";
 
     if (this.ps) {
       this.#panel.dataset.ps = this.ps;
     } else {
-      this.#panel.dataset.ps = (rect.bottom + this.#panelInner.offsetHeight < viewportHeight) ? 'bl' : 'tl';
+      this.#panel.dataset.ps =
+        rect.bottom + this.#panelInner.offsetHeight < viewportHeight
+          ? "bl"
+          : "tl";
     }
 
     if (!this.#isArea) {
-      this.#panel.style.width = rect.width + 'px';
-      this.#panel.style.left = rect.x + 'px';
-      this.#panel.style.top = (rect.y + scroll_t) + 'px';
-    } 
+      this.#panel.style.width = rect.width + "px";
+      this.#panel.style.left = rect.x + "px";
+      this.#panel.style.top = rect.y + scroll_t + "px";
+    }
 
     this.#panel.focus();
-    this.#html.addEventListener('click', this.#boundHandleOutsideClick);
+    this.#html.addEventListener("click", this.#boundHandleOutsideClick);
 
     new FocusTrap(this.#panel);
   }
-  
+
   hide() {
     if (!this.#button || !this.#panel) return;
 
-    this.#html.removeEventListener('click', this.#boundHandleOutsideClick);
-    this.#button.setAttribute('aria-expanded', 'false');
-    this.#panel.setAttribute('aria-hidden', 'true');
+    this.#html.removeEventListener("click", this.#boundHandleOutsideClick);
+    this.#button.setAttribute("aria-expanded", "false");
+    this.#panel.setAttribute("aria-hidden", "true");
     this.#button.focus();
   }
 
   destroy() {
     this.#removeEventListeners();
-    window.removeEventListener('resize', this.reset);
+    window.removeEventListener("resize", this.reset);
 
     this.#wrap = null;
     this.#button = null;
@@ -215,7 +228,7 @@ export default class Dropdown {
     this.#panel = null;
     this.#panelInner = null;
     this.#area = null;
-    
+
     // 3. (필요하다면) 컴포넌트가 생성한 DOM 요소 제거
     // 예를 들어, loadContent로 동적으로 삽입된 패널을 제거하고 싶다면
     if (this.#panel && this.#panel.parentNode && this.#src) {

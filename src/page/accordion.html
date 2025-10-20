@@ -1,106 +1,117 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accordion | UIUXU</title>
+    <!-- loads the entire Variable Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/app.css" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Accordion | UIUXU </title>
-	<!-- loads the entire Variable Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+      [data-accordion-item]:first-child {
+        border-top: 0;
+      }
 
-	<style>
-		[data-accordion-item]:first-child {
-			border-top: 0;
-		}
+      [data-accordion-item] {
+        border-top: 1px solid var(--gray-30);
+        scroll-margin-top: 6rem;
+      }
 
-		[data-accordion-item] {
-			border-top: 1px solid var(--gray-30);
-			scroll-margin-top: 6rem
-		}
+      [data-accordion-button] {
+        padding: 1.2rem 0.8rem;
+      }
 
-		[data-accordion-button] {
-			padding: 1.2rem .8rem
-		}
+      [data-accordion-section] {
+        padding: 1.6rem 0.8rem;
+      }
 
-		[data-accordion-section] {
-			padding: 1.6rem .8rem;
-		}
-
-		[data-guide="on"] {
-			[data-accordion],
+      [data-guide="on"] {
+        [data-accordion],
 			/* [data-accordion-button], */
 			[data-accordion-body],
 			[data-accordion-body],
 			[data-accordion-item],
 			[data-accordion-head],
 			[data-accordion-title] {
-				position: relative;
-				outline: 1px dashed rgba(255, 99, 71, 0.2);
-				outline-offset: -1px;
-				background-color: rgba(255, 99, 71, 0.1);
+          position: relative;
+          outline: 1px dashed rgba(255, 99, 71, 0.2);
+          outline-offset: -1px;
+          background-color: rgba(255, 99, 71, 0.1);
 
-				&::after,
-				&::before {
-					content: "";
-					position: absolute;
-					display: block;
-					pointer-events: none;
-				}
+          &::after,
+          &::before {
+            content: "";
+            position: absolute;
+            display: block;
+            pointer-events: none;
+          }
 
-				&::after {
-					width: 100%;
-					height: 1px;
-					border-top: 1px dashed rgba(255, 99, 71, 0.2);
-					top: 50%;
-					left: 0;
-				}
+          &::after {
+            width: 100%;
+            height: 1px;
+            border-top: 1px dashed rgba(255, 99, 71, 0.2);
+            top: 50%;
+            left: 0;
+          }
 
-				&::before {
-					width: 1px;
-					height: 100%;
-					border-left: 1px dashed rgba(255, 99, 71, 0.2);
-					left: 50%;
-					top: 0;
-				}
-			}
-		}
-	</style>
-</head>
+          &::before {
+            width: 1px;
+            height: 100%;
+            border-left: 1px dashed rgba(255, 99, 71, 0.2);
+            left: 50%;
+            top: 0;
+          }
+        }
+      }
+    </style>
+  </head>
 
-<body>
-	<!-- script -->
-	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/base.html',
-			page: './content/accordion.html',
-			callback: () => {
-				UI.exe.codeGuide = new UX.Tab({
-					id: 'codeGuide',
-					renderMode: 'static',
-					selected: 1,
-					data: [
-						{ callback: () => { logger.debug('HTML open', null, 'Accordion'); },},
-						{ callback: () => { logger.debug('Javascript open', null, 'Accordion'); },},
-						{ callback: () => { logger.debug('CSS open', null, 'Accordion'); },},
-					],
-				});
-				UI.exe.codeGuide.init();
+  <body>
+    <!-- script -->
+    <script type="module">
+      import { UX } from "../assets/js/uiuxu.common.js";
+      UX.init({
+        layout: "./layout/base.html",
+        page: "./content/accordion.html",
+        callback: () => {
+          UI.exe.codeGuide = new UX.Tab({
+            id: "codeGuide",
+            renderMode: "static",
+            selected: 1,
+            data: [
+              {
+                callback: () => {
+                  logger.debug("HTML open", null, "Accordion");
+                },
+              },
+              {
+                callback: () => {
+                  logger.debug("Javascript open", null, "Accordion");
+                },
+              },
+              {
+                callback: () => {
+                  logger.debug("CSS open", null, "Accordion");
+                },
+              },
+            ],
+          });
+          UI.exe.codeGuide.init();
 
-				// accordion
-				UI.exe.acco1 = new UX.Accordion({
-					id: 'acco1',
-					expanded: 'acco1-0',
-					// scrollIntoView: true,
-					// scrollOptions: { behavior: 'smooth', block: 'start' },
-				});
-
-				UI.exe.acco1.init();
-			}
-		});
-	</script>
-</body>
-
+          // accordion
+          UI.exe.acco1 = new UX.Accordion({
+            id: "acco1",
+            expanded: "acco1-0",
+            // scrollIntoView: true,
+            // scrollOptions: { behavior: 'smooth', block: 'start' },
+          });
+          UI.exe.acco1.init();
+        },
+      });
+    </script>
+  </body>
 </html>

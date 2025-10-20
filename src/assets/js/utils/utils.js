@@ -1,4 +1,4 @@
-import { logger } from './logger.js';
+import { logger } from "./logger.js";
 
 /**
  * Loads content from a specified source and inserts it into a DOM element.
@@ -20,153 +20,66 @@ import { logger } from './logger.js';
 		.catch(err => logger.error('Error loading content', err));
 */
 export const loadContent = ({ area, src, insert = false, callback = null }) => {
-	return new Promise((resolve, reject) => {
-		if (!(area instanceof Element)) {
-			logger.error('Invalid selector provided', null, 'loadContent');
-			reject(new Error('Invalid DOM element.'));
-			return;
-		}
-		if (!src) {
-			logger.error('Source (src) is required', null, 'loadContent');
-			reject(new Error('Source (src) is required'));
-			return;
-		}
-
-		fetch(src)
-			.then(response => {
-				if (!response.ok) throw new Error(`Failed to fetch ${src}`);
-				return response.text();
-			})
-			.then(result => {
-				insert ? area.insertAdjacentHTML('afterbegin', result) : area.innerHTML = result;
-				if (callback) callback();
-				resolve(result);
-			})
-			.catch(error => reject(error));
-	});
-};
-
-export const scrollMove = {
-  options: {
-    selector: document.querySelector('html, body'),
-    focus: false,
-    top: 0,
-    left: 0,
-    add: 0,
-    align: 'default',
-    effect: 'smooth', //'auto'
-    callback: false,
-  },
-  move(option) {
-    const opt = Object.assign({}, this.options, option);
-    //const opt = {...this.options, ...option};
-    const top = opt.top;
-    const left = opt.left;
-    const callback = opt.callback;
-    const align = opt.align;
-    const add = opt.add;
-    const focus = opt.focus;
-    const effect = opt.effect;
-    let selector = opt.selector;
-
-    switch (align) {
-      case 'center':
-        selector.scrollTo({
-          top: Math.abs(top) - (selector.offsetHeight / 2) + add,
-          left: Math.abs(left) - (selector.offsetWidth / 2) + add,
-          behavior: effect
-        });
-        break;
-
-      case 'default':
-      default:
-        selector.scrollTo({
-          top: Math.abs(top) + add,
-          left: Math.abs(left) + add,
-          behavior: effect
-        });
+  return new Promise((resolve, reject) => {
+    if (!(area instanceof Element)) {
+      logger.error("Invalid selector provided", null, "loadContent");
+      reject(new Error("Invalid DOM element."));
+      return;
     }
-    this.checkEnd({
-      selector: selector,
-      nowTop: selector.scrollTop,
-      nowLeft: selector.scrollLeft,
-      align: align,
-      callback: callback,
-      focus: focus
-    });
-  },
-  checkEndTimer: {},
-  checkEnd(opt) {
-    const el_selector = opt.selector;
-    const align = opt.align
-    const focus = opt.focus
-    const callback = opt.callback
+    if (!src) {
+      logger.error("Source (src) is required", null, "loadContent");
+      reject(new Error("Source (src) is required"));
+      return;
+    }
 
-    let nowTop = opt.nowTop;
-    let nowLeft = opt.nowLeft;
-
-    this.checkEndTimer = setTimeout(() => {
-      //스크롤 현재 진행 여부 판단
-      if (nowTop === el_selector.scrollTop && nowLeft === el_selector.scrollLeft) {
-        clearTimeout(this.checkEndTimer);
-        //포커스가 위치할 엘리먼트를 지정하였다면 실행
-        if (!!focus) {
-          focus.setAttribute('tabindex', 0);
-          focus.focus();
-        }
-        //스크롤 이동후 콜백함수 실행
-        if (!!callback) {
-          if (typeof callback === 'string') {
-            // Global.callback[callback]();
-          } else {
-            callback();
-          }
-        }
-      } else {
-        nowTop = el_selector.scrollTop;
-        nowLeft = el_selector.scrollLeft;
-
-        this.checkEnd({
-          selector: el_selector,
-          nowTop: nowTop,
-          nowLeft: nowLeft,
-          align: align,
-          callback: callback,
-          focus: focus
-        });
-      }
-    }, 100);
-  }
-}
+    fetch(src)
+      .then((response) => {
+        if (!response.ok) throw new Error(`Failed to fetch ${src}`);
+        return response.text();
+      })
+      .then((result) => {
+        insert
+          ? area.insertAdjacentHTML("afterbegin", result)
+          : (area.innerHTML = result);
+        if (callback) callback();
+        resolve(result);
+      })
+      .catch((error) => reject(error));
+  });
+};
 
 export const makeID = (v) => {
   let idLength = v;
   let idText = "";
-  let word_list = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*"; 
+  let word_list =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*";
   for (let i = 0; i < idLength; i++) {
     idText += word_list.charAt(Math.floor(Math.random() * word_list.length));
-  };
+  }
   return idText;
 };
 
 export const comma = (n) => {
   const parts = n.toString().split(".");
 
-  return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") + (parts[1] ? "." + parts[1] : "");
+  return (
+    parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",") +
+    (parts[1] ? "." + parts[1] : "")
+  );
 };
 
 export const add0 = (x) => {
-  return Number(x) < 10 ? '0' + x : x;
+  return Number(x) < 10 ? "0" + x : x;
 };
 
 export const dayOption = (YYYY, MM) => {
   const lastDay = new Date(YYYY, MM, 0).getDate();
   const currentDays = [];
   for (let i = 1; i <= lastDay; i++) {
-    const formattedText = i.toString().padStart(2, '0');
+    const formattedText = i.toString().padStart(2, "0");
     currentDays.push({
       value: i,
-      text: formattedText
+      text: formattedText,
     });
   }
   return currentDays;
@@ -177,71 +90,72 @@ export const createOptions = (start, end) => {
   for (let i = start; i <= end; i++) {
     options.push({
       value: i,
-      text: i < 10 ? '0' + i.toString() : i.toString()
+      text: i < 10 ? "0" + i.toString() : i.toString(),
     });
   }
   return options;
 };
 
 export const slideUp = (element, duration = 300) => {
-  return new Promise(resolve => {
-    element.style.height = element.scrollHeight + 'px';
+  return new Promise((resolve) => {
+    element.style.height = element.scrollHeight + "px";
     element.style.transition = `height ${duration}ms ease`;
     element.offsetHeight; // reflow
 
     requestAnimationFrame(() => {
-      element.style.height = '0px';
+      element.style.height = "0px";
     });
 
     const onEnd = () => {
-      element.removeEventListener('transitionend', onEnd);
+      element.removeEventListener("transitionend", onEnd);
       element.hidden = true;
-      element.style = '';
+      element.style = "";
       //element.style.display = 'none';
       //element.style.height = '';
       //element.style.transition = '';
       resolve();
     };
 
-    element.addEventListener('transitionend', onEnd);
+    element.addEventListener("transitionend", onEnd);
   });
 };
 
 export const slideDown = (element, duration = 300) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     element.hidden = false;
-    
+
     const height = element.scrollHeight;
-    element.style.height = '0px';
+    element.style.height = "0px";
     element.style.transition = `height ${duration}ms ease`;
     element.offsetHeight; // reflow
 
     requestAnimationFrame(() => {
-      element.style.height = height + 'px';
+      element.style.height = height + "px";
     });
 
     const onEnd = () => {
-      element.removeEventListener('transitionend', onEnd);
-      element.style.height = '';
-      element.style.transition = '';
+      element.removeEventListener("transitionend", onEnd);
+      element.style.height = "";
+      element.style.transition = "";
       resolve();
     };
 
-    element.addEventListener('transitionend', onEnd);
+    element.addEventListener("transitionend", onEnd);
   });
 };
 
 export const slideToggle = (element, duration = 300) => {
-  const isHidden = getComputedStyle(element).display === 'none' || element.clientHeight === 0;
+  const isHidden =
+    getComputedStyle(element).display === "none" || element.clientHeight === 0;
   return isHidden ? slideDown(element, duration) : slideUp(element, duration);
 };
 
-export const getUrlParameter = (paraname) => { 
+export const getUrlParameter = (paraname) => {
   const _tempUrl = window.location.search.substring(1);
-  const _tempArray = _tempUrl.split('&');
+  const _tempArray = _tempUrl.split("&");
 
   for (let i = 0, len = _tempArray.length; i < len; i++) {
-    const that = _tempArray[i].split('=');
+    const that = _tempArray[i].split("=");
 
     if (that[0] === paraname) {
       return that[1];
@@ -251,15 +165,19 @@ export const getUrlParameter = (paraname) => {
 
 export const getDeviceInfo = (appname) => {
   const ua = navigator.userAgent;
-  let isDevice =  "desktop";
+  let isDevice = "desktop";
   let isApp = false;
   let os = "other";
 
   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-      isDevice = "tablet";
+    isDevice = "tablet";
   }
-  if (/Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|NetFront|Opera M(obi|ini)|S(ymbian|eries60|eries40)|UCWEB|Text.d|Windows C.E|Windows P.E/i.test(ua)) {
-      isDevice =  "mobile";
+  if (
+    /Mobile|iP(hone|od)|Android|BlackBerry|IEMobile|Kindle|NetFront|Opera M(obi|ini)|S(ymbian|eries60|eries40)|UCWEB|Text.d|Windows C.E|Windows P.E/i.test(
+      ua
+    )
+  ) {
+    isDevice = "mobile";
   }
   if (ua.includes(appname)) {
     isApp = true;
@@ -276,71 +194,172 @@ export const getDeviceInfo = (appname) => {
     os = "linux";
   }
   const data = {
-    touch: 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
+    touch:
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0,
     device: isDevice,
     os: os,
-    app: isApp
-  }
+    app: isApp,
+  };
   return data;
-}
+};
 
 export const textLength = (opt) => {
-  const textInputs = document.querySelectorAll('[data-length-object]');
-  const callback = opt ? opt.callback ? opt.callback : null : null;
+  const textInputs = document.querySelectorAll("[data-length-object]");
+  const callback = opt ? (opt.callback ? opt.callback : null) : null;
   const resultInputs = [];
-  
-  textInputs.forEach(item => {
+
+  textInputs.forEach((item) => {
     resultInputs.push({
       name: item.dataset.lengthObject,
-      state: false
+      state: false,
     });
   });
 
   const updateInputStatus = (inputElement) => {
     const targetId = inputElement.dataset.lengthObject;
-    const counterElements = document.querySelectorAll(`[data-length-target="${targetId}"]`);
-    const minLength = Number(inputElement.getAttribute('minlength')) || 4;
+    const counterElements = document.querySelectorAll(
+      `[data-length-target="${targetId}"]`
+    );
+    const minLength = Number(inputElement.getAttribute("minlength")) || 4;
     const currentLength = inputElement.value.length;
-    const maxLength = Number(inputElement.getAttribute('maxlength'));
+    const maxLength = Number(inputElement.getAttribute("maxlength"));
     if (currentLength > maxLength) {
       inputElement.value = inputElement.value.slice(0, maxLength);
     }
     if (counterElements) {
-      counterElements.forEach(item => {
+      counterElements.forEach((item) => {
         item.textContent = currentLength;
       });
     }
-    const itemToUpdate = resultInputs.find(item => item.name === targetId);
+    const itemToUpdate = resultInputs.find((item) => item.name === targetId);
 
     if (currentLength >= minLength) {
-      inputElement.dataset.state = 'on';
+      inputElement.dataset.state = "on";
       itemToUpdate.state = true;
     } else {
-      inputElement.dataset.state = 'off';
+      inputElement.dataset.state = "off";
       itemToUpdate.state = false;
     }
-    
+
     callback && callback(resultInputs);
   };
 
-  textInputs.forEach(input => {
+  textInputs.forEach((input) => {
     updateInputStatus(input);
-    input.addEventListener('keyup', () => {
+    input.addEventListener("keyup", () => {
       updateInputStatus(input);
     });
   });
-}
+};
+
+export const scrollMove = {
+  options: {
+    selector: document.querySelector("html, body"),
+    focus: false,
+    top: 0,
+    left: 0,
+    add: 0,
+    align: "default",
+    effect: "smooth", //'auto'
+    callback: false,
+  },
+  move(option) {
+    const opt = Object.assign({}, this.options, option);
+    //const opt = {...this.options, ...option};
+    const top = opt.top;
+    const left = opt.left;
+    const callback = opt.callback;
+    const align = opt.align;
+    const add = opt.add;
+    const focus = opt.focus;
+    const effect = opt.effect;
+    let selector = opt.selector;
+
+    switch (align) {
+      case "center":
+        selector.scrollTo({
+          top: Math.abs(top) - selector.offsetHeight / 2 + add,
+          left: Math.abs(left) - selector.offsetWidth / 2 + add,
+          behavior: effect,
+        });
+        break;
+
+      case "default":
+      default:
+        selector.scrollTo({
+          top: Math.abs(top) + add,
+          left: Math.abs(left) + add,
+          behavior: effect,
+        });
+    }
+    this.checkEnd({
+      selector: selector,
+      nowTop: selector.scrollTop,
+      nowLeft: selector.scrollLeft,
+      align: align,
+      callback: callback,
+      focus: focus,
+    });
+  },
+  checkEndTimer: {},
+  checkEnd(opt) {
+    const el_selector = opt.selector;
+    const align = opt.align;
+    const focus = opt.focus;
+    const callback = opt.callback;
+
+    let nowTop = opt.nowTop;
+    let nowLeft = opt.nowLeft;
+
+    this.checkEndTimer = setTimeout(() => {
+      //스크롤 현재 진행 여부 판단
+      if (
+        nowTop === el_selector.scrollTop &&
+        nowLeft === el_selector.scrollLeft
+      ) {
+        clearTimeout(this.checkEndTimer);
+        //포커스가 위치할 엘리먼트를 지정하였다면 실행
+        if (!!focus) {
+          focus.setAttribute("tabindex", 0);
+          focus.focus();
+        }
+        //스크롤 이동후 콜백함수 실행
+        if (!!callback) {
+          if (typeof callback === "string") {
+            // Global.callback[callback]();
+          } else {
+            callback();
+          }
+        }
+      } else {
+        nowTop = el_selector.scrollTop;
+        nowLeft = el_selector.scrollLeft;
+
+        this.checkEnd({
+          selector: el_selector,
+          nowTop: nowTop,
+          nowLeft: nowLeft,
+          align: align,
+          callback: callback,
+          focus: focus,
+        });
+      }
+    }, 100);
+  },
+};
 
 export class ScrollTrigger {
   constructor(options) {
     // 기본 옵션 설정
     this.options = {
       targetSelector: null, // 관찰할 요소의 CSS 선택자 (필수)
-      callback: () => {},   // 요소가 트리거될 때 실행할 함수 (필수)
-      root: null,           // Intersection Observer의 root 옵션 (null = 뷰포트)
-      rootMargin: '0px',    // Intersection Observer의 rootMargin 옵션
-      threshold: 0,         // Intersection Observer의 threshold 옵션 (0.0 ~ 1.0 또는 배열)
-      once: false           // 한 번 트리거되면 관찰을 중지할지 여부
+      callback: () => {}, // 요소가 트리거될 때 실행할 함수 (필수)
+      root: null, // Intersection Observer의 root 옵션 (null = 뷰포트)
+      rootMargin: "0px", // Intersection Observer의 rootMargin 옵션
+      threshold: 0, // Intersection Observer의 threshold 옵션 (0.0 ~ 1.0 또는 배열)
+      once: false, // 한 번 트리거되면 관찰을 중지할지 여부
     };
 
     // 사용자가 제공한 옵션으로 기본 옵션 오버라이드
@@ -348,11 +367,11 @@ export class ScrollTrigger {
 
     // 필수 옵션 검증
     if (!this.options.targetSelector) {
-      console.error('ScrollTrigger: targetSelector 옵션은 필수입니다.');
+      console.error("ScrollTrigger: targetSelector 옵션은 필수입니다.");
       return;
     }
-    if (typeof this.options.callback !== 'function') {
-      console.error('ScrollTrigger: callback 옵션은 함수여야 합니다.');
+    if (typeof this.options.callback !== "function") {
+      console.error("ScrollTrigger: callback 옵션은 함수여야 합니다.");
       return;
     }
 
@@ -362,28 +381,33 @@ export class ScrollTrigger {
 
   init() {
     const { root, rootMargin, threshold } = this.options;
-    console.log('rootMargin',rootMargin)
+    console.log("rootMargin", rootMargin);
     // Intersection Observer 생성
-    this.observer = new IntersectionObserver(this.handleIntersection.bind(this), {
-      root,
-      rootMargin,
-      threshold
-    });
+    this.observer = new IntersectionObserver(
+      this.handleIntersection.bind(this),
+      {
+        root,
+        rootMargin,
+        threshold,
+      }
+    );
 
     // 모든 대상 요소를 찾아 관찰 시작
     this.targetElements = this.options.targetSelector;
     if (this.targetElements.length === 0) {
-      console.warn(`ScrollTrigger: '${this.options.targetSelector}'에 해당하는 요소를 찾을 수 없습니다.`);
+      console.warn(
+        `ScrollTrigger: '${this.options.targetSelector}'에 해당하는 요소를 찾을 수 없습니다.`
+      );
       return;
     }
 
-    this.targetElements.forEach(element => {
+    this.targetElements.forEach((element) => {
       this.observer.observe(element);
     });
   }
 
   handleIntersection(entries, observer) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       //target: 대상 요소
       //isIntersecting: 교차 여부
       //intersectionRatio: 교차 비율
@@ -392,7 +416,7 @@ export class ScrollTrigger {
         this.options.callback({
           target: entry.target,
           ratio: entry.intersectionRatio.toPrecision(2),
-          rect: entry.boundingClientRect
+          rect: entry.boundingClientRect,
         }); // 콜백에 해당 요소 전달
 
         // once 옵션이 true이면, 콜백 실행 후 해당 요소의 관찰 중지
@@ -421,7 +445,7 @@ export class SmoothScroller {
   constructor(opt) {
     this.container = opt.element;
     this.width = this.container.offsetWidth;
-    this.type = opt.type || 'center';
+    this.type = opt.type || "center";
     const computedStyle = window.getComputedStyle(this.container);
     this.gap = parseFloat(computedStyle.paddingLeft);
   }
@@ -429,7 +453,9 @@ export class SmoothScroller {
   move(item) {
     // If the container has been destroyed, do nothing
     if (!this.container) {
-      console.warn("SmoothScroller: Attempted to move item on a destroyed instance.");
+      console.warn(
+        "SmoothScroller: Attempted to move item on a destroyed instance."
+      );
       return;
     }
 
@@ -438,29 +464,31 @@ export class SmoothScroller {
     const itemRect = item.getBoundingClientRect();
 
     // targetLeft는 아이템의 시작점이 컨테이너의 시작점(paddingLeft 포함)으로부터 얼마나 떨어져 있는지 계산합니다.
-    const targetLeft = Math.abs((rect.left + this.gap) - (itemRect.left + scrollLeft));
+    const targetLeft = Math.abs(
+      rect.left + this.gap - (itemRect.left + scrollLeft)
+    );
 
     switch (this.type) {
-      case 'center':
+      case "center":
         // 중앙 정렬: 아이템의 중앙이 컨테이너의 중앙에 오도록 스크롤합니다.
         this.container.scrollTo({
-          left: targetLeft - (rect.width / 2) + (itemRect.width / 2),
-          behavior: 'smooth'
+          left: targetLeft - rect.width / 2 + itemRect.width / 2,
+          behavior: "smooth",
         });
         break;
-      case 'left':
+      case "left":
         // 좌측 정렬: 아이템의 시작점이 컨테이너의 좌측 정렬 기준에 오도록 스크롤합니다. (paddingLeft 고려)
         this.container.scrollTo({
           left: targetLeft,
-          behavior: 'smooth'
+          behavior: "smooth",
         });
         break;
-      case 'right':
+      case "right":
         // 우측 정렬: 아이템의 끝점이 컨테이너의 우측 정렬 기준에 오도록 스크롤합니다.
         // targetLeft는 아이템의 시작 위치이므로, 아이템 너비와 컨테이너 너비를 고려하여 계산합니다.
         this.container.scrollTo({
           left: targetLeft - (rect.width - itemRect.width), // 아이템 시작점에서 (컨테이너 너비 - 아이템 너비)를 빼서 우측 정렬
-          behavior: 'smooth'
+          behavior: "smooth",
         });
         break;
     }
@@ -485,13 +513,14 @@ export class SmoothScroller {
 export class FocusTrap {
   constructor(container) {
     if (!container || !(container instanceof HTMLElement)) {
-      throw new Error('FocusTrap requires a valid DOM element.');
+      throw new Error("FocusTrap requires a valid DOM element.");
     }
 
     this.container = container;
     this.focusableElements = this.getFocusableElements();
     this.firstElement = this.focusableElements[0];
-    this.lastElement = this.focusableElements[this.focusableElements.length - 1];
+    this.lastElement =
+      this.focusableElements[this.focusableElements.length - 1];
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.activate();
@@ -499,27 +528,30 @@ export class FocusTrap {
 
   getFocusableElements() {
     const selectors = [
-      'a[href]',
-      'area[href]',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      'button:not([disabled])',
-      'iframe',
-      'object',
-      'embed',
-      '[contenteditable]',
-      '[tabindex]:not([tabindex="-1"])'
+      "a[href]",
+      "area[href]",
+      "input:not([disabled])",
+      "select:not([disabled])",
+      "textarea:not([disabled])",
+      "button:not([disabled])",
+      "iframe",
+      "object",
+      "embed",
+      "[contenteditable]",
+      '[tabindex]:not([tabindex="-1"])',
     ];
-    return Array.from(this.container.querySelectorAll(selectors.join(','))).filter(el => el.offsetParent !== null);
+    return Array.from(
+      this.container.querySelectorAll(selectors.join(","))
+    ).filter((el) => el.offsetParent !== null);
   }
 
   handleKeyDown(e) {
-    if (e.key !== 'Tab') return;
+    if (e.key !== "Tab") return;
 
     this.focusableElements = this.getFocusableElements(); // update in case of dynamic changes
     this.firstElement = this.focusableElements[0];
-    this.lastElement = this.focusableElements[this.focusableElements.length - 1];
+    this.lastElement =
+      this.focusableElements[this.focusableElements.length - 1];
 
     if (this.focusableElements.length === 0) return;
 
@@ -542,11 +574,11 @@ export class FocusTrap {
   }
 
   activate() {
-    this.container.addEventListener('keydown', this.handleKeyDown);
+    this.container.addEventListener("keydown", this.handleKeyDown);
   }
 
   deactivate() {
-    this.container.removeEventListener('keydown', this.handleKeyDown);
+    this.container.removeEventListener("keydown", this.handleKeyDown);
   }
 }
 
@@ -557,35 +589,38 @@ export class ArrowNavigator {
     const callback = opt.callback;
 
     if (!container || !(container instanceof HTMLElement)) {
-      throw new Error('ArrowNavigator: 유효한 DOM 요소를 전달해야 합니다.');
+      throw new Error("ArrowNavigator: 유효한 DOM 요소를 전달해야 합니다.");
     }
 
     this.container = container;
-    this.callback = typeof callback === 'function' ? callback : () => {};
-    this.focusableSelectors = !foucsabledSelector ? [
-      '[role="tab"]',
-      '[role="button"]',
-      'button:not([disabled])',
-      'a[href]',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])'
-    ] : [foucsabledSelector];
+    this.callback = typeof callback === "function" ? callback : () => {};
+    this.focusableSelectors = !foucsabledSelector
+      ? [
+          '[role="tab"]',
+          '[role="button"]',
+          "button:not([disabled])",
+          "a[href]",
+          "input:not([disabled])",
+          "select:not([disabled])",
+          "textarea:not([disabled])",
+          '[tabindex]:not([tabindex="-1"])',
+        ]
+      : [foucsabledSelector];
     this.handleKeyDown = this.handleKeyDown.bind(this);
 
-    this.container.addEventListener('keydown', this.handleKeyDown);
+    this.container.addEventListener("keydown", this.handleKeyDown);
   }
 
   getFocusableElements() {
     // container가 null이 된 후에 호출될 경우를 대비한 방어 로직 추가
     if (!this.container) return [];
-    return Array.from(this.container.querySelectorAll(this.focusableSelectors.join(',')))
-      .filter(el => el.offsetParent !== null);
+    return Array.from(
+      this.container.querySelectorAll(this.focusableSelectors.join(","))
+    ).filter((el) => el.offsetParent !== null);
   }
 
   handleKeyDown(e) {
-    const keys = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+    const keys = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
     if (!keys.includes(e.key)) return;
 
     const elements = this.getFocusableElements();
@@ -602,9 +637,9 @@ export class ArrowNavigator {
     }
 
     let nextIndex;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+    if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       nextIndex = (currentIndex + 1) % elements.length;
-    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       nextIndex = (currentIndex - 1 + elements.length) % elements.length;
     }
 
@@ -619,7 +654,7 @@ export class ArrowNavigator {
   destroy() {
     // container가 유효한 경우에만 이벤트 리스너를 제거합니다.
     if (this.container) {
-      this.container.removeEventListener('keydown', this.handleKeyDown);
+      this.container.removeEventListener("keydown", this.handleKeyDown);
     }
 
     // 내부 참조를 null로 설정하여 가비지 컬렉션에 도움을 줍니다.
@@ -632,10 +667,10 @@ export class ArrowNavigator {
 
 export class HoverMenu {
   constructor(opt) {
-    this.id = opt.id,
-    this.nav = document.querySelector(`[data-hover-nav="${this.id}"]`);
-    this.links = this.nav.querySelectorAll('a, button');
-    this.depBtns = this.nav.querySelectorAll('[data-hover-nav-button]');
+    (this.id = opt.id),
+      (this.nav = document.querySelector(`[data-hover-nav="${this.id}"]`));
+    this.links = this.nav.querySelectorAll("a, button");
+    this.depBtns = this.nav.querySelectorAll("[data-hover-nav-button]");
     this.handleHover = this.handleHover.bind(this);
     this.handleLeave = this.handleLeave.bind(this);
     this.handleTab = this.handleTab.bind(this);
@@ -646,17 +681,16 @@ export class HoverMenu {
 
   init() {
     this.depBtns.forEach((item, index) => {
-      item.addEventListener('mouseover', this.handleHover);
-      item.addEventListener('focus', this.handleFocus);
-      item.addEventListener('mouseleave', this.handleLeave);
+      item.addEventListener("mouseover", this.handleHover);
+      item.addEventListener("focus", this.handleFocus);
+      item.addEventListener("mouseleave", this.handleLeave);
     });
 
-    this.first.addEventListener('keydown', this.handleTab);
-    this.last.addEventListener('keydown', this.handleTab);
+    this.first.addEventListener("keydown", this.handleTab);
+    this.last.addEventListener("keydown", this.handleTab);
 
-    this.nav.addEventListener('mouseover', this.handleBodyOn);
-    this.nav.addEventListener('mouseleave', this.handleBodyOff);
-
+    this.nav.addEventListener("mouseover", this.handleBodyOn);
+    this.nav.addEventListener("mouseleave", this.handleBodyOff);
   }
 
   handleBodyOn() {
@@ -666,79 +700,79 @@ export class HoverMenu {
     document.body.dataset.navState = "off";
   }
   handleTab(e) {
-    if (e.key !== 'Tab') return;
+    if (e.key !== "Tab") return;
 
     const _this = e.currentTarget;
     const wrap = _this.closest('[data-hover-nav-item="1"]');
     if (_this === this.first && e.shiftKey) {
-      wrap.dataset.state = 'off';
+      wrap.dataset.state = "off";
       document.body.dataset.navState = "off";
     } else if (_this === this.last && !e.shiftKey) {
-      wrap.dataset.state = 'off';
+      wrap.dataset.state = "off";
       document.body.dataset.navState = "off";
     }
   }
   handleFocus(e) {
     const _this = e.currentTarget;
-    const area = _this.closest('[data-hover-nav]');
-    const wrap = _this.closest('[data-hover-nav-item]');
-    const onItem = area.querySelector('[data-hover-nav-item][data-state="on"]')
+    const area = _this.closest("[data-hover-nav]");
+    const wrap = _this.closest("[data-hover-nav-item]");
+    const onItem = area.querySelector('[data-hover-nav-item][data-state="on"]');
     if (onItem) {
-      onItem.dataset.state = 'off';
+      onItem.dataset.state = "off";
       document.body.dataset.navState = "off";
     }
-    wrap.dataset.state = 'on';
+    wrap.dataset.state = "on";
     document.body.dataset.navState = "on";
   }
 
   handleHover(e) {
     const _this = e.currentTarget;
-    const wrap = _this.closest('[data-hover-nav-item]');
-    wrap.dataset.state = 'on';
+    const wrap = _this.closest("[data-hover-nav-item]");
+    wrap.dataset.state = "on";
     document.body.dataset.navState = "on";
   }
   handleLeave(e) {
     const _this = e.currentTarget;
-    const wrap = _this.closest('[data-hover-nav-item]');
+    const wrap = _this.closest("[data-hover-nav-item]");
     const depth = Number(wrap.dataset.hoverNavItem) + 1;
     const nextDepth = wrap.querySelector(`[data-hover-nav-item="${depth}"]`);
     let timer = null;
 
     const actHide = () => {
-      wrap.dataset.state = 'off';
-    }
+      wrap.dataset.state = "off";
+    };
     const actCancle = () => {
       clearTimeout(timer);
-      nextDepth.addEventListener('mouseleave', actHide)
-    }
+      nextDepth.addEventListener("mouseleave", actHide);
+    };
 
-    nextDepth.addEventListener('mouseover', actCancle);
+    nextDepth.addEventListener("mouseover", actCancle);
     timer = setTimeout(() => {
-      wrap.dataset.state = 'off';
+      wrap.dataset.state = "off";
     }, 200);
   }
 }
 
-export class FakeRadio  {
+export class FakeRadio {
   constructor(opt) {
     this.el = document.querySelector(`[data-radio-checked="${opt.id}"]`);
-    this.radios = this.el.querySelectorAll('[data-radio-checked]');
+    this.radios = this.el.querySelectorAll("[data-radio-checked]");
     this.checkedItem = null;
     this.callback = opt.callback;
     this.init();
   }
-  init(){ 
-    this.radios.forEach(item => {
-      item.addEventListener('click', this.handleCheck);
+  init() {
+    this.radios.forEach((item) => {
+      item.addEventListener("click", this.handleCheck);
     });
   }
   handleCheck = (e) => {
     const _this = e.currentTarget;
     this.checkedItem = this.el.querySelector('[data-radio-checked="true"]');
-    this.checkedItem.dataset.radioChecked = 'false';
-    _this.dataset.radioChecked = 'true';
+    this.checkedItem.dataset.radioChecked = "false";
+    _this.dataset.radioChecked = "true";
     this.callback && this.callback(_this);
-  }
+  };
 }
 
 export class RadioAllcheck {
@@ -750,14 +784,14 @@ export class RadioAllcheck {
   #callback;
   #isAllCheck;
   #isAllCheckRequired;
-	#subRequireds;
-	#sumRequired ;
+  #subRequireds;
+  #sumRequired;
 
   constructor(opt) {
-		console.log(opt)
+    console.log(opt);
     // opt 유효성 검사
     if (!opt || !opt.name) {
-      throw new Errow('옵션 객체와 name 속성은 필수입니다.');
+      throw new Errow("옵션 객체와 name 속성은 필수입니다.");
     }
 
     const { name, callback } = opt;
@@ -766,7 +800,9 @@ export class RadioAllcheck {
     this.#main = document.querySelector(`[data-allcheck-main="${name}"]`);
     this.#subs = document.querySelectorAll(`[data-allcheck-sub="${name}"]`);
     this.#btn = document.querySelector(`[data-allcheck-btn="${name}"]`);
-    this.#subRequireds = document.querySelectorAll(`[data-allcheck-sub="${name}"][aria-required="true"]`);
+    this.#subRequireds = document.querySelectorAll(
+      `[data-allcheck-sub="${name}"][aria-required="true"]`
+    );
 
     if (!this.#main || this.#subs.length === 0) {
       console.error(`${name}에 핻앟나느 체크박스 요소를 찾을 수가 없습니다.`);
@@ -780,43 +816,43 @@ export class RadioAllcheck {
   }
 
   #addEventListeners() {
-    this.#main.addEventListener('change', this.#handleToggle);
-    this.#subs.forEach(item => {
-      item.addEventListener('change', this.#updateState);
+    this.#main.addEventListener("change", this.#handleToggle);
+    this.#subs.forEach((item) => {
+      item.addEventListener("change", this.#updateState);
     });
   }
 
   #handleToggle = (e) => {
     this.#isAllCheck = e.target.checked;
-    this.#subs.forEach(item => {
+    this.#subs.forEach((item) => {
       item.checked = this.#isAllCheck;
     });
     this.#btn.disabled = this.#isAllCheck ? false : true;
     this.#callback?.({
-			all: this.#isAllCheck,
-			required : this.#isAllCheck,
-		});
-  }
+      all: this.#isAllCheck,
+      required: this.#isAllCheck,
+    });
+  };
   #updateState = () => {
-    const checkedSum = Array.from(this.#subs).filter(item => item.checked).length;
-    const checkedSumRequired = Array.from(this.#subRequireds).filter(item => item.checked).length;
-    this.#isAllCheck = (this.#sum === checkedSum);
-    this.#isAllCheckRequired = (this.#sumRequired === checkedSumRequired);
+    const checkedSum = Array.from(this.#subs).filter(
+      (item) => item.checked
+    ).length;
+    const checkedSumRequired = Array.from(this.#subRequireds).filter(
+      (item) => item.checked
+    ).length;
+    this.#isAllCheck = this.#sum === checkedSum;
+    this.#isAllCheckRequired = this.#sumRequired === checkedSumRequired;
     this.#main.checked = this.#isAllCheck;
     this.#btn.disabled = this.#isAllCheckRequired ? false : true;
-    this.#callback?.(
-			{
-				all: this.#isAllCheck,
-				required : this.#isAllCheckRequired,
-			}
-		);
-  }
+    this.#callback?.({
+      all: this.#isAllCheck,
+      required: this.#isAllCheckRequired,
+    });
+  };
   destroy() {
-    this.#main.removeEventListener('change', this.#handleToggle);
-    this.#subs.forEach(item => {
-      item.removeEventListener('change', this.#updateState);
+    this.#main.removeEventListener("change", this.#handleToggle);
+    this.#subs.forEach((item) => {
+      item.removeEventListener("change", this.#updateState);
     });
   }
 }
-
-

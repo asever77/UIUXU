@@ -1,66 +1,7 @@
-.area{
+.area {
   &-base {
     position: relative;
     margin: 0 auto;
     z-index: 0;
-  }
-
-  &-dropdown {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    pointer-events: none;
-  }
-
-  &-tooltip {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 200;
-    pointer-events: none;
-  }
-
-  &-dialog {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 300;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-
-    &[data-area="body"] {
-      position: fixed;
-    }
-  }
-
-  &-toast {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 400;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-
-    &[data-ps="bottom"] {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: center;
-      gap: .8rem;
-      padding-bottom: 0.8rem;
-    }
-    &[data-ps="top"] {
-      display: flex;
-      flex-direction: column-reverse;
-      justify-content: flex-end;
-      align-items: center;
-      gap: .8rem;
-      padding-top: 0.8rem;
-    }
   }
 }

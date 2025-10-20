@@ -21,29 +21,81 @@
       "import": "./dist/buttonSelection.esm.js",
       "require": "./dist/buttonSelection.cjs"
     },
+    "./chart-bubble": {
+      "import": "./dist/chartBubble.esm.js",
+      "require": "./dist/chartBubble.cjs"
+    },
+    "./countdown": {
+      "import": "./dist/countdown.esm.js",
+      "require": "./dist/countdown.cjs"
+    },
     "./dialog": {
       "import": "./dist/dialog.esm.js",
       "require": "./dist/dialog.cjs"
+    },
+    "./drag": {
+      "import": "./dist/drag.esm.js",
+      "require": "./dist/drag.cjs"
     },
     "./dropdown": {
       "import": "./dist/dropdown.esm.js",
       "require": "./dist/dropdown.cjs"
     },
+    "./form": {
+      "import": "./dist/form.esm.js",
+      "require": "./dist/form.cjs"
+    },
+    "./list-ia": {
+      "import": "./dist/listIA.esm.js",
+      "require": "./dist/listIA.cjs"
+    },
+    "./nav": {
+      "import": "./dist/nav.esm.js",
+      "require": "./dist/nav.cjs"
+    },
+    "./range-slider": {
+      "import": "./dist/rangeSlider.esm.js",
+      "require": "./dist/rangeSlider.cjs"
+    },
+    "./roulette": {
+      "import": "./dist/roulette.esm.js",
+      "require": "./dist/roulette.cjs"
+    },
+    "./scroll-event": {
+      "import": "./dist/scrollEvent.esm.js",
+      "require": "./dist/scrollEvent.cjs"
+    },
     "./tab": {
       "import": "./dist/tab.esm.js",
       "require": "./dist/tab.cjs"
+    },
+    "./time-select": {
+      "import": "./dist/timeSelect.esm.js",
+      "require": "./dist/timeSelect.cjs"
+    },
+    "./toggle-controller": {
+      "import": "./dist/toggleController.esm.js",
+      "require": "./dist/toggleController.cjs"
     },
     "./tooltip": {
       "import": "./dist/tooltip.esm.js",
       "require": "./dist/tooltip.cjs"
     },
-    "./utils/logger": {
-      "import": "./dist/logger.esm.js",
-      "require": "./dist/logger.cjs"
+    "./wheel-picker": {
+      "import": "./dist/wheelPicker.esm.js",
+      "require": "./dist/wheelPicker.cjs"
     },
     "./utils/errors": {
       "import": "./dist/errors.esm.js",
       "require": "./dist/errors.cjs"
+    },
+    "./utils/logger": {
+      "import": "./dist/logger.esm.js",
+      "require": "./dist/logger.cjs"
+    },
+    "./utils": {
+      "import": "./dist/utils.esm.js",
+      "require": "./dist/utils.cjs"
     },
     "./styles": "./dist/uiuxu.css",
     "./dist/uiuxu.css": "./dist/uiuxu.css",
@@ -77,6 +129,19 @@
     "dropdown",
     "tooltip",
     "button-selection",
+    "chart-bubble",
+    "countdown",
+    "drag-drop",
+    "form",
+    "list-ia",
+    "navigation",
+    "range-slider",
+    "roulette",
+    "scroll-event",
+    "tab",
+    "time-select",
+    "toggle-controller",
+    "wheel-picker",
     "ui-library",
     "component-library",
     "frontend"

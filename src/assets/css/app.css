@@ -533,59 +533,6 @@ legend,
   margin: 0 auto;
   z-index: 0;
 }
-.area-dropdown {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  pointer-events: none;
-}
-.area-tooltip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 200;
-  pointer-events: none;
-}
-.area-dialog {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 300;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-.area-dialog[data-area=body] {
-  position: fixed;
-}
-.area-toast {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 400;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-.area-toast[data-ps=bottom] {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.8rem;
-  padding-bottom: 0.8rem;
-}
-.area-toast[data-ps=top] {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 0.8rem;
-  padding-top: 0.8rem;
-}
 
 [data-mso-after],
 [data-mso-before],
@@ -1017,6 +964,60 @@ tr *:first-child {
 }
 .scroll-not {
   overflow: hidden !important;
+}
+
+.area-dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+.area-tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+.area-dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.area-dialog[data-area=body] {
+  position: fixed;
+}
+.area-toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 400;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+.area-toast[data-ps=bottom] {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+.area-toast[data-ps=top] {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.8rem;
 }
 
 @keyframes modal-hide {
@@ -1702,7 +1703,7 @@ td [data-state=제외]::before {
 /* dialog */
 [data-dialog] {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 100;

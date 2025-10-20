@@ -1,201 +1,215 @@
 <!DOCTYPE html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dialog | UIUXU</title>
+    <!-- loads the entire Variable Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/app.css" />
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dialog | UIUXU </title>
-	<!-- loads the entire Variable Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
+    <style>
+      [role="tablist"] [role="tab"] {
+        min-width: 20rem;
+        text-align: center;
+        border-bottom: 1px solid #ccc;
+      }
+      [role="tablist"] [role="tab"][aria-selected="true"] {
+        border-color: #000;
+      }
+      [data-tab-type="scroll"] [role="tabpanel"] {
+        scroll-margin-top: 12rem;
+      }
+      .bb2 {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 20rem;
+        flex-shrink: 0;
+      }
+      .bb2 .btn-base {
+        margin-top: 0.8rem;
+      }
+      @media (min-width: 1400px) {
+        .base-content[data-grid="sub-content"] > *:nth-child(1) {
+          grid-column: span 2;
+        }
+        .base-content[data-grid="sub-content"] > *:nth-child(2) {
+          grid-column: span 2;
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
 
-	<style>
-		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
-		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
-		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
-		.bb2 {
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-			width: 20rem;
-			flex-shrink: 0;
-		}
-		.bb2 .btn-base{
-			margin-top:.8rem
-		}
-		@media (min-width: 1400px) {
-			.base-content[data-grid="sub-content"]  > *:nth-child(1) {
-				grid-column: span 2;
-			}
-			.base-content[data-grid="sub-content"]  > *:nth-child(2) {
-				grid-column: span 2;
-				display: flex;
-				flex-wrap: wrap;
+  <body>
+    <!-- script -->
+    <script type="module">
+      /* 준비 ---------------------------------------------- */
+      // 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드
+      import { UX } from "../assets/js/uiuxu.common.js";
+      UX.init({
+        layout: "./layout/base.html",
+        page: "./content/dialog.html",
+        callback: () => {
+          UI.exe.codeGuide = new UX.Tab({
+            id: "codeGuide",
+            renderMode: "static",
+            selected: 1,
+            data: [
+              {
+                callback: () => {
+                  console.log("탭1 open");
+                },
+              },
+              {
+                callback: () => {
+                  console.log("탭2 open");
+                },
+              },
+            ],
+          });
+          UI.exe.codeGuide.init();
 
-			}
-			
-		}
-	</style>
-</head>
+          // dialog
+          UI.exe.modal1 = new UX.Dialog({
+            id: "modalname1",
+            area: document.querySelector('.area-dialog[data-area="body"]'),
+            type: "modal",
+            ps: "center",
+            full: false,
+            load: "pre",
+            src: "./dialog/modal.html",
+            loadCallback: () => {
+              console.log("modal1 loadCallback");
+            },
+            extend: false,
+            move: true,
+            dim: true,
+            dimClick: false,
+            focus_back: document.querySelector('[data-test-id="toast1"]'),
+          });
+          UI.exe.modal2 = new UX.Dialog({
+            id: "modalname2",
+            type: "modal",
+            ps: "bottom",
+            src: null,
+            extend: true,
+            load: "pre",
+            src: "./dialog/modal2.html",
+            extendCallback: (v) => {
+              console.log("extendCallback", v);
+            },
+            loadCallback: () => {
+              console.log("modal2 loadCallback");
+            },
+          });
+          UI.exe.modal3 = new UX.Dialog({
+            area: document.querySelector('.area-dialog[data-area="main"]'),
+            type: "modal",
+            id: "modalname3",
+            ps: "top",
+            src: "./dialog/modal3.html",
+            extend: false,
+            load: "lazy",
+            loadCallback: () => {
+              console.log("modal3 loadCallback");
+            },
+          });
+          UI.exe.modal4 = new UX.Dialog({
+            area: document.querySelector('.area-dialog[data-area="body"]'),
+            type: "modal",
+            id: "modalname4",
+            ps: "left",
+            src: "./dialog/modal4.html",
+            extend: false,
+            load: "lazy",
+            loadCallback: () => {
+              console.log("modal4 loadCallback");
+            },
+          });
+          UI.exe.modal5 = new UX.Dialog({
+            area: document.querySelector('.area-dialog[data-area="body"]'),
+            type: "modal",
+            id: "modalname5",
+            ps: "right",
+            src: "./dialog/modal5.html",
+            extend: false,
+            load: "lazy",
+            loadCallback: () => {
+              console.log("modal5 loadCallback");
+            },
+          });
 
-<body>
-	<!-- script -->
-	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/base.html',
-			page:'./content/dialog.html',
-			callback: () => {
-				UI.exe.codeGuide = new UX.Tab({
-					id: 'codeGuide',
-					renderMode: 'static',
-					selected: 1,
-					data: [
-						{ callback: () => { console.log('탭1 open'); },},
-						{ callback: () => { console.log('탭2 open'); },},
-					],
-				});
-				UI.exe.codeGuide.init();
+          UI.exe.alert1 = new UX.Dialog({
+            area: document.querySelector('.area-dialog[data-area="body"]'),
+            id: "alert1",
+            type: "system",
+            title: `<b>제목</b>영역입니다.`,
+            message: `<strong>공지</strong>입니다.`,
+            confirmText: "확인",
+            confirmCallback: () => {
+              console.log("확인 콜백");
+              UI.exe.alert1.hide();
+            },
+          });
+          UI.exe.confirm1 = new UX.Dialog({
+            area: document.querySelector('.area-dialog[data-area="body"]'),
+            id: "confirm1",
+            type: "system",
+            title: `<b>제목</b>영역입니다.`,
+            message: `<strong>공지</strong>입니다.`,
+            confirmText: "확인",
+            confirmCallback: () => {
+              console.log("확인 콜백");
+              UI.exe.confirm1.hide();
+            },
+            cancelText: "취소",
+            cancelCallback: () => {
+              console.log("취소 콜백");
+              UI.exe.confirm1.hide();
+            },
+          });
 
-				// dialog
-				UI.exe.modal1 = new UX.Dialog({
-					id: 'modalname1',
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					type: 'modal',
-					ps: 'center',
-					full: false,
-					load: 'pre', 
-					src: './dialog/modal.html',
-					loadCallback: () => {
-						console.log('modal1 loadCallback')
-					},
-					extend: false,
-					move: true,
-					dim: true,
-					dimClick: false,
-					focus_back: document.querySelector('[data-test-id="toast1"]'),
-					
-				});			
-				UI.exe.modal2 = new UX.Dialog({
-					id: 'modalname2',
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					type: 'modal',
-					ps: 'bottom',
-					src: null,
-					extend: true, 
-					load: 'pre', 
-					src: './dialog/modal2.html',
-					extendCallback: (v) => {
-						console.log('extendCallback', v);
-					},
-					loadCallback: () => {
-						console.log('modal2 loadCallback')
-					},
-				});
-				UI.exe.modal3 = new UX.Dialog({
-					area: document.querySelector('.area-dialog[data-area="main"]'),
-					type: 'modal',
-					id: 'modalname3',
-					ps: 'top',
-					src: './dialog/modal3.html',
-					extend: false, 
-					load: 'lazy', 
-					loadCallback: () => {
-						console.log('modal3 loadCallback')
-					},
-				});
-				UI.exe.modal4 = new UX.Dialog({
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					type: 'modal',
-					id: 'modalname4',
-					ps: 'left',
-					src: './dialog/modal4.html',
-					extend: false, 
-					load: 'lazy', 
-					loadCallback: () => {
-						console.log('modal4 loadCallback')
-					},
-				});
-				UI.exe.modal5 = new UX.Dialog({
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					type: 'modal',
-					id: 'modalname5',
-					ps: 'right',
-					src: './dialog/modal5.html',
-					extend: false, 
-					load: 'lazy', 
-					loadCallback: () => {
-						console.log('modal5 loadCallback');
-					},
-				});
+          UI.exe.toast1 = new UX.Dialog({
+            area: document.querySelector(".area-toast"),
+            id: "toast1",
+            ps: "top",
+            type: "toast",
+            toastRole: "status",
+            toastMessage: `<strong>토스트 메세지</strong>입니다.`,
+          });
+          UI.exe.toast2 = new UX.Dialog({
+            area: document.querySelector(".area-toast"),
+            id: "toast2",
+            ps: "top",
+            type: "toast",
+            toastRole: "alert",
+            toastMessage: `<strong>2222 토스트 메세지</strong>입니다.`,
+          });
 
-				UI.exe.alert1 = new UX.Dialog({
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					id: 'alert1',
-					type: 'system',
-					title: `<b>제목</b>영역입니다.`,
-					message: `<strong>공지</strong>입니다.`,
-					confirmText: '확인',
-					confirmCallback: () => {
-						console.log('확인 콜백');
-						UI.exe.alert1.hide()
-					},
-				});
-				UI.exe.confirm1 = new UX.Dialog({
-					area: document.querySelector('.area-dialog[data-area="body"]'),
-					id: 'confirm1',
-					type: 'system',
-					title: `<b>제목</b>영역입니다.`,
-					message: `<strong>공지</strong>입니다.`,
-					confirmText: '확인',
-					confirmCallback: () => {
-						console.log('확인 콜백');
-						UI.exe.confirm1.hide()
-					},
-					cancelText: '취소',
-					cancelCallback: ()=> {
-						console.log('취소 콜백');
-						UI.exe.confirm1.hide()
-					},
-				});
-
-				UI.exe.toast1 = new UX.Dialog({
-					area: document.querySelector('.area-toast'),
-					id: 'toast1',
-					ps: 'top',
-					type: 'toast',
-					toastRole: 'status',
-					toastMessage: `<strong>토스트 메세지</strong>입니다.`,
-				});
-				UI.exe.toast2 = new UX.Dialog({
-					area: document.querySelector('.area-toast'),
-					id: 'toast2',
-					ps: 'top',
-					type: 'toast',
-					toastRole: 'alert',
-					toastMessage: `<strong>2222 토스트 메세지</strong>입니다.`,
-				});
-
-				UI.exe.toast3 = new UX.Dialog({
-					area: document.querySelector('.area-toast'),
-					id: 'toast3',
-					ps: 'bottom',
-					type: 'toast',
-					toastRole: 'status',
-					toastMessage: `<strong>토스트 메세지</strong>입니다.`,
-				});
-				UI.exe.toast4 = new UX.Dialog({
-					area: document.querySelector('.area-toast'),
-					id: 'toast4',
-					ps: 'bottom',
-					type: 'toast',
-					toastRole: 'alert',
-					toastMessage: `<strong>2222 토스트 메세지</strong>입니다.`,
-				});
-			}
-		});
-	</script>
-</body>
+          UI.exe.toast3 = new UX.Dialog({
+            area: document.querySelector(".area-toast"),
+            id: "toast3",
+            ps: "bottom",
+            type: "toast",
+            toastRole: "status",
+            toastMessage: `<strong>토스트 메세지</strong>입니다.`,
+          });
+          UI.exe.toast4 = new UX.Dialog({
+            area: document.querySelector(".area-toast"),
+            id: "toast4",
+            ps: "bottom",
+            type: "toast",
+            toastRole: "alert",
+            toastMessage: `<strong>2222 토스트 메세지</strong>입니다.`,
+          });
+        },
+      });
+    </script>
+  </body>
 </html>
