@@ -1,4 +1,4 @@
-import { loadContent, FocusTrap } from "../utils/utils.js";
+import { loadContent, FocusTrap, makeID, Timeouts } from "../utils/utils.js";
 import { logger } from "../utils/logger.js";
 import {
   ErrorHandler,
@@ -80,11 +80,11 @@ export default class Dialog {
       "ontouchstart" in window || navigator.maxTouchPoints > 0;
     this.el_dim = null;
     this.rem_base = 10;
-    this.toastTimer = null;
+    this.toastTimer = {}; // ← 객체로 초기화 (여러 토스트 타이머 관리용)
     this.elToast = null;
     this.boundExtendStart = this.extendStart.bind(this);
     this.boundToastAnimationend = this.toastAnimationend.bind(this);
-
+    this.randomID = null;
     // 토스트 마우스 이벤트 바인딩 함수들 (나중에 제거하기 위해)
     this.boundToastMouseOver = null;
     this.boundToastMouseLeave = null;
@@ -146,23 +146,30 @@ export default class Dialog {
 
   // toast
   initToast() {
-    if (!this.elToast) {
-      let htmlToast = `<div class="ui-toast" 
-        data-dialog="${this.id}" 
+    this.randomID = makeID(5);
+    Timeouts[this.randomID] = null;
+
+    console.log("initToast", Timeouts[this.randomID]);
+
+    // if (!this.elToast) {
+    let htmlToast = `<div class="ui-toast" 
+        data-dialog="${this.id + this.randomID}" 
         data-type="toast" 
         role="${this.toastRole}" 
         aria-hidden="true">
         ${this.toastMessage}
       </div>`;
-      this.area.dataset.ps = this.ps;
-      this.area.insertAdjacentHTML("afterbegin", htmlToast);
-      this.elToast = document.querySelector(`[data-dialog="${this.id}"]`);
-    }
+    this.area.dataset.ps = this.ps;
+    this.area.insertAdjacentHTML("afterbegin", htmlToast);
+    this.elToast = document.querySelector(
+      `[data-dialog="${this.id + this.randomID}"]`
+    );
+    // }
 
     if (this.elToast.getAttribute("aria-hidden") === "true") {
       this.elToast.setAttribute("aria-hidden", "false");
       this.elToast.dataset.ps = this.ps;
-
+      console.log(this.elToast);
       // 자동 닫힘 타이머 시작
       this.startToastTimer();
     }
@@ -177,11 +184,18 @@ export default class Dialog {
   startToastTimer() {
     const delay = this.delay === "short" ? 2000 : 3000;
 
-    this.toastTimer = setTimeout(() => {
+    Timeouts[this.randomID] = setTimeout(() => {
+      console.log("hide");
       this.toastHide();
     }, delay);
 
-    logger.debug(`Toast timer started: ${delay}ms`, null, "Dialog");
+    console.log("startToastTimer", Timeouts[this.randomID]);
+
+    logger.debug(
+      `Toast timer started: ${delay}ms for ID: ${this.randomID}`,
+      null,
+      "Dialog"
+    );
   }
 
   /**
@@ -197,30 +211,20 @@ export default class Dialog {
     this.elToast.addEventListener("mouseleave", this.boundToastMouseLeave);
   }
 
-  /**
-   * 토스트 마우스오버 핸들러
-   */
+  // 토스트 마우스오버 핸들러
   handleToastMouseOver() {
-    if (this.toastTimer) {
-      clearTimeout(this.toastTimer);
-      this.toastTimer = null;
+    if (Timeouts[this.randomID]) {
+      clearTimeout(Timeouts[this.randomID]);
+      Timeouts[this.randomID] = null;
       logger.debug("Toast timer paused (mouseover)", null, "Dialog");
     }
   }
-
-  /**
-   * 토스트 마우스리브 핸들러
-   */
   handleToastMouseLeave() {
-    if (!this.toastTimer) {
+    if (!Timeouts[this.randomID]) {
       this.startToastTimer();
       logger.debug("Toast timer resumed (mouseleave)", null, "Dialog");
     }
   }
-
-  /**
-   * 토스트 마우스 이벤트 리스너 제거
-   */
   removeToastMouseEvents() {
     if (this.elToast && this.boundToastMouseOver && this.boundToastMouseLeave) {
       this.elToast.removeEventListener("mouseover", this.boundToastMouseOver);
@@ -250,9 +254,9 @@ export default class Dialog {
   }
   toastHide() {
     // 타이머 정리
-    if (this.toastTimer) {
-      clearTimeout(this.toastTimer);
-      this.toastTimer = null;
+    if (Timeouts[this.randomID]) {
+      clearTimeout(Timeouts[this.randomID]);
+      delete Timeouts[this.randomID]; // 객체에서 완전히 제거
     }
 
     // 마우스 이벤트 리스너 제거
@@ -260,18 +264,25 @@ export default class Dialog {
 
     const rect = this.elToast.getBoundingClientRect();
     const gap = 8;
-    this.elToast.style.transition = "margin 300ms ease";
-    if (this.ps === "bottom") {
-      this.elToast.style.marginBottom = ((rect.height + gap) / 10) * -1 + "rem";
-    } else {
-      //'top'
-      this.elToast.style.marginTop = ((rect.height + gap) / 10) * -1 + "rem";
-    }
+    this.elToast.dataset.closeReady = "true";
 
-    this.elToast.addEventListener("transitionend", this.boundToastAnimationend);
+    // this.elToast.style.transition = "margin 3300ms ease";
+    // if (this.ps === "bottom") {
+    //   this.elToast.style.marginBottom = ((rect.height + gap) / 10) * -1 + "rem";
+    // } else {
+    //   //'top'
+    //   this.elToast.style.marginTop = ((rect.height + gap) / 10) * -1 + "rem";
+    // }
 
-    logger.debug("Toast hide initiated", null, "Dialog");
+    this.elToast.addEventListener("animationend", this.boundToastAnimationend);
+
+    logger.debug(
+      `Toast hide initiated for ID: ${this.randomID}`,
+      null,
+      "Dialog"
+    );
   }
+
   // system
   initSystem() {
     let htmlSystem = `

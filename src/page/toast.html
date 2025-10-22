@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toast Component Demo</title>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+          sans-serif;
+        padding: 2rem;
+        background: #f5f5f5;
+      }
+
+      .demo-section {
+        background: white;
+        padding: 2rem;
+        margin: 2rem 0;
+        border-radius: 0.8rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .demo-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
+
+      .btn {
+        padding: 0.8rem 1.6rem;
+        border: none;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary {
+        background: #3b82f6;
+        color: white;
+      }
+      .btn-success {
+        background: #22c55e;
+        color: white;
+      }
+      .btn-error {
+        background: #ef4444;
+        color: white;
+      }
+      .btn-warning {
+        background: #f59e0b;
+        color: white;
+      }
+      .btn-info {
+        background: #06b6d4;
+        color: white;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🍞 Toast Component Demo</h1>
+
+    <!-- 기본 사용법 -->
+    <div class="demo-section">
+      <h2>📝 기본 사용법</h2>
+      <div class="demo-buttons">
+        <button class="btn btn-primary" onclick="basicToastDemo()">
+          기본 토스트
+        </button>
+        <button class="btn btn-primary" onclick="longToastDemo()">
+          긴 지연시간
+        </button>
+        <button class="btn btn-primary" onclick="customDelayDemo()">
+          커스텀 지연시간
+        </button>
+        <button class="btn btn-primary" onclick="neverHideDemo()">
+          자동 숨김 없음
+        </button>
+      </div>
+      <pre><code>// 클래스 방식 (기본)
+const myToast = new Toast('Hello World!');
+myToast.show();
+
+// 옵션과 함께
+new Toast('장시간 표시', { delay: 'long' }).show();
+
+// 함수 방식도 계속 지원
+toast('Hello World!');</code></pre>
+    </div>
+
+    <!-- 타입별 토스트 -->
+    <div class="demo-section">
+      <h2>🎨 타입별 토스트</h2>
+      <div class="demo-buttons">
+        <button class="btn btn-success" onclick="successToastDemo()">
+          성공
+        </button>
+        <button class="btn btn-error" onclick="errorToastDemo()">에러</button>
+        <button class="btn btn-warning" onclick="warningToastDemo()">
+          경고
+        </button>
+        <button class="btn btn-info" onclick="infoToastDemo()">정보</button>
+        <button class="btn btn-info" onclick="loadingToastDemo()">로딩</button>
+      </div>
+      <pre><code>// 타입별 편의 함수
+toast.success('성공했습니다!');
+toast.error('오류가 발생했습니다!');
+toast.warning('주의하세요!');
+toast.info('정보를 확인하세요.');
+const loading = toast.loading('처리 중...'); // 자동 숨김 없음</code></pre>
+    </div>
+
+    <!-- Class 방식 -->
+    <div class="demo-section">
+      <h2>🏗️ Class 방식 (고급 사용법)</h2>
+      <div class="demo-buttons">
+        <button class="btn btn-primary" onclick="classBasicDemo()">
+          Class 기본
+        </button>
+        <button class="btn btn-primary" onclick="methodChainingDemo()">
+          Method Chaining
+        </button>
+        <button class="btn btn-primary" onclick="callbackDemo()">
+          콜백 함수
+        </button>
+        <button class="btn btn-primary" onclick="manualControlDemo()">
+          수동 제어
+        </button>
+      </div>
+      <pre><code>// Class 방식
+const toast1 = new Toast('Hello World!');
+toast1.show();
+
+// Method Chaining
+new Toast('체이닝!').setDelay('long').setType('success').show();
+
+// 콜백과 수동 제어
+const toast2 = new Toast({
+  message: '클릭 가능한 토스트',
+  onClick: () => alert('클릭됨!'),
+  closable: true
+});</code></pre>
+    </div>
+
+    <!-- 위치별 토스트 -->
+    <div class="demo-section">
+      <h2>📍 위치별 토스트</h2>
+      <div class="demo-buttons">
+        <button class="btn btn-primary" onclick="topToastDemo()">상단</button>
+        <button class="btn btn-primary" onclick="bottomToastDemo()">
+          하단
+        </button>
+        <button class="btn btn-primary" onclick="centerToastDemo()">
+          중앙
+        </button>
+      </div>
+      <pre><code>// 위치 설정
+toast('상단 토스트', { position: 'top' });
+toast('하단 토스트', { position: 'bottom' });
+toast('중앙 토스트', { position: 'center' });</code></pre>
+    </div>
+
+    <!-- 고급 기능 -->
+    <div class="demo-section">
+      <h2>⚙️ 고급 기능</h2>
+      <div class="demo-buttons">
+        <button class="btn btn-primary" onclick="multipleToastDemo()">
+          다중 토스트
+        </button>
+        <button class="btn btn-primary" onclick="interactiveToastDemo()">
+          인터랙티브
+        </button>
+        <button class="btn btn-error" onclick="clearAllDemo()">
+          모두 지우기
+        </button>
+      </div>
+      <pre><code>// 다중 토스트 및 제어
+for(let i = 1; i <= 5; i++) {
+  toast(`토스트 ${i}`, { delay: i * 1000 });
+}
+
+// 모든 토스트 지우기
+toast.clear();</code></pre>
+    </div>
+
+    <!-- Import Toast -->
+    <script type="module">
+      import Toast, { toast } from "../assets/js/component/toast.js";
+
+      // 전역으로 노출 (데모용)
+      window.Toast = Toast;
+      window.toast = toast;
+
+      // 데모 함수들 - 클래스 방식 사용
+      window.basicToastDemo = () => {
+        new Toast("안녕하세요! 클래스 방식으로 되돌린 Toast입니다.").show();
+      };
+
+      window.longToastDemo = () => {
+        new Toast("이 토스트는 3.5초 후에 사라집니다.", {
+          delay: "long",
+        }).show();
+      };
+
+      window.customDelayDemo = () => {
+        new Toast("이 토스트는 5초 후에 사라집니다.", { delay: 5000 }).show();
+      };
+
+      window.neverHideDemo = () => {
+        const t = new Toast(
+          "이 토스트는 자동으로 사라지지 않습니다. 클릭하면 숨겨집니다.",
+          {
+            delay: "never",
+            onClick: (toast) => toast.hide(),
+          }
+        ).show();
+      };
+
+      window.successToastDemo = () => {
+        toast.success("작업이 성공적으로 완료되었습니다!");
+      };
+
+      window.errorToastDemo = () => {
+        toast.error("오류가 발생했습니다. 다시 시도해주세요.");
+      };
+
+      window.warningToastDemo = () => {
+        toast.warning("주의: 이 작업은 되돌릴 수 없습니다.");
+      };
+
+      window.infoToastDemo = () => {
+        toast.info("새로운 업데이트가 available합니다.");
+      };
+
+      window.loadingToastDemo = () => {
+        const loading = toast.loading("데이터를 처리하고 있습니다...");
+
+        // 3초 후 로딩 완료
+        setTimeout(() => {
+          loading.hide();
+          toast.success("처리가 완료되었습니다!");
+        }, 3000);
+      };
+
+      window.classBasicDemo = () => {
+        const myToast = new Toast("Class 방식으로 생성된 토스트입니다.");
+        myToast.show();
+      };
+
+      window.methodChainingDemo = () => {
+        new Toast("Method Chaining!")
+          .setType("success")
+          .setDelay("long")
+          .show();
+      };
+
+      window.callbackDemo = () => {
+        new Toast("콜백 기능이 있는 토스트입니다. 클릭해보세요!", {
+          closable: true,
+          onClick: (toast) => {
+            alert("토스트가 클릭되었습니다!");
+          },
+          onShow: () => console.log("토스트가 표시되었습니다."),
+          onHide: () => console.log("토스트가 숨겨졌습니다."),
+        }).show();
+      };
+
+      window.manualControlDemo = () => {
+        const manualToast = new Toast("수동 제어 토스트 (자동 숨김 없음)", {
+          delay: "never",
+          closable: true,
+        }).show();
+
+        // 5초 후 프로그래밍 방식으로 숨기기
+        setTimeout(() => {
+          manualToast.setMessage("5초가 지나서 자동으로 숨겨집니다.").hide();
+        }, 5000);
+      };
+
+      window.topToastDemo = () => {
+        new Toast("상단에 표시되는 토스트입니다.", { position: "top" }).show();
+      };
+
+      window.bottomToastDemo = () => {
+        new Toast("하단에 표시되는 토스트입니다.", {
+          position: "bottom",
+        }).show();
+      };
+
+      window.centerToastDemo = () => {
+        new Toast("중앙에 표시되는 토스트입니다.", {
+          position: "center",
+        }).show();
+      };
+
+      window.multipleToastDemo = () => {
+        for (let i = 1; i <= 5; i++) {
+          setTimeout(() => {
+            new Toast(`토스트 ${i}번`, {
+              type: ["default", "success", "info", "warning", "error"][i - 1],
+              delay: "long",
+            }).show();
+          }, i * 300);
+        }
+      };
+
+      window.interactiveToastDemo = () => {
+        const interactive = new Toast("좋아요를 눌러주세요! 👍", {
+          closable: true,
+          delay: "never",
+          onClick: (toast) => {
+            toast
+              .setMessage("좋아요를 눌러주셨군요! 감사합니다 ❤️")
+              .setType("success");
+            setTimeout(() => toast.hide(), 2000);
+          },
+        }).show();
+      };
+
+      window.clearAllDemo = () => {
+        toast.clear();
+        toast.info("모든 토스트가 지워졌습니다.");
+      };
+    </script>
+  </body>
+</html>

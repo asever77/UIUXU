@@ -58,6 +58,34 @@
       align-items: center;
       gap: 0.8rem;
       padding-top: 0.8rem;
+      .ui-toast {
+        transition: all 0.2s ease;
+      }
+      .ui-toast:nth-child(1) {
+        position: absolute;
+        z-index: 2;
+      }
+      .ui-toast:nth-child(2) {
+        position: absolute;
+        margin-top: 1.4rem;
+        opacity: 0.9;
+        scale: 0.98;
+        z-index: 1;
+      }
+      .ui-toast:nth-child(3) {
+        position: absolute;
+        margin-top: 2.8rem;
+        opacity: 0.8;
+        scale: 0.96;
+        z-index: 0;
+      }
+      .ui-toast:nth-child(3) ~ .ui-toast {
+        position: absolute;
+        z-index: 1;
+        margin-top: 5.6rem;
+        opacity: 0 !important;
+        scale: 0.94;
+      }
     }
   }
 }
@@ -157,7 +185,7 @@
     z-index: 0;
   }
   1% {
-    transform: translateY(-10rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
@@ -171,11 +199,11 @@
     opacity: 1;
   }
   99% {
-    transform: translateY(-10rem);
+    transform: translateY(-1rem);
     opacity: 0;
   }
   100% {
-    transform: translateY(-10rem);
+    transform: translateY(-1rem);
     opacity: 0;
     visibility: hidden;
   }

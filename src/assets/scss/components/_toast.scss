@@ -1,0 +1,227 @@
+/* ==========================================================================
+   Toast Component Styles
+   ========================================================================== */
+
+/* Toast 컨테이너 영역 */
+.area-toast {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* 위치별 스타일 */
+.area-toast[data-position="top"] {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.area-toast[data-position="bottom"] {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+.area-toast[data-position="center"] {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+}
+
+/* 토스트 개별 스타일 */
+.ui-toast {
+  pointer-events: auto;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-width: 20rem;
+  max-width: 32rem;
+  padding: 1.2rem 1.6rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  border-radius: 0.6rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  font-size: 1.4rem;
+  line-height: 1.4;
+  word-break: break-word;
+
+  /* 초기 상태 (숨김) */
+  opacity: 0;
+  transform: translateY(-1rem);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 표시 상태 */
+.ui-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 숨김 애니메이션 */
+.ui-toast.is-hiding {
+  opacity: 0;
+  transform: translateY(-0.5rem);
+}
+
+/* 토스트 콘텐츠 */
+.ui-toast__content {
+  flex: 1;
+  margin: 0;
+}
+
+/* 닫기 버튼 */
+.ui-toast__close {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  color: currentColor;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.ui-toast__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ui-toast__close:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+/* 타입별 스타일 */
+.ui-toast[data-type="default"] {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+}
+
+.ui-toast[data-type="success"] {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.9) 0%,
+    rgba(21, 128, 61, 0.9) 100%
+  );
+  color: #ffffff;
+}
+
+.ui-toast[data-type="error"] {
+  background: linear-gradient(
+    135deg,
+    rgba(239, 68, 68, 0.9) 0%,
+    rgba(185, 28, 28, 0.9) 100%
+  );
+  color: #ffffff;
+}
+
+.ui-toast[data-type="warning"] {
+  background: linear-gradient(
+    135deg,
+    rgba(245, 158, 11, 0.9) 0%,
+    rgba(180, 83, 9, 0.9) 100%
+  );
+  color: #ffffff;
+}
+
+.ui-toast[data-type="info"] {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.9) 0%,
+    rgba(29, 78, 216, 0.9) 100%
+  );
+  color: #ffffff;
+}
+
+/* 호버 효과 */
+.ui-toast:hover {
+  transform: translateY(-0.1rem) scale(1.02);
+  box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 48rem) {
+  .area-toast {
+    left: 1rem;
+    right: 1rem;
+    transform: none;
+    padding: 1rem;
+  }
+
+  .area-toast[data-position="top"] {
+    top: 0;
+  }
+
+  .area-toast[data-position="bottom"] {
+    bottom: 0;
+  }
+
+  .area-toast[data-position="center"] {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .ui-toast {
+    min-width: auto;
+    max-width: none;
+    width: 100%;
+  }
+}
+
+/* 다크모드 지원 */
+@media (prefers-color-scheme: dark) {
+  .ui-toast[data-type="default"] {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+  }
+}
+
+/* 애니메이션 최적화 */
+@media (prefers-reduced-motion: reduce) {
+  .ui-toast {
+    transition: opacity 0.2s ease;
+  }
+
+  .ui-toast:hover {
+    transform: none;
+  }
+}
+
+/* 접근성 개선 */
+.ui-toast:focus-within {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* 스택 효과 (여러 토스트) */
+.area-toast .ui-toast:nth-child(1) {
+  z-index: 10;
+}
+.area-toast .ui-toast:nth-child(2) {
+  z-index: 9;
+  opacity: 0.95;
+}
+.area-toast .ui-toast:nth-child(3) {
+  z-index: 8;
+  opacity: 0.9;
+}
+.area-toast .ui-toast:nth-child(n + 4) {
+  z-index: 7;
+  opacity: 0.85;
+}

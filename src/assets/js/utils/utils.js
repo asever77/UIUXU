@@ -350,6 +350,8 @@ export const scrollMove = {
   },
 };
 
+export const Timeouts = {};
+
 export class ScrollTrigger {
   constructor(options) {
     // 기본 옵션 설정
