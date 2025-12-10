@@ -3,9 +3,8 @@
   position: relative;
   display: flex;
   overflow-x: auto;
-  position: relative;
-  scroll-behavior: smooth; 
-  -ms-overflow-style: none; 
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
   scrollbar-width: none;
   width: 100%;
   z-index: 1;
@@ -21,7 +20,7 @@
     display: flex;
     padding: 1.2rem;
     cursor: pointer;
-    min-width:10rem;
+    min-width: 10rem;
 
     &[aria-selected="true"] {
       font-weight: 700;
@@ -44,9 +43,9 @@
     position: sticky;
   }
   &[data-tab-wrap] {
-    display:flex;
+    display: flex;
     flex-direction: column;
-    gap:var(--x4);
+    gap: var(--x4);
   }
   [role="tabpanel"] {
     scroll-margin-top: 0;

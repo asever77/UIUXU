@@ -728,7 +728,8 @@
   gap: 0 0.6rem;
   flex-wrap: wrap;
 }
-.IA[data-size=desktop] .IA--list th, .IA[data-size=desktop] .IA--list td {
+.IA[data-size=desktop] .IA--list th,
+.IA[data-size=desktop] .IA--list td {
   padding: 0;
   display: none;
   border: 0;
@@ -767,12 +768,16 @@
 .IA thead th {
   background-color: var(--gray-20);
 }
-.IA td, .IA th {
+.IA td,
+.IA th {
   position: relative;
   padding: 0.2rem;
   font-size: 1.1rem;
   background-color: #fff;
   border: 1px solid var(--gray-30);
+}
+.IA tr *:first-child {
+  padding-left: 0.2rem;
 }
 .IA .on td {
   z-index: 1;
@@ -1680,7 +1685,6 @@ td [data-state=제외]::before {
   position: relative;
   display: flex;
   overflow-x: auto;
-  position: relative;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;

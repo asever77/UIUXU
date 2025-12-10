@@ -15,7 +15,7 @@
 
   "liveServer.settings.donotVerifyTags": true,
   "liveServer.settings.donotShowInfoMsg": true,
-  "liveServer.settings.port": 5508,
+  "liveServer.settings.port": 5509,
 
   // 편집기 설정
   "editor.wordWrap": "on",
