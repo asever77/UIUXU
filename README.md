@@ -6,6 +6,13 @@
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
 [![Vite](https://img.shields.io/badge/vite-5.4.10-646CFF?logo=vite)](https://vitejs.dev/)
 
+---
+
+### 📅 휴가 관리
+- **[휴가관리.xlsx 다운로드](./휴가관리.xlsx)**
+
+---
+
 ## 🚀 빠른 시작
 
 ### 1. 의존성 설치
