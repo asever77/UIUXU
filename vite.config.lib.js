@@ -55,11 +55,10 @@ export default defineConfig({
         utils: resolve(__dirname, "src/assets/js/utils/utils.js"),
       },
       name: "UIUXU",
-      formats: ["es", "cjs", "umd"],
+      formats: ["es", "cjs"],
       fileName: (format, entryName) => {
         if (format === "es") return `${entryName}.esm.js`;
-        if (format === "cjs") return `${entryName}.cjs`;
-        return `${entryName}.umd.js`;
+        return `${entryName}.cjs`;
       },
     },
 

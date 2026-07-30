@@ -24,6 +24,7 @@ export default class Tab {
   #smoothScroll = null;
   #keyNavigator = null;
   #scrolltrigger = null;
+  #boundHandleToggle = null;
 
   constructor(opt) {
     const defaults = {
@@ -44,6 +45,8 @@ export default class Tab {
     this.#selected = this.#options.selected;
     this.#renderMode = this.#options.renderMode;
     this.#scrollOffsetTop = this.#options.scrollOffsetTop; // 옵션 값 할당
+
+    this.#boundHandleToggle = this.#handleToggle.bind(this);
   }
 
   init() {
@@ -201,7 +204,7 @@ export default class Tab {
 
     // 탭 버튼 클릭 이벤트 리스너 등록
     this.#el_tabBtns.forEach((tab) => {
-      tab.addEventListener("click", this.#handleToggle.bind(this));
+      tab.addEventListener("click", this.#boundHandleToggle);
     });
 
     // 키보드 내비게이션 초기화
@@ -380,7 +383,7 @@ export default class Tab {
     // 탭 버튼 클릭 이벤트 리스너 제거
     if (this.#el_tabBtns) {
       this.#el_tabBtns.forEach((tab) => {
-        tab.removeEventListener("click", this.#handleToggle.bind(this));
+        tab.removeEventListener("click", this.#boundHandleToggle);
       });
     }
 

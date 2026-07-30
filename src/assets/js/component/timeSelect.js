@@ -6,8 +6,9 @@ export default class TimeSelect {
 		this.min = "00:00";
 		this.max = "24:00";
 		this.value = opt.value;
-		this.middayUnit = ['오전', '오후'];
-		this.miuntUnit = opt.miuntUnit;
+		this.middayUnit = opt.middayUnit || ['오전', '오후'];
+		this.miuntUnit = opt.minuteUnit || opt.miuntUnit || 1;
+		this.minuteUnit = this.miuntUnit;
 		this.timerWheel = null;
 		this.nowScrollTop = 0;
 		this.hUnit = 0;
@@ -494,5 +495,26 @@ export default class TimeSelect {
 			}
 		}
 		eventList[eType]();
+	}
+
+	destroy() {
+		if (this.el_time) {
+			const el_midday = this.el_time.querySelector('.mdl-time-midday');
+			const el_hour = this.el_time.querySelector('.mdl-time-hour');
+			const el_minute = this.el_time.querySelector('.mdl-time-minute');
+
+			[el_midday, el_hour, el_minute].forEach((el) => {
+				if (el) {
+					el.removeEventListener('touchstart', this.action);
+					el.removeEventListener('mousedown', this.action);
+					el.removeEventListener('wheel', this.action);
+					const btns = el.querySelectorAll('button');
+					btns.forEach((btn) => btn.removeEventListener('click', this.action));
+				}
+			});
+
+			this.el_time.innerHTML = '';
+			this.el_time = null;
+		}
 	}
 }

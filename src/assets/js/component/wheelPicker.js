@@ -183,7 +183,7 @@ export default class WheelPicker {
 		let circleListHTML = '';
 		let selectOptionHTML = ``;
 		for (let i = 0; i < source.length; i++) {
-			selectOptionHTML += `<option value="${source[i].value}" ${this.value, this.source[i].value ? 'selected' : ''}>${source[i].text}</option>`;
+			selectOptionHTML += `<option value="${source[i].value}" ${this.value === this.source[i].value ? 'selected' : ''}>${source[i].text}</option>`;
 
 			circleListHTML += `<li class="wheel-picker--option" aria-hidden="true" 
 			style="
@@ -445,14 +445,18 @@ export default class WheelPicker {
 
 	destroy() {
 		this._stop();
-		for (let eventName in this.events) {
-			this.elems.el.removeEventListener('eventName', this.events[eventName]);
+		if (this.elems && this.elems.el) {
+			for (let eventName in this.events) {
+				if (this.events[eventName]) {
+					this.elems.el.removeEventListener(eventName, this.events[eventName]);
+				}
+			}
+			this.elems.el.innerHTML = '';
 		}
 		document.removeEventListener('mousedown', this.events['touchstart']);
 		document.removeEventListener('mousemove', this.events['touchmove']);
 		document.removeEventListener('mouseup', this.events['touchend']);
 		// 초기화
-		this.elems.el.innerHTML = '';
 		this.elems = null;
 	}
 }

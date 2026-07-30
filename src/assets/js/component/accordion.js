@@ -213,38 +213,16 @@ export default class Accordion {
   }
 
   /**
-   * 아코디언 인스턴스를 파괴하고 모든 이벤트 리스너를 제거합니다.
-   */
-  destroy() {
-    this.#acco_btns.forEach(button => {
-      button.removeEventListener('click', this.handleToggle);
-    });
-
-    // ArrowNavigator 인스턴스가 있다면 파괴 메서드 호출 (가정)
-    // ArrowNavigator 클래스에 destroy 메서드가 있다면 여기에 추가
-    if (this.#arrowNavigator && typeof this.#arrowNavigator.destroy === 'function') {
-      this.#arrowNavigator.destroy();
-    }
-    this.#acco_items.forEach(item => {
-      item.querySelector(`[data-accordion-body="${this.#id}"]`).removeAttribute('style');
-    })
-
-    // 필요한 경우 다른 DOM 참조 및 상태 초기화
-    this.#acco = null;
-    this.#acco_items = null;
-    this.#acco_btns = null;
-    this.#isAnimating = false;
-  }
-
-  /**
    * 아코디언 항목 목록을 업데이트합니다.
    * 동적으로 아코디언 항목이 추가되거나 제거될 때 호출합니다.
    */
   update() {
     // 기존 이벤트 리스너 제거 (이전에 등록된 버튼에 대해)
-    this.#acco_btns.forEach(button => {
-      button.removeEventListener('click', this.handleToggle);
-    });
+    if (this.#acco_btns) {
+      this.#acco_btns.forEach(button => {
+        button.removeEventListener('click', this.handleToggle);
+      });
+    }
 
     // 최신 DOM 상태를 다시 스캔
     this.#acco_items = this.#acco.querySelectorAll(`[data-accordion-item="${this.#id}"]`);
@@ -252,15 +230,7 @@ export default class Accordion {
 
     // 새로 스캔된 항목들을 다시 초기화
     this.#initializeAccordionItems();
-    
-    // ArrowNavigator도 업데이트가 필요할 수 있으므로, 재초기화하거나 업데이트 메서드 호출 (가정)
-    // 예를 들어, ArrowNavigator가 focusable 요소를 다시 스캔해야 하는 경우:
-    // if (this.#arrowNavigator && typeof this.#arrowNavigator.update === 'function') {
-    //   // this.#arrowNavigator.update();
-    // } else {
-    //   // 혹은 ArrowNavigator를 다시 생성할 수도 있습니다. (기존 인스턴스 파괴 후)
-    //   // this.#arrowNavigator = new ArrowNavigator({...});
-    // }
+
     logger.info(`Accordion "${this.#id}" has been updated.`, null, 'Accordion');
   }
 
@@ -282,16 +252,25 @@ export default class Accordion {
         });
       }
 
-      // 2. ArrowNavigator 정리 (있다면)
+      // 2. DOM 스타일 속성 정리
+      if (this.#acco_items) {
+        this.#acco_items.forEach(item => {
+          const body = item.querySelector(`[data-accordion-body="${this.#id}"]`);
+          if (body) body.removeAttribute('style');
+        });
+      }
+
+      // 3. ArrowNavigator 정리
       if (this.#arrowNavigator && typeof this.#arrowNavigator.destroy === 'function') {
         this.#arrowNavigator.destroy();
       }
 
-      // 3. private 필드 초기화
+      // 4. private 필드 초기화
       this.#acco = null;
       this.#acco_items = null;
       this.#acco_btns = null;
       this.#arrowNavigator = null;
+      this.#isAnimating = false;
 
       logger.info(`Accordion "${this.#id}" destroyed successfully`, null, 'Accordion');
       

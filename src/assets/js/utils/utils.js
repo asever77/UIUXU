@@ -52,7 +52,7 @@ export const makeID = (v) => {
   let idLength = v;
   let idText = "";
   let word_list =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*";
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
   for (let i = 0; i < idLength; i++) {
     idText += word_list.charAt(Math.floor(Math.random() * word_list.length));
   }
@@ -793,7 +793,7 @@ export class RadioAllcheck {
     console.log(opt);
     // opt 유효성 검사
     if (!opt || !opt.name) {
-      throw new Errow("옵션 객체와 name 속성은 필수입니다.");
+      throw new Error("옵션 객체와 name 속성은 필수입니다.");
     }
 
     const { name, callback } = opt;
@@ -807,7 +807,7 @@ export class RadioAllcheck {
     );
 
     if (!this.#main || this.#subs.length === 0) {
-      console.error(`${name}에 핻앟나느 체크박스 요소를 찾을 수가 없습니다.`);
+      console.error(`${name}에 해당하는 체크박스 요소를 찾을 수가 없습니다.`);
       return;
     }
 
@@ -829,7 +829,7 @@ export class RadioAllcheck {
     this.#subs.forEach((item) => {
       item.checked = this.#isAllCheck;
     });
-    this.#btn.disabled = this.#isAllCheck ? false : true;
+    if (this.#btn) this.#btn.disabled = this.#isAllCheck ? false : true;
     this.#callback?.({
       all: this.#isAllCheck,
       required: this.#isAllCheck,
@@ -845,16 +845,18 @@ export class RadioAllcheck {
     this.#isAllCheck = this.#sum === checkedSum;
     this.#isAllCheckRequired = this.#sumRequired === checkedSumRequired;
     this.#main.checked = this.#isAllCheck;
-    this.#btn.disabled = this.#isAllCheckRequired ? false : true;
+    if (this.#btn) this.#btn.disabled = this.#isAllCheckRequired ? false : true;
     this.#callback?.({
       all: this.#isAllCheck,
       required: this.#isAllCheckRequired,
     });
   };
   destroy() {
-    this.#main.removeEventListener("change", this.#handleToggle);
-    this.#subs.forEach((item) => {
-      item.removeEventListener("change", this.#updateState);
-    });
+    if (this.#main) this.#main.removeEventListener("change", this.#handleToggle);
+    if (this.#subs) {
+      this.#subs.forEach((item) => {
+        item.removeEventListener("change", this.#updateState);
+      });
+    }
   }
 }

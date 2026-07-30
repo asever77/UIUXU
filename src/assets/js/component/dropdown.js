@@ -75,9 +75,7 @@ export default class Dropdown {
     this.#setupElements();
     this.#addEventListeners();
 
-    // resize 이벤트 리스너도 destroy 시 제거 필요
     window.addEventListener("resize", this.reset);
-    this.#button.addEventListener("click", this.#boundHandleToggle); // init에서 이미 한 번 추가되는 부분
     this.#callback && this.#callback();
   }
 
@@ -222,18 +220,16 @@ export default class Dropdown {
     this.#removeEventListeners();
     window.removeEventListener("resize", this.reset);
 
+    if (this.#panel && this.#panel.parentNode && this.#src) {
+      this.#panel.parentNode.removeChild(this.#panel);
+    }
+
     this.#wrap = null;
     this.#button = null;
     this.#text = null;
     this.#panel = null;
     this.#panelInner = null;
     this.#area = null;
-
-    // 3. (필요하다면) 컴포넌트가 생성한 DOM 요소 제거
-    // 예를 들어, loadContent로 동적으로 삽입된 패널을 제거하고 싶다면
-    if (this.#panel && this.#panel.parentNode && this.#src) {
-      this.#panel.parentNode.removeChild(this.#panel); // 실제 DOM에서 패널 제거
-    }
 
     console.log(`Dropdown with ID "${this.#id}" destroyed.`);
   }
