@@ -774,4 +774,56 @@ export default class Dialog {
     if (zIndex <= 1)
       document.querySelector("body").classList.remove("scroll-not");
   }
+
+  /**
+   * Promise 기반 확인 창 반환
+   * @param {string|Object} [messageOrOptions]
+   * @returns {Promise<boolean>}
+   */
+  confirm(messageOrOptions = {}) {
+    return new Promise((resolve) => {
+      if (typeof messageOrOptions === "string") {
+        this.message = messageOrOptions;
+      } else if (typeof messageOrOptions === "object") {
+        Object.assign(this, messageOrOptions);
+      }
+
+      if (!this.confirmText) this.confirmText = "확인";
+      if (!this.cancelText) this.cancelText = "취소";
+
+      const originalConfirm = this.confirmCallback;
+      const originalCancel = this.cancelCallback;
+
+      this.confirmCallback = () => {
+        originalConfirm && originalConfirm();
+        this.hide();
+        resolve(true);
+      };
+
+      this.cancelCallback = () => {
+        originalCancel && originalCancel();
+        this.hide();
+        resolve(false);
+      };
+
+      this.show();
+    });
+  }
+
+  /**
+   * 편리한 정적 Dialog.confirm 헬퍼
+   * @param {string} message
+   * @param {Object} [options]
+   * @returns {Promise<boolean>}
+   */
+  static confirm(message, options = {}) {
+    const instance = new Dialog({
+      type: "system",
+      message: message,
+      confirmText: "확인",
+      cancelText: "취소",
+      ...options,
+    });
+    return instance.confirm();
+  }
 }

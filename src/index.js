@@ -56,6 +56,12 @@ export {
   loadContent,
 } from "./assets/js/utils/utils.js";
 
+export {
+  initAutoComponents,
+  startAutoObserver,
+  stopAutoObserver,
+} from "./assets/js/uiuxu.common.js";
+
 // ============================================
 // 메타 정보
 // ============================================

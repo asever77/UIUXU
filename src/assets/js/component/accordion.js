@@ -177,6 +177,16 @@ export default class Accordion {
         const scrollTarget = button.closest(`[data-accordion-item="${this.#id}"]`) || button;
         scrollTarget.scrollIntoView(this.#option.scrollOptions || { behavior: 'smooth', block: 'nearest' });
       }
+      if (this.#acco) {
+        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:open", {
+          bubbles: true,
+          detail: { id: this.#id, button, body: accoBody }
+        }));
+        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:change", {
+          bubbles: true,
+          detail: { id: this.#id, action: "open", button, body: accoBody }
+        }));
+      }
       callback && callback();
     });
   }
@@ -208,6 +218,16 @@ export default class Accordion {
       accoBody.setAttribute('hidden', '');
       button.disabled = false;
       this.#isAnimating = false;
+      if (this.#acco) {
+        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:close", {
+          bubbles: true,
+          detail: { id: this.#id, button, body: accoBody }
+        }));
+        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:change", {
+          bubbles: true,
+          detail: { id: this.#id, action: "close", button, body: accoBody }
+        }));
+      }
       callback && callback();
     });
   }

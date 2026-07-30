@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accordion | UIUXU</title>
-    <!-- loads the entire Variable Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
       rel="stylesheet"
@@ -28,89 +27,426 @@
       [data-accordion-section] {
         padding: 1.6rem 0.8rem;
       }
-
-      [data-guide="on"] {
-        [data-accordion],
-			/* [data-accordion-button], */
-			[data-accordion-body],
-			[data-accordion-body],
-			[data-accordion-item],
-			[data-accordion-head],
-			[data-accordion-title] {
-          position: relative;
-          outline: 1px dashed rgba(255, 99, 71, 0.2);
-          outline-offset: -1px;
-          background-color: rgba(255, 99, 71, 0.1);
-
-          &::after,
-          &::before {
-            content: "";
-            position: absolute;
-            display: block;
-            pointer-events: none;
-          }
-
-          &::after {
-            width: 100%;
-            height: 1px;
-            border-top: 1px dashed rgba(255, 99, 71, 0.2);
-            top: 50%;
-            left: 0;
-          }
-
-          &::before {
-            width: 1px;
-            height: 100%;
-            border-left: 1px dashed rgba(255, 99, 71, 0.2);
-            left: 50%;
-            top: 0;
-          }
-        }
-      }
     </style>
   </head>
 
   <body>
+    <div class="area-base" data-layout="base">
+      <header class="base-header"></header>
+      <div class="base-body">
+        <aside class="base-aside"></aside>
+        <main class="base-main">
+          <aside class="aside-inner">
+            <div class="aside-inner--wrap" data-index="0">
+              <h3 class="h-3">Index</h3>
+              <nav>
+                <ul>
+                  <li>
+                    <a href="#anchor-ex" class="selected">Example</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-code">Code</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-opt">Options</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-a11y">Accessibility</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-history">History</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </aside>
+          <article class="base-content" data-grid="sub-content">
+            <section class="base-wrap" data-dir="col" data-grid="display-title">
+              <h1 class="h-1">Accordion</h1>
+              <p>
+                Accordion 컴포넌트는 접을 수 있는 콘텐츠 패널을 표시하는 접근성
+                좋고 유연한 방법을 제공합니다. <br />이를 통해 사용자는 콘텐츠
+                섹션을 표시하거나 숨길 수 있어 FAQ, 제품 상세 정보 또는 정보가
+                효율적으로 구성되어야 하는 모든 시나리오에 이상적입니다.
+              </p>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-ex">Example 1: 자동 초기화 (JS 작성 필요 없음)</h2>
+              <p>마크업에 <code>data-ui="accordion"</code>만 부여하면 UX.init() 시 자동으로 아코디언이 구동됩니다.</p>
+              <div class="base-box">
+                <div data-ui="accordion" data-accordion="acco1">
+                  <div data-accordion-item="acco1">
+                    <div data-accordion-head="acco1">
+                      <h3 data-accordion-title="acco1">
+                        <button type="button" data-accordion-button="acco1">
+                          자동 아코디언 1
+                        </button>
+                      </h3>
+                    </div>
+                    <div data-accordion-body="acco1" hidden>
+                      <div data-accordion-section="acco1">
+                        <p>JS 작성 없이 data-ui="accordion"으로 자동 작동됩니다.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-accordion-item="acco1">
+                    <div data-accordion-head="acco1">
+                      <h3 data-accordion-title="acco1">
+                        <button type="button" data-accordion-button="acco1">
+                          자동 아코디언 2
+                        </button>
+                      </h3>
+                    </div>
+                    <div data-accordion-body="acco1" hidden>
+                      <div data-accordion-section="acco1">
+                        <p>자동 아코디언 항목 2의 내용입니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2">Example 2: 커스텀 수동 세팅 (특수 옵션 적용)</h2>
+              <p>초기열림(expanded), 다중열기(singleOpen: false), 스크롤 이동(scrollIntoView) 등 커스텀 옵션이 필요할 때 JS 코드로 세팅합니다.</p>
+              <div class="base-box">
+                <div data-accordion="accoCustom">
+                  <div data-accordion-item="accoCustom">
+                    <div data-accordion-head="accoCustom">
+                      <h3 data-accordion-title="accoCustom">
+                        <button type="button" data-accordion-button="accoCustom">
+                          커스텀 1 (초기 확장 상태)
+                        </button>
+                      </h3>
+                    </div>
+                    <div data-accordion-body="accoCustom" hidden>
+                      <div data-accordion-section="accoCustom">
+                        <p>expanded: "accoCustom-0" 옵션에 의해 시작 시 자동으로 열려 있습니다.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-accordion-item="accoCustom">
+                    <div data-accordion-head="accoCustom">
+                      <h3 data-accordion-title="accoCustom">
+                        <button type="button" data-accordion-button="accoCustom">
+                          커스텀 2 (다중 열기 허용)
+                        </button>
+                      </h3>
+                    </div>
+                    <div data-accordion-body="accoCustom" hidden>
+                      <div data-accordion-section="accoCustom">
+                        <p>singleOpen: false 옵션 덕분에 1번과 2번이 동시에 열려 있을 수 있습니다.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-code">Code</h2>
+              <div data-tab="codeGuide" data-tab-style="small-box-type">
+                <div role="tablist">
+                  <button type="button" role="tab">
+                    <span>HTML</span>
+                  </button>
+                  <button type="button" role="tab">
+                    <span>Javascript</span>
+                  </button>
+                  <button type="button" role="tab">
+                    <span>CSS</span>
+                  </button>
+                </div>
+              </div>
+              <div data-tab-wrap="codeGuide">
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">HTML</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+&lt;div <b>data-accordion="name"</b>&gt;
+	<i>//아코디언 콘텐츠 반복</i>
+	&lt;div <b>data-accordion-item="name"</b>&gt;
+		<i>//아코디언 제목</i>
+		&lt;div <b>data-accordion-head="name"</b>&gt;
+			&lt;h3 <b>data-accordion-title="name"</b>&gt;title 1
+				&lt;button type="button" <b>data-accordion-button="name"</b>&gt;&lt;/button&gt;
+			&lt;/h3&gt;
+		&lt;/div&gt;
+		<i>//아코디언 내용</i>
+		&lt;div <b>data-accordion-body="name"</b> hidden&gt;
+			&lt;div <b>data-accordion-section="name"</b>&gt;
+				...
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+	<i>...</i>
+&lt;/div&gt;
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">javascript</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+&lt;script <b>type="module"</b>&gt;
+	<b>import Accordion from './component/accordion.js';</b>
+
+	const acco1 = new <b>Accordion</b>({
+		<b>id</b>: 'acco1',
+		<b>expanded</b>: null,
+		<b>scrollIntoView</b>: true,
+		<b>scrollOptions</b>: { 
+			<b>behavior</b>: 'smooth', 
+			<b>block</b>: 'start' 
+		},
+	});
+
+	<i>//실행</i>
+	acco1.<b>init</b>(); 
+	<i>//선택 열림</i>
+	acco1.<b>show</b>('acco1-1');
+	<i>//선택 닫힘</i>
+	acco1.<b>hide</b>('acco1-1', () =&gt; {...}); 
+	<i>//아코디언 동적 추가 후 업데이트</i>
+	acco1.<b>update</b>();
+	<i>//아코디언 구성 삭제</i>
+	acco1.<b>destroy</b>();
+&lt;/script&gt;
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">CSS</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+[data-accordion] {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-item] {
+  display: flex;
+  flex-direction: column;
+}
+
+[data-accordion-group] {
+  display: flex;
+}
+
+[data-accordion-head] {
+  position: relative;
+  display: flex;
+}
+
+[data-accordion-button] {
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+[data-accordion-button]:disabled {
+  opacity: 1;
+}
+
+[data-accordion-title] {
+  position: relative;
+  z-index: 0;
+}
+
+[data-accordion-body] {
+  position: relative;
+  overflow: hidden;
+}
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-opt">Options</h2>
+              <p>
+                Accordion 클래스 생성자에 전달할 수 있는 옵션에 대한 자세한
+                설명입니다.
+              </p>
+              <table>
+                <caption></caption>
+                <colgroup>
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">옵션명</th>
+                    <th scope="col">타입</th>
+                    <th scope="col">기본값</th>
+                    <th scope="col">설명</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">id</th>
+                    <td>String</td>
+                    <td>필수</td>
+                    <td>
+                      아코디언 인스턴스의 고유 식별자입니다. 이는 HTML의 주
+                      아코디언 컨테이너 요소에 있는 data-accordion 속성과
+                      일치해야 합니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">expanded</th>
+                    <td>string 또는 null</td>
+                    <td>null</td>
+                    <td>
+                      컴포넌트 로드 시 어떤 아코디언 항목이 초기에 확장되어야
+                      하는지 지정합니다. 확장하려는 아코디언 버튼의 ID를
+                      제공해야 합니다. null로 설정하면 기본적으로 어떤 항목도
+                      확장되지 않습니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">singleOpen</th>
+                    <td>boolean</td>
+                    <td>true</td>
+                    <td>
+                      한 번에 하나의 아코디언 항목만 열릴 수 있는지(true) 또는
+                      여러 항목이 동시에 열릴 수 있는지(false)를 결정합니다.
+                      true인 경우, 한 항목을 열면 현재 열려 있는 다른 항목이
+                      자동으로 닫힙니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">scrollIntoView</th>
+                    <td>boolean</td>
+                    <td>false</td>
+                    <td>스크롤이벤트</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">scrollOptions</th>
+                    <td>object</td>
+                    <td>false</td>
+                    <td>{ behavior: 'smooth', block: 'start' }</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-a11y">Accessibility</h2>
+              <div data-grid="wrap-group">
+                <div class="base-group">
+                  <h3 class="h-3">아코디언에 접근 가능한 제목을 제공한다.</h3>
+                  <p>
+                    아코디언 헤더 내부의 제목은 페이지의 다른 콘텐츠의 구조에
+                    맞추어 &lt;h1&gt;~&lt;h6&gt; 태그로 마크업한다. 스크린 리더
+                    사용자가 아코디언 목록에서 어떤 정보를 확인할 수 있는지
+                    개요를 파악하고 필요한 정보를 빠르게 탐색하는 데 도움이
+                    된다.
+                  </p>
+                  <ul data-bullet="dot">
+                    <li>KWCAG 2.2 제목 제공</li>
+                    <li>WCAG 2.1 Info and Relationships (A)</li>
+                  </ul>
+                </div>
+
+                <div class="base-group">
+                  <h3 class="h-3">
+                    아코디언의 활성화 상태 정보를 스크린 리더에서 확인할 수
+                    있도록 한다.
+                  </h3>
+                  <p>
+                    아코디언의 확장 상태에 대한 정보를 텍스트 정보로
+                    제공(펼치기/접기, 축소됨/확장됨)하여 스크린 리더 사용자가
+                    컨트롤의 상태를 인지할 수 있도록 해야 한다.
+                  </p>
+                  <ul data-bullet="dot">
+                    <li>WCAG 2.1 Name, Role, Value (A)</li>
+                  </ul>
+                </div>
+
+                <div class="base-group">
+                  <h3 class="h-3">헤더를 버튼 역할로 제공한다.</h3>
+                  <p>
+                    헤더를 실행하였을 때 특정 섹션이나 화면으로 이동하는 것이
+                    아니므로 &lt;button&gt;을 사용하거나 role="button"을
+                    사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록
+                    한다.
+                  </p>
+                  <ul data-bullet="dot">
+                    <li>WCAG 2.1 Name, Role, Value (A)</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-history">History</h2>
+              <ol class="list-history">
+                <li class="list-history--item">
+                  <div class="list-history--item-key">2025.09.08 -</div>
+                  <div class="list-history--item-value">
+                    Accordion 1.1.0 웹접근성 수정으로 h태그 안에 button 태그
+                    위치 수정.
+                  </div>
+                </li>
+                <li class="list-history--item">
+                  <div class="list-history--item-key">2025.07.24 -</div>
+                  <div class="list-history--item-value">
+                    Accordion 1.0.1 update, destroy 기능 추가
+                  </div>
+                </li>
+                <li class="list-history--item">
+                  <div class="list-history--item-key">2025.07.22 -</div>
+                  <div class="list-history--item-value">
+                    Accordion 1.0.0 아코디언 버전관리 시작
+                  </div>
+                </li>
+              </ol>
+            </section>
+          </article>
+        </main>
+      </div>
+      <footer class="base-footer"></footer>
+    </div>
+
+    <!-- zIndex 100: dropdown -->
+    <div class="area-dropdown" data-area="body"></div>
+    <!-- zIndex 200: tooltip  -->
+    <div class="area-tooltip"></div>
+    <!-- zIndex 300: modal -->
+    <div class="area-dialog" data-area="body"></div>
+
     <!-- script -->
     <script type="module">
       import { UX } from "../assets/js/uiuxu.common.js";
-      UX.init({
-        layout: "./layout/base.html",
-        page: "./content/accordion.html",
-        callback: () => {
-          UI.exe.codeGuide = new UX.Tab({
-            id: "codeGuide",
-            renderMode: "static",
-            selected: 1,
-            data: [
-              {
-                callback: () => {
-                  logger.debug("HTML open", null, "Accordion");
-                },
-              },
-              {
-                callback: () => {
-                  logger.debug("Javascript open", null, "Accordion");
-                },
-              },
-              {
-                callback: () => {
-                  logger.debug("CSS open", null, "Accordion");
-                },
-              },
-            ],
-          });
-          UI.exe.codeGuide.init();
 
-          // accordion
-          UI.exe.acco1 = new UX.Accordion({
-            id: "acco1",
-            expanded: "acco1-0",
-            // scrollIntoView: true,
-            // scrollOptions: { behavior: 'smooth', block: 'start' },
-          });
-          UI.exe.acco1.init();
-        },
+      // 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+      UX.init().then(() => {
+        // 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+        UI.exe.accoCustom = new UX.Accordion({
+          id: "accoCustom",
+          expanded: "accoCustom-0", // 첫 번째 항목 기본 열림
+          singleOpen: false,        // 다중 열기 허용
+          scrollIntoView: true,     // 클릭 시 부드럽게 스크롤 이동
+        });
+        UI.exe.accoCustom.init();
       });
     </script>
   </body>

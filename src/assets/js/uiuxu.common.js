@@ -69,174 +69,190 @@ class UXCore {
     }
   }
 
-  #loadCommonLayout(data) {
-    if (data.layout) {
-      loadContent({
-        area: document.querySelector("body"),
-        src: data.layout,
-        insert: true,
-      })
-        .then(() => {
-          const el_header = document.querySelector(".base-header");
-          const el_footer = document.querySelector(".base-footer");
-          const el_aside = document.querySelector(".base-aside");
-          const el_main = document.querySelector(".base-main");
+  async #loadIncFiles() {
+    const el_header = document.querySelector(".base-header");
+    const el_aside = document.querySelector(".base-aside");
+    const el_footer = document.querySelector(".base-footer");
 
-          if (el_header) {
-            loadContent({
-              area: el_header,
-              src: "./inc/header.html",
-              insert: true,
-            })
-              .then(() => {
-                const el_html = document.querySelector("html");
+    const promises = [];
 
-                // 다크모드 초기 상태 설정
-                if (localStorage.getItem("dark-mode")) {
-                  el_html.dataset.mode = localStorage.getItem("dark-mode");
-                }
-
-                // ToggleController에 전달할 콜백 함수들 정의
-                const modeChangeCallback = (v) => {
-                  if (localStorage.getItem("dark-mode") === "dark") {
-                    el_html.dataset.mode = "light";
-                  } else {
-                    el_html.dataset.mode = "dark";
-                  }
-                  localStorage.setItem("dark-mode", el_html.dataset.mode);
-                };
-
-                const guideToggleCallback = (v) => {
-                  if (v.state) {
-                    el_html.dataset.guide = "on";
-                  } else {
-                    el_html.dataset.guide = "off";
-                  }
-                };
-
-                // 헤더의 토글 버튼들을 위한 ToggleController 인스턴스 생성
-                UI.exe.toggle.header = new ToggleController({
-                  area: document.querySelector(".base-header"), // 범위를 헤더로 한정
-                  callbacks: {
-                    guideToggle: guideToggleCallback,
-                    modeChange: modeChangeCallback,
-                    nav: () => {
-                      /* 네비게이션 토글 시 추가 동작이 필요하면 여기에 작성 */
-                    },
-                  },
-                });
-
-                const aniLandomArray = [
-                  "판다",
-                  "개구리",
-                  "백곰",
-                  "여우",
-                  "트로피컬",
-                  "돼지",
-                  "똥",
-                  "로봇",
-                  "말풍선",
-                  "병아리",
-                  "유령",
-                  "썬글라스",
-                ];
-                const randomIndex = Math.floor(
-                  Math.random() * aniLandomArray.length
-                );
-
-                document.querySelector(
-                  ".ani"
-                ).src = `../assets/img/${aniLandomArray[randomIndex]}.png`;
-              })
-              .catch((err) =>
-                logger.error("Error loading header content", err, "UXCore")
-              );
-          }
-
-          if (el_aside) {
-            loadContent({
-              area: el_aside,
-              src: "./inc/aside.html",
-              insert: true,
-            })
-              .then(() => {})
-              .catch((err) =>
-                logger.error("Error loading aside content", err, "UXCore")
-              );
-          }
-
-          if (el_main && data) {
-            loadContent({
-              area: el_main,
-              src: data.page,
-              insert: true,
-            })
-              .then(() => {
-                data.callback();
-
-                setTimeout(() => {
-                  const wraps = document.querySelectorAll(
-                    '.base-content > .base-wrap:not([data-grid="display-title"])'
-                  );
-                  let wrapTopArray = [];
-                  const checkArray = () => {
-                    wrapTopArray = [];
-                    wraps.forEach((item) => {
-                      wrapTopArray.push(
-                        item.getBoundingClientRect().top +
-                          document.documentElement.scrollTop -
-                          94
-                      );
-                    });
-                  };
-                  checkArray();
-                  const getCurrentSection = (scrollY) => {
-                    const index = wrapTopArray.findIndex((pos, i) => {
-                      const next = wrapTopArray[i + 1] ?? Infinity;
-                      return scrollY >= pos && scrollY < next;
-                    });
-                    return index;
-                  };
-
-                  window.addEventListener("scroll", () => {
-                    const y = window.scrollY;
-                    const idx = getCurrentSection(y);
-                    checkArray();
-                    if (idx !== -1) {
-                      document.querySelector(
-                        ".aside-inner--wrap"
-                      ).dataset.index = idx;
-                    }
-                  });
-                }, 100);
-              })
-              .catch((err) =>
-                logger.error("Error loading main content", err, "UXCore")
-              );
-          }
-
-          if (el_footer) {
-            loadContent({
-              area: el_footer,
-              src: "./inc/footer.html",
-              insert: true,
-            })
-              .then(() => {})
-              .catch((err) =>
-                logger.error("Error loading footer content", err, "UXCore")
-              );
-          }
+    if (el_header && el_header.children.length === 0) {
+      promises.push(
+        loadContent({
+          area: el_header,
+          src: "./inc/header.html",
+          insert: true,
         })
-        .catch((err) =>
-          logger.error("Error loading layout content", err, "UXCore")
-        );
+          .then(() => {
+            const el_html = document.querySelector("html");
+
+            if (localStorage.getItem("dark-mode")) {
+              el_html.dataset.mode = localStorage.getItem("dark-mode");
+            }
+
+            const modeChangeCallback = () => {
+              const currentMode = localStorage.getItem("dark-mode");
+              const newMode = currentMode === "dark" ? "light" : "dark";
+              el_html.dataset.mode = newMode;
+              localStorage.setItem("dark-mode", newMode);
+            };
+
+            const guideToggleCallback = (v) => {
+              el_html.dataset.guide = v.state ? "on" : "off";
+            };
+
+            UI.exe.toggle.header = new ToggleController({
+              area: document.querySelector(".base-header"),
+              callbacks: {
+                guideToggle: guideToggleCallback,
+                modeChange: modeChangeCallback,
+                nav: () => {},
+              },
+            });
+
+            const aniLandomArray = [
+              "판다", "개구리", "백곰", "여우", "트로피컬",
+              "돼지", "똥", "로봇", "말풍선", "병아리", "유령", "썬글라스",
+            ];
+            const randomIndex = Math.floor(
+              Math.random() * aniLandomArray.length
+            );
+            const aniEl = document.querySelector(".ani");
+            if (aniEl) {
+              aniEl.src = `../assets/img/${aniLandomArray[randomIndex]}.png`;
+            }
+          })
+          .catch((err) => logger.error("Error loading header", err, "UXCore"))
+      );
     }
+
+    if (el_aside && el_aside.children.length === 0) {
+      promises.push(
+        loadContent({
+          area: el_aside,
+          src: "./inc/aside.html",
+          insert: true,
+        }).catch((err) => logger.error("Error loading aside", err, "UXCore"))
+      );
+    }
+
+    if (el_footer && el_footer.children.length === 0) {
+      promises.push(
+        loadContent({
+          area: el_footer,
+          src: "./inc/footer.html",
+          insert: true,
+        }).catch((err) => logger.error("Error loading footer", err, "UXCore"))
+      );
+    }
+
+    await Promise.all(promises);
   }
 
-  init(data) {
+  async init(data = {}) {
     this.#setupGlobalNamespace();
-    this.#loadCommonLayout(data);
-    UI.exe.toggle.main = new ToggleController();
+    await this.#loadIncFiles();
+    initAutoComponents(document);
+    startAutoObserver();
+    if (data && typeof data.callback === "function") {
+      data.callback();
+    }
+  }
+}
+
+let autoObserver = null;
+
+export async function initAutoComponents(container = document) {
+  const root = container && container.querySelectorAll ? container : document;
+
+  // 1. Accordion
+  const accoEls = root.querySelectorAll
+    ? root.querySelectorAll('[data-ui="accordion"]')
+    : [];
+  if (accoEls.length > 0) {
+    accoEls.forEach((el) => {
+      if (el.dataset.autoInitialized === "true") return;
+      const id = el.dataset.accordion || el.dataset.id || el.id;
+      if (id) {
+        const singleOpen = el.dataset.singleOpen !== "false";
+        const instance = new Accordion({ id, singleOpen });
+        instance.init();
+        el.dataset.autoInitialized = "true";
+      }
+    });
+  }
+
+  // 2. Dropdown
+  const dropEls = root.querySelectorAll
+    ? root.querySelectorAll('[data-ui="dropdown"]')
+    : [];
+  if (dropEls.length > 0) {
+    dropEls.forEach((el) => {
+      if (el.dataset.autoInitialized === "true") return;
+      const id = el.dataset.dropdown || el.dataset.id || el.id;
+      if (id) {
+        const instance = new Dropdown({ id });
+        instance.init();
+        el.dataset.autoInitialized = "true";
+      }
+    });
+  }
+
+  // 3. Tab
+  const tabEls = root.querySelectorAll
+    ? root.querySelectorAll('[data-ui="tab"]')
+    : [];
+  if (tabEls.length > 0) {
+    tabEls.forEach((el) => {
+      if (el.dataset.autoInitialized === "true") return;
+      const id = el.dataset.tab || el.dataset.id || el.id;
+      if (id) {
+        const instance = new Tab({ id, renderMode: "static" });
+        instance.init();
+        el.dataset.autoInitialized = "true";
+      }
+    });
+  }
+
+  // 4. Tooltip
+  const tooltipEls = root.querySelectorAll
+    ? root.querySelectorAll('[data-ui="tooltip"]')
+    : [];
+  if (tooltipEls.length > 0) {
+    tooltipEls.forEach((el) => {
+      if (el.dataset.autoInitialized === "true") return;
+      const id = el.dataset.tooltip || el.dataset.id || el.id;
+      if (id) {
+        const instance = new Tooltip({ id });
+        instance.init();
+        el.dataset.autoInitialized = "true";
+      }
+    });
+  }
+}
+
+export function startAutoObserver() {
+  if (autoObserver || typeof MutationObserver === "undefined") return;
+
+  autoObserver = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) {
+          initAutoComponents(node);
+        }
+      });
+    });
+  });
+
+  if (document.body) {
+    autoObserver.observe(document.body, { childList: true, subtree: true });
+  }
+}
+
+export function stopAutoObserver() {
+  if (autoObserver) {
+    autoObserver.disconnect();
+    autoObserver = null;
   }
 }
 
@@ -261,6 +277,9 @@ export const UX = {
   TimeSelect,
   ListIA,
 
+  initAutoComponents,
+  startAutoObserver,
+  stopAutoObserver,
   init: (data) => uxInstance.init(data),
   utils: {
     loadContent,
