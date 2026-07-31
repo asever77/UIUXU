@@ -1,66 +1,535 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UIUXU</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    <style>
+      @media (min-width: 1400px) {
+        .base-content[data-grid="sub-content"] > *:nth-child(1) {
+          grid-column: span 2;
+        }
+      }
+    </style>
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dropdown | UIUXU </title>
-	<!-- loads the entire Variable Font -->
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
-	<style>
-		@media (min-width: 1400px) {
-			.base-content[data-grid="sub-content"]  > *:nth-child(1) {
-				grid-column: span 2;
-			}
-			
+  <body>
+    <div class="area-base" data-layout="base">
+      <header class="base-header"></header>
+      <div class="base-body">
+        <aside class="base-aside"></aside>
+        <main class="base-main">
+          <aside class="aside-inner">
+            <div class="aside-inner--wrap" data-index="0">
+              <h3 class="h-3">Index</h3>
+              <nav>
+                <ul>
+                  <li>
+                    <a href="#anchor-ex" class="selected">Example</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-code">Code</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-opt">Options</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-a11y">Accessibility</a>
+                  </li>
+                  <li>
+                    <a href="#anchor-history">History</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </aside>
+
+          <article class="base-content" data-grid="sub-content">
+            <section class="base-wrap" data-dir="col" data-grid="display-title">
+              <h1 class="h-1">Dropdown</h1>
+              <p>
+                드롭다운 컴포넌트는 웹 페이지에서 사용자에게 선택 목록을
+                제공하거나, 특정 콘텐츠를 필요할 때만 보여주는 데 사용되는 UI
+                요소입니다. <br />이 가이드에서는 드롭다운 컴포넌트의 설정
+                가능한 옵션과 제공되는 주요 기능에 대해 설명합니다.
+              </p>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-ex">Example</h2>
+              <div class="base-box">
+                <div
+                  style="
+                    display: flex;
+                    gap: 0.8rem;
+                    justify-content: center;
+                    height: 31rem;
+                    align-items: center;
+                  "
+                >
+                  <select class="inp--base" id="psSelect" style="width: 14rem">
+                    <option value="bl">Bottom Left</option>
+                    <option value="bc">Bottom Center</option>
+                    <option value="br">Bottom Right</option>
+                    <option value="tl">Top Left</option>
+                    <option value="tc">Top Center</option>
+                    <option value="tr">Top Right</option>
+                    <option value="lt">Left Top</option>
+                    <option value="lc">Left Center</option>
+                    <option value="lb">Left Bottom</option>
+                    <option value="rc">Right Center</option>
+                    <option value="rt">Right Top</option>
+                    <option value="rb">Right Bottom</option>
+                  </select>
+                  <div data-dropdown="dropdown1">
+                    <button
+                      type="button"
+                      class="btn-base"
+                      data-dropdown-button="dropdown1"
+                    >
+                      <span data-dropdown-text="dropdown1">주요기능</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-code">Code</h2>
+              <div data-tab="codeGuide" data-tab-style="small-box-type">
+                <div role="tablist">
+                  <button type="button" role="tab">
+                    <span>HTML</span>
+                  </button>
+                  <button type="button" role="tab">
+                    <span>Javascript</span>
+                  </button>
+                  <button type="button" role="tab">
+                    <span>CSS</span>
+                  </button>
+                </div>
+              </div>
+              <div data-tab-wrap="codeGuide">
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">HTML</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+<i>//dropdown button</i>
+&lt;div <b>data-dropdown="dropdown1"</b>&gt;
+	&lt;button type="button" class="btn-base" <b>data-dropdown-button="dropdown1"</b>&gt;
+		&lt;span <b>data-dropdown-text="dropdown1"</b>&gt;주요기능&lt;/span&gt;
+	&lt;/button&gt;
+&lt;/div&gt;
+
+<i>//dropdown content</i>
+&lt;div <b>data-dropdown-panel="dropdown1"</b> <b>aria-hidden="true"</b>&gt;
+  &lt;div <b>data-dropdown-section="dropdown1"</b>&gt;
+		...
+  &lt;/div&gt;
+&lt;/div&gt;
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">javascript</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+&lt;script <b>type="module"</b>&gt;
+	<b>import Dropdown from './component/dropdown.js';</b>
+
+	const drop1 = new <b>Dropdown</b>({
+		<b>id</b>: 'userMenu',
+		<i>//헤더 영역에 드롭다운 패널 삽입</i>
+		<b>area</b>: document.querySelector('area-dropdown[data-area="body"]'), 
+		<i>//외부 파일에서 메뉴 콘텐츠 로드</i>
+		<b>src</b>: './html/user-menu.html', 
+		<i>//버튼의 오른쪽 아래에 패널 위치</i>
+		<b>ps</b>: 'br', 
+		<b>srcCallback</b>: () =&gt; {
+			console.log('User menu content loaded!');
+			<i>//로드된 콘텐츠 내의 특정 버튼에 이벤트 리스너 추가 등</i>
+		},
+		<b>callback</b>: () =&gt; {
+			console.log('Dropdown initialized!');
 		}
-	</style>
-</head>
+	});
 
-<body>
-	<!-- script -->
-	<script type="module">
-		import { UX } from '../assets/js/uiuxu.common.js';
+	<i>//실행</i>
+	drop1.<b>init()</b>;
+	<i>//선택 열림</i>
+	drop1.<b>show()</b>;
+	<i>//선택 닫힘</i>
+	drop1.<b>hide()</b>;
+	<i>//드랍다운 구성 삭제</i>
+	drop1.<b>destroy()</b>;
+&lt;/script&gt;
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+                <div role="tabpanel">
+                  <section>
+                    <h3 class="h-3 a11y-hidden">CSS</h3>
+                    <div class="code-box">
+                      <pre contenteditable="true"><code>
+[data-dropdown] {
+  position: relative;
+}
 
-		UX.init({
-			layout: './layout/base.html',
-			page:'./content/dropdown.html',
-			callback: () => {
-				UI.exe.codeGuide = new UX.Tab({
-					id: 'codeGuide',
-					renderMode: 'static',
-					selected: 1,
-					data: [
-						{ callback: () => { console.log('탭1 open'); },},
-						{ callback: () => { console.log('탭2 open'); },},
-						{ callback: () => { console.log('탭3 open'); },},
-					],
-				});
-				UI.exe.codeGuide.init();
+[data-dropdown-button] {
+  text-align: left;
+  position: relative;
+  z-index: 1;
 
-				// dropdown
-				let ps = 'bl';
-				document.querySelector('#psSelect').addEventListener('change', (e) => {
-					const ps = e.target.value;
-					UI.exe.dropdown1.ps = ps
-					
-				});
-				UI.exe.dropdown1 = new UX.Dropdown({
-					id: 'dropdown1',
-					ps: ps,
-					src: './dropdown/dropdown1.html',
-					srcCallback: () => {
-						console.log(`./dropdown/dropdown1.html load complete callback`);
-					},
-					callback: () => {
-						console.log(`dropdown init callback`);
-					},
-				});
+  &[aria-expanded] {
+    border: 0.1rem solid #000;
+    padding: 0.2rem 0.8rem;
+    border-radius: 0.4rem;
+  }
+}
 
-				UI.exe.dropdown1.init();
-			}
-		});
-	</script>
-</body>
+[data-dropdown-panel] {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+
+  [data-mso-before="close"] {
+    width: var(--x4);
+    height: var(--x4);
+    font-size: var(--x3);
+  }
+
+  [data-dropdown-section] {
+    overflow-y: auto;
+  }
+
+  &[data-ps="bl"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left:0;
+    right: auto;
+  }
+  &[data-ps="bc"] {justify-content: center}
+  &[data-ps="bc"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+  &[data-ps="br"] [data-dropdown-section] {
+    top: 100%;
+    bottom: auto;
+    left:auto;
+    right: 0;
+  }
+  &[data-ps="tl"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+    left:0;
+    right: auto;
+  }
+  &[data-ps="tc"] {justify-content: center}
+  &[data-ps="tc"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+    left: auto;
+    right: auto;
+    transform: auto;
+  }
+  &[data-ps="tr"] [data-dropdown-section] {
+    top: auto;
+    bottom: 100%;
+    left:auto;
+    right: 0;
+  }
+
+  &[data-ps="lt"] [data-dropdown-section] {
+    top: 0;
+    bottom: auto;
+    left: auto;
+    right: 100%;
+  }
+
+  &[data-ps="lc"] {align-items: center;}
+  &[data-ps="lc"] [data-dropdown-section] {
+    top: auto;
+    bottom: auto;
+    left: auto;
+    right: 100%;
+  }
+  &[data-ps="lb"] [data-dropdown-section] {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 100%;
+  }
+   &[data-ps="rt"] [data-dropdown-section] {
+    top: 0;
+    bottom: auto;
+    left: 100%;
+    right: auto;
+  }
+  &[data-ps="rc"] {align-items: center;}
+  &[data-ps="rc"] [data-dropdown-section] {
+    top: auto;
+    bottom: auto;
+    left: 100%;
+    right: auto;
+  }
+  &[data-ps="rb"] [data-dropdown-section] {
+    top: auto;
+    bottom: 0;
+    left: 100%;
+    right: auto;
+  }
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+  &[aria-hidden="false"] {
+    display: flex;
+  }
+
+  &:hover {
+    z-index: 1;
+  }
+}
+@media screen and (max-width: 700px) {
+  [data-dropdown-panel] [data-dropdown-section] {
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    top:0 !important;
+    bottom:0 !important;
+    left:0 !important;
+    right:0 !important;
+    height: 100%;
+    overflow-y: auto;
+    border: 0;
+    border-radius: 0;
+  }
+}
+
+[data-dropdown-section] {
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  position: absolute;
+  pointer-events: visible;
+  border: 1px solid #000;
+  background-color: #fff;
+}
+						</code></pre>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-opt">Options</h2>
+              <p>
+                드롭다운 컴포넌트는 constructor를 통해 다양한 옵션을 설정하여
+                유연하게 사용할 수 있습니다. 아래는 사용 가능한 옵션 목록입니다.
+              </p>
+              <table>
+                <caption></caption>
+                <colgroup>
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                  <col style="width: auto" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th scope="col">옵션명</th>
+                    <th scope="col">타입</th>
+                    <th scope="col">기본값</th>
+                    <th scope="col">설명</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">id</th>
+                    <td>String</td>
+                    <td>필수</td>
+                    <td>
+                      드롭다운 컴포넌트를 식별하는 고유 ID입니다. 이 ID를
+                      기반으로 HTML 요소들이 연결됩니다. (data-dropdown,
+                      data-dropdown-button, data-dropdown-panel 등)
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">area</th>
+                    <td>HTMLElement</td>
+                    <td>.area-dropdown[data-area="body"]</td>
+                    <td>
+                      드롭다운 패널이 삽입될 DOM 영역을 지정합니다. 기본값은
+                      body의 특정 요소를 가리킵니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">src</th>
+                    <td>String</td>
+                    <td>null</td>
+                    <td>
+                      드롭다운 패널에 로드할 외부 HTML 콘텐츠의 경로입니다.
+                      src가 지정되면 해당 콘텐츠가 동적으로 로드되어 패널에
+                      삽입됩니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">ps</th>
+                    <td>String</td>
+                    <td>null</td>
+                    <td>
+                      드롭다운 패널의 **위치(Position)**를 수동으로
+                      설정합니다.<br />
+                      - bl (bottom-left), bc (bottom-center), br
+                      (bottom-right)<br />
+                      - tl (top-left), tc (top-center), tr (top-right)<br />
+                      - lt (left-top), lc (left-center), lb (left-bottom)<br />
+                      - rt (right-top), rc (right-center), rb (right-bottom)<br />
+                      null일 경우 자동으로 bl 또는 tl로 위치가 결정됩니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">srcCallback</th>
+                    <td>Function</td>
+                    <td>null</td>
+                    <td>
+                      src 옵션을 통해 외부 콘텐츠 로드가 완료된 후 실행될 콜백
+                      함수입니다. 동적으로 로드된 콘텐츠 내의 요소에 대한
+                      추가적인 초기화가 필요할 때 유용합니다.
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">callback</th>
+                    <td>Function</td>
+                    <td>null</td>
+                    <td>
+                      드롭다운 컴포넌트가 init() 메서드를 통해 초기화된 직후
+                      실행될 콜백 함수입니다.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-a11y">Accessibility</h2>
+              <div data-grid="wrap-group">
+                <div class="base-group">
+                  <h3 class="h-3">드랍다운을 버튼 역할로 제공한다.</h3>
+                  <p>
+                    드랍다운을 실행하였을 때 특정 섹션이나 화면으로 이동하는
+                    것이 아니므로 &lt;button&gt;을 사용하거나 role="button"을
+                    사용하여 스크린 리더에서 버튼 역할임을 인지할 수 있도록
+                    한다.
+                  </p>
+                  <ul data-bullet="dot">
+                    <li>WCAG 2.1 Name, Role, Value (A)</li>
+                  </ul>
+                </div>
+
+                <div class="base-group">
+                  <h3 class="h-3">
+                    스크린 리더에서 확장/축소 상태 정보를 확인할 수 있도록 한다.
+                  </h3>
+                  <p>
+                    aria-expanded 속성이나 title 속성을 활용하여 드랍다운 섹션의
+                    활성화 상태 정보가 스크린 리더에 탐지될 수 있도록 해야 한다.
+                  </p>
+                  <ul data-bullet="dot">
+                    <li>WCAG 2.1 Name, Role, Value (A)</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="base-wrap" data-dir="col">
+              <h2 class="h-2" id="anchor-history">History</h2>
+              <ol class="list-history">
+                <li class="list-history--item">
+                  <div class="list-history--item-key">2025.09.09 -</div>
+                  <div class="list-history--item-value">Dropdown 1.0.0</div>
+                </li>
+              </ol>
+            </section>
+          </article>
+        </main>
+      </div>
+      <footer class="base-footer"></footer>
+    </div>
+
+    <!-- zIndex 100: dropdown -->
+    <div class="area-dropdown" data-area="body"></div>
+    <!-- zIndex 200: tooltip  -->
+    <div class="area-tooltip"></div>
+    <!-- zIndex 300: modal -->
+    <div class="area-dialog" data-area="body"></div>
+
+    <!-- script -->
+    <script type="module">
+      import { UX } from "../assets/js/uiuxu.common.js";
+
+      // 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+      UX.init().then(() => {
+        // 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+        UI.exe.codeGuide = new UX.Tab({
+          id: "codeGuide",
+          renderMode: "static",
+          selected: 1,
+          data: [
+            {
+              callback: () => {
+                console.log("탭1 open");
+              },
+            },
+            {
+              callback: () => {
+                console.log("탭2 open");
+              },
+            },
+            {
+              callback: () => {
+                console.log("탭3 open");
+              },
+            },
+          ],
+        });
+        UI.exe.codeGuide.init();
+
+        // dropdown
+        let ps = "bl";
+        document.querySelector("#psSelect").addEventListener("change", (e) => {
+          const ps = e.target.value;
+          UI.exe.dropdown1.ps = ps;
+        });
+        UI.exe.dropdown1 = new UX.Dropdown({
+          id: "dropdown1",
+          ps: ps,
+          src: "./dropdown/dropdown1.html",
+          srcCallback: () => {
+            console.log(`./dropdown/dropdown1.html load complete callback`);
+          },
+          callback: () => {
+            console.log(`dropdown init callback`);
+          },
+        });
+
+        UI.exe.dropdown1.init();
+      });
+    </script>
+  </body>
 </html>

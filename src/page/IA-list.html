@@ -1,84 +1,118 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>KB 헬스케어 MVP2 </title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>UIUXU</title>
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
+	<link rel="stylesheet" href="../assets/css/app.css" />
 	<style>
-		[data-selection] {display: flex; gap:0.4rem; padding: 0.4rem 0;}
-		[data-selection-item] {padding: 0.4rem 0.8rem; border: 1px solid var(--gray-30);}
-		.base-main{padding-right: var(--x4);}
+		[data-selection] {
+			display: flex;
+			gap: 0.4rem;
+			padding: 0.4rem 0;
+		}
+
+		[data-selection-item] {
+			padding: 0.4rem 0.8rem;
+			border: 1px solid var(--gray-30);
+		}
+
+		.base-main {
+			padding-right: var(--x4);
+		}
 	</style>
 </head>
 
 <body>
+	<div class="area-base" data-layout="base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-aside"></aside>
+			<main class="base-main">
+				<section class="IA">
+					<div class="IA--list" id="projectlist"></div>
+					<div class="IA--view">
+						<div class="IA--view-group">
+							<a href="" target="_tab">새창</a>
+							<div class="iframe-size">
+								<div data-selection="deviceSize"></div>
+							</div>
+						</div>
+						<iframe class="iframe" src="../../src/page/index.html" name="base" title="" data-id="case1"
+							data-size="medium"></iframe>
+					</div>
+				</section>
+
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- zIndex 100: dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+	<!-- zIndex 200: tooltip  -->
+	<div class="area-tooltip"></div>
+	<!-- zIndex 300: modal -->
+	<div class="area-dialog" data-area="body"></div>
+
+	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/base.html',
-			page: './content/IA-list.html',
-			callback: () => {
-				/* 선언 ---------------------------------------------- */
-				const kbhcList = new UX.ListIA({
-					id: 'projectlist',
-					url: '../assets/data/IA.json'
-				});
-				kbhcList.init();
+		import { UX } from "../assets/js/uiuxu.common.js";
 
-				const tabs = document.querySelectorAll('.tab button');
-				const act = (e) => {
-					const btn = e.currentTarget;
-					const n = btn.dataset.tab;
-					const pnls = document.querySelectorAll('.base-wrap > [data-tab]');
-					console.log(btn, n)
-					for (let that of pnls) {
-						that.classList.remove('on');
-					}
-					for (let that of tabs) {
-						that.classList.remove('on');
-					}
+		// 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+		UX.init().then(() => {
+			// 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+			const kbhcList = new UX.ListIA({
+				id: 'projectlist',
+				url: '../assets/data/IA.json'
+			});
+			kbhcList.init();
 
-					document.querySelector('.type-' + n).classList.add('on');
-					btn.classList.add('on');
+			const tabs = document.querySelectorAll('.tab button');
+			const act = (e) => {
+				const btn = e.currentTarget;
+				const n = btn.dataset.tab;
+				const pnls = document.querySelectorAll('.base-wrap > [data-tab]');
+				console.log(btn, n)
+				for (let that of pnls) {
+					that.classList.remove('on');
 				}
-				for (let tab of tabs) {
-					tab.addEventListener('click', act);
+				for (let that of tabs) {
+					that.classList.remove('on');
 				}
 
-				UI.exe.deviceSize = new UX.ButtonSelection({
-					id: 'deviceSize',
-					type: 'radio',
-					label: '사이즈 선택',
-					data: [
-						{ text: '320', value: 'small', checked: true },
-						{ text: '375', value: 'medium', checked: false },
-						{ text: '414', value: 'large', checked: false },
-						{ text: '670', value: 'foldable', checked: false },
-						{ text: '1400', value: 'desktop', checked: false },
-					],
-					callback: (result) => {
-						console.log('deviceSize callback', result);
-
-						document.querySelector('.IA').dataset.size = result.value
-					},
-					onGroupExit: (value) => {
-						console.log('deviceSize onGroupExit', value);
-					}
-				});
-
-				UI.exe.deviceSize.init();
+				document.querySelector('.type-' + n).classList.add('on');
+				btn.classList.add('on');
 			}
+			for (let tab of tabs) {
+				tab.addEventListener('click', act);
+			}
+
+			UI.exe.deviceSize = new UX.ButtonSelection({
+				id: 'deviceSize',
+				type: 'radio',
+				label: '사이즈 선택',
+				data: [
+					{ text: '320', value: 'small', checked: true },
+					{ text: '375', value: 'medium', checked: false },
+					{ text: '414', value: 'large', checked: false },
+					{ text: '670', value: 'foldable', checked: false },
+					{ text: '1400', value: 'desktop', checked: false },
+				],
+				callback: (result) => {
+					console.log('deviceSize callback', result);
+
+					document.querySelector('.IA').dataset.size = result.value
+				},
+				onGroupExit: (value) => {
+					console.log('deviceSize onGroupExit', value);
+				}
+			});
+
+			UI.exe.deviceSize.init();
 		});
-	</script>
-		
-		
-
-
 	</script>
 </body>
 

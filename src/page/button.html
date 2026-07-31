@@ -1,33 +1,207 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Button | UIUXU </title>
-	<!-- loads the entire Variable Font -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>UIUXU</title>
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
-
+	<link rel="stylesheet" href="../assets/css/app.css" />
 	<style>
-		[role=tablist] [role=tab] {min-width: 20rem; text-align: center; border-bottom:1px solid #ccc}
-		[role=tablist] [role=tab][aria-selected=true] {border-color:#000}
-		[data-tab-type="scroll"] [role="tabpanel"] {scroll-margin-top: 12rem;}
+		[role=tablist] [role=tab] {
+			min-width: 20rem;
+			text-align: center;
+			border-bottom: 1px solid #ccc
+		}
+
+		[role=tablist] [role=tab][aria-selected=true] {
+			border-color: #000
+		}
+
+		[data-tab-type="scroll"] [role="tabpanel"] {
+			scroll-margin-top: 12rem;
+		}
 	</style>
+
 </head>
 
-<body data-toggle-target="nav">
+<body>
+	<div class="area-base" data-layout="base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-aside"></aside>
+			<main class="base-main">
+				<aside class="aside-inner">
+					<div class="aside-inner--wrap" data-index="0">
+						<h3 class="h-3">Index</h3>
+						<nav>
+							<ul>
+								<li>
+									<a href="#anchor-ex" class="selected">Example</a>
+								</li>
+								<li>
+									<a href="#anchor-code">Code</a>
+								</li>
+								<li>
+									<a href="#anchor-opt">Options</a>
+								</li>
+								<li>
+									<a href="#anchor-a11y">Accessibility</a>
+								</li>
+								<li>
+									<a href="#anchor-history">History</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</aside>
+
+				<article class="base-content" data-grid="sub-content">
+					<section class="base-wrap" data-dir="col" data-grid="display-title">
+						<h1 class="h-1">Button</h1>
+						<p>기본으로 사용하는 버튼(button, a, role="button")의 스타일로 data속성 조합으로 사용합니다.</p>
+					</section>
+
+					<section class="base-wrap" data-dir="col">
+						<h2 class="h-2" id="anchor-ex">Example</h2>
+
+						<div data-grid="wrap-group">
+							<div class="base-group">
+								<h3 class="h-3">기본 버튼</h3>
+								<p>class="btn-base"</p>
+								<div class="base-box">
+									<button type="button" class="btn-base">
+										<span>button tag</span>
+									</button>
+									<a href="#" class="btn-base">
+										<span>a tag</span>
+									</a>
+									<div role="button" tabindex="0" class="btn-base">
+										<span>role tag</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">Size</h3>
+								<p>data-size="[ small | normal(기본값) | large ]"</p>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-size="small">
+										<span>small size</span>
+									</button>
+									<a href="#" class="btn-base" data-size="normal">
+										<span>normal size</span>
+									</a>
+									<div role="button" tabindex="0" class="btn-base" data-size="large">
+										<span>large size</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">Type</h3>
+								<p>data-type="[ text | box(기본값) | ... ]"</p>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-type="text">
+										<span>text type</span>
+									</button>
+									<a href="#" class="btn-base" data-type="box">
+										<span>box type</span>
+									</a>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">Shadow</h3>
+								<p>data-shadow="[ none | base | deep | ... ]"</p>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-shadow="base">
+										<span>text type</span>
+									</button>
+									<a href="#" class="btn-base" data-type="box" data-shadow="deep">
+										<span>box type</span>
+									</a>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">color</h3>
+								<p>data-color="[ primary | sub | ... ]", data-bgcolor="[ dark | gray | light | primary | sub | ... ]"
+								</p>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-color="primary">
+										<span>primary color</span>
+									</button>
+									<a href="#" class="btn-base" data-color="sub">
+										<span>sub color</span>
+									</a>
+									<div role="button" tabindex="0" class="btn-base" data-bgcolor="dark">
+										<span>dark bgcolor</span>
+									</div>
+									<button type="button" class="btn-base" data-bgcolor="gray">
+										<span>gray bgcolor</span>
+									</button>
+									<button type="button" class="btn-base" data-bgcolor="primary">
+										<span>primary bgcolor</span>
+									</button>
+									<a href="#" class="btn-base" data-bgcolor="sub">
+										<span>sub bgcolor</span>
+									</a>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">Icon</h3>
+								<p>data-icon-before="arrow", data-icon-after="arrow"</p>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-icon-before="refresh" data-bgcolor="dark">
+										<span>text type</span>
+									</button>
+									<a href="#" class="btn-base" data-type="box" data-icon-after="refresh">
+										<span>box type</span>
+									</a>
+								</div>
+							</div>
+
+							<div class="base-group">
+								<h3 class="h-3">Icon (material)</h3>
+								<div>
+									<a href="https://fonts.google.com/icons" target="_blank">Material Symbols</a>
+									<p>data-mso-before="arrow", data-mso-after="arrow"</p>
+								</div>
+								<div class="base-box">
+									<button type="button" class="btn-base" data-mso-before="check">
+										<span>text type</span>
+									</button>
+									<a href="#" class="btn-base" data-type="box" data-mso-after="arrow_forward_ios" data-bgcolor="dark">
+										<span>box type</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</section>
+				</article>
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- zIndex 100: dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+	<!-- zIndex 200: tooltip  -->
+	<div class="area-tooltip"></div>
+	<!-- zIndex 300: modal -->
+	<div class="area-dialog" data-area="body"></div>
+
 	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/base.html',
-			page:'./content/button.html',
-			callback: () => {
-				console.log('페이지 로드')
-			}
+		import { UX } from "../assets/js/uiuxu.common.js";
+
+		// 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+		UX.init().then(() => {
+			// 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+
+
 		});
 	</script>
 </body>

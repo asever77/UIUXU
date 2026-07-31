@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UIUXU</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/app.css" />
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
+        sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+
+    .demo-section {
+      background: white;
+      padding: 2rem;
+      margin: 2rem 0;
+      border-radius: 0.8rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
+
+    .btn {
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-success {
+      background: #22c55e;
+      color: white;
+    }
+
+    .btn-error {
+      background: #ef4444;
+      color: white;
+    }
+
+    .btn-warning {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .btn-info {
+      background: #06b6d4;
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="area-base" data-layout="base">
+    <header class="base-header"></header>
+    <div class="base-body">
+      <aside class="base-aside"></aside>
+      <main class="base-main">
+
+
+      </main>
+    </div>
+    <footer class="base-footer"></footer>
+  </div>
+
+  <!-- zIndex 100: dropdown -->
+  <div class="area-dropdown" data-area="body"></div>
+  <!-- zIndex 200: tooltip  -->
+  <div class="area-tooltip"></div>
+  <!-- zIndex 300: modal -->
+  <div class="area-dialog" data-area="body"></div>
+
+  <!-- script -->
+  <script type="module">
+    import { UX } from "../assets/js/uiuxu.common.js";
+
+    // 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+    UX.init().then(() => {
+      // 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+
+    });
+  </script>
+</body>
+
+</html>

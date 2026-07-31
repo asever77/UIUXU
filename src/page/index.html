@@ -1,34 +1,84 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UIUXU</title>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>UIUXU</title>
+    <!-- SEO 및 접근성 개선 -->
+    <meta name="description" content="UIUXU UI/UX 컴포넌트 라이브러리" />
+    <meta name="keywords" content="UI, UX, components" />
 
-	<!-- SEO 및 접근성 개선 -->
-	<meta name="description" content="UIUXU UI/UX 컴포넌트 라이브러리">
-	<meta name="keywords" content="UI, UX, components">
-	
-	<!-- Preconnect for performance -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap" rel="stylesheet">
-	
-	<link rel="stylesheet" href="../assets/css/app.css">
-</head>
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded&display=swap"
+      rel="stylesheet"
+    />
 
-<body>
-	<!-- script -->
-	<script type="module">
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/main.html',
-			page:'./content/index.html',
-			callback: () => {
-				 
-			}
-		});
-	</script>
-</body>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+
+  <body>
+    <div class="area-base" data-layout="main">
+      <header class="base-header"></header>
+      <div class="base-body">
+        <aside class="base-aside"></aside>
+        <main class="base-main">
+          <div class="img-main">
+            <h2>
+              <!-- <img src="../assets/img/logo_netive.svg" alt="Netive" class="logo-netive" /> -->
+              <img src="../assets/img/logo.svg" alt="UIUXU" class="logo" />
+              <p role="text">
+                <b>U</b>ser <b>I</b>nerface <b>U</b>ser e<b>X</b>perience yo<b
+                  >U</b
+                >
+              </p>
+            </h2>
+            <div
+              class="download-container"
+              style="
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                align-items: center;
+                z-index: 10;
+                position: relative;
+              "
+            ></div>
+            <img src="../assets/img/img-1.png" alt="" class="img1" />
+            <img src="../assets/img/img-2.png" alt="" class="img2" />
+            <img src="../assets/img/img-3.png" alt="" class="img3" />
+            <img src="../assets/img/img-4.png" alt="" class="img4" />
+            <img src="../assets/img/img-5.png" alt="" class="img5" />
+            <img src="../assets/img/img-6.png" alt="" class="img6" />
+            <img src="../assets/img/img-7.png" alt="" class="img7" />
+          </div>
+        </main>
+      </div>
+      <footer class="base-footer"></footer>
+    </div>
+
+    <!-- zIndex 100: dropdown -->
+    <div class="area-dropdown" data-area="body"></div>
+    <!-- zIndex 200: tooltip  -->
+    <div class="area-tooltip"></div>
+    <!-- zIndex 300: modal -->
+    <div class="area-dialog" data-area="body"></div>
+    <!-- zIndex 400: toast -->
+    <div class="area-toast" data-area="body"></div>
+
+    <!-- script -->
+    <script type="module">
+      import { UX } from "../assets/js/uiuxu.common.js";
+      UX.init({
+        layout: "./layout/main.html",
+        page: "./content/index.html",
+        callback: () => {},
+      });
+    </script>
+  </body>
 </html>

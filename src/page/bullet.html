@@ -1,31 +1,68 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Button | UIUXU </title>
-	<!-- loads the entire Variable Font -->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>UIUXU</title>
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
-	<link rel="stylesheet" href="../assets/css/app.css">
+	<link rel="stylesheet" href="../assets/css/app.css" />
 
-	<style>
-		
-	</style>
 </head>
 
 <body>
+	<div class="area-base" data-layout="base">
+		<header class="base-header"></header>
+		<div class="base-body">
+			<aside class="base-aside"></aside>
+			<main class="base-main">
+				<wrap data-dir="col">
+					<group data-dir="col" data-grid="display-title">
+						<h1 data-heading="display" data-text="Bullet">Bullet</h1>
+					</group>
+
+					<group data-dir="col">
+						<stit>기본 버튼</stit>
+						<p>data-bullet="dot"</p>
+						<box>
+							<ul data-bullet="dot">
+								<li>블릿 도트 타입의 리스트 <br>블릿 도트 타입의 리스트 블릿 도트 타입의 리스트</li>
+								<li>블릿 도트 타입의 리스트</li>
+								<li>블릿 도트 타입의 리스트</li>
+							</ul>
+							<ul data-bullet>
+								<li data-style="-">블릿 도트 타입의 리스트 <br>블릿 도트 타입의 리스트 블릿 도트 타입의 리스트</li>
+								<li data-style="+">블릿 도트 타입의 리스트</li>
+								<li data-style="*">블릿 도트 타입의 리스트</li>
+								<li data-style="※">블릿 도트 타입의 리스트</li>
+								<li data-style="-">블릿 도트 타입의 리스트</li>
+							</ul>
+
+						</box>
+					</group>
+
+				</wrap>
+
+			</main>
+		</div>
+		<footer class="base-footer"></footer>
+	</div>
+
+	<!-- zIndex 100: dropdown -->
+	<div class="area-dropdown" data-area="body"></div>
+	<!-- zIndex 200: tooltip  -->
+	<div class="area-tooltip"></div>
+	<!-- zIndex 300: modal -->
+	<div class="area-dialog" data-area="body"></div>
+
 	<!-- script -->
 	<script type="module">
-		/* 준비 ---------------------------------------------- */
-		// 전역 UI/UX 컴포넌트 및 유틸리티 라이브러리 로드	
-		import { UX } from '../assets/js/uiuxu.common.js';
-		UX.init({
-			layout: './layout/base.html',
-			page:'./content/bullet.html',
-			callback: () => {
-				console.log('페이지 로드')
-			}
+		import { UX } from "../assets/js/uiuxu.common.js";
+
+		// 1. 공통 엔진 초기화 (LNB/헤더/푸터 및 data-ui="accordion" 자동 작동)
+		UX.init().then(() => {
+			// 2. [Example 2 예시] 세팅이 필요한 경우 수동 생성
+
 		});
 	</script>
 </body>
