@@ -1,6 +1,6 @@
 import { slideUp, slideDown, ArrowNavigator, getUrlParameter } from '../utils/utils.js';
 import { logger } from '../utils/logger.js';
-import { ErrorHandler, ValidationError, ElementNotFoundError, StateError } from '../utils/errors.js';
+import { ErrorHandler, ElementNotFoundError } from '../utils/errors.js';
 
 export default class Accordion {
   #option;
@@ -8,10 +8,9 @@ export default class Accordion {
   #expanded;
   #singleOpen;
   #acco;
-  #acco_items;
-  #acco_btns;
-  #isAnimating = false; // ✨ 개선점: 애니메이션 상태 추적을 위한 플래그
-  #arrowNavigator; // ArrowNavigator 인스턴스를 저장할 private 필드
+  #isAnimating = false;
+  #arrowNavigator;
+  #handleDelegatedClick;
 
   constructor(opt) {
     const defaults = {
@@ -23,7 +22,7 @@ export default class Accordion {
 
     this.#option = { ...defaults, ...opt };
     this.#id = this.#option.id;
-    
+
     // 필수 파라미터 검증
     try {
       ErrorHandler.requireParams(this.#option, ['id'], 'Accordion');
@@ -31,17 +30,17 @@ export default class Accordion {
       ErrorHandler.handle(error, 'Accordion');
       return;
     }
-    
+
     this.#expanded = this.#option.expanded;
     this.#singleOpen = this.#option.singleOpen;
     this.#acco = document.querySelector(`[data-accordion="${this.#id}"]`);
-    
+
     // DOM 요소 존재 검증
     if (!this.#acco) {
       try {
         ErrorHandler.requireElement(
-          this.#acco, 
-          `[data-accordion="${this.#id}"]`, 
+          this.#acco,
+          `[data-accordion="${this.#id}"]`,
           'Accordion'
         );
       } catch (error) {
@@ -50,71 +49,104 @@ export default class Accordion {
       }
     }
 
-    this.#acco_items = this.#acco.querySelectorAll(`[data-accordion-item="${this.#id}"]`);
-    this.#acco_btns = this.#acco.querySelectorAll(`[data-accordion-button="${this.#id}"]`);
-
-    // handleToggle 메서드의 this 바인딩을 한 번만 수행
+    // handleToggle 메서드의 this 바인딩
     this.handleToggle = this.#handleToggle.bind(this);
+    this.#handleDelegatedClick = this.#onContainerClick.bind(this);
   }
 
   init() {
     this.#initializeAccordionItems();
-    
-    // 🚀 개선점: foucsabledSelector를 동적으로 설정하여 모든 아코디언에서 동작하도록 수정
+
+    // 🚀 이벤트 위임(Event Delegation) 설정: 최상위 컨테이너 1곳에서 모든 클릭 처리
+    // 동적으로 생성되거나 삭제되는 아코디언 항목도 update() 없이 즉시 동작
+    this.#acco.addEventListener('click', this.#handleDelegatedClick);
+
+    // 🚀 키보드 네비게이터 바인딩 (자식 아코디언 간섭 방지를 위해 동적 셀렉터 적용)
     this.#arrowNavigator = new ArrowNavigator({
       container: this.#acco,
-      foucsabledSelector: `[data-accordion-button="${this.#id}"]`,
+      foucsabledSelector: `[data-accordion-button]`,
     });
   }
 
-  // 아코디언 항목들을 초기화하는 private 메서드
+  /**
+   * 직계 아코디언 자식 요소 탐색 (중첩 아코디언 간섭 방지)
+   */
+  #getDirectElements(selector) {
+    return Array.from(this.#acco.querySelectorAll(selector)).filter(
+      (el) => el.closest('[data-accordion]') === this.#acco
+    );
+  }
+
+  // 아코디언 항목 ARIA 속성 및 초기 상태를 설정하는 private 메서드
   #initializeAccordionItems() {
-    this.#acco_items.forEach((item, index) => {
+    const items = this.#getDirectElements('[data-accordion-item]');
+
+    items.forEach((item, index) => {
       const btnID = `${this.#id}-${index}`;
       const bodyID = `${this.#id}-body-${index}`;
-      const accoBtn = item.querySelector(`[data-accordion-button="${this.#id}"]`);
-      const accoTitle = item.querySelector(`[data-accordion-title="${this.#id}"]`);
-      const accoBody = item.querySelector(`[data-accordion-body="${this.#id}"]`);
 
-      accoTitle.id = btnID;
-      accoBtn.setAttribute('aria-expanded', 'false');
-      accoBtn.setAttribute('aria-controls', bodyID);
-      // if(accoTitle) { // title 요소가 있을 경우에만 aria-label 설정
-      //   accoBtn.setAttribute('aria-label', accoTitle.textContent + ' 내용보기');
-      // }
-      
-      accoBody.id =  bodyID;
+      const accoBtn = item.querySelector('[data-accordion-button]');
+      const accoTitle = item.querySelector('[data-accordion-title]');
+      const accoBody = item.querySelector('[data-accordion-body]');
+
+      if (!accoBtn || !accoBody) return;
+
+      // ID 자동 부여
+      if (accoTitle && !accoTitle.id) accoTitle.id = btnID;
+      if (!accoBtn.id) accoBtn.id = accoTitle ? `${btnID}-btn` : btnID;
+      if (!accoBody.id) accoBody.id = bodyID;
+
+      // ARIA 표준 속성 준수
+      if (!accoBtn.hasAttribute('aria-expanded')) {
+        accoBtn.setAttribute('aria-expanded', 'false');
+      }
+      accoBtn.setAttribute('aria-controls', accoBody.id);
+
       accoBody.setAttribute('role', 'region');
-      accoBody.setAttribute('aria-labelledby', btnID);
-      accoBody.setAttribute('hidden', '');
-      
+      accoBody.setAttribute('aria-labelledby', accoBtn.id);
+
+      // URL 파라미터 또는 초기 expanded 옵션 확인
       const para = getUrlParameter('acco');
-      if (para) {
-        if (para === btnID) {
-          accoBtn.setAttribute('aria-expanded', 'true');
-          accoBody.removeAttribute('hidden');
-        }
+      const isTargetExpanded =
+        (para && (para === accoBtn.id || para === btnID)) ||
+        (this.#expanded && (this.#expanded === accoBtn.id || this.#expanded === btnID || this.#expanded === `index-${index}`));
+
+      if (isTargetExpanded) {
+        accoBtn.setAttribute('aria-expanded', 'true');
+        accoBody.removeAttribute('hidden');
+        accoBody.style.overflow = '';
       } else {
-        if (this.#expanded === btnID) {
-          accoBtn.setAttribute('aria-expanded', 'true');
-          accoBody.removeAttribute('hidden');
+        if (!accoBtn.hasAttribute('aria-expanded')) {
+          accoBtn.setAttribute('aria-expanded', 'false');
+        }
+        if (accoBtn.getAttribute('aria-expanded') !== 'true') {
+          accoBody.setAttribute('hidden', '');
         }
       }
-
-      // 이벤트 리스너 추가
-      accoBtn.addEventListener('click', this.handleToggle);
     });
   }
 
-  // 🚀 개선점: 화살표 함수 대신 private 메서드로 변경 및 this 바인딩 처리
-  #handleToggle(e) {
-    // ✨ 개선점: 애니메이션 중에는 클릭 이벤트를 무시
+  /**
+   * 이벤트 위임(Event Delegation) 핸들러
+   */
+  #onContainerClick(e) {
+    // 클릭된 요소 또는 상위에서 가장 가까운 토글 버튼 검색
+    const button = e.target.closest('[data-accordion-button]');
+    if (!button) return;
+
+    // 🚀 중첩 아코디언 방지: 클릭된 버튼의 직속 아코디언 컨테이너가 '나' 자신인지 확인
+    const targetAccordion = button.closest('[data-accordion]');
+    if (targetAccordion !== this.#acco) return;
+
+    this.#handleToggle(button);
+  }
+
+  #handleToggle(button) {
     if (this.#isAnimating) {
       logger.debug('애니메이션 진행 중 - 클릭 무시', null, 'Accordion');
       return;
     }
 
-    const button = e.currentTarget;
     const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
     if (isExpanded) {
@@ -130,21 +162,17 @@ export default class Accordion {
    * @param {Function} [callback] - 애니메이션 완료 후 실행될 콜백 함수
    */
   show(target, callback) {
-    this.#show(target, callback); // private show 메서드 호출
+    this.#show(target, callback);
   }
 
-  // 🚀 개선점: id 대신 element를 직접 인자로 받아 불필요한 DOM 탐색 제거
-  // 🚀 개선점: 인자가 ID(문자열) 또는 엘리먼트인지 판별하여 모두 처리
   #show(target, callback = false) {
-    // target이 문자열이면 ID로 간주하여 버튼 엘리먼트를 찾고, 아니면 엘리먼트로 간주
     const button = typeof target === 'string' ? document.querySelector(`#${target}`) : target;
-    
-    // 해당하는 버튼이 없으면 함수 종료
+
     if (!button) {
       try {
         throw new ElementNotFoundError(
           `Accordion item을 찾을 수 없습니다`,
-          { target: target, type: typeof target }
+          { target, type: typeof target }
         );
       } catch (error) {
         ErrorHandler.handle(error, 'Accordion');
@@ -152,39 +180,52 @@ export default class Accordion {
       }
     }
 
+    if (this.#isAnimating) return;
     this.#isAnimating = true;
-    const accoBody = document.querySelector(`#${button.getAttribute('aria-controls')}`);
-    
+
+    const bodyId = button.getAttribute('aria-controls');
+    const accoBody = bodyId ? document.getElementById(bodyId) : button.closest('[data-accordion-item]')?.querySelector('[data-accordion-body]');
+
+    if (!accoBody) {
+      this.#isAnimating = false;
+      return;
+    }
+
+    // singleOpen 옵션 처리: 동일 레벨의 열린 다른 아이템 닫기
     if (this.#singleOpen) {
-      const openItems = this.#acco.querySelectorAll(`[data-accordion-button="${this.#id}"][aria-expanded="true"]`);
-      
-      openItems.forEach(openButton => {
-        if (openButton !== button) {
-          this.#hide(openButton, false); // 다른 항목을 닫을 때는 스크롤 조정 안함
+      const openButtons = this.#getDirectElements('[data-accordion-button][aria-expanded="true"]');
+      openButtons.forEach((openBtn) => {
+        if (openBtn !== button) {
+          this.#hide(openBtn, false);
         }
       });
     }
 
-    button.disabled = true; // ✨ 개선점: pointer-events 대신 disabled 속성 사용
+    button.disabled = true;
     button.setAttribute('aria-expanded', 'true');
     accoBody.removeAttribute('hidden');
+    accoBody.style.overflow = 'hidden';
 
     slideDown(accoBody, 300).then(() => {
       button.disabled = false;
       this.#isAnimating = false;
-      // 옵션으로 스크롤 보정 지원
+      
+      // ✨ 슬라이드 다운 후 overflow 해제 (스크롤 및 내부 팝업/드롭다운 정상 동작 보장)
+      accoBody.style.overflow = '';
+
       if (this.#option.scrollIntoView) {
-        const scrollTarget = button.closest(`[data-accordion-item="${this.#id}"]`) || button;
+        const scrollTarget = button.closest('[data-accordion-item]') || button;
         scrollTarget.scrollIntoView(this.#option.scrollOptions || { behavior: 'smooth', block: 'nearest' });
       }
+
       if (this.#acco) {
-        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:open", {
+        this.#acco.dispatchEvent(new CustomEvent('ui:accordion:open', {
           bubbles: true,
           detail: { id: this.#id, button, body: accoBody }
         }));
-        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:change", {
+        this.#acco.dispatchEvent(new CustomEvent('ui:accordion:change', {
           bubbles: true,
-          detail: { id: this.#id, action: "open", button, body: accoBody }
+          detail: { id: this.#id, action: 'open', button, body: accoBody }
         }));
       }
       callback && callback();
@@ -197,7 +238,7 @@ export default class Accordion {
    * @param {Function} [callback] - 애니메이션 완료 후 실행될 콜백 함수
    */
   hide(target, callback) {
-    this.#hide(target, callback); // private hide 메서드 호출
+    this.#hide(target, callback);
   }
 
   #hide(target, callback = false) {
@@ -208,24 +249,29 @@ export default class Accordion {
       return;
     }
 
+    const bodyId = button.getAttribute('aria-controls');
+    const accoBody = bodyId ? document.getElementById(bodyId) : button.closest('[data-accordion-item]')?.querySelector('[data-accordion-body]');
+
+    if (!accoBody) return;
+
     this.#isAnimating = true;
-    const accoBody = document.querySelector(`#${button.getAttribute('aria-controls')}`);
-    
-    button.disabled = true; // ✨ 개선점: pointer-events 대신 disabled 속성 사용
+    button.disabled = true;
     button.setAttribute('aria-expanded', 'false');
+    accoBody.style.overflow = 'hidden';
 
     slideUp(accoBody, 300).then(() => {
       accoBody.setAttribute('hidden', '');
       button.disabled = false;
       this.#isAnimating = false;
+
       if (this.#acco) {
-        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:close", {
+        this.#acco.dispatchEvent(new CustomEvent('ui:accordion:close', {
           bubbles: true,
           detail: { id: this.#id, button, body: accoBody }
         }));
-        this.#acco.dispatchEvent(new CustomEvent("ui:accordion:change", {
+        this.#acco.dispatchEvent(new CustomEvent('ui:accordion:change', {
           bubbles: true,
-          detail: { id: this.#id, action: "close", button, body: accoBody }
+          detail: { id: this.#id, action: 'close', button, body: accoBody }
         }));
       }
       callback && callback();
@@ -233,69 +279,41 @@ export default class Accordion {
   }
 
   /**
-   * 아코디언 항목 목록을 업데이트합니다.
-   * 동적으로 아코디언 항목이 추가되거나 제거될 때 호출합니다.
+   * 아코디언 항목 목록을 다시 스캔하여 초기화합니다.
+   * (이벤트 위임이 적용되어 있어 새 항목 추가 시 호출하지 않아도 기본 클릭은 동작하지만,
+   * ARIA ID 자동 부여가 필요한 경우 호출 가능)
    */
   update() {
-    // 기존 이벤트 리스너 제거 (이전에 등록된 버튼에 대해)
-    if (this.#acco_btns) {
-      this.#acco_btns.forEach(button => {
-        button.removeEventListener('click', this.handleToggle);
-      });
-    }
-
-    // 최신 DOM 상태를 다시 스캔
-    this.#acco_items = this.#acco.querySelectorAll(`[data-accordion-item="${this.#id}"]`);
-    this.#acco_btns = this.#acco.querySelectorAll(`[data-accordion-button="${this.#id}"]`);
-
-    // 새로 스캔된 항목들을 다시 초기화
     this.#initializeAccordionItems();
-
     logger.info(`Accordion "${this.#id}" has been updated.`, null, 'Accordion');
   }
 
   /**
-   * 아코디언을 제거하고 리소스를 정리합니다.
-   * 메모리 누수 방지를 위해 컴포넌트를 파괴할 때 호출해야 합니다.
-   * 
-   * @example
-   * // 컴포넌트 사용 후
-   * UI.exe.acco.destroy();
-   * UI.exe.acco = null;
+   * 아코디언 인스턴스를 파괴하고 리소스를 해제합니다.
    */
   destroy() {
     try {
-      // 1. 모든 이벤트 리스너 제거
-      if (this.#acco_btns) {
-        this.#acco_btns.forEach(button => {
-          button.removeEventListener('click', this.handleToggle);
-        });
+      if (this.#acco && this.#handleDelegatedClick) {
+        this.#acco.removeEventListener('click', this.#handleDelegatedClick);
       }
 
-      // 2. DOM 스타일 속성 정리
-      if (this.#acco_items) {
-        this.#acco_items.forEach(item => {
-          const body = item.querySelector(`[data-accordion-body="${this.#id}"]`);
-          if (body) body.removeAttribute('style');
-        });
-      }
+      const items = this.#getDirectElements('[data-accordion-item]');
+      items.forEach((item) => {
+        const body = item.querySelector('[data-accordion-body]');
+        if (body) body.removeAttribute('style');
+      });
 
-      // 3. ArrowNavigator 정리
       if (this.#arrowNavigator && typeof this.#arrowNavigator.destroy === 'function') {
         this.#arrowNavigator.destroy();
       }
 
-      // 4. private 필드 초기화
       this.#acco = null;
-      this.#acco_items = null;
-      this.#acco_btns = null;
       this.#arrowNavigator = null;
       this.#isAnimating = false;
 
       logger.info(`Accordion "${this.#id}" destroyed successfully`, null, 'Accordion');
-      
     } catch (error) {
       logger.error('Accordion destroy failed', error, 'Accordion');
     }
   }
-}
+}
