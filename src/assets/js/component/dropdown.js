@@ -1,236 +1,126 @@
+import { LayerCore } from "../core/layerCore.js";
 import { loadContent } from "../utils/utils.js";
-import { FocusTrap } from "../utils/utils.js";
+import { logger } from "../utils/logger.js";
 
+/**
+ * Dropdown Component (Refactored to use LayerCore engine)
+ * 14가지 위치 지원: tl, tc, tr, lt, lc, lb, bl, bc, br, rt, rc, rb, cc, auto
+ * Teleport 지원: 'body' | HTMLElement | false (inline)
+ */
 export default class Dropdown {
-  // Private 필드 선언
-  #option;
-  #id;
-  #area;
-  #callback;
-  #src;
-  #srcCallback;
-  #wrap;
-  #button;
-  #text;
-  #panel;
-  #panelInner;
-  #html;
-  #boundHandleToggle;
-  #boundHandleOutsideClick;
-  #isArea;
-
-  constructor(opt) {
+  constructor(opt = {}) {
     const defaults = {
+      id: null,
       area: document.querySelector('.area-dropdown[data-area="body"]'),
       src: null,
-      scroll: null,
-      ps: null, // bl,bc,br,tl,tc,tr,lt,lc,lb,rt,rc,rb, null(auto tl/bl)
+      ps: "bl", // 14가지 위치 코드
+      teleportTo: "body",
+      autoFocus: true,
+      returnFocus: true,
       srcCallback: null,
       callback: null,
     };
 
-    this.#option = { ...defaults, ...opt };
-    this.#id = this.#option.id;
-    this.ps = this.#option.ps;
-    this.#area = this.#option.area;
-    this.#callback = this.#option.callback;
-    this.#src = this.#option.src;
-    this.#srcCallback = this.#option.srcCallback;
+    this.option = { ...defaults, ...opt };
+    this.id = this.option.id;
+    this._ps = this.option.ps;
+    this.area = this.option.area;
+    this.src = this.option.src;
+    this.teleportTo = this.option.teleportTo;
+    this.callback = this.option.callback;
+    this.srcCallback = this.option.srcCallback;
 
-    this.#wrap = document.querySelector(`[data-dropdown="${this.#id}"]`);
-    if (!this.#wrap) {
-      console.error(
-        `Error: Dropdown wrapper with data-dropdown="${this.#id}" not found.`
-      );
-      return;
-    }
-    if (!this.#area) {
-      console.error(
-        `Error: Dropdown wrapper with data-area="${this.#id}" not found.`
-      );
-      return;
-    }
-    this.#button = this.#wrap.querySelector(
-      `[data-dropdown-button="${this.#id}"]`
-    );
-    this.#text = this.#button
-      ? this.#button.querySelector(`[data-dropdown-text="${this.#id}"]`)
+    this.wrap = document.querySelector(`[data-dropdown="${this.id}"]`);
+    this.button = this.wrap
+      ? this.wrap.querySelector(`[data-dropdown-button="${this.id}"]`)
       : null;
-    this.#panel = document.querySelector(`[data-dropdown-panel="${this.#id}"]`);
-    this.#panelInner = document.querySelector(
-      `[data-dropdown-section="${this.#id}"]`
-    );
-    this.#html = document.documentElement;
+    this.panel = document.querySelector(`[data-dropdown-panel="${this.id}"]`);
 
-    this.#boundHandleToggle = this.#handleToggle.bind(this);
-    this.#boundHandleOutsideClick = this.#handleOutsideClick.bind(this);
+    this.layerCore = null;
+    this.init();
+  }
 
-    this.#isArea = this.#wrap.querySelector("[data-dropdown-panel]");
+  get ps() {
+    return this._ps;
+  }
+
+  set ps(value) {
+    this._ps = value;
+    if (this.layerCore) {
+      this.layerCore.options.placement = value;
+      if (this.layerCore.isOpen) {
+        this.layerCore.updatePosition();
+      }
+    }
   }
 
   init() {
-    if (!this.#wrap) {
-      return false;
-    }
-    this.#setupElements();
-    this.#addEventListeners();
+    if (!this.wrap && !this.panel) return false;
 
-    window.addEventListener("resize", this.reset);
-    this.#callback && this.#callback();
-  }
-
-  #setupElements() {
-    if (this.#src) {
+    if (this.src) {
       loadContent({
-        area: this.#area,
-        src: this.#src,
+        area: this.area || document.body,
+        src: this.src,
         insert: true,
       })
         .then(() => {
-          if (this.#text) {
-            this.#text.dataset.dropdownText = this.#id;
-          }
-          if (this.#button) {
-            this.#button.dataset.dropdownButton = this.#id;
-            this.#button.setAttribute("aria-controls", this.#id);
-            this.#button.setAttribute("aria-expanded", "false");
-          }
-
-          this.#panel = document.querySelector(
-            `[data-dropdown-panel="${this.#id}"]`
-          );
-          this.#panelInner = document.querySelector(
-            `[data-dropdown-section="${this.#id}"]`
-          );
-          this.#panel.dataset.dropdownPanel = this.#id;
-          this.#panel.setAttribute("aria-hidden", "true");
-          this.#panel.setAttribute("tabindex", "-1");
-          this.#panel.id = this.#id;
-
-          this.#isArea = this.#wrap.querySelector("[data-dropdown-panel]");
-          this.#srcCallback && this.#srcCallback();
+          this.panel = document.querySelector(`[data-dropdown-panel="${this.id}"]`);
+          this.setupCore();
+          this.srcCallback && this.srcCallback();
         })
-        .catch((err) => console.error("Error loading tab content:", err));
+        .catch((err) => logger.error("Error loading dropdown content:", err, "Dropdown"));
     } else {
-      if (this.#text) {
-        this.#text.dataset.dropdownText = this.#id;
-      }
-      if (this.#button) {
-        this.#button.dataset.dropdownButton = this.#id;
-        this.#button.setAttribute("aria-controls", this.#id);
-        this.#button.setAttribute("aria-expanded", "false");
-      }
-      if (this.#panel) {
-        this.#panel.dataset.dropdownPanel = this.#id;
-        this.#panel.setAttribute("aria-hidden", "true");
-        this.#panel.setAttribute("tabindex", "-1");
-        this.#panel.id = this.#id;
-      }
+      this.setupCore();
     }
+
+    this.callback && this.callback();
   }
 
-  #addEventListeners() {
-    if (this.#button) {
-      // init()에서 이미 추가되므로 중복될 수 있습니다. init()에서 한 번만 추가하도록 조정하거나,
-      // init()의 `this.button.addEventListener('click', this.boundHandleToggle);` 라인을 제거하고
-      // 여기서만 추가하는 것을 권장합니다.
-      this.#button.addEventListener("click", this.#boundHandleToggle);
+  setupCore() {
+    if (!this.panel) {
+      this.panel = document.querySelector(`[data-dropdown-panel="${this.id}"]`);
     }
+    if (!this.button && this.wrap) {
+      this.button = this.wrap.querySelector(`[data-dropdown-button="${this.id}"]`);
+    }
+
+    this.layerCore = new LayerCore({
+      id: this.id,
+      type: "dropdown",
+      element: this.panel,
+      target: this.button,
+      placement: this._ps || "bl",
+      trigger: "click",
+      zIndexGroup: "dropdown",
+      teleportTo: this.teleportTo,
+      autoFocus: this.option.autoFocus,
+      returnFocus: this.option.returnFocus,
+    });
   }
-
-  #removeEventListeners() {
-    if (this.#button) {
-      this.#button.removeEventListener("click", this.#boundHandleToggle);
-    }
-    this.#html.removeEventListener("click", this.#boundHandleOutsideClick);
-  }
-
-  #handleOutsideClick = (e) => {
-    if (!this.#wrap || !this.#panel) return; // destroy 후 호출 방지
-    const isClickInsideDropdown =
-      this.#wrap.contains(e.target) || this.#panel.contains(e.target);
-    if (!isClickInsideDropdown) {
-      this.hide();
-    }
-  };
-
-  #handleToggle = () => {
-    if (!this.#button || !this.#panel) return;
-    const isExpanded = this.#button.getAttribute("aria-expanded") === "true";
-    isExpanded ? this.hide() : this.show();
-  };
-
-  reset = () => {
-    const expanded = document.querySelector(
-      '[data-dropdown-panel][aria-hidden="false"]'
-    );
-    console.log(expanded, this);
-    if (expanded && expanded !== this.#panel) {
-      expanded.setAttribute("aria-hidden", true);
-      document
-        .querySelector(
-          `[data-dropdown-button="${expanded.dataset.dropdownPanel}"]`
-        )
-        .setAttribute("aria-expanded", false);
-    }
-  };
 
   show() {
-    if (!this.#button || !this.#panel) return;
-
-    this.#button.setAttribute("aria-expanded", true);
-    this.#panel.setAttribute("aria-hidden", false);
-
-    const rect = this.#button.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    const scroll_t = document.documentElement.scrollTop;
-    this.#panel.style.height = rect.height + "px";
-
-    if (this.ps) {
-      this.#panel.dataset.ps = this.ps;
-    } else {
-      this.#panel.dataset.ps =
-        rect.bottom + this.#panelInner.offsetHeight < viewportHeight
-          ? "bl"
-          : "tl";
+    if (this.layerCore) {
+      this.layerCore.open();
     }
-
-    if (!this.#isArea) {
-      this.#panel.style.width = rect.width + "px";
-      this.#panel.style.left = rect.x + "px";
-      this.#panel.style.top = rect.y + scroll_t + "px";
-    }
-
-    this.#panel.focus();
-    this.#html.addEventListener("click", this.#boundHandleOutsideClick);
-
-    new FocusTrap(this.#panel);
   }
 
   hide() {
-    if (!this.#button || !this.#panel) return;
+    if (this.layerCore) {
+      this.layerCore.close();
+    }
+  }
 
-    this.#html.removeEventListener("click", this.#boundHandleOutsideClick);
-    this.#button.setAttribute("aria-expanded", "false");
-    this.#panel.setAttribute("aria-hidden", "true");
-    this.#button.focus();
+  toggle() {
+    if (this.layerCore) {
+      this.layerCore.toggle();
+    }
   }
 
   destroy() {
-    this.#removeEventListeners();
-    window.removeEventListener("resize", this.reset);
-
-    if (this.#panel && this.#panel.parentNode && this.#src) {
-      this.#panel.parentNode.removeChild(this.#panel);
+    if (this.layerCore) {
+      this.layerCore.destroy();
+      this.layerCore = null;
     }
-
-    this.#wrap = null;
-    this.#button = null;
-    this.#text = null;
-    this.#panel = null;
-    this.#panelInner = null;
-    this.#area = null;
-
-    console.log(`Dropdown with ID "${this.#id}" destroyed.`);
+    logger.debug(`Dropdown destroyed [${this.id}]`, null, "Dropdown");
   }
 }

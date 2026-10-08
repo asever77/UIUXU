@@ -61,38 +61,54 @@
             </section>
 
             <section class="base-wrap" data-dir="col">
-              <h2 class="h-2" id="anchor-ex">Example</h2>
-              <div class="base-box">
-                <div
-                  style="
-                    display: flex;
-                    gap: 0.8rem;
-                    justify-content: center;
-                    height: 31rem;
-                    align-items: center;
-                  "
-                >
-                  <select class="inp--base" id="psSelect" style="width: 14rem">
-                    <option value="bl">Bottom Left</option>
-                    <option value="bc">Bottom Center</option>
-                    <option value="br">Bottom Right</option>
-                    <option value="tl">Top Left</option>
-                    <option value="tc">Top Center</option>
-                    <option value="tr">Top Right</option>
-                    <option value="lt">Left Top</option>
-                    <option value="lc">Left Center</option>
-                    <option value="lb">Left Bottom</option>
-                    <option value="rc">Right Center</option>
-                    <option value="rt">Right Top</option>
-                    <option value="rb">Right Bottom</option>
-                  </select>
+              <h2 class="h-2" id="anchor-ex">Example (14 Position & Teleport Matrix)</h2>
+              <div class="base-box" style="padding: 2rem;">
+                <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; align-items: center;">
+                  <!-- Position Selector (14 Options) -->
+                  <div>
+                    <label for="psSelect" style="font-weight: 600; margin-right: 0.5rem; font-size: 0.9rem;">위치 지정 (14 Positions):</label>
+                    <select class="inp--base" id="psSelect" style="width: 16rem; padding: 6px 12px; border-radius: 6px;">
+                      <option value="bl" selected>Bottom Left (bl)</option>
+                      <option value="bc">Bottom Center (bc)</option>
+                      <option value="br">Bottom Right (br)</option>
+                      <option value="tl">Top Left (tl)</option>
+                      <option value="tc">Top Center (tc)</option>
+                      <option value="tr">Top Right (tr)</option>
+                      <option value="lt">Left Top (lt)</option>
+                      <option value="lc">Left Center (lc)</option>
+                      <option value="lb">Left Bottom (lb)</option>
+                      <option value="rt">Right Top (rt)</option>
+                      <option value="rc">Right Center (rc)</option>
+                      <option value="rb">Right Bottom (rb)</option>
+                      <option value="cc">Center Center (cc)</option>
+                      <option value="auto">Auto Flip (auto)</option>
+                    </select>
+                  </div>
+
+                  <!-- Teleport Selector -->
+                  <div>
+                    <label for="teleportSelect" style="font-weight: 600; margin-right: 0.5rem; font-size: 0.9rem;">Teleport 대상:</label>
+                    <select class="inp--base" id="teleportSelect" style="width: 14rem; padding: 6px 12px; border-radius: 6px;">
+                      <option value="body" selected>body (Page Absolute)</option>
+                      <option value="#specified-area">#specified-area (지정 영역)</option>
+                      <option value="false">inline (부모 요소)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Specified Container Area Demo -->
+                <div id="specified-area" style="position: relative; min-height: 24rem; border: 2px dashed #cbd5e1; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #f8fafc;">
+                  <span style="position: absolute; top: 10px; left: 12px; font-size: 0.75rem; color: #64748b; font-weight: 600;">[지정 컨테이너 영역: #specified-area]</span>
+                  
+                  <!-- Dropdown Trigger Button -->
                   <div data-dropdown="dropdown1">
                     <button
                       type="button"
                       class="btn-base"
                       data-dropdown-button="dropdown1"
+                      style="padding: 12px 24px; font-size: 1rem; font-weight: 600; background: #4f46e5; color: white; border-radius: 8px; border: none; cursor: pointer;"
                     >
-                      <span data-dropdown-text="dropdown1">주요기능</span>
+                      <span data-dropdown-text="dropdown1">드롭다운 위치 테스트 (클릭)</span>
                     </button>
                   </div>
                 </div>
@@ -510,25 +526,42 @@
         });
         UI.exe.codeGuide.init();
 
-        // dropdown
-        let ps = "bl";
+        // dropdown 14-position & teleport initializer
+        let currentPs = "bl";
+        let currentTeleport = "body";
+
+        const initDropdown = () => {
+          if (UI.exe.dropdown1) {
+            UI.exe.dropdown1.destroy();
+          }
+
+          UI.exe.dropdown1 = new UX.Dropdown({
+            id: "dropdown1",
+            ps: currentPs,
+            teleportTo: currentTeleport === "false" ? false : (currentTeleport === "#specified-area" ? document.querySelector("#specified-area") : "body"),
+            src: "./dropdown/dropdown1.html",
+            srcCallback: () => {
+              console.log(`./dropdown/dropdown1.html loaded for ${currentPs} (${currentTeleport})`);
+            },
+            callback: () => {
+              console.log(`Dropdown initialized: ps=${currentPs}, teleportTo=${currentTeleport}`);
+            },
+          });
+        };
+
         document.querySelector("#psSelect").addEventListener("change", (e) => {
-          const ps = e.target.value;
-          UI.exe.dropdown1.ps = ps;
-        });
-        UI.exe.dropdown1 = new UX.Dropdown({
-          id: "dropdown1",
-          ps: ps,
-          src: "./dropdown/dropdown1.html",
-          srcCallback: () => {
-            console.log(`./dropdown/dropdown1.html load complete callback`);
-          },
-          callback: () => {
-            console.log(`dropdown init callback`);
-          },
+          currentPs = e.target.value;
+          if (UI.exe.dropdown1) {
+            UI.exe.dropdown1.ps = currentPs;
+          }
         });
 
-        UI.exe.dropdown1.init();
+        document.querySelector("#teleportSelect").addEventListener("change", (e) => {
+          currentTeleport = e.target.value;
+          initDropdown();
+        });
+
+        initDropdown();
       });
     </script>
   </body>

@@ -1,3 +1,4 @@
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { resolve } from "path";
 
@@ -6,6 +7,7 @@ import { resolve } from "path";
  * - 개발 서버: localhost:5173
  * - 핫 리로드: 자동 활성화
  * - SCSS 자동 컴파일
+ * - Tailwind CSS v4 지원
  * - 프로덕션 빌드 최적화
  */
 export default defineConfig(({ mode }) => {
@@ -46,7 +48,6 @@ export default defineConfig(({ mode }) => {
 
           // 컴포넌트 데모 페이지들 (알파벳 순)
           accordion: resolve(__dirname, "src/page/accordion.html"),
-          alert: resolve(__dirname, "src/page/alert.html"),
           allCheck: resolve(__dirname, "src/page/allCheck.html"),
           bubbleChart: resolve(__dirname, "src/page/bubbleChart.html"),
           bullet: resolve(__dirname, "src/page/bullet.html"),
@@ -58,6 +59,7 @@ export default defineConfig(({ mode }) => {
           dropdown: resolve(__dirname, "src/page/dropdown.html"),
           form: resolve(__dirname, "src/page/form.html"),
           iaList: resolve(__dirname, "src/page/IA-list.html"),
+          layerGuide: resolve(__dirname, "src/page/layerGuide.html"),
           rangeSlider: resolve(__dirname, "src/page/rangeSlider.html"),
           roulette: resolve(__dirname, "src/page/roulette.html"),
           scrollEvent: resolve(__dirname, "src/page/scrollEvent.html"),
@@ -150,7 +152,7 @@ export default defineConfig(({ mode }) => {
 
     // 플러그인 설정
     plugins: [
-      // HTML 변환 플러그인 (필요시)
+      tailwindcss(),
     ],
 
     // 환경 변수 설정

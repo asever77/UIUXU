@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UIUXU - LayerComponent Guide</title>
+
+    <meta name="description" content="UIUXU Lego-like LayerComponent Multi-Framework Guide" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../assets/css/app.css" />
+    
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+        --glass-bg: rgba(255, 255, 255, 0.7);
+        --glass-border: rgba(255, 255, 255, 0.3);
+      }
+      
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      }
+
+      .hero-gradient {
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      }
+
+      .badge-matrix {
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.6rem;
+        border-radius: 9999px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      /* Custom Layer Styling using data-[ui-state=open] */
+      .ui-layer-panel {
+        display: none;
+        position: absolute;
+        z-index: 2000;
+        min-width: 220px;
+        padding: 12px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .ui-layer-panel[data-ui-state="open"] {
+        display: block;
+        animation: layerFadeIn 0.2s ease-out forwards;
+      }
+
+      @keyframes layerFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95) translateY(-4px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+        }
+      }
+
+      .ui-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 3000;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ui-modal-overlay[data-ui-state="open"] {
+        display: flex;
+        animation: fadeIn 0.2s ease-out;
+      }
+
+      .ui-modal-content {
+        background: #ffffff;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 480px;
+        padding: 24px;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+      .ui-tooltip-box {
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background: #1e293b;
+        color: #f8fafc;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.825rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .ui-tooltip-box[data-ui-state="open"] {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="area-base" data-layout="base">
+      <header class="base-header"></header>
+
+      <div class="base-body">
+        <aside class="base-aside"></aside>
+
+        <main class="base-main" style="padding: 2rem;">
+          <div style="max-width: 1100px; margin: 0 auto;">
+
+            <!-- Header Banner -->
+            <section class="glass-card" style="border-radius: 24px; padding: 2.5rem; margin-bottom: 2rem; position: relative; overflow: hidden;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                  <span class="badge-matrix" style="background: #e0e7ff; color: #4338ca;">UIUXU Core System</span>
+                  <h1 style="font-size: 2.5rem; font-weight: 800; margin-top: 0.5rem; margin-bottom: 0.5rem;">
+                    Unified <span class="hero-gradient">LayerComponent</span> Guide
+                  </h1>
+                  <p style="color: #64748b; font-size: 1.05rem; max-width: 600px; line-height: 1.6;">
+                    <b>UX</b> + <b>UI</b> + <b>U (You)</b>의 철학을 담은 레고(Lego) 블록형 통합 레이어 엔진입니다.<br/>
+                    React/Vue의 Prop 방식과 HTML의 <code>data-*</code> 속성이 1:1 매핑되어 자유롭게 조합할 수 있습니다.
+                  </p>
+                </div>
+                <div>
+                  <div style="display: flex; gap: 0.5rem; flex-direction: column;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem;">
+                      <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
+                      <b>Tailwind CSS v4 Engine</b>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9; padding: 6px 14px; border-radius: 8px; font-size: 0.875rem;">
+                      <span style="width: 10px; height: 10px; border-radius: 50%; background: #3b82f6;"></span>
+                      <b>WCAG A11y & Focus Trap</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Live Interactive Playground -->
+            <section style="margin-bottom: 3rem;">
+              <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span class="material-symbols-rounded" style="color: #6366f1;">widgets</span>
+                Live Interactive Playground
+              </h2>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+
+                <!-- 1. Dropdown Lego Block -->
+                <div class="glass-card" style="border-radius: 16px; padding: 1.5rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span class="material-symbols-rounded" style="color: #4f46e5;">arrow_drop_down_circle</span>
+                      Dropdown (Drop Panel)
+                    </h3>
+                    <span class="badge-matrix" style="background: #fef3c7; color: #b45309;">Z-Index 2000</span>
+                  </div>
+                  <p style="color: #64748b; font-size: 0.875rem; margin-bottom: 1.25rem;">
+                    위치 자동 계산(Auto-Flip) 및 키보드 접근성을 갖춘 레고형 드롭다운입니다.
+                  </p>
+
+                  <div style="position: relative; text-align: center; margin-bottom: 1rem;">
+                    <!-- Trigger Button -->
+                    <button
+                      type="button"
+                      id="demo-dropdown-btn"
+                      class="btn-base"
+                      style="background: #4f46e5; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+                      data-ui-layer="dropdown"
+                      data-ui-target="#demo-dropdown-btn"
+                      data-ui-placement="bottom-start"
+                      data-ui-trigger="click"
+                    >
+                      드롭다운 열기 ▾
+                    </button>
+
+                    <!-- Dropdown Panel -->
+                    <div id="demo-dropdown-panel" class="ui-layer-panel" style="text-align: left;">
+                      <div style="font-weight: 700; padding: 4px 8px; font-size: 0.85rem; color: #64748b;">메뉴 옵션</div>
+                      <a href="#" style="display: block; padding: 8px; color: #1e293b; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">👤 프로필 설정</a>
+                      <a href="#" style="display: block; padding: 8px; color: #1e293b; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">⚙️ 환경 설정</a>
+                      <hr style="border: 0; border-top: 1px solid #f1f5f9; margin: 4px 0;" />
+                      <a href="#" style="display: block; padding: 8px; color: #ef4444; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">🚪 로그아웃</a>
+                    </div>
+                  </div>
+
+                  <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-family: monospace; color: #334155;">
+                    &lt;button <b>data-ui-layer="dropdown"</b> <b>data-ui-placement="bottom-start"</b>&gt;
+                  </div>
+                </div>
+
+                <!-- 2. Modal Dialog Lego Block -->
+                <div class="glass-card" style="border-radius: 16px; padding: 1.5rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span class="material-symbols-rounded" style="color: #ec4899;">web_asset</span>
+                      Modal Dialog
+                    </h3>
+                    <span class="badge-matrix" style="background: #e0e7ff; color: #3730a3;">Z-Index 3000</span>
+                  </div>
+                  <p style="color: #64748b; font-size: 0.875rem; margin-bottom: 1.25rem;">
+                    ESC 키 순차 닫기, Focus Trap, 스크롤 잠금이 자동 통합된 대화상자입니다.
+                  </p>
+
+                  <div style="text-align: center; margin-bottom: 1rem;">
+                    <button
+                      type="button"
+                      id="demo-modal-btn"
+                      style="background: #ec4899; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+                      data-ui-layer="modal"
+                      data-ui-target="#demo-modal-btn"
+                      data-ui-trigger="click"
+                    >
+                      모달 대화상자 열기
+                    </button>
+                  </div>
+
+                  <!-- Modal Overlay & Window -->
+                  <div id="demo-modal-dialog" class="ui-modal-overlay">
+                    <div class="ui-modal-content">
+                      <h4 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">🎉 UIUXU 모달 시스템</h4>
+                      <p style="color: #64748b; font-size: 0.925rem; margin-bottom: 1.5rem; line-height: 1.5;">
+                        이 모달은 <b>FocusTrap</b>이 적용되어 탭 이동이 모달 내부에서 순환하며, <br/>
+                        <code>ESC</code> 키를 누르면 이전 포커스 위치로 안전하게 복원됩니다.
+                      </p>
+                      <div style="display: flex; justify-content: flex-end; gap: 8px;">
+                        <button type="button" onclick="document.getElementById('demo-modal-dialog').setAttribute('aria-hidden', 'true'); document.getElementById('demo-modal-dialog').dataset.uiState = 'closed';" style="padding: 8px 16px; border-radius: 8px; border: 1px solid #cbd5e1; background: #ffffff; cursor: pointer;">취소 (Esc)</button>
+                        <button type="button" onclick="alert('확인되었습니다.'); document.getElementById('demo-modal-dialog').setAttribute('aria-hidden', 'true'); document.getElementById('demo-modal-dialog').dataset.uiState = 'closed';" style="padding: 8px 16px; border-radius: 8px; border: none; background: #ec4899; color: #ffffff; font-weight: 600; cursor: pointer;">확인</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-family: monospace; color: #334155;">
+                    &lt;div <b>data-ui-layer="modal"</b> <b>data-ui-z-index="3000"</b>&gt;
+                  </div>
+                </div>
+
+                <!-- 3. Tooltip Lego Block -->
+                <div class="glass-card" style="border-radius: 16px; padding: 1.5rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h3 style="font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 0.4rem;">
+                      <span class="material-symbols-rounded" style="color: #10b981;">info</span>
+                      Tooltip / Popover
+                    </h3>
+                    <span class="badge-matrix" style="background: #d1fae5; color: #065f46;">Z-Index 1000</span>
+                  </div>
+                  <p style="color: #64748b; font-size: 0.875rem; margin-bottom: 1.25rem;">
+                    마우스 Hover 및 접근성 Focus 연동 툴팁입니다.
+                  </p>
+
+                  <div style="position: relative; text-align: center; margin-bottom: 1rem;">
+                    <button
+                      type="button"
+                      id="demo-tooltip-btn"
+                      style="background: #10b981; color: #ffffff; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; cursor: pointer;"
+                      data-ui-layer="tooltip"
+                      data-ui-target="#demo-tooltip-btn"
+                      data-ui-placement="top"
+                      data-ui-trigger="hover"
+                    >
+                      마우스 올려보기 (Hover)
+                    </button>
+
+                    <div id="demo-tooltip-box" class="ui-tooltip-box">
+                      💡 툴팁 메시지입니다 (Top placement)
+                    </div>
+                  </div>
+
+                  <div style="background: #f8fafc; padding: 8px 12px; border-radius: 8px; font-size: 0.75rem; font-family: monospace; color: #334155;">
+                    &lt;button <b>data-ui-layer="tooltip"</b> <b>data-ui-trigger="hover"</b>&gt;
+                  </div>
+                </div>
+
+              </div>
+            </section>
+
+            <!-- Code Specification & Property Table -->
+            <section class="glass-card" style="border-radius: 20px; padding: 2rem; margin-bottom: 2rem;">
+              <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <span class="material-symbols-rounded" style="color: #8b5cf6;">code</span>
+                Multi-Framework Prop & Data Attribute Matrix
+              </h2>
+
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                <thead>
+                  <tr style="border-bottom: 2px solid #e2e8f0; background: #f8fafc;">
+                    <th style="padding: 10px;">설정 항목</th>
+                    <th style="padding: 10px;">React / Vue Prop</th>
+                    <th style="padding: 10px;">HTML <code>data-*</code> Attribute</th>
+                    <th style="padding: 10px;">설명 및 허용 값</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid #f1f5f9;">
+                    <td style="padding: 10px; font-weight: 600;">레이어 종류</td>
+                    <td style="padding: 10px; font-family: monospace; color: #4f46e5;">type="dropdown"</td>
+                    <td style="padding: 10px; font-family: monospace; color: #059669;">data-ui-layer="dropdown"</td>
+                    <td style="padding: 10px;">dropdown, tooltip, modal, toast 선택</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #f1f5f9;">
+                    <td style="padding: 10px; font-weight: 600;">위치 (Placement)</td>
+                    <td style="padding: 10px; font-family: monospace; color: #4f46e5;">placement="bottom-start"</td>
+                    <td style="padding: 10px; font-family: monospace; color: #059669;">data-ui-placement="bottom-start"</td>
+                    <td style="padding: 10px;">top, bottom, left, right, bottom-start, auto</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #f1f5f9;">
+                    <td style="padding: 10px; font-weight: 600;">트리거 이벤트</td>
+                    <td style="padding: 10px; font-family: monospace; color: #4f46e5;">trigger="click"</td>
+                    <td style="padding: 10px; font-family: monospace; color: #059669;">data-ui-trigger="click"</td>
+                    <td style="padding: 10px;">click, hover, focus, manual</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid #f1f5f9;">
+                    <td style="padding: 10px; font-weight: 600;">Z-Index 그룹</td>
+                    <td style="padding: 10px; font-family: monospace; color: #4f46e5;">zIndexGroup="modal"</td>
+                    <td style="padding: 10px; font-family: monospace; color: #059669;">data-ui-z-index="modal"</td>
+                    <td style="padding: 10px;">tooltip(1000), dropdown(2000), modal(3000), toast(4000)</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 10px; font-weight: 600;">상태 표시 (JS자동)</td>
+                    <td style="padding: 10px; font-family: monospace; color: #4f46e5;">state="open"</td>
+                    <td style="padding: 10px; font-family: monospace; color: #059669;">data-ui-state="open"</td>
+                    <td style="padding: 10px;">Tailwind CSS <code>data-[ui-state=open]:...</code> 바인딩</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Script Init -->
+    <script type="module">
+      import { UX } from "../assets/js/uiuxu.common.js";
+      UX.init({
+        callback: () => {
+          console.log("UIUXU LayerComponent Guide Page Initialized!");
+        },
+      });
+    </script>
+  </body>
+</html>

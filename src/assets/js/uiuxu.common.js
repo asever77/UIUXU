@@ -15,6 +15,7 @@ import ListIA from "./component/listIA.js";
 import WheelPicker from "./component/wheelPicker.js";
 import Roulette from "./component/roulette.js";
 
+import { autoInitLayers } from "./core/layerAutoInit.js";
 import {
   loadContent,
   RadioAllcheck,
@@ -164,6 +165,9 @@ let autoObserver = null;
 
 export async function initAutoComponents(container = document) {
   const root = container && container.querySelectorAll ? container : document;
+
+  // 0. Lego Layer Core Auto Init (HTML data-ui-layer="dropdown|modal|tooltip|toast")
+  autoInitLayers(root);
 
   // 1. Accordion
   const accoEls = root.querySelectorAll
